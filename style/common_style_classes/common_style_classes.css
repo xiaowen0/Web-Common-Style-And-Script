@@ -344,6 +344,11 @@
     cursor: pointer
 }
 
+/* border */
+.bottomBorder {
+    border-bottom: solid 1px #CCCCCC;
+}
+
 /* rotate animation
  * keyframes need: keyframes -webkit-keyframes -moz-keyframes
  */
@@ -1458,6 +1463,17 @@ select.inline {
 
 .list_blog .item_blog:last-child {
     margin-bottom: 0;
+}
+
+.list_blog .item_blog .title_box {
+    font-size: 24px;
+    margin: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.list_blog .item_blog .title_box a {
+    color: #2fa0ec;
 }
 
 .item_blog .item_title {
