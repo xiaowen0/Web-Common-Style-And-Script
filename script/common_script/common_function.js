@@ -4,26 +4,22 @@
  */
 
 /* --- debug function group ------------------------------------------ */
- 
+
 /**
  * enable debug mode
  * @return  Bool
  */
-function enableDebug()
-{
-    try
-    {
+function enableDebug() {
+    try {
         // current browser not support sessionStorage
-        if ( typeof(sessionStorage) != 'object' )
-        {
+        if (typeof(sessionStorage) != 'object') {
             return false;
         }
-        
+
         sessionStorage.setItem("debug", 'on');
         return true;
     }
-    catch(e)
-    {
+    catch (e) {
         return true;
     }
 }
@@ -33,21 +29,17 @@ var openDebug = enableDebug;
  * disable debug mode
  * @return  Bool
  */
-function disableDebug()
-{
-    try
-    {
+function disableDebug() {
+    try {
         // current browser not support sessionStorage
-        if ( typeof(sessionStorage) != 'object' )
-        {
+        if (typeof(sessionStorage) != 'object') {
             return false;
         }
-        
+
         sessionStorage.setItem("debug", 'off');
         return true;
     }
-    catch (e)
-    {
+    catch (e) {
         return false;
     }
 }
@@ -57,19 +49,15 @@ var closeDebug = disableDebug;
  * get debug status
  * @returns Bool
  */
-function getDebugStatus()
-{
-    try
-    {
-        if ( typeof(sessionStorage) != 'object')
-        {
+function getDebugStatus() {
+    try {
+        if (typeof(sessionStorage) != 'object') {
             return false;
         }
-        
+
         return sessionStorage.getItem('debug') === 'on';
     }
-    catch(e)
-    {
+    catch (e) {
         return false;
     }
 }
@@ -79,20 +67,16 @@ function getDebugStatus()
  * @param   text    String
  * @returns Bool
  */
-function addConsoleLog(text)
-{
-    try
-    {
-        if ( typeof(console) != 'object')
-        {
+function addConsoleLog(text) {
+    try {
+        if (typeof(console) != 'object') {
             return false;
         }
-        
+
         console.log(text);
         return true;
     }
-    catch(e)
-    {
+    catch (e) {
         return false;
     }
 }
@@ -102,15 +86,12 @@ function addConsoleLog(text)
  * @param   text    String
  * @returns Bool
  */
-function addDebugLog(text)
-{
-    if (getDebugStatus())
-    {
+function addDebugLog(text) {
+    if (getDebugStatus()) {
         addConsoleLog('[debug] ' + text);
         return true;
     }
-    else
-    {
+    else {
         return false;
     }
 }
@@ -120,9 +101,8 @@ var log = addDebugLog;
  * disable user copy action
  * @returns {boolean}
  */
-function disableCopy()
-{
-    if (typeof(document.oncopy)!=="undefined") {
+function disableCopy() {
+    if (typeof(document.oncopy) !== "undefined") {
         document.oncopy = (function (e) {
             return false;
         });
@@ -136,32 +116,28 @@ function disableCopy()
  * disable right-click context menu
  * @return {boolean}
  */
-function disableContextMenu()
-{
-    if (typeof(document.oncontextmenu)==="undefined") {
+function disableContextMenu() {
+    if (typeof(document.oncontextmenu) === "undefined") {
         return false;
     }
-    
+
     document.oncontextmenu = (function () {
         return false;
     });
     return true;
 }
 
-function disableCtrlC()
-{
-    try
-    {
-        var onkeydown = (function(ev){
-            var oEvent = event || ev;
-            // Prevent Ctrl+C
-            if(oEvent.ctrlKey && oEvent.keyCode == 67)
-            {
+function disableCtrlC() {
+    try {
+        var onkeydown = (function (e) {
+
+            // keyCode with C key: 67
+            if (e.ctrlKey && (e.keyCode == 67)) {
                 return false;
             }
         });
 
-        if (document.addEventListener) {                    //所有主流浏览器，除了 IE 8 及更早 IE版本
+        if (document.addEventListener) {  //所有主流浏览器，除了 IE 8 及更早 IE版本
             document.addEventListener("keydown", onkeydown);
             return true;
         }
@@ -172,8 +148,7 @@ function disableCtrlC()
 
         return false;
     }
-    catch (e)
-    {
+    catch (e) {
         ;
     }
     return false;
@@ -181,16 +156,13 @@ function disableCtrlC()
 
 /* --- String function group ------------------------------------------ */
 
-function str_replace(string, find, replace)
-{
-    if (find == replace)
-    {
+function str_replace(string, find, replace) {
+    if (find == replace) {
         return string;
     }
-    
+
     var oStr = new String(string);
-    while ( oStr.indexOf(find) >= 0 )
-    {
+    while (oStr.indexOf(find) >= 0) {
         string = string.replace(find, replace);
     }
 }
@@ -201,65 +173,53 @@ function str_replace(string, find, replace)
  * @param data Object  key-value pairs
  * @returns String
  */
-function replaceData(string, data)
-{
-    for (var p in data)
-    {
-        while ( string.indexOf(p) >= 0 )
-        {
+function replaceData(string, data) {
+    for (var p in data) {
+        while (string.indexOf(p) >= 0) {
             string = string.replace(p, data[p]);
         }
     }
-    
+
     return string;
 }
 
-function data2String(data)
-{
+function data2String(data) {
     var text = '';
-    
-    if (typeof(data) === 'object')
-    {
-        for (var i in data)
-        {
+
+    if (typeof(data) === 'object') {
+        for (var i in data) {
             text += i + ': ' + data[i] + '  ';
         }
         return text;
     }
-    else if (typeof(data) === 'array')
-    {
-        for (var i=0; i<data.length; i++)
-        {
+    else if (typeof(data) === 'array') {
+        for (var i = 0; i < data.length; i++) {
             text += data[i];
-            
-            if (i+1 < data.length)
-            {
+
+            if (i + 1 < data.length) {
                 text += ', ';
             }
         }
         return text;
     }
-    
+
     return data;
 }
 
-function createUrl(url, params)
-{
-    if ( typeof(params) === 'object' )
-    {
+function createUrl(url, params) {
+    if (typeof(params) === 'object') {
         url += '?';
         var param_string = '';
-        
-        for (var name in params)
-        {
+
+        for (var name in params) {
             param_string.length ? param_string += '&' : null;
-            
+
             param_string += name + '=' + params[name];
         }
-        
+
         url += param_string;
     }
-    
+
     return url;
 }
 
@@ -268,18 +228,15 @@ function createUrl(url, params)
  * @param   object
  * @returns String|false
  */
-function json_encode(object)
-{
-    if ( typeof(JSON) !== 'undefined' )
-    {
+function json_encode(object) {
+    if (typeof(JSON) !== 'undefined') {
         var json_string = JSON.stringify(object);
         return json_string;
     }
-    else if ( typeof(json_parse) !== 'undefined' )
-    {
+    else if (typeof(json_parse) !== 'undefined') {
         return false;
     }
-    
+
     return false;
 }
 
@@ -288,23 +245,20 @@ function json_encode(object)
  * @param   string  JSON string
  * @returns Object|false
  */
-function json_decode(string)
-{
+function json_decode(string) {
     var object = null;
-    
+
     // use JSON object
-    if ( typeof(JSON) !== 'undefined' )
-    {
+    if (typeof(JSON) !== 'undefined') {
         object = JSON.parse(string);
         return object;
     }
     // use JSON library from  http://www.JSON.org/
-    else if ( typeof(json_parse) !== 'undefined' )
-    {
+    else if (typeof(json_parse) !== 'undefined') {
         object = json_parse(string);
         return object;
     }
-    
+
     return false;
 }
 
@@ -316,12 +270,9 @@ function json_decode(string)
  * @param Array  array data
  * @returns Bool
  */
-function inArray(value, array)
-{
-    for (var i = 0; i < array.length; i++)
-    {
-        if (array[i] == value)
-        {
+function inArray(value, array) {
+    for (var i = 0; i < array.length; i++) {
+        if (array[i] == value) {
             return true;
         }
     }
@@ -331,103 +282,33 @@ function inArray(value, array)
 /* --- Time function group ------------------------------------------ */
 
 /**
- * string to date
- * @param String str  date expression
- * @returns Object(Date)
- */
-function strToDate(str)
-{
-    var oDate = new Date(0);
-    var str_slices = str.split(" ");
-
-    // set date
-    var str_date_slices = str_slices[0].split("-");
-    str_date_slices[0] ? oDate.setFullYear(str_date_slices[0]) : '';
-    str_date_slices[1] ? oDate.setMonth(parseInt(str_date_slices[1]) - 1) : '';
-    str_date_slices[2] ? oDate.setDate(str_date_slices[2]) : '';
-
-    // set time
-    if (str_slices[1])
-    {
-        var str_time_slices = str_slices[1].split(":");
-        str_time_slices[0] ? oDate.setHours(str_time_slices[0]) : '';
-        str_time_slices[1] ? oDate.setMinutes(str_time_slices[1]) : '';
-        str_time_slices[2] ? oDate.setSeconds(str_time_slices[2]) : '';
-    }
-
-    return oDate;
-}
-
-/**
- * format date object
- * @param   date    Object(Date)
- * @returns String
- */
-function dateFormat(date, string)
-{
-	if (!string)
-	{
-		return string;
-	}
-	
-    var y = date.getFullYear().toString();
-    var m = (date.getMonth() + 1).toString();
-    if (m.length === 1)
-    {
-        m = "0" + m;
-    }
-    var d = date.getDate().toString();
-    if (d.length === 1)
-    {
-        d = "0" + d;
-    }
-    var hour = date.getHours().toString();
-    if (hour.length === 1)
-    {
-        hour = "0" + hour;
-    }
-    var minute = date.getMinutes().toString();
-    if (minute.length === 1)
-    {
-        minute = "0" + minute;
-    }
-    var second = date.getSeconds().toString();
-    if (second.length === 1)
-    {
-        second = "0" + second;
-    }
-    
-    string = string.replace('yy', y);
-    string = string.replace('mm', m);
-    string = string.replace('dd', d);
-    string = string.replace('hh', hour);
-    string = string.replace('ii', minute);
-    string = string.replace('ss', second);
-
-    return string;
-    //return y + "-" + m + "-" + d + " " + hour + ":" + minute + ":" + second;
-}
-
-/**
  * get fresh text
  * @param time_str  time text (2016-01-31 12:00:00)
  * @returns String
- * require moment-with-locales
+ * require moment-with-locales library
  */
-function getFreshText(time_str)
-{
+function getFreshText(time_str) {
     var minute = 1000 * 60;
     var hour = minute * 60;
     var day = hour * 24;
     var halfamonth = day * 15;
     var month = day * 30;
 
-    moment.locale('zh-cn');
+    try {
+        if (typeof(moment) != 'object') {
+            addConsoleLog('moment library is required.');
+            return false;
+        }
 
-    var time = moment(time_str);
+        moment.locale('zh-cn');
+        var time = moment(time_str);
+        return time.fromNow
+    }
+    catch (e) {
+        ;
+    }
 
-    return time.fromNow
-
+    return '';
 }
 
 /* --- element function group ------------------------------------------ */
@@ -437,86 +318,94 @@ function getFreshText(time_str)
  * @param id String  element ID
  * @returns Object(HTMLElement) | null
  */
-function getElement(id)
-{
-  return document.getElementById(id);
+function getElement(id) {
+    return document.getElementById(id);
+}
+
+/**
+ * get elements
+ * @param selector  CSS query selector
+ * @returns {*}
+ */
+function get(selector) {
+    try {
+        if (typeof(document.querySelector) != 'function') {
+            addConsoleLog('querySelector is not supported in current client.');
+            return false;
+        }
+
+        return document.querySelector(selector);
+    }
+    catch (e) {
+        return false;
+    }
 }
 
 /**
  * create element  创建元素
- * @param name  String  element name
- * param 2  Object  element attributes
- * param 3  Object of HTMLElement | String  element content
+ * @param name     String  element name
+ * @param options  Object  element attributes
+ * @param content  Object of HTMLElement | String  element content
  * @returns Object(HTMLElement) | false
  */
-function createElement(name)
-{
-  // create element
-  var element = document.createElement(name);
+function createElement(name, options, content) {
+    // create element
+    var element = document.createElement(name);
 
-  // set attributes
-  var options = arguments[1] ? arguments[1] : null;
-  if (options !== null)
-  {
-    for (var attr_name in options)
-    {
-      element.setAttribute(attr_name, options[attr_name]);
+    // set attributes
+    if (options !== null) {
+        for (var attr_name in options) {
+            element.setAttribute(attr_name, options[attr_name]);
+        }
     }
-  }
 
-  // set content
-  var content = arguments[2] ? arguments[2] : "";
-  if (typeof (content) === "object")
-  {
-    element.innerHTML = content.outerHTML;
-  }
-  else
-  {
-    element.innerHTML = content;
-  }
+    // set content
+    if (typeof (content) === "object") {
+        element.innerHTML = content.outerHTML;
+    }
+    else if (typeof (content) === 'string') {
+        element.innerHTML = content;
+    }
 
-  // return
-  return element;
+    // return
+    return element;
 }
 
 /**
  * set element height equal to width  设置元素高度等于宽度
  * @param element Object of HTMLElement
  */
-function setHeightEqualToWidth(element)
-{
-  element.style.height = element.offsetWidth + "px";
+function setHeightEqualToWidth(element) {
+    element.style.height = element.offsetWidth + "px";
 }
 
 /**
  * set image fill
  * @param   image   Object(HTMLImageElement)    image element
  */
-function setImageFill(image)
-{
-	image.onload = (function()  // set 'onload' event
-	{
-        var wrapper_width   = this.parentNode.offsetWidth;
-        var wrapper_height  = this.parentNode.offsetHeight;
-        
-        this.style.width    = '100%';
-        this.style.height   = 'auto';
-        
-        // wrapper has height limit and image height less than warpper height
-        if (wrapper_height > 0 && this.height < wrapper_height)
-        {
-            this.style.width    = 'auto';
-            this.style.maxWidth = 'none';
-            this.style.height   = '100%';
-        }
-        
-	});
+function setImageFill(image) {
+    image.onload = (function ()  // set 'onload' event
+    {
+        var wrapper_width = this.parentNode.offsetWidth;
+        var wrapper_height = this.parentNode.offsetHeight;
 
-	// check if loaded
-	if (this.width > 0 && this.height > 0) // already loaded
-	{
-		this.onload();
-	}
+        this.style.width = '100%';
+        this.style.height = 'auto';
+
+        // wrapper has height limit and image height less than warpper height
+        if (wrapper_height > 0 && this.height < wrapper_height) {
+            this.style.width = 'auto';
+            this.style.maxWidth = 'none';
+            this.style.height = '100%';
+        }
+
+    });
+
+    // check if loaded
+    if (this.width > 0 && this.height > 0) // already loaded
+    {
+        this.onload();
+    }
 
 }
 
@@ -526,21 +415,20 @@ function setImageFill(image)
  * @param options   Object
  * @returns Object(Image)
  */
-function loadImage(url, options)
-{
+function loadImage(url, options) {
     var image = new Image;
-    
+
     typeof (options) === 'object' ? null : options = {};
-    var onerror     = options.onerror ? options.onerror : null;
-    var onload      = options.onload ? options.onload : null;
-    var onabort     = options.onabort ? options.onabort : null;
-    
+    var onerror = options.onerror ? options.onerror : null;
+    var onload = options.onload ? options.onload : null;
+    var onabort = options.onabort ? options.onabort : null;
+
     onerror ? image.onerror = onerror : null;
-    onload  ? image.onload = onload : null;
+    onload ? image.onload = onload : null;
     onabort ? image.onabort = onabort : null;
-    
+
     image.src = url;
-    
+
     return image;
 }
 
@@ -552,17 +440,14 @@ function loadImage(url, options)
  * @param null|Array options  element attributes
  * @returns Object of Image
  */
-function createImage(url, options)
-{
+function createImage(url, options) {
     // create new
     var image = new Image();
 
-    if (typeof (options) === "undefined")
-    {
+    if (typeof (options) === "undefined") {
         options = new Array();
     }
-    for (var i in options)
-    {
+    for (var i in options) {
         image[i] = options[i];
     }
 
@@ -575,47 +460,42 @@ function createImage(url, options)
  * set image centered fill
  * @param image Object(ImageHTMLElement)
  */
-function setImageCenteredFill(image)
-{
+function setImageCenteredFill(image) {
     // check if loaded
-    if (image.complete !== true)
-    {
+    if (image.complete !== true) {
         // call self again
-        image.onload = (function ()
-        {
+        image.onload = (function () {
             setImageCenteredFill(this);
         });
         return;
     }
-    
+
     // reset max width & height rule
     image.style.maxHeight = "none";
     image.style.maxWidth = "none";
     image.style.width = "auto";
     image.style.height = "auto";
-    
+
     image_width = image.offsetWidth;
     image_height = image.offsetHeight;
 
     // get parent
     var parent = image.parentNode;
-    
+
     container_width = parent.offsetWidth;
     container_height = parent.offsetHeight;
-    
-    if ( container_width / container_height < image_width / image_height)
-    {
+
+    if (container_width / container_height < image_width / image_height) {
         image.style.height = '100%';
         image.style.width = 'auto';
         image.style.marginLeft = (container_width - image.offsetWidth) / 2 + 'px';
     }
-    else
-    {
+    else {
         image.style.height = 'auto';
         image.style.width = '100%';
         image.style.marginTop = (container_height - image.offsetHeight) / 2 + 'px';
     }
-    
+
 }
 
 /* --- Multimedia function group ------------------------------------------------ */
@@ -625,34 +505,23 @@ function setImageCenteredFill(image)
  * @param coding String  coding name
  * @return Bool  true if supported or false if not supported
  */
-function checkAudio(coding)
-{
-  var audio = createAudio();
-  if (audio === false) {
+function checkAudio(coding) {
+    var audio = createAudio();
+    if (audio === false) {
+        return false;
+    }
+    if (audio.canPlayType("audio/" + coding)) {
+        return true;
+    }
     return false;
-  }
-  if (audio.canPlayType("audio/" + coding)) {
-    return true;
-  }
-  return false;
 }
 
 /**
  * check canvas supported  检查画布元素支持
  * @returns Boolean
  */
-function canvasSupport()
-{
-    var canvas = createElement('canvas');
-    
-    if (typeof (canvas.getContext) === 'undefined')
-    {
-        return false;
-    }
-    else
-    {
-        return true;
-    }
+function canvasSupport() {
+    return typeof (createElement('canvas').getContext) === 'function';
 }
 
 /* --- URL function group ------------------------------------------ */
@@ -680,15 +549,14 @@ function addUrlParam(url, name, value) {
  * @returns fixed  param value  参数的值
  */
 function getUrlParam(name) {
-    
+
     var default_value = arguments[1] ? arguments[1] : null;
 
     // get query string
     var query_string = location.search.replace('?', '');
 
     // no any param
-    if (!query_string.length)
-    {
+    if (!query_string.length) {
         return default_value;
     }
 
@@ -697,7 +565,7 @@ function getUrlParam(name) {
 
     var index_name = -1;
     for (var i = 0; i < url_query_params.length; i++) {
-        
+
         index_name = url_query_params[i].indexOf(name + "=");
 
         // 参数名开头
@@ -713,69 +581,64 @@ function getUrlParam(name) {
 
 /**
  * Get scroll top  获取窗口视图区域到顶部的滚动距离
- * @returns Number
+ * @returns Number|false
  */
-function getScrollTop()
-{
-  if (document.documentElement && document.documentElement.scrollTop)		// For standard
-  {
-    return document.documentElement.scrollTop;
-  }
-  else if (document.body)		// For Internet Explorer
-  {
-    return document.body.scrollTop;
-  }
-  return false;
+function getScrollTop() {
+    if (document.documentElement && document.documentElement.scrollTop)		// For standard
+    {
+        return document.documentElement.scrollTop;
+    }
+    else if (document.body)		// For Internet Explorer old version
+    {
+        return document.body.scrollTop;
+    }
+    return false;
 }
 
 /**
  * Get scroll height  获取窗口视图区域的高度
  * @returns Number
  */
-function getScrollHeight()
-{
-  if (document.documentElement && document.documentElement.scrollHeight)		// For standard
-  {
-    return document.documentElement.scrollHeight;
-  }
-  else if (document.body)		// For Internet Explorer
-  {
-    return document.body.scrollHeight;
-  }
-  return false;
+function getScrollHeight() {
+    if (document.documentElement && document.documentElement.scrollHeight)		// For standard
+    {
+        return document.documentElement.scrollHeight;
+    }
+    else if (document.body)		// For Internet Explorer
+    {
+        return document.body.scrollHeight;
+    }
+    return false;
 }
 
 /**
  * get window height  获取窗口的高度
  * @returns Number
  */
-function getWindowHeight()
-{
-  if (document.compatMode === "CSS1Compat") {
-    return document.documentElement.clientHeight;
-  }
-  else
-  {
-    return document.body.clientHeight;
-  }
-  return false;
+function getWindowHeight() {
+    var height = window.height
+        || window.innerHeight
+        || document.documentElement.clientHeight
+        || document.body.clientHeight;
+
+    return height ? height : 0;
 }
 
-function getWindowWidth()
-{
-  if (document.compatMode === "CSS1Compat") {
-    return document.documentElement.clientWidth;
-  }
-  else
-  {
-    return document.body.clientWidth;
-  }
-  return false;
+/**
+ * get window width  获取窗口的宽度
+ * @returns Number
+ */
+function getWindowWidth() {
+    var width = window.width
+        || window.innerWidth
+        || document.documentElement.clientWidth
+        || document.body.clientWidth;
+
+    return width ? width : 0;
 }
 
-function createDialog(options)
-{
-    
+function createDialog(options) {
+
 }
 
 /* --- Browser function group ------------------------------------------ */
@@ -784,8 +647,7 @@ function createDialog(options)
  * Get browser core  获取浏览器核心
  * @returns String  core name
  */
-function getBrowserCore()
-{
+function getBrowserCore() {
     // Find known core names from the userAgent data  搜索核心名称
     var userAgent = window.navigator.userAgent;
     var isGecko = RegExp("Gecko").test(userAgent);
@@ -815,8 +677,7 @@ function getBrowserCore()
  * Get IE browser core  获取 IE 的版本
  * @returns Number
  */
-function getIEsVersion()
-{
+function getIEsVersion() {
     // Check whether the current browser is IE  检查是否 IE 浏览器
     var userAgent = window.navigator.userAgent;
     var isIE = userAgent.search(RegExp("MSIE [0-9.]+;"));
@@ -838,9 +699,8 @@ function getIEsVersion()
  * @param type string
  * @returns bool
  */
-function checkFile(file, type)
-{
-  return file.type.indexOf(type) === 0;
+function checkFile(file, type) {
+    return file.type.indexOf(type) === 0;
 }
 
 /**
@@ -848,13 +708,11 @@ function checkFile(file, type)
  * @param file  Object(File)
  * @returns Boolean
  */
-function checkFileIsImage(file)
-{
-    if(/image\/\w+/.test(file.type)){  
+function checkFileIsImage(file) {
+    if (/image\/\w+/.test(file.type)) {
         return true;
     }
-    else
-    {
+    else {
         return false;
     }
 }
@@ -863,16 +721,8 @@ function checkFileIsImage(file)
  * check file reader supported  检查文件读取器支持
  * @returns Boolean
  */
-function fileReaderSupport()
-{
-    if ( typeof(FileReader) === 'undefined' )
-    {
-        return false;
-    }
-    else
-    {
-        return true;
-    }
+function fileReaderSupport() {
+    return typeof(FileReader) !== 'undefined';
 }
 
 /**
@@ -883,40 +733,37 @@ function fileReaderSupport()
  * @param options  Object|null
  * 'onabort', 'onload', 'onloadend', 'onloadstart', 'onprogress'
  */
-function readFile(file, data_type, options)
-{
-    if ( !fileReaderSupport() )
-    {
-        addDebugLog('[error] 浏览器不支持文件读取');
+function readFile(file, data_type, options) {
+    if (!fileReaderSupport()) {
+        addConsoleLog('[error] FileReader API is not supported.');
         return false;
     }
-    
+
     typeof (options) === 'object' ?
         null : options = {};
-        
-    var onabort     = options.onabort ? options.onabort : null;
-    var onload      = options.onload ? options.onload : null;
-    var onloadend   = options.onloadend ? options.onloadend : null;
+
+    var onabort = options.onabort ? options.onabort : null;
+    var onload = options.onload ? options.onload : null;
+    var onloadend = options.onloadend ? options.onloadend : null;
     var onloadstart = options.onloadstart ? options.onloadstart : null;
-    var onprogress  = options.onprogress ? options.onprogress : null;
-    
+    var onprogress = options.onprogress ? options.onprogress : null;
+
     // 创建文件读取器
     var reader = new FileReader();
-    
-    onabort     ? reader.onabort = onabort : null;
-    onload      ? reader.onload = onload : null;
-    onloadend   ? reader.onloadend = onloadend : null;
+
+    onabort ? reader.onabort = onabort : null;
+    onload ? reader.onload = onload : null;
+    onloadend ? reader.onloadend = onloadend : null;
     onloadstart ? reader.onloadstart = onloadstart : null;
-    onprogress  ? reader.onprogress = onprogress : null;
-    
-    switch (data_type)
-    {
+    onprogress ? reader.onprogress = onprogress : null;
+
+    switch (data_type) {
         case 'data_url' :
             reader.readAsDataURL(file);
             return true;
             break;
     }
-    
+
     return false;
 }
 
@@ -927,127 +774,115 @@ function readFile(file, data_type, options)
  * @param callback  Function|null   convert success callback function
  * @returns Object(CanvasHTMLElement)|false
  */
-function convertImage2Canvas(image, options, callback)
-{
+function convertImage2Canvas(image, options, callback) {
     // check canvas support
-    if ( !canvasSupport() )
-    {
+    if (!canvasSupport()) {
         return false;
     }
-    
+
     var image_object = null;
-    
+
     typeof (options) === 'object' ? null : options = {};
-    
-    var image_min_width     = options.image_min_width ?     options.image_min_width : -1;
-    var image_min_height    = options.image_min_height ?    options.image_min_height : -1;
-    var image_max_width     = options.image_max_width ?     options.image_max_width : -1;
-    var image_max_height    = options.image_max_height ?    options.image_max_height : -1;
+
+    var image_min_width = options.image_min_width ? options.image_min_width : -1;
+    var image_min_height = options.image_min_height ? options.image_min_height : -1;
+    var image_max_width = options.image_max_width ? options.image_max_width : -1;
+    var image_max_height = options.image_max_height ? options.image_max_height : -1;
     addDebugLog('image_max_width: ' + image_max_width);
     addDebugLog('image_max_height: ' + image_max_height);
-    
+
     // canvas size
-    var canvas_width    = options.canvas_width ?    options.canvas_width : -1;
-    var canvas_height   = options.canvas_height ?   options.canvas_height : -1;
+    var canvas_width = options.canvas_width ? options.canvas_width : -1;
+    var canvas_height = options.canvas_height ? options.canvas_height : -1;
     //addDebugLog('canvas_width: ' + canvas_width);
     //addDebugLog('canvas_height: ' + canvas_height);
-    
+
     // error event
-    var onerror         = options.onerror ? options.onerror : null;
-    
-    if ( typeof(image) === 'string' )
-    {
+    var onerror = options.onerror ? options.onerror : null;
+
+    if (typeof(image) === 'string') {
         image_object = new Image;
         image_object.src = image;
     }
-    else
-    {
+    else {
         image_object = image;
     }
-    
+
     onerror ? image_object.onerror = onerror : null;
-    
-    image_object.onload = (function(){
-        
+
+    image_object.onload = (function () {
+
         // 宽高比例
         var image_ratio = this.width / this.height;
-        
+
         // limit size
         if (
             image_min_width > -1 ||
             image_min_height > -1 ||
             image_max_width > -1 ||
             image_max_height > -1
-        )
-        {
+        ) {
             // min size limit
-            if (this.width < image_min_width || this.height < image_min_height)
-            {
+            if (this.width < image_min_width || this.height < image_min_height) {
                 // 取最小宽度时，高度不小于最小高度
-                if (image_min_width / image_ratio >= image_min_height)
-                {
+                if (image_min_width / image_ratio >= image_min_height) {
                     // 宽度取最小值，高度按比例
                     this.width = image_min_width;
                     this.height = this.width / image_ratio;
                 }
-                else
-                {
+                else {
                     // 高度取最小值，宽度按比例
                     this.height = image_min_height;
-                    this.width  = this.height * image_ratio;
+                    this.width = this.height * image_ratio;
                 }
             }
 
             // max size limit
-            if (image_max_width > -1 && this.width > image_max_width && image_max_height > -1 && this.height > image_max_height)
-            {
+            if (image_max_width > -1 && this.width > image_max_width && image_max_height > -1 && this.height > image_max_height) {
                 // 宽度和高度都超过了
                 if (image_max_width / image_ratio <= image_max_height)  // 取最大宽度时，高度不超过最大高度
                 {
                     // 宽度取最大值，高度按比例
-                    this.width  = image_max_width;
+                    this.width = image_max_width;
                     this.height = this.width / image_ratio;
                 }
-                else
-                {
+                else {
                     // 高度取最大值，宽度按比例
                     this.height = image_max_height;
-                    this.width  = this.height * image_ratio;
+                    this.width = this.height * image_ratio;
                 }
             }
-            else if (image_max_width  > -1 && this.width > image_max_width)
-            {
+            else if (image_max_width > -1 && this.width > image_max_width) {
                 // 只是宽度超过了
                 this.width = image_max_width;
                 this.height = this.width / image_ratio;
             }
-            else if (image_max_height > -1 && this.height > image_max_height)
-            {
+            else if (image_max_height > -1 && this.height > image_max_height) {
                 // 只是高度超过了
                 this.height = image_max_height;
-                this.width  = this.height * image_ratio;
+                this.width = this.height * image_ratio;
             }
         }
-    
+
         // create canvas element
         var canvas = createElement('canvas');
         //canvas.style.display = 'block';
         var ctx = canvas.getContext("2d");
-    
+
         // set canvas size
-        canvas.width    = canvas_width > -1 ? canvas_width : this.width;
-        canvas.height   = canvas_height > -1 ? canvas_height : this.height;
-        
+        canvas.width = canvas_width > -1 ? canvas_width : this.width;
+        canvas.height = canvas_height > -1 ? canvas_height : this.height;
+
         // 画图后，重设画布尺寸裁剪
         ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
-        
+
         // success callback
-        if (callback)
-        {
+        if (callback) {
             callback(canvas);
         }
-        
-    });/* end image onload event */
+
+    });
+    /* end image onload event */
 }
 
 /* --- Form function group ----------------------------------------------- */
@@ -1057,8 +892,7 @@ function convertImage2Canvas(image, options, callback)
  * @param element   Object(HTMLElement)
  * @returns Object(HTMLElement)|null
  */
-function getForm(element)
-{
+function getForm(element) {
     return element.form ? element.form : null;
 }
 
@@ -1067,20 +901,17 @@ function getForm(element)
  * @param   form    Object(HTMLFormElement)
  * @returns Object|false
  */
-function getFormData(form)
-{
+function getFormData(form) {
     var data = {};
-    
-    if ( typeof(form.elements) === 'undefined' )
-    {
+
+    if (typeof(form.elements) === 'undefined') {
         return false;
     }
-    
-    for (var i=0; i<form.elements.length; i++)
-    {
+
+    for (var i = 0; i < form.elements.length; i++) {
         data[form.elements[i].name] = form.elements[i].value;
     }
-    
+
     return data;
 }
 
@@ -1089,21 +920,17 @@ function getFormData(form)
  * @param   form    Object|String       form element or ID
  * @returns Boolean
  */
-function formIsLocked(form)
-{
+function formIsLocked(form) {
     // get element by ID
-    if (typeof (form) === 'string')
-    {
+    if (typeof (form) === 'string') {
         var form = document.getElementById(form);
-        if (!form)
-        {
+        if (!form) {
             return false;
         }
     }
 
     // undefined return false
-    if (typeof (form.dataset.lock) === 'undefined')
-    {
+    if (typeof (form.dataset.lock) === 'undefined') {
         // set default value
         form.dataset.lock = 'off';
         return false;
@@ -1118,14 +945,11 @@ function formIsLocked(form)
  * set a lock data
  * @param   form    Object|String       form element or ID
  */
-function lockForm(form)
-{
+function lockForm(form) {
     // get element by ID
-    if (typeof (form) === 'string')
-    {
+    if (typeof (form) === 'string') {
         var form = document.getElementById(form);
-        if (!form)
-        {
+        if (!form) {
             return;
         }
     }
@@ -1138,14 +962,11 @@ function lockForm(form)
  * set a lock data
  * @param   form    Object|String       form element or ID
  */
-function unlockForm(form)
-{
+function unlockForm(form) {
     // get element by ID
-    if (typeof (form) === 'string')
-    {
+    if (typeof (form) === 'string') {
         var form = document.getElementById(form);
-        if (!form)
-        {
+        if (!form) {
             return;
         }
     }
@@ -1153,14 +974,11 @@ function unlockForm(form)
     form.dataset.lock = 'off';
 }
 
-function formNoMoreData(form)
-{
+function formNoMoreData(form) {
     // get element by ID
-    if (typeof (form) === 'string')
-    {
+    if (typeof (form) === 'string') {
         var form = document.getElementById(form);
-        if (!form)
-        {
+        if (!form) {
             return;
         }
     }
@@ -1168,14 +986,11 @@ function formNoMoreData(form)
     form.dataset.noMoreData = "on";
 }
 
-function formMoreData(form)
-{
+function formMoreData(form) {
     // get element by ID
-    if (typeof (form) === 'string')
-    {
+    if (typeof (form) === 'string') {
         var form = document.getElementById(form);
-        if (!form)
-        {
+        if (!form) {
             return;
         }
     }
@@ -1183,20 +998,16 @@ function formMoreData(form)
     form.dataset.noMoreData = 'off';
 }
 
-function formHasMoreData(form)
-{
+function formHasMoreData(form) {
     // get element by ID
-    if (typeof (form) === 'string')
-    {
+    if (typeof (form) === 'string') {
         var form = document.getElementById(form);
-        if (!form)
-        {
+        if (!form) {
             return true;
         }
     }
 
-    if (typeof (form.dataset.noMoreData) !== 'undefined')
-    {
+    if (typeof (form.dataset.noMoreData) !== 'undefined') {
         // set default value
         form.dataset.noMoreData = 'off';
 
@@ -1210,22 +1021,19 @@ function formHasMoreData(form)
  * set check all action
  * @param   checkbox    Object(HTMLInputElement)
  */
-function setCheckAllAction(checkbox)
-{
-    checkbox.onchange   = (function(){
-        
+function setCheckAllAction(checkbox) {
+    checkbox.onchange = (function () {
+
         // get check status
-        var check_status    = this.checked;
-        
+        var check_status = this.checked;
+
         // get form's input controls
         var form_input_list = this.form.getElementsByTagName('input');
-        
+
         // traversal
-        for (var i=0; i<form_input_list.length; i++)
-        {
-            if (form_input_list[i].type === 'checkbox')
-            {
-                form_input_list[i].checked  = check_status;
+        for (var i = 0; i < form_input_list.length; i++) {
+            if (form_input_list[i].type === 'checkbox') {
+                form_input_list[i].checked = check_status;
             }
         }
     });
@@ -1236,8 +1044,7 @@ function setCheckAllAction(checkbox)
  * @param   container   container for append
  * @param   options     panel options
  */
-function renderPaginationPanel(container, options)
-{
+function renderPaginationPanel(container, options) {
     var pagination_list = $('<ul class="pagination">\
         <li class="previous_page_item disabled">\
             <a class="previous_page_link" href="javascript:;" aria-label="上一页">\
@@ -1262,20 +1069,17 @@ function renderPaginationPanel(container, options)
  * 分页元素需要用 Form 标签包含，且 Form 标签包含 ".form_page" 的隐藏类型的 Input 元素，用于更改页码。
  * @param   element     Object(HTMLElement)
  */
-function bindPaginationPanelAction(element)
-{
+function bindPaginationPanelAction(element) {
     var previous_page_link = $(element).find('.previous_page_link');
     var next_page_link = $(element).find('.next_page_link');
     var current_page_link = $(element).find('.current a');
 
     // set previous page link click action
-    previous_page_link.on('click', function ()
-    {
+    previous_page_link.on('click', function () {
 
         // check form
         var form = $(this).parents('form');
-        if (!form.length)
-        {
+        if (!form.length) {
             return;
         }
 
@@ -1284,8 +1088,7 @@ function bindPaginationPanelAction(element)
         page ? null : page = 1;
 
         // set previous page number
-        if (page === 1)
-        {
+        if (page === 1) {
             return;
         }
         page--;
@@ -1298,23 +1101,21 @@ function bindPaginationPanelAction(element)
     }); // End .previous_page_link click event function
 
     // set next page link click action
-    next_page_link.on('click', function ()
-    {
+    next_page_link.on('click', function () {
 
         // check form
         var form = $(this).parents('form');
-        if (!form.length)
-        {
+        if (!form.length) {
             return;
         }
 
         // get current page number
         var page = parseInt($(form).find('.form_page').val());
         page ? null : page = 1;
-        
+
         // get page count
-        var pagination  = $(this).parents('.pagination');
-        var page_count  = parseInt(pagination.data('count'));
+        var pagination = $(this).parents('.pagination');
+        var page_count = parseInt(pagination.data('count'));
         if (page_count && page === page_count)  // 已经是最后1页了
         {
             addDebugLog('[warning] 已经是最后1页了');
@@ -1338,43 +1139,39 @@ function bindPaginationPanelAction(element)
  * @param   element     Object(HTMLElement)     pagination panel element
  * @param   options     Object                  pagination panel data
  */
-function updatePaginationPanel(element, options)
-{
+function updatePaginationPanel(element, options) {
     var message = '[info] 更新页码面板；';
-    
-    var current_page    = options.page  ? options.page : parseInt($(element).find('.current a').html());
+
+    var current_page = options.page ? options.page : parseInt($(element).find('.current a').html());
     current_page ? null : current_page = 1;
-    var page_count      = options.count ? options.count : null;
+    var page_count = options.count ? options.count : null;
 
     // update current page
     message += '当前页码：' + current_page + '；';
     $(element).find('.current a').html(current_page);
-    
+
     if (current_page === 1)     // 第1页禁用上一页按钮
     {
         $(element).find('.previous_page_item').addClass('disabled');
     }
-    else
-    {
+    else {
         $(element).find('.previous_page_item').removeClass('disabled');
     }
-    
+
     // set page count
-    if (page_count)
-    {
+    if (page_count) {
         message += '总页数：' + page_count + '。';
         $(element).data('count', page_count);
-        
+
         if (current_page === page_count)    // 最后1页禁用下一页按钮
         {
             $(element).find('.next_page_item').addClass('disabled');
         }
-        else
-        {
+        else {
             $(element).find('.next_page_item').removeClass('disabled');
         }
     }
-    
+
     addDebugLog(message);
 
 }
@@ -1383,60 +1180,56 @@ function updatePaginationPanel(element, options)
  * initialize textbox actions
  * @param   textbox     Object(HTMLElement)     textbox element
  * @param   options     Object                  action option
- * 'change' : function(textbox, text, length)
- * 'input'  : function(textbox, text, length)
- *  param textbox   textbox element
- *  param text      textbox text
- *  param length    textbox text length
+ *   change : function(textbox, text, length)
+ *   input  : function(textbox, text, length)
+ *     param textbox   textbox element
+ *     param text      textbox text
+ *     param length    textbox text length
  */
-function initTextboxActions(textbox, options)
-{
-    var change_callback     = options.change ? options.change : null;
-    var input_callback      = options.input ? options.input : null;
-    
-    if (change_callback)
-    {
-        textbox.onchange    = (function(){
-            
-            var text            = this.value;
-            var length          = text.length;
-    
+function initTextboxActions(textbox, options) {
+    var change_callback = options.change ? options.change : null;
+    var input_callback = options.input ? options.input : null;
+
+    if (change_callback) {
+        textbox.onchange = (function () {
+
+            var text = this.value;
+            var length = text.length;
+
             change_callback(this, text, length);
         });
     }
-    
-    if (input_callback)
-    {
-        textbox.oninput    = (function(){
-            
-            var text            = this.value;
-            var length          = text.length;
-    
+
+    if (input_callback) {
+        textbox.oninput = (function () {
+
+            var text = this.value;
+            var length = text.length;
+
             input_callback(this, text, length);
         });
     }
-    
+
 }
 
 /**
  * add a auto complete value to inputbox
  * this function simulate a form submit action
- * @param name		inputbox data name
- * @param value		inputbox value
+ * @param name        inputbox data name
+ * @param value        inputbox value
  * @Author  Kevin
  * @date    2017-01-23
  */
-function addInputboxAutocompleteValue(name, value)
-{
+function addInputboxAutocompleteValue(name, value) {
     var form = document.createElement('form');
     form.action = 'javascript:;';
     form.method = 'post';
-    form.style.display	= 'none';
+    form.style.display = 'none';
 
-    var inputbox	= document.createElement('input');
-    inputbox.type	= 'text';
-    inputbox.name	= name;
-    inputbox.value	= value;
+    var inputbox = document.createElement('input');
+    inputbox.type = 'text';
+    inputbox.name = name;
+    inputbox.value = value;
 
     form.appendChild(inputbox);
 
@@ -1452,11 +1245,10 @@ function addInputboxAutocompleteValue(name, value)
  * @param  textStatus
  * @param  errorThrown
  */
-function generalAjaxErrorCallback(XMLHttpRequest, textStatus, errorThrown)
-{
+function generalAjaxErrorCallback(XMLHttpRequest, textStatus, errorThrown) {
     var error_text = "连接失败\n";
     error_text += XMLHttpRequest.status + ' ' + XMLHttpRequest.statusText + "\n";
-    alert(error_text);
+    addConsoleLog(error_text);
 }
 
 /**
@@ -1466,7 +1258,12 @@ function generalAjaxErrorCallback(XMLHttpRequest, textStatus, errorThrown)
  * @param data  null|Object
  * @param callback  null|Function
  */
-var ajax = (function(api_name, data, callback){
+var ajax = (function (api_name, data, callback) {
+
+    if (typeof(api) === 'undefined') {
+        addConsoleLog('[error] api variable is undefined.');
+        return false;
+    }
 
     var api_url = api[api_name].url;
     var url = base_url + api_url;
@@ -1479,8 +1276,7 @@ var ajax = (function(api_name, data, callback){
         'data': data,
         'error': ajaxErrorCallback,
         'success': function (result) {
-            if (callback)
-            {
+            if (callback) {
                 callback(result);
             }
         }
@@ -1496,17 +1292,15 @@ var ajax = (function(api_name, data, callback){
  * argument 3  Object  dialog options  对话框参数
  * @return Object(DivHTMLElement)  对象（DOM）
  */
-function createDialog(title, text)
-{
+function createDialog(title, text) {
     // get arguments
-    var options  = arguments[3] ? arguments[3] : new Object();
+    var options = arguments[3] ? arguments[3] : new Object();
 
     // set dialog attributes
     var dialog_attributes = {
         "class": "dialog"
     };
-    if (options.id)
-    {
+    if (options.id) {
         dialog_attributes.id = options.id;
     }
 
@@ -1534,7 +1328,7 @@ function createDialog(title, text)
         "class": "button_close dialog_close"
     }, "x");
     dialog_buttons.appendChild(button_close);
-    button_close.onclick = (function(){
+    button_close.onclick = (function () {
         var dialog = this.parentNode.parentNode.parentNode;
         dialog.parentNode.removeChild(dialog);
     });
@@ -1553,16 +1347,13 @@ function createDialog(title, text)
  * remove dialog  移除对话框
  * @param dialog  String|Object(HTMLElement)  dialog ID or dialog node  对话框ID或对话框节点
  */
-function removeDialog(dialog)
-{
-    if ( !dialog || !dialog.parentNode )
-    {
+function removeDialog(dialog) {
+    if (!dialog || !dialog.parentNode) {
         return;
     }
 
     // get dialog node
-    if ( typeof(dialog) !== "object" )
-    {
+    if (typeof(dialog) !== "object") {
         dialog = getElement(dialog);
     }
 
@@ -1575,8 +1366,7 @@ function removeDialog(dialog)
  * @param id  String  dialog ID string  对话框ID
  * @param percent  Number  progress percent  进度条百分比
  */
-function createProgressDialog(id, percent)
-{
+function createProgressDialog(id, percent) {
     // create a wrapper
     var dialog = createElement("div", {
         "id": id,
@@ -1614,28 +1404,23 @@ function createProgressDialog(id, percent)
  * @param percent  Number  progress percent  进度条百分比
  * @returns Bool  true if success or false if fail  成功返回true，失败返回false
  */
-function updateProgressDialog(id, percent)
-{
+function updateProgressDialog(id, percent) {
     // get dialog node
     var dialog = getElement(id);
-    if (!dialog)
-    {
+    if (!dialog) {
         log("dialog (" + id + ") not found.");
         return false;
     }
 
     var progress_bar = null;
-    if ( document.getElementsByClassName )
-    {
+    if (document.getElementsByClassName) {
         var list_progress_bar = dialog.getElementsByClassName("progress-bar");
-        if (list_progress_bar.length)
-        {
+        if (list_progress_bar.length) {
             progress_bar = list_progress_bar[0];
             progress_bar.style.width = percent + "%";
         }
     }
-    else
-    {
+    else {
         $(dialog).find(".progress-bar").css("width", percent + "%");
     }
 
@@ -1647,12 +1432,10 @@ function updateProgressDialog(id, percent)
  * @param id String  dialog ID string  对话框ID
  * @returns Bool  true if success or false if fail  成功返回true，失败返回false
  */
-function removeProgressDialog(id)
-{
+function removeProgressDialog(id) {
     // get dialog node
     var dialog = getElement(id);
-    if (!dialog)
-    {
+    if (!dialog) {
         log("dialog (" + id + ") not found.");
         return false;
     }
@@ -1664,14 +1447,22 @@ function removeProgressDialog(id)
     return true;
 }
 
-function showLoadingIcon()
-{
-    $('#loading_icon_container').show();
+/**
+ * show loadding icon
+ * require jQuery library
+ * @param speed  fade speed
+ */
+function showLoadingIcon(speed) {
+    $('#loading_icon_container').fadeIn(speed ? speed : 'fast');
 }
 
-function hideLoadingIcon()
-{
-    $('#loading_icon_container').hide();
+/**
+ * hide loadding icon
+ * require jQuery library
+ * @param speed  fade speed
+ */
+function hideLoadingIcon(speed) {
+    $('#loading_icon_container').fadeOut(speed ? speed : 'fast');
 }
 
 
