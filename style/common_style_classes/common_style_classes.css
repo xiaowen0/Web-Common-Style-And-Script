@@ -451,6 +451,10 @@
     }
 }
 
+.spinner-loader {
+    vertical-align: middle;
+}
+
 /* :not(:required) hides this rule from IE9 and below */
 .spinner-loader:not(:required) {
     -moz-animation: spinner-loader 1500ms infinite linear;
