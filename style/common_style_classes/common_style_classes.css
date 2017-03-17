@@ -1083,3 +1083,79 @@ select.inline {
     right: 3px;
 }
 
+/**
+ * Tooltip
+ */
+
+.displayTooltip { /* a text which need to display tooltip */
+    /*display: inline-block;*/
+    position: relative;
+}
+
+.tooltip { /* tooltip content */
+    display: block;
+    position: absolute;
+    z-index: 1;
+    min-width: 110px;
+    visibility: hidden;
+    box-sizing: border-box;
+    background-color: black;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 6px;
+    /*top: 100%;*/
+    /*left: 50%;*/
+    left: 0;
+}
+
+.tooltip.right {
+    top: -5px;
+    left: 105%;
+}
+
+.tooltip.left {
+    top: -5px;
+    right: 105%;
+    left: auto;
+}
+
+.tooltip.top {
+    top: auto;
+    bottom: 100%;
+    left: 0;
+    /*left: 50%;*/
+    /*margin-left: calc((attr(width)) / 2); !* Use half of the width (120/2 = 60), to center the tooltip *!*/
+}
+
+.displayTooltip:hover .tooltip,
+.displayTooltip:hover ~ .tooltip,
+.displayTooltip.hover .tooltip,
+.displayTooltip.hover ~ .tooltip {
+    visibility: visible;
+}
+
+
+
+/* progress */
+.progress {
+    background: #e8edf2;
+    height: 12px;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    overflow: hidden;
+}
+
+.progress.rounded {
+    border-radius: 32px;
+}
+
+.progress .bar {
+    height: 100%;
+    background: #1abc9c;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+
