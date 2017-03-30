@@ -637,6 +637,40 @@ function getWindowWidth() {
     return width ? width : 0;
 }
 
+/**
+ * set body min height
+ * @returns Boolean
+ */
+function setBodyMinHeight()
+{
+	var bodyHeight = document.body.offsetHeight || 0;
+	var windowHeight = getWindowHeight() || 0;
+	
+	// can not get height
+	if (bodyHeight == 0 || windowHeight == 0)
+	{
+		return false;
+	}
+	
+	// set window resize event
+	$(window).on('resize', function(){
+		
+		// reset height to auto
+		$(document.body).css('height', 'auto');
+		
+		var bodyHeight = document.body.offsetHeight || 0;
+		var windowHeight = getWindowHeight() || 0;
+		
+		if (bodyHeight < windowHeight)
+		{
+			$(document.body).css('height', windowHeight + 'px');
+		}
+		
+	}).trigger('resize');
+	
+	return true;
+}
+
 function createDialog(options) {
 
 }
