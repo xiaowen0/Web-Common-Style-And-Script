@@ -206,6 +206,12 @@ function data2String(data) {
     return data;
 }
 
+/**
+ * create url with params
+ * @param String url
+ * @param Object params
+ * @return String
+ */
 function createUrl(url, params) {
     if (typeof(params) === 'object') {
         url += '?';
@@ -221,6 +227,84 @@ function createUrl(url, params) {
     }
 
     return url;
+}
+
+/**
+ * check a path if root
+ * @param String path
+ * @returns Boolean
+ */
+function isRootPath(path)
+{
+	// remove last / char
+	if (path.lastIndexOf('/') == path.length - 1)
+	{
+		path = path.substr(0, path.length - 1);
+	}
+	
+	// no parent
+	if (path == '/' || path.length == 0)
+	{
+		return true;
+	}
+	
+	return false;
+}
+
+/**
+ * get the parent folder url by url
+ * @param String url
+ * @returns String
+ * example:
+ * 'abc' => ''
+ * 'abc/dfg' => 'abc'
+ * './abc/dfg' => './abc'
+ */
+function getParentFolder(url)
+{
+	// remove last / char
+	if (url.lastIndexOf('/') == url.length - 1)
+	{
+		url = url.substr(0, url.length - 1);
+	}
+	
+	// no parent
+	if (url.lastIndexOf('/') < 0 || url.lastIndexOf('/') == 0)
+	{
+		return '';
+	}
+	
+	return url.substr(0, url.lastIndexOf('/'));
+}
+
+/**
+ * adjust url
+ * remove ./ string, last / string
+ * @param String url
+ * @returns String
+ */
+function adjustUrl(url)
+{
+	// remove last / char
+	if (url.lastIndexOf('/') == url.length - 1)
+	{
+		url = url.substr(0, url.length - 1);
+	}
+	
+	if (url.substr(0, 2) == './')
+	{
+		url = url.substr(2, url.length);
+	}
+	
+	if (url.substr(0, 1) == '/')
+	{
+		url = url.substr(1, url.length);
+	}
+	
+	// remove './' string
+	url = url.split('/./').join('/');
+	
+	return url;
 }
 
 /**
