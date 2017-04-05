@@ -1163,3 +1163,14 @@ select.inline {
     filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
 }
 
+.loadingIconLayer {
+	position: absolute;
+	z-index: 1;
+	top: 50%;
+	left: 50%;
+	margin-left: -25px;
+	margin-top: -25px;
+	width: 50px;
+	height: 50px;
+	text-align: center;
+}

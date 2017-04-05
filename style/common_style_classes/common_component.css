@@ -204,6 +204,23 @@
     overflow: visible;
 }
 
+.article .title {
+	font-size: 22px;
+	margin-bottom: 20px;
+	
+}
+
+.article .publishInfo {
+	color: #999;
+    border-bottom: solid 1px #ccc;
+    padding-bottom: 10px;
+    font-size: 13px;
+}
+
+.article .content {
+	padding-top: 30px;
+}
+
 .article_title {
     font-size: 28px;
     padding-bottom: 10px;
