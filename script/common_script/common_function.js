@@ -395,6 +395,43 @@ function getFreshText(time_str) {
     return '';
 }
 
+/**
+ * set a number count backwards
+ * @param Object(HTMLElement)  element
+ * @param Object               options
+ */
+function countBackwards(element, options)
+{
+    typeof (options) == 'object' ? null : options = {};
+    var callback = options.callback || null;
+
+    // get the number
+    var number = parseInt(element.innerHTML);
+    
+    // set timer to count
+    var timer = setInterval(function()
+    {
+        try
+        {
+            var number = parseInt(element.innerHTML);
+            
+            number--;
+            element.innerHTML = number;
+            
+            if (number <= 0)
+            {
+                clearInterval(timer);
+                callback ? callback(element) : null;
+            }
+            
+        }
+        catch (e)
+        {
+            log(e);
+        }
+    }, 1000);
+}
+
 /* --- element function group ------------------------------------------ */
 
 /**
