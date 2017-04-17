@@ -228,6 +228,18 @@
     opacity: 0.5;
 }
 
+/* border */
+
+.border {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #c9c9c9;
+}
+
+.red_border {
+    border-color: #dd5a43;
+}
+
 /* align */
 .align-left,
 .align_left,
