@@ -41,6 +41,11 @@
 	height:80px;
 	width:80px
 }
+.icon.weather.white80 {
+	background-image:url(image/weather_icons_white_80.png);
+	height:80px;
+	width:80px
+}
 .icon.weather.png40 {
 	background-image:url(http://i.tq121.com.cn/i/weather2015/png/blue30.png);
 	height:30px;
