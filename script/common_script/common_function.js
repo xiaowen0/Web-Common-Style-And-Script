@@ -396,6 +396,29 @@ function getFreshText(time_str) {
 }
 
 /**
+ * print time string in a wrapper
+ * it will refresh time per second
+ * @param element   HTMLElement|String      HTML element or CSS path string
+ * @param format    String                  date time format expression
+ */
+function printTime(element, format)
+{
+    // update per minute
+    setInterval(function()
+    {
+        try
+        {
+            var current_time_string = moment().format('dddd<br />YYYY年MM月DD日');
+            $(element).html(current_time_string);
+        }
+        catch (e)
+        {
+            addConsoleLog(e);
+        }
+    }, 1000);
+}
+
+/**
  * set a number count backwards
  * @param Object(HTMLElement)  element
  * @param Object               options
