@@ -471,17 +471,55 @@ function printTime(element, format)
 
 /**
  * set a number count backwards
- * @param Object(HTMLElement)  element
- * @param Object               options
+ * @param Object(HTMLElement)|String  element    element object or css selector string
+ * @param Object                      options
+ * -- process   String      process text string with {n}
+ * -- finish    String      finish text string
+ * -- callback  Function    finish callback
  */
 function countBackwards(element, options)
 {
-    typeof (options) == 'object' ? null : options = {};
+    // check jQuery library
+    if (typeof($) === 'undefined')
+    {
+        log('[error] missing $ function.');
+        return false;
+    }
+
+    var elementQuote = $(element);
+
+    // check options param
+    typeof (options) === 'object' ? null : options = {};
+
+    // save default text
+    var defaultText = elementQuote.html();
+    elementQuote.data('default', defaultText);
+
+    // get process text
+    var processText = options.process || '';
+    if (processText)
+    {
+        elementQuote.data('process', processText);
+    }
+    else if (!elementQuote.data('process'))
+    {
+        elementQuote.data('process', '{0}');
+    }
+
+    // get finish
+    var finishText = options.finish || '';
+    if (finishText)
+    {
+        elementQuote.data('finish', finishText);
+    }
+    else if (!elementQuote.data('finish'))
+    {
+        elementQuote.data('finish', '');
+    }
+
+    // get callback
     var callback = options.callback || null;
 
-    // get the number
-    var number = parseInt(element.innerHTML);
-    
     // set timer to count
     var timer = setInterval(function()
     {
@@ -497,7 +535,6 @@ function countBackwards(element, options)
                 clearInterval(timer);
                 callback ? callback(element) : null;
             }
-            
         }
         catch (e)
         {
