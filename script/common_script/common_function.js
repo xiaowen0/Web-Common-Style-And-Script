@@ -279,32 +279,83 @@ function getParentFolder(url)
 
 /**
  * adjust url
- * remove ./ string, last / string
+ * remove current directory string and current directory string
  * @param String url
  * @returns String
  */
 function adjustUrl(url)
 {
-	// remove last / char
-	if (url.lastIndexOf('/') == url.length - 1)
-	{
-		url = url.substr(0, url.length - 1);
-	}
-	
-	if (url.substr(0, 2) == './')
-	{
-		url = url.substr(2, url.length);
-	}
+    // remove spare directory separator
+    url = url.split('//').join('/');
+
+    // current directory string
+    url = url.split('/./').join('/');
+    if (url.substr(0, 2) == './')
+    {
+        url = url.substr(2, url.length);
+    }
+
+    // remove parent directory expression string
+    var rule1 = new RegExp('([^\/]*)\/..\/');
+    while (url.search(rule1) >= 0)
+    {
+        url = url.replace(rule1, '');
+    }
 	
 	if (url.substr(0, 1) == '/')
 	{
 		url = url.substr(1, url.length);
 	}
 	
-	// remove './' string
-	url = url.split('/./').join('/');
-	
 	return url;
+}
+
+/**
+ * concat path string
+ * @param String path1
+ * @param String path2
+ * @return String
+ */
+function concatPath(path1, path2)
+{
+    // complement separator in the end of path
+    if (path1.substr(-1, 1) != '/');
+    {
+        path1 += '/';
+    }
+    
+    // remove separator in the head of path
+    if (path2.substr(0, 1) === '/')
+    {
+        path2 = path2.substr(1, path2.length);
+    }
+    
+    return path1 + path2;
+}
+
+/**
+ * simplify path
+ * remove current directory string and current directory string
+ * @param String url
+ * @returns String
+ */
+function simplifyPath(url)
+{
+    // current directory string
+    url = url.split('/./').join('/');
+    if (url.substr(0, 2) == './')
+    {
+        url = url.substr(2, url.length);
+    }
+
+    // remove parent directory expression string
+    var rule1 = new RegExp('([^\/]*)\/..\/');
+    while (url.search(rule1) >= 0)
+    {
+        url = url.replace(rule1, '');
+    }
+    
+    return url;
 }
 
 /**
