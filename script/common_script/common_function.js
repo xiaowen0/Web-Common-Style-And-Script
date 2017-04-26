@@ -183,6 +183,24 @@ function replaceData(string, data) {
     return string;
 }
 
+/**
+ * remove all html tag in html code
+ * @param   String html
+ * @returns String
+ */
+function removeHtmlTag(html) {
+    return html.replace(/<[^<>]+?>/g,'');//删除所有HTML标签
+}
+
+/**
+ * escape html code
+ * @param   String html
+ * @returns String
+ */
+function escapeHtml(html) {
+    return html.replace(/[<>&"]/g,function(c){return {'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c];});
+}
+
 function data2String(data) {
     var text = '';
 
@@ -471,13 +489,51 @@ function printTime(element, format)
 
 /**
  * set a number count backwards
+ * @param Object(HTMLElement)  element
+ * @param Object               options
+ */
+function countBackwards(element, options)
+{
+    typeof (options) == 'object' ? null : options = {};
+    var callback = options.callback || null;
+
+    // get the number
+    var number = parseInt(element.innerHTML);
+
+    // set timer to count
+    var timer = setInterval(function()
+    {
+        try
+        {
+            var number = parseInt(element.innerHTML);
+
+            number--;
+            element.innerHTML = number;
+
+            if (number <= 0)
+            {
+                clearInterval(timer);
+                callback ? callback(element) : null;
+            }
+
+        }
+        catch (e)
+        {
+            log(e);
+        }
+    }, 1000);
+}
+
+/**
+ * set a element include number count backwards
  * @param Object(HTMLElement)|String  element    element object or css selector string
  * @param Object                      options
  * -- process   String      process text string with {n}
  * -- finish    String      finish text string
+ * -- second    String      count backwards seconds
  * -- callback  Function    finish callback
  */
-function countBackwards(element, options)
+function setCountBackwards(element, options)
 {
     // check jQuery library
     if (typeof($) === 'undefined')
@@ -496,43 +552,45 @@ function countBackwards(element, options)
     elementQuote.data('default', defaultText);
 
     // get process text
-    var processText = options.process || '';
-    if (processText)
-    {
-        elementQuote.data('process', processText);
-    }
-    else if (!elementQuote.data('process'))
-    {
-        elementQuote.data('process', '{0}');
-    }
+    var processText = options.process || elementQuote.data('process');
 
-    // get finish
-    var finishText = options.finish || '';
-    if (finishText)
-    {
-        elementQuote.data('finish', finishText);
-    }
-    else if (!elementQuote.data('finish'))
-    {
-        elementQuote.data('finish', '');
-    }
+    // get finish text
+    var finishText = options.finish || elementQuote.data('finish');
 
     // get callback
     var callback = options.callback || null;
 
-    // set timer to count
-    var timer = setInterval(function()
+    // get second
+    var second = options.second || parseInt(elementQuote.data('second')) || 60;
+
+    if (second <= 0)
+    {
+        addConsoleLog('[error] setCountBackwards must give a second param.');
+        return;
+    }
+
+    log('second=' + second);
+
+    var timer = null;
+
+    var update = (function()
     {
         try
         {
-            var number = parseInt(element.innerHTML);
-            
-            number--;
-            element.innerHTML = number;
-            
-            if (number <= 0)
+            second--;
+
+            // update content
+            elementQuote.html(processText.replace('{n}', second));
+
+            if (second <= 0)
             {
+                // set finish text
+                elementQuote.html(finishText);
+
+                // clear timer
                 clearInterval(timer);
+
+                // callback
                 callback ? callback(element) : null;
             }
         }
@@ -540,7 +598,11 @@ function countBackwards(element, options)
         {
             log(e);
         }
-    }, 1000);
+    });
+
+    update();
+    // set timer to count
+    timer = setInterval(update, 1000);
 }
 
 /* --- element function group ------------------------------------------ */

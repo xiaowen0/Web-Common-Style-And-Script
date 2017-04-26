@@ -561,6 +561,13 @@
     text-indent: 2em;
 }
 
+.indent {
+    text-indent: 4ex;
+}
+.indent2space {
+    text-indent: 8ex;
+}
+
 p.mute {
     color: #777;
 }

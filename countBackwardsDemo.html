@@ -15,17 +15,66 @@
     <div class="container">
 
         <div>
+            <h2>普通倒计时</h2>
+            <p>针对具体元素，该元素直接包含且只包含数字，使用 countBackwards(element, options)</p>
+            <p>例如：</p>
+            <p>&lt;span class=&quot;red&quot; id=&quot;countdownNumber&quot;&gt;10&lt;/span&gt;</p>
+            <p>countBackwards($('#countdownNumber')[0], {</p>
+            <p class="indent">callback : function(){</p>
+            <p class="indent2space">$('#countdownNumber').html('完成');</p>
+            <p class="indent">}</p>
+            <p>});</p>
             <p>倒计时<span class="red" id="countdownNumber">10</span></p>
-            <p class="countdownInfo"></p>
         </div>
 
-        <div class="">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="填写手机号码"/>
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" data-text="">获取验证码</button>
-                </span>
-            </div><!-- /input-group -->
+        <div class="method1">
+            <h2 class="title">针对文字和数字混合的方法1：</h2>
+            <div class="caption">
+                <p>调用 setCountBackwards() 函数时给予参数</p>
+                <p class="bold">HTML 代码：</p>
+                <p>&lt;button class=&quot;btn btn-default getValidationCodeButton&quot; type=&quot;button&quot; data-text=&quot;&quot;&gt;获取验证码&lt;/button&gt;</p>
+                <p class="bold">JavaScript 代码：</p>
+                <p>setCountBackwards('.method1 .getValidationCodeButton', { </p>
+                <p class="indent">process : '获取验证码({n})',</p>
+                <p class="indent">finish : '获取验证码',</p>
+                <p class="indent">second : 10,</p>
+                <p class="indent">callback : function(){</p>
+                <p class="indent2space">$('.getValidationCodeButton')[0].disabled = false;</p>
+                <p class="indent">}</p>
+                <p>});</p>
+            </div>
+            <form action="javascript:;" method="post">
+                <div class="input-group">
+                    <input type="text" class="form-control phoneInputbox" placeholder="填写手机号码"/>
+                    <span class="input-group-btn">
+                        <button class="btn btn-default getValidationCodeButton" type="button" data-text="">获取验证码</button>
+                    </span>
+                </div><!-- /input-group -->
+            </form>
+        </div>
+
+        <div class="method2">
+            <h2 class="title">针对文字和数字混合的方法2：</h2>
+            <div class="caption">
+                <p>在 HTML 标记里给予参数</p>
+                <p class="bold">HTML 代码：</p>
+                <p>&lt;button class=&quot;btn btn-default getValidationCodeButton&quot; type=&quot;button&quot; data-process=&quot;获取验证码({n})&quot; data-finish=&quot;获取验证码&quot; data-second=&quot;30&quot;&gt;获取验证码&lt;/button&gt;<br/></p>
+                <p class="bold">JavaScript 代码：</p>
+                <p>setCountBackwards(this, {</p>
+                <p class="indent">callback : function(){</p>
+                <p class="indent2space">$('.getValidationCodeButton')[0].disabled = false;</p>
+                <p class="indent">}</p>
+                <p>});</p>
+            </div>
+            <form action="javascript:;" method="post">
+                <div class="input-group">
+                    <input type="text" class="form-control phoneInputbox" placeholder="填写手机号码"/>
+                    <span class="input-group-btn">
+                        <button class="btn btn-default getValidationCodeButton" type="button"
+                            data-process="获取验证码({n})" data-finish="获取验证码" data-second="30">获取验证码</button>
+                    </span>
+                </div><!-- /input-group -->
+            </form>
         </div>
 
     </div>
@@ -36,10 +85,50 @@
     
     countBackwards($('#countdownNumber')[0], {
         callback: function(){
-            $('.countdownInfo').html('完成！');
+            $('#countdownNumber').html('完成！');
         }
     });
-    
+
+    $('.method1 .getValidationCodeButton').on('click', function()
+    {
+        var phoneInputbox = $(this.form).find('.phoneInputbox');
+        if (phoneInputbox.val().length < 1)
+        {
+            phoneInputbox.focus();
+            return;
+        }
+
+        this.disabled = true;
+        setCountBackwards(this, {
+            process : '获取验证码({n})',
+            finish : '获取验证码',
+            second : 10,
+            callback : function(){
+                $('.getValidationCodeButton')[0].disabled = false;
+            }
+        });
+    });
+
+    $('.method2 .getValidationCodeButton').on('click', function()
+    {
+        // check phone input
+        var phoneInputbox = $(this.form).find('.phoneInputbox');
+        if (phoneInputbox.val().length < 1)
+        {
+            phoneInputbox.focus();
+            return;
+        }
+
+        // disable current button
+        this.disabled = true;
+
+        setCountBackwards(this, {
+            callback : function(){
+                $('.getValidationCodeButton')[0].disabled = false;
+            }
+        });
+    });
+
     </script>
     
 </body>
