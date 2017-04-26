@@ -3,20 +3,39 @@
  * common component
  */
 
+/* page base layout */
+.page {
+    margin-left: auto;
+    margin-right: auto;
+    min-height: 100%;
+}
+
+.pageHeader .inner {
+    padding: 10px;
+}
+
+.pageHeader .title {
+    padding-left: 70px;
+    padding-right: 70px;
+    text-align: center;
+    font-size: 150%;
+    font-weight: 700;
+}
+
 /* pagination */
 
-.page {
+.pagination {
     padding-left: 0;
 }
 
-.page li {
+.pagination li {
     /*display: inline;*/
     margin-right: 6px;
     display: inline-block;
     margin-bottom: 10px;
 }
 
-.page li a {
+.pagination li a {
     padding: 6px 12px;
     background-color: #FFF;
     display: block;
@@ -939,4 +958,16 @@
     width: 160px;
     height: 160px;
     overflow: hidden;
+}
+
+.loadingIconLayer {
+	position: absolute;
+	z-index: 1;
+	top: 50%;
+	left: 50%;
+	margin-left: -25px;
+	margin-top: -25px;
+	width: 50px;
+	height: 50px;
+	text-align: center;
 }

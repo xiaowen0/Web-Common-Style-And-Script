@@ -145,6 +145,22 @@
     box-sizing: border-box;
 }
 
+.max_w320,
+.max320 {
+    max-width: 320px;
+    box-sizing: border-box;
+}
+.max_w640,
+.max640 {
+    max-width: 640px;
+    box-sizing: border-box;
+}
+.max_w720,
+.max720 {
+    max-width: 720px;
+    box-sizing: border-box;
+}
+
 .limit_max_width {
     max-width: 100%;
 }
@@ -187,6 +203,10 @@
 /* background */
 .white_bg {
     background-color: white;
+}
+
+.grey_bg {
+    background-color: #EEE;
 }
 
 .blue_bg,
@@ -605,6 +625,8 @@ p.danger {
 }
 
 .border_radius {
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
     border-radius: 4px;
 }
 
@@ -796,10 +818,6 @@ p.danger {
     list-style: none;
 }
 
-.list li {
-    margin-bottom: 10px;
-}
-
 .list > li:last-child,
 .list .last {
     border-bottom: none 0;
@@ -817,10 +835,24 @@ p.danger {
     padding-right: 5px;
 }
 
-/*.list_dot, ul.dot{ !* list dot style  列表圆点 *!*/
-/*background: url(../images/bg_baidu_iknow.gif) no-repeat -84px -250px;*/
-/*padding-left: 8px;*/
-/*}*/
+.list.concise {
+    border: solid 1px #EFEFEF;
+    background-color: #FFF;
+}
+
+.list.concise li {
+    margin: 0;
+    border-bottom: solid 1px #EFEFEF;
+}
+
+.list.concise li:last-child {
+    border-bottom: 0 none;
+}
+
+.list.concise li a {
+    display: block;
+    padding: 10px;
+}
 
 .trans {
     opacity: 0.8
@@ -1182,14 +1214,4 @@ select.inline {
     filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
 }
 
-.loadingIconLayer {
-	position: absolute;
-	z-index: 1;
-	top: 50%;
-	left: 50%;
-	margin-left: -25px;
-	margin-top: -25px;
-	width: 50px;
-	height: 50px;
-	text-align: center;
-}
+
