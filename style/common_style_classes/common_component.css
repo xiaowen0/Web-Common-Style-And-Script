@@ -8,18 +8,44 @@
     margin-left: auto;
     margin-right: auto;
     min-height: 100%;
+
 }
 
-.pageHeader .inner {
+.pageHeader {
     padding: 10px;
 }
 
-.pageHeader .title {
+.pageHeader .inner {
+    position: relative;
+    height: 30px;
+}
+
+.pageHeader.mobileStyle .title {
     padding-left: 70px;
     padding-right: 70px;
     text-align: center;
     font-size: 150%;
     font-weight: 700;
+}
+
+.pageHeader.mobileStyle .leftBox,
+.pageHeader.mobileStyle .rightBox{
+    position: absolute;
+    z-index: 1;
+    top: 0;
+}
+
+.pageHeader.mobileStyle .leftBox {
+    left: 0;
+}
+
+.pageHeader.mobileStyle .rightBox {
+    right: 0;
+}
+
+.pageHeader.mobileStyle .button {
+    height: 30px;
+    line-height: 28px;
 }
 
 /* pagination */
@@ -223,24 +249,9 @@
     overflow: visible;
 }
 
-.article .title {
-	font-size: 22px;
-	margin-bottom: 20px;
-	
-}
-
-.article .publishInfo {
-	color: #999;
-    border-bottom: solid 1px #ccc;
-    padding-bottom: 10px;
-    font-size: 13px;
-}
-
-.article .content {
-	padding-top: 30px;
-}
-
-.article_title {
+.article_title,
+.articleTitle,
+.article .title{
     font-size: 28px;
     padding-bottom: 10px;
     line-height: normal;
@@ -251,7 +262,8 @@
     color: #9a9a9a;
 }
 
-.article_text {
+.article_text,
+.articleContent{
     color: #666;
     word-wrap: break-word;
     word-break: break-all;

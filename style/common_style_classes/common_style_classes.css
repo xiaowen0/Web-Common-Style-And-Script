@@ -248,18 +248,6 @@
     opacity: 0.5;
 }
 
-/* border */
-
-.border {
-    border-style: solid;
-    border-width: 1px;
-    border-color: #c9c9c9;
-}
-
-.red_border {
-    border-color: #dd5a43;
-}
-
 /* align */
 .align-left,
 .align_left,
@@ -579,13 +567,6 @@
 /* paragraph */
 .indent_2em {
     text-indent: 2em;
-}
-
-.indent {
-    text-indent: 4ex;
-}
-.indent2space {
-    text-indent: 8ex;
 }
 
 p.mute {
@@ -1213,5 +1194,4 @@ select.inline {
     box-shadow: none;
     filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
 }
-
 
