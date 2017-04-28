@@ -237,7 +237,7 @@
 .tablecloth {
     background-color:white;
     background-image: linear-gradient(90deg, rgba(200,0,0,.5) 50%, transparent 50%),
-        linear-gradient(rgba(200,0,0,.5) 50%, transparent 50%);
+    linear-gradient(rgba(200,0,0,.5) 50%, transparent 50%);
     background-size:50px 50px;
 }
 
@@ -793,7 +793,6 @@ p.danger {
 
 /* list style */
 .list {
-    line-height: 100%;
     margin: 0;
     padding-left: 0;
     list-style: none;
@@ -824,6 +823,7 @@ p.danger {
 .list.concise li {
     margin: 0;
     border-bottom: solid 1px #EFEFEF;
+    padding: 10px;
 }
 
 .list.concise li:last-child {
@@ -832,7 +832,6 @@ p.danger {
 
 .list.concise li a {
     display: block;
-    padding: 10px;
 }
 
 .trans {
