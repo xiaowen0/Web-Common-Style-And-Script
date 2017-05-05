@@ -871,6 +871,33 @@ function getUrlParam(name) {
     return default_value;
 }
 
+/**
+ * get body html from html code
+ * @param  String  html
+ * @return String|false
+ */
+function getBodyHtml(html)
+{
+	try
+	{
+		var splitResult = html.split(/\<body[^\>]*\>/);
+		if (splitResult.length < 2)
+		{
+			log('can not found string: /\<body[^\>]*\>/');
+			return false;
+		}
+		html = splitResult[1].replace('</body>', '');
+		
+	}
+	catch (e)
+	{
+		log(e);
+		return false;
+	}
+	
+	return html;
+}
+
 /* --- Window function group ------------------------------------------- */
 
 /**
