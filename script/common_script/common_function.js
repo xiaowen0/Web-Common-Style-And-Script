@@ -1,6 +1,6 @@
 /**
  * common function
- * @last update:     2017-03-15 11:05
+ * @last update:     2017-05-09 11:05
  */
 
 /* --- debug function group ------------------------------------------ */
@@ -444,21 +444,16 @@ function getFreshText(time_str) {
     var minute = 1000 * 60;
     var hour = minute * 60;
     var day = hour * 24;
-    var halfamonth = day * 15;
+    // var halfamonth = day * 15;
     var month = day * 30;
 
-    try {
-        if (typeof(moment) != 'object') {
-            addConsoleLog('moment library is required.');
-            return false;
-        }
-
-        moment.locale('zh-cn');
+    try
+    {
         var time = moment(time_str);
-        return time.fromNow
+        return time.fromNow();
     }
     catch (e) {
-        ;
+        addConsoleLog(e);
     }
 
     return '';
@@ -469,15 +464,21 @@ function getFreshText(time_str) {
  * it will refresh time per second
  * @param element   HTMLElement|String      HTML element or CSS path string
  * @param format    String                  date time format expression
+ * require moment-with-locales library
  */
 function printTime(element, format)
 {
+    if (!format)
+    {
+        format = $(element).data('format') || 'YYYY-MM-DD H:mm:ss';
+    }
+
     // update per minute
     setInterval(function()
     {
         try
         {
-            var current_time_string = moment().format('dddd<br />YYYY年MM月DD日');
+            var current_time_string = moment().format(format);
             $(element).html(current_time_string);
         }
         catch (e)
