@@ -983,3 +983,26 @@
 	height: 50px;
 	text-align: center;
 }
+
+/* progress */
+.progress {
+    background: #e8edf2;
+    height: 12px;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    overflow: hidden;
+}
+
+.progress.rounded {
+    border-radius: 32px;
+}
+
+.progress .bar {
+    height: 100%;
+    background: #1abc9c;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}

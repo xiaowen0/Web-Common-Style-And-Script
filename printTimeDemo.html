@@ -9,29 +9,45 @@
 
 </head>
 <body>
-<div class="container">
-    <div>
-        <p>printTime(element, format)</p>
-        <p>element 指定元素对象或 CSS 选择器表达式，比如：</p>
-        <p>format 指定时间文本格式</p>
-        <p>
-            需要
-            <a href="http://momentjs.com/">Moment.js</a>
-            库
-        </p>
-        <p>
-            时间格式参考：
-            <a href="http://momentjs.com/docs/" target="_blank">
-                http://momentjs.com/docs/
-            </a>
-        </p>
-        <p>
-            演示：<span id="time1"></span>
-        </p>
-        <p>或者在标记里定义属性 data-format 来指定时间文本格式</p>
-        <p>
-            演示：<span id="time2" data-format="YYYY年M月D日 A h:mm:ss dddd"></span>
-        </p>
+<div class="page">
+
+    <div class="inner container">
+
+        <h1>输出时间演示</h1>
+
+        <div>
+
+            <p>实时输出时间文本到一个 DOM 里</p>
+            <p>脚本：common_function.js</p>
+            <p>printTime(element, format)</p>
+            <p>element 指定元素对象或 CSS 选择器表达式，比如：</p>
+            <p>format 指定时间文本格式</p>
+            <p>
+                需要
+                <a href="http://momentjs.com/">Moment.js</a>
+                库
+            </p>
+            <p>
+                时间格式参考：
+                <a href="http://momentjs.com/docs/" target="_blank">
+                    http://momentjs.com/docs/
+                </a>
+            </p>
+            <p>
+                示例：<code>printTime('#time1', 'YYYY年M月D日 H:mm:ss');</code>
+            </p>
+            <p class="greenyello">
+                <span id="time1"></span>
+            </p>
+            <p>PS: 推荐在标记里定义属性 data-format 来指定时间文本格式</p>
+            <p>
+                示例：<code>printTime('#time2');</code>
+            </p>
+            <p class="greenyello">
+                <span id="time2" data-format="YYYY年M月D日 A h:mm:ss dddd"></span>
+            </p>
+        </div>
+
     </div>
 </div>
 
@@ -39,21 +55,20 @@
 <script src="script/common_script/common_function.js"></script>
 <script src="https://cdn.bootcss.com/moment.js/2.18.1/moment-with-locales.min.js"></script>
 <script>
-var lang = document.documentElement.lang;
-if (lang)
-{
-    var scriptTag = document.createElement('script');
-    scriptTag.src = 'https://cdn.bootcss.com/moment.js/2.18.1/locale/' + lang + '.js';
-    document.body.appendChild(scriptTag);
-    moment.updateLocale(lang);
-}
+    var lang = document.documentElement.lang;
+    if (lang) {
+        var scriptTag = document.createElement('script');
+        scriptTag.src = 'https://cdn.bootcss.com/moment.js/2.18.1/locale/' + lang + '.js';
+        document.body.appendChild(scriptTag);
+        moment.updateLocale(lang);
+    }
 </script>
 
 <script>
-$(document).ready(function(){
-    printTime('#time1', 'YYYY年M月D日 H:mm:ss');
-    printTime('#time2');
-});
+    $(document).ready(function () {
+        printTime('#time1', 'YYYY年M月D日 H:mm:ss');
+        printTime('#time2');
+    });
 </script>
 
 </body>

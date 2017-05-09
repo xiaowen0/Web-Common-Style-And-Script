@@ -5,6 +5,14 @@
 
 $(document).ready(function()
 {
+	// dialog
+	$('.dialog').each(function(){
+		$(this).find('.dialog_header .close_button').on('click', function(){
+			var dialog = $(this).parents('.dialog');
+			dialog.fadeOut();
+		});
+	});
+
     // backspace button action
     $('.backspaceButton').on('click', function(){
     	var inputGroup = $(this).parents('.inputGroup');
