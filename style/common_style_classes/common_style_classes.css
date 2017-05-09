@@ -209,6 +209,10 @@
     background-color: #EEE;
 }
 
+.black_bg {
+    background-color: #000;
+}
+
 .blue_bg,
 .primary_bg {
     color: #fff;
@@ -635,7 +639,6 @@ p.danger {
     min-height: 30px;
     padding-left: 6px;
     padding-right: 6px;
-    margin-bottom: 0;
     font-size: 100%;
     line-height: 1.5;
     white-space: nowrap;
