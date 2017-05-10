@@ -1,663 +1,667 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>样式类示例 - Common Style And Script 公共样式与脚本</title>
+        <title>样式类示例 - Common Style And Script 公共样式与脚本</title>
 
-    <!-- Bootstrap framework -->
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"/>
+        <!-- common function -->
+        <script src="script/common_script/common_function.js"></script>
 
-    <!-- common style classes library -->
-    <link rel="stylesheet" href="style/common_style_classes/common_style_classes.css"/>
+        <!-- check IE old version, add HTML5 support, use CDN. -->
+        <!--[if lt IE 9]>
+        <script>
+            if (getBrowserLanguage() === 'zh-cn')   // 中国大陆
+            {
+                printTag('script', {src: 'https://cdn.bootcss.com/html5shiv/r29/html5.min.js'});
+            }
+            else    // 国际网络
+            {
+                printTag('script', {src: 'https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js'});
+            }
+        </script>
+        <![endif]-->
 
-    <style>
-        a {
-            color: #333;
-        }
+        <!-- Bootstrap framework , use CDN. -->
+        <script>
+            if (getBrowserLanguage() === 'zh-cn')   // 中国大陆
+            {
+                printStylesheetLink('https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css');
+                printStylesheetLink('https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap-theme.min.css');
+            }
+            else    // 国际网络
+            {
+                printStylesheetLink('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css');
+                printStylesheetLink('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap-theme.min.css');
+            }
+        </script>
 
-        a:hover {
-            color: #007FFF;
-        }
-    </style>
-</head>
-<body>
+        <!-- common style classes library -->
+        <link rel="stylesheet" href="style/common_style_classes/common_style_classes.css" />
 
-<div class="page container-fluid">
-    <div class="inner">
+        <style>
+            a {
+                color: #333;
+            }
 
-        <h1 class="mb20">公共样式类表示例</h1>
+            a:hover {
+                color: #007FFF;
+            }
+        </style>
+    </head>
+    <body>
 
-        <div class="mb10">
-            <p>样式表：common_style_classes.css</p>
-        </div>
+        <div class="page container-fluid">
+            <div class="inner">
 
-        <!-- display style -->
-        <div class="floor">
+                <h1 class="mb20">公共样式类表示例</h1>
 
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h2>显示控制类</h2>
-                    <p>使用 .inline 可转换为行内元素</p>
-                    <div>
-                        <ul class="no-padding">
-                            <li class="inline">Inline Item 1</li>
-                            <li class="inline">Inline Item 2</li>
-                            <li class="inline">Inline Item 3</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <label class="block">使用 .block 可转换为块元素</label>
-                        <input class="inputbox block" type="text" value="使用 .block 可转换为块元素" placeholder="使用 .block 可转换为块元素"/>
-                    </div>
-                    <div>
-                        使用 .hidden 可隐藏元素
-                    </div>
-                </div>
-            </div>
-        </div>
+                <p>样式表：common_style_classes.css</p>
+                <p>这个样式设定了一些类实现某一种特殊的样式属性，必要时直接使用而无需另外写样式定义。</p>
 
-        <div class="floor">
+                <!-- display style -->
+                <div class="floor">
 
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h2>背景类</h2>
-                    <div class="clearfix row">
-
-                        <div class="col-xs-12 col-md-6 padding10 blue_bg">
-                            蓝色 .blue_bg<br/>
-                            主要的 .primary_bg
-                        </div>
-
-                        <div class="col-xs-12 col-md-6 padding10 green_bg">
-                            绿色 .green_bg<br/>
-                            成功 .success_bg
-                        </div>
-
-                        <div class="col-xs-12 col-md-6 padding10 info_bg">
-                            信息(天蓝色) .info_bg
-                        </div>
-                        <div class="col-xs-12 col-md-6 padding10 yellow_bg">
-                            黄色 .yellow_bg<br/>
-                            警告的 .warning_bg
-                        </div>
-                        <div class="col-xs-12 col-md-6 padding10 red_bg">
-                            红色 .red_bg<br/>
-                            危险的 .danger_bg
-                        </div>
-                        <div class="col-xs-12 col-md-6 padding10 tablecloth white" style="height: 200px;">
-                            <p class="black_bg">桌布 .tablecloth</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="floor">
-
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h2>宽度设定类</h2>
-
-                    <div class="clearfix">
-                        <div class="fl primary_bg w120 padding10 mb10 mr10">.w120 代表 120px 宽度</div>
-                        <div class="fl primary_bg w120 padding10 mb10 mr10">.w120 代表 120px 宽度</div>
-                        <div class="fl primary_bg w120 padding10 mb10 mr10">.w120 代表 120px 宽度</div>
-                    </div>
-
-                    <div class="clearfix">
-                        <div class="fl primary_bg w240 padding10 mb10 mr10">.w240 代表 240px 宽度</div>
-                        <div class="fl primary_bg w240 padding10 mb10 mr10">.w240 代表 240px 宽度</div>
-                    </div>
-
-                    <div class="clearfix">
-                        <div class="fl primary_bg w20p padding10 mb10 mr10">.w20p 代表 20% 宽度</div>
-                        <div class="fl primary_bg w20p padding10 mb10 mr10">.w20p 代表 20% 宽度</div>
-                        <div class="fl primary_bg w20p padding10 mb10 mr10">.w20p 代表 20% 宽度</div>
-                        <div class="fl primary_bg w20p padding10 mb10 mr10">.w20p 代表 20% 宽度</div>
-                    </div>
-
-                    <div class="clearfix">
-                        <div class="fl primary_bg w30p padding10 mb10 mr10">.w30p 代表 30% 宽度</div>
-                        <div class="fl primary_bg w30p padding10 mb10 mr10">.w30p 代表 30% 宽度</div>
-                        <div class="fl primary_bg w30p padding10 mb10 mr10">.w30p 代表 30% 宽度</div>
-                    </div>
-
-                    <div class="clearfix">
-                        <div class="fl primary_bg w40p padding10 mb10 mr10">.w40p 代表 40% 宽度</div>
-                        <div class="fl primary_bg w40p padding10 mb10 mr10">.w40p 代表 40% 宽度</div>
-                    </div>
-
-                    <div>
-                        <div class="fl primary_bg w50p padding10 mb10 mr10">.w50p 代表 50% 宽度</div>
-                        <div class="fl primary_bg w70p padding10 mb10 mr10">.w70p 代表 70% 宽度</div>
-                        <div class="fl primary_bg w100p padding10 mb10 mr10">.w100p 代表 100% 宽度</div>
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
-
-        <div class="floor">
-
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h2>边距设定类</h2>
-                    <div class="clearfix">
-                        <div class="primary_bg padding10 mb10">.mb10 代表下边距 10px</div>
-                        <div class="primary_bg padding10 mb20">.mb20 代表下边距 20px</div>
-                    </div>
-                    <div class="clearfix mb10">
-                        <div class="fl primary_bg w30p padding10 mr10">.mr10 代表右边距 10px</div>
-                        <div class="fl primary_bg w30p padding10 mr20">.mr20 代表右边距 20px</div>
-                        <div class="fl primary_bg w20p padding10 mr20">&nbsp;</div>
-                    </div>
-                    <div class="clearfix">
-                        <h3 class="fl primary_bg w30p padding10 noMargin">.noMargin 取消所有边距</h3>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="floor">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h2>填充设定类</h2>
-                    <div class="clearfix">
-                        <div class="primary_bg padding10 mb20">.padding10 代表内填充 10px</div>
-                        <div class="primary_bg padding20 mb20">.padding20 代表内填充 20px</div>
-                        <h3 class="primary_bg noPadding">.noPadding 取消所有内填充</h3>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="floor">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h2>布局控制类</h2>
-                    <div class="clear green_bg padding10 mb20">.clear 清除浮动</div>
-                    <div class="clear mb20">
-                        <div class="w40p padding10 green_bg fl">.fl 设置左浮动</div>
-                    </div>
-                    <div class="clear padding10 mb20">
-                        <div class="w40p padding10 green_bg fr">.fr 设置右浮动</div>
-                    </div>
-                    <div class="clear padding10 mb20">
-                        <div class="w40p padding10 green_bg center">.center 或 .centered 设置居中</div>
-                    </div>
-                    <div class="clear padding10 green_bg mb20">.clearfix 清除浮动并固实容器</div>
-                    <p>当一个容器所包含的子元素全部为浮动元素时，应设置 .clearfix 类。</p>
-                    <div class="clear padding10 green_bg mb20">.floor 多层布局用的层，有白色背景和20px下边距</div>
-
-                </div>
-            </div>
-
-        </div>
-
-        <div class="floor">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h2>文字对齐设定类</h2>
-                    <div class="row">
-                        <div class="col-xs-12 col-md-6">
-                            <div class="padding10 info_bg mb10 align-left">.align-left 左对齐</div>
-                        </div>
-                        <div class="col-xs-12 col-md-6">
-                            <div class="padding10 info_bg mb10 align-right">.align-right 右对齐</div>
-                        </div>
-                        <div class="col-xs-12 col-md-6">
-                            <div class="padding10 info_bg mb10 align-center">.align-center 居中</div>
-                        </div>
-                        <div class="col-xs-12 col-md-6">
-                            <div class="padding10 info_bg mb10 align-justify">
-                                <p>.align-justify 两边对齐。</p>
-                                <p>text-align 属性规定元素中的文本的水平对齐方式。</p>
-                                <p>该属性通过指定行框与哪个点对齐，从而设置块级元素内文本的水平对齐方式。通过允许用户代理调整行内容中字母和字之间的间隔，可以支持值 justify；不同用户代理可能会得到不同的结果。</p>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <h2>显示控制类</h2>
+                            <p>使用 .inline 可转换为行内元素</p>
+                            <div>
+                                <ul class="no-padding">
+                                    <li class="inline">Inline Item 1</li>
+                                    <li class="inline">Inline Item 2</li>
+                                    <li class="inline">Inline Item 3</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <label class="block">使用 .block 可转换为块元素</label>
+                                <input class="inputbox block" type="text" value="使用 .block 可转换为块元素"
+                                       placeholder="使用 .block 可转换为块元素" />
+                            </div>
+                            <div>
+                                使用 .hidden 可隐藏元素
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-        </div>
+                <div class="floor">
 
-        <div class="floor">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h2>字体类</h2>
-                    <div class="row">
-                        <div class="col-xs-12 col-md-4">
-                            <div class="padding10 info_bg mb10 wryh">.wryh 或 .msyh 设置微软雅黑</div>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <h2>背景类</h2>
+                            <div class="clearfix row">
+
+                                <div class="col-xs-12 col-md-6 padding10 blue_bg">
+                                    蓝色 .blue_bg<br />
+                                    主要的 .primary_bg
+                                </div>
+
+                                <div class="col-xs-12 col-md-6 padding10 green_bg">
+                                    绿色 .green_bg<br />
+                                    成功 .success_bg
+                                </div>
+
+                                <div class="col-xs-12 col-md-6 padding10 info_bg">
+                                    信息(天蓝色) .info_bg
+                                </div>
+                                <div class="col-xs-12 col-md-6 padding10 yellow_bg">
+                                    黄色 .yellow_bg<br />
+                                    警告的 .warning_bg
+                                </div>
+                                <div class="col-xs-12 col-md-6 padding10 red_bg">
+                                    红色 .red_bg<br />
+                                    危险的 .danger_bg
+                                </div>
+                                <div class="col-xs-12 col-md-6 padding10 tablecloth white" style="height: 200px;">
+                                    <p class="padding10 black_bg">桌布 .tablecloth</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-xs-12 col-md-4">
-                            <div class="padding10 info_bg mb10 f16">.f16 设置 16px 字体</div>
+                    </div>
+
+                </div>
+
+                <div class="floor">
+
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <h2>宽度设定类</h2>
+
+                            <div class="clearfix">
+                                <div class="fl primary_bg w120 padding10 mb10 mr10">.w120 代表 120px 宽度</div>
+                                <div class="fl primary_bg w120 padding10 mb10 mr10">.w120 代表 120px 宽度</div>
+                                <div class="fl primary_bg w120 padding10 mb10 mr10">.w120 代表 120px 宽度</div>
+                            </div>
+
+                            <div class="clearfix">
+                                <div class="fl primary_bg w240 padding10 mb10 mr10">.w240 代表 240px 宽度</div>
+                                <div class="fl primary_bg w240 padding10 mb10 mr10">.w240 代表 240px 宽度</div>
+                            </div>
+
+                            <div class="clearfix">
+                                <div class="fl primary_bg w20p padding10 mb10 mr10">.w20p 代表 20% 宽度</div>
+                                <div class="fl primary_bg w20p padding10 mb10 mr10">.w20p 代表 20% 宽度</div>
+                                <div class="fl primary_bg w20p padding10 mb10 mr10">.w20p 代表 20% 宽度</div>
+                                <div class="fl primary_bg w20p padding10 mb10 mr10">.w20p 代表 20% 宽度</div>
+                            </div>
+
+                            <div class="clearfix">
+                                <div class="fl primary_bg w30p padding10 mb10 mr10">.w30p 代表 30% 宽度</div>
+                                <div class="fl primary_bg w30p padding10 mb10 mr10">.w30p 代表 30% 宽度</div>
+                                <div class="fl primary_bg w30p padding10 mb10 mr10">.w30p 代表 30% 宽度</div>
+                            </div>
+
+                            <div class="clearfix">
+                                <div class="fl primary_bg w40p padding10 mb10 mr10">.w40p 代表 40% 宽度</div>
+                                <div class="fl primary_bg w40p padding10 mb10 mr10">.w40p 代表 40% 宽度</div>
+                            </div>
+
+                            <div>
+                                <div class="fl primary_bg w50p padding10 mb10 mr10">.w50p 代表 50% 宽度</div>
+                                <div class="fl primary_bg w70p padding10 mb10 mr10">.w70p 代表 70% 宽度</div>
+                                <div class="fl primary_bg w100p padding10 mb10 mr10">.w100p 代表 100% 宽度</div>
+                            </div>
                         </div>
-                        <div class="col-xs-12 col-md-4">
-                            <div class="padding10 info_bg mb10 f18">.f18 设置 18px 字体</div>
+                    </div>
+
+
+                </div>
+
+                <div class="floor">
+
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <h2>边距设定类</h2>
+                            <div class="clearfix">
+                                <div class="primary_bg padding10 mb10">.mb10 代表下边距 10px</div>
+                                <div class="primary_bg padding10 mb20">.mb20 代表下边距 20px</div>
+                            </div>
+                            <div class="clearfix mb10">
+                                <div class="fl primary_bg w30p padding10 mr10">.mr10 代表右边距 10px</div>
+                                <div class="fl primary_bg w30p padding10 mr20">.mr20 代表右边距 20px</div>
+                                <div class="fl primary_bg w20p padding10 mr20">&nbsp;</div>
+                            </div>
+                            <div class="clearfix">
+                                <h3 class="fl primary_bg w30p padding10 noMargin">.noMargin 取消所有边距</h3>
+                            </div>
                         </div>
-                        <div class="col-xs-12 col-md-4">
-                            <div class="padding10 info_bg mb10 f80p">.f80p 设置 80% 字体</div>
+                    </div>
+
+                </div>
+
+                <div class="floor">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <h2>填充设定类</h2>
+                            <div class="clearfix">
+                                <div class="primary_bg padding10 mb20">.padding10 代表内填充 10px</div>
+                                <div class="primary_bg padding20 mb20">.padding20 代表内填充 20px</div>
+                                <h3 class="primary_bg noPadding">.noPadding 取消所有内填充</h3>
+                            </div>
                         </div>
-                        <div class="col-xs-12 col-md-4">
-                            <div class="padding10 info_bg mb10 f90p">.f90p 设置 90% 字体</div>
+                    </div>
+
+                </div>
+
+                <div class="floor">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <h2>布局控制类</h2>
+                            <div class="clear green_bg padding10 mb20">.clear 清除浮动</div>
+                            <div class="clear mb20">
+                                <div class="w40p padding10 green_bg fl">.fl 设置左浮动</div>
+                            </div>
+                            <div class="clear padding10 mb20">
+                                <div class="w40p padding10 green_bg fr">.fr 设置右浮动</div>
+                            </div>
+                            <div class="clear padding10 mb20">
+                                <div class="w40p padding10 green_bg center">.center 或 .centered 设置居中</div>
+                            </div>
+                            <div class="clear padding10 green_bg mb20">.clearfix 清除浮动并固实容器</div>
+                            <p>当一个容器所包含的子元素全部为浮动元素时，应设置 .clearfix 类。</p>
+                            <div class="clear padding10 green_bg mb20">.floor 多层布局用的层，有白色背景和20px下边距</div>
+
                         </div>
-                        <div class="col-xs-12 col-md-4">
-                            <div class="padding10 info_bg mb10 f110p">.f110p 设置 110% 字体</div>
+                    </div>
+
+                </div>
+
+                <div class="floor">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <h2>文字对齐设定类</h2>
+                            <div class="row">
+                                <div class="col-xs-12 col-md-6">
+                                    <div class="padding10 info_bg mb10 align-left">.align-left 左对齐</div>
+                                </div>
+                                <div class="col-xs-12 col-md-6">
+                                    <div class="padding10 info_bg mb10 align-right">.align-right 右对齐</div>
+                                </div>
+                                <div class="col-xs-12 col-md-6">
+                                    <div class="padding10 info_bg mb10 align-center">.align-center 居中</div>
+                                </div>
+                                <div class="col-xs-12 col-md-6">
+                                    <div class="padding10 info_bg mb10 align-justify">
+                                        <p>.align-justify 两边对齐。</p>
+                                        <p>text-align 属性规定元素中的文本的水平对齐方式。</p>
+                                        <p>该属性通过指定行框与哪个点对齐，从而设置块级元素内文本的水平对齐方式。通过允许用户代理调整行内容中字母和字之间的间隔，可以支持值
+                                            justify；不同用户代理可能会得到不同的结果。</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-xs-12 col-md-4">
-                            <div class="padding10 info_bg mb10 f120p">.f120p 设置 120% 字体</div>
+                    </div>
+
+                </div>
+
+                <div class="floor">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <h2>字体类</h2>
+                            <div class="row">
+                                <div class="col-xs-12 col-md-4">
+                                    <div class="padding10 info_bg mb10 wryh">.wryh 或 .msyh 设置微软雅黑</div>
+                                </div>
+                                <div class="col-xs-12 col-md-4">
+                                    <div class="padding10 info_bg mb10 f16">.f16 设置 16px 字体</div>
+                                </div>
+                                <div class="col-xs-12 col-md-4">
+                                    <div class="padding10 info_bg mb10 f18">.f18 设置 18px 字体</div>
+                                </div>
+                                <div class="col-xs-12 col-md-4">
+                                    <div class="padding10 info_bg mb10 f80p">.f80p 设置 80% 字体</div>
+                                </div>
+                                <div class="col-xs-12 col-md-4">
+                                    <div class="padding10 info_bg mb10 f90p">.f90p 设置 90% 字体</div>
+                                </div>
+                                <div class="col-xs-12 col-md-4">
+                                    <div class="padding10 info_bg mb10 f110p">.f110p 设置 110% 字体</div>
+                                </div>
+                                <div class="col-xs-12 col-md-4">
+                                    <div class="padding10 info_bg mb10 f120p">.f120p 设置 120% 字体</div>
+                                </div>
+                                <div class="col-xs-12 col-md-4">
+                                    <div class="padding10 info_bg mb10 f130p">.f130p 设置 130% 字体</div>
+                                </div>
+                                <div class="col-xs-12 col-md-4">
+                                    <div class="padding10 info_bg mb10 bold">.bold 设置字体加粗</div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-xs-12 col-md-4">
-                            <div class="padding10 info_bg mb10 f130p">.f130p 设置 130% 字体</div>
+                    </div>
+
+                </div>
+
+                <div class="floor">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <h2>文字颜色类</h2>
+                            <div class="row">
+                                <div class="col-xs-6 col-md-3 padding10 red">
+                                    .red 红色<br />
+                                    .error 出错信息<br />
+                                    .price 价格
+                                </div>
+                                <div class="col-xs-6 col-md-3 padding10 pink">
+                                    .pink 粉红色
+                                </div>
+                                <div class="col-xs-6 col-md-3 padding10 orangered">
+                                    .orangered 橙红色
+                                </div>
+                                <div class="col-xs-6 col-md-3 padding10 orange">
+                                    .orange 橙色
+                                </div>
+                                <div class="col-xs-6 col-md-3 padding10 yellow">
+                                    .yellow 黄色
+                                </div>
+                                <div class="col-xs-6 col-md-3 padding10 greenyello">
+                                    .greenyello 黄绿色
+                                </div>
+                                <div class="col-xs-6 col-md-3 padding10 green">
+                                    .green 绿色<br />
+                                    .success 成功信息
+                                </div>
+                                <div class="col-xs-6 col-md-3 padding10 olive">
+                                    .olive 橄榄绿
+                                </div>
+                                <div class="col-xs-6 col-md-3 padding10 blue">
+                                    .blue 蓝色
+                                </div>
+                                <div class="col-xs-6 col-md-3 padding10 skyblue">
+                                    .skyblue 天空蓝
+                                </div>
+                                <div class="col-xs-6 col-md-3 padding10 purple">
+                                    .purple 紫色
+                                </div>
+                                <div class="col-xs-6 col-md-3 padding10 grey">
+                                    .grey 灰色<br />
+                                    .more 更多链接
+                                </div>
+                                <div class="col-xs-6 col-md-3 padding10 darkgrey">
+                                    .darkgrey 深灰色<br />
+                                    .date 日期
+                                </div>
+                                <div class="col-xs-6 col-md-3 black_bg padding10 white">
+                                    .white 白色
+                                </div>
+
+                            </div>
                         </div>
-                        <div class="col-xs-12 col-md-4">
-                            <div class="padding10 info_bg mb10 bold">.bold 设置字体加粗</div>
+                    </div>
+
+                </div>
+
+                <div class="floor">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <h2>鼠标指针类</h2>
+                            <div class="hand">
+                                <p>.hand 使用手型鼠标指针</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="floor">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <h2>动画类</h2>
+                            <div>
+                                <p>.rotate2d 用于二维旋转</p>
+                                <div>
+                                    <img class="rotate2d circle" src="image/piano.jpg" alt="" />
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="floor">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <h2>过渡效果</h2>
+                            <div>
+                                <p>样式改变时有渐变过渡效果</p>
+                                <div class="padding20 w240">
+                                    <a class="transition" href="javascript:;">.transition</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-        </div>
-
-        <div class="floor">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h2>文字颜色类</h2>
-                    <div class="row">
-                        <div class="col-xs-6 col-md-3 padding10 red">
-                            .red 红色<br/>
-                            .error 出错信息<br/>
-                            .price 价格
+                <div class="floor">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <h2>图形类</h2>
+                            <div>
+                                <div class="fl mr20">
+                                    <p>.circle 圆盘</p>
+                                    <p>
+                                        <img class="circle" src="image/girl_picture.jpg" alt="" />
+                                    </p>
+                                </div>
+                                <div class="fl mr20">
+                                    <p>.thumbnail 缩略图</p>
+                                    <p>
+                                        <img class="thumbnail" src="image/girl_picture.jpg" alt="" />
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-xs-6 col-md-3 padding10 pink">
-                            .pink 粉红色
-                        </div>
-                        <div class="col-xs-6 col-md-3 padding10 orangered">
-                            .orangered 橙红色
-                        </div>
-                        <div class="col-xs-6 col-md-3 padding10 orange">
-                            .orange 橙色
-                        </div>
-                        <div class="col-xs-6 col-md-3 padding10 yellow">
-                            .yellow 黄色
-                        </div>
-                        <div class="col-xs-6 col-md-3 padding10 greenyello">
-                            .greenyello 黄绿色
-                        </div>
-                        <div class="col-xs-6 col-md-3 padding10 green">
-                            .green 绿色<br/>
-                            .success 成功信息
-                        </div>
-                        <div class="col-xs-6 col-md-3 padding10 olive">
-                            .olive 橄榄绿
-                        </div>
-                        <div class="col-xs-6 col-md-3 padding10 blue">
-                            .blue 蓝色
-                        </div>
-                        <div class="col-xs-6 col-md-3 padding10 skyblue">
-                            .skyblue 天空蓝
-                        </div>
-                        <div class="col-xs-6 col-md-3 padding10 purple">
-                            .purple 紫色
-                        </div>
-                        <div class="col-xs-6 col-md-3 padding10 grey">
-                            .grey 灰色<br/>
-                            .more 更多链接
-                        </div>
-                        <div class="col-xs-6 col-md-3 padding10 darkgrey">
-                            .darkgrey 深灰色<br/>
-                            .date 日期
-                        </div>
-                        <div class="col-xs-6 col-md-3 black_bg padding10 white">
-                            .white 白色
-                        </div>
-
                     </div>
+
                 </div>
-            </div>
 
-        </div>
-
-        <div class="floor">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h2>鼠标指针类</h2>
-                    <div class="hand">
-                        <p>.hand 使用手型鼠标指针</p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="floor">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h2>动画类</h2>
-                    <div>
-                        <p>.rotate2d 用于二维旋转</p>
-                        <div>
-                            <img class="rotate2d circle" src="image/piano.jpg" alt=""/>
-                            </p>
+                <div class="floor">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <h2>按钮类</h2>
+                            <div>
+                                <button class="button mr10 mb10" type="button">
+                                    .button 普通按钮
+                                </button>
+                                <button class="button large mr10 mb10" type="button">
+                                    .button.large 大按钮<br />
+                                    .button.lg
+                                </button>
+                                <button class="button small mr10 mb10" type="button">
+                                    .button.small 小按钮<br />
+                                    .button.sm"
+                                </button>
+                                <button class="button extra_small mr10 mb10" type="button">
+                                    .button.extra_small 超小按钮<br />
+                                    .button.xs
+                                </button>
+                                <button class="button red mr10 mb10" type="button">
+                                    .button.red 红色按钮<br />
+                                    .button.danger 有危险的含义
+                                </button>
+                                <button class="button darkred large mr10 mb10" type="button">
+                                    .button.darkred 暗红色按钮
+                                </button>
+                                <button class="button yellow mr10 mb10" type="button">
+                                    .button.yellow 黄色按钮<br />
+                                    .button.warning 有警告的含义
+                                </button>
+                                <button class="button green large mr10 mb10" type="button">
+                                    .button.green 绿色按钮<br />
+                                    .button.success 有成功的含义
+                                </button>
+                                <button class="button darkgreen large mr10 mb10" type="button">
+                                    .button.darkgreen 暗绿色按钮
+                                </button>
+                                <button class="button cyan large mr10 mb10" type="button">
+                                    .button.cyan 青色按钮<br />
+                                    .button.info 有信息意味的
+                                </button>
+                                <button class="button pink large mr10 mb10" type="button">
+                                    .button.pink 粉红色按钮
+                                </button>
+                                <button class="button purple large mr10 mb10" type="button">
+                                    .button.purple 紫色按钮
+                                </button>
+                                <button class="button no-radius mr10 mb10" type="button">
+                                    .button.no-radius 不要圆角
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-        </div>
+                <!-- 表格 demo -->
+                <div class="floor">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <h2>表格</h2>
+                            <div>
+                                <p class="bold">table class="bordered" 带有边框的表格</p>
+                                <table class="table bordered">
+                                    <caption>表格标题</caption>
+                                    <thead>
+                                    <tr>
+                                        <th>姓名</th>
+                                        <th>星座</th>
+                                        <th>电子邮箱</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>周杰伦</td>
+                                        <td>魔蝎座</td>
+                                        <td>zjl@163.com</td>
+                                    </tr>
+                                    <tr>
+                                        <td>容祖儿</td>
+                                        <td>双子座</td>
+                                        <td>rze@qq.com</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <p class="bold">table class="striped" 带有条纹的表格</p>
+                                <table class="table striped">
+                                    <caption>表格标题</caption>
+                                    <thead>
+                                    <tr>
+                                        <th>姓名</th>
+                                        <th>星座</th>
+                                        <th>电子邮箱</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>周杰伦</td>
+                                        <td>魔蝎座</td>
+                                        <td>zjl@163.com</td>
+                                    </tr>
+                                    <tr>
+                                        <td>容祖儿</td>
+                                        <td>双子座</td>
+                                        <td>rze@qq.com</td>
+                                    </tr>
+                                    <tr>
+                                        <td>关心妍</td>
+                                        <td>狮子座</td>
+                                        <td>gxy@163.com</td>
+                                    </tr>
+                                    <tr>
+                                        <td>麦家瑜</td>
+                                        <td>射手座</td>
+                                        <td>mjy@gmail.com</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- End 表格 demo -->
 
-        <div class="floor">
-            <h2>过渡动画</h2>
-            <div>
-                <p>样式改变时有渐变过渡效果</p>
-                <div class="padding20 w240">
-                    <a class="transition" href="javascript:;">.transition</a>
-                </div>
-            </div>
-        </div>
+                <!-- 表单 Demo -->
+                <div class="floor">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <h2>表单</h2>
+                            <p>使用 .form 添加默认样式</p>
+                            <form class="form" action="javascript:;">
+                                <div class="form-group">使用 .form-group 包含控件组</div>
+                                <div class="form-group">
+                                    <label>这是 label 标签</label>
+                                    <div>
+                                        <input class="mb10" type="text" value="这是 text input 标签" />
+                                        <textarea class="mb10">这是 textarea </textarea>
+                                        <input type="text" class="mb10" disabled="disabled" value="不可用" />
+                                        <input type="text" class="mb10" readonly="readonly" value="只读" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="">
+                                        <input type="checkbox" class="checkbox" value="1" name="checkbox" />
+                                        多选框
+                                    </label>
+                                    <label class="">
+                                        <input type="checkbox" class="checkbox" value="2" name="checkbox" />
+                                        多选框
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="">
+                                        <input type="radio" value="1" name="radio" />
+                                        单选框
+                                    </label>
+                                    <label class="">
+                                        <input type="radio" value="2" name="radio" />
+                                        单选框
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="error mb10" value="使用 .error 类表示输入错误" />
+                                    <input type="text" class="success mb10" value="使用 .success 类表示输入正确" />
+                                    <input type="text" class="warning mb10" value="使用 .warning 类表示输入不推荐" />
+                                </div>
+                                <div class="form-group">
+                                    <select>
+                                        <option value="">选择框</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div><!-- End 表单 Demo -->
 
-        <div class="floor">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h2>图形类</h2>
-                    <div>
-                        <div class="fl mr20">
-                            <p>.circle 圆盘</p>
+                <div class="floor">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <h2>特殊图标</h2>
                             <p>
-                                <img class="circle" src="image/girl_picture.jpg" alt=""/>
+                                i.spinner-loader
                             </p>
-                        </div>
-                        <div class="fl mr20">
-                            <p>.thumbnail 缩略图</p>
                             <p>
-                                <img class="thumbnail" src="image/girl_picture.jpg" alt=""/>
+                                <i class="spinner-loader"></i>
+                                加载更多中
+                            </p>
+                            <p>
+                                i.refreshing-loader
+                            </p>
+                            <p>
+                                <i class="refreshing-loader"></i>
+                                刷新中
                             </p>
                         </div>
                     </div>
                 </div>
-            </div>
 
-        </div>
+                <div class="floor">
 
-        <div class="floor">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h2>按钮类</h2>
-                    <div>
-                        <button class="button mr10 mb10" type="button">
-                            .button 普通按钮
-                        </button>
-                        <button class="button large mr10 mb10" type="button">
-                            .button.large 大按钮<br/>
-                            .button.lg
-                        </button>
-                        <button class="button small mr10 mb10" type="button">
-                            .button.small 小按钮<br/>
-                            .button.sm"
-                        </button>
-                        <button class="button extra_small mr10 mb10" type="button">
-                            .button.extra_small 超小按钮<br/>
-                            .button.xs
-                        </button>
-                        <button class="button red mr10 mb10" type="button">
-                            .button.red 红色按钮<br/>
-                            .button.danger 有危险的含义
-                        </button>
-                        <button class="button darkred large mr10 mb10" type="button">
-                            .button.darkred 暗红色按钮
-                        </button>
-                        <button class="button yellow mr10 mb10" type="button">
-                            .button.yellow 黄色按钮<br/>
-                            .button.warning 有警告的含义
-                        </button>
-                        <button class="button green large mr10 mb10" type="button">
-                            .button.green 绿色按钮<br/>
-                            .button.success 有成功的含义
-                        </button>
-                        <button class="button darkgreen large mr10 mb10" type="button">
-                            .button.darkgreen 暗绿色按钮
-                        </button>
-                        <button class="button cyan large mr10 mb10" type="button">
-                            .button.cyan 青色按钮<br/>
-                            .button.info 有信息意味的
-                        </button>
-                        <button class="button pink large mr10 mb10" type="button">
-                            .button.pink 粉红色按钮
-                        </button>
-                        <button class="button purple large mr10 mb10" type="button">
-                            .button.purple 紫色按钮
-                        </button>
-                        <button class="button no-radius mr10 mb10" type="button">
-                            .button.no-radius 不要圆角
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="floor">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h2>卡片式布局，多用于商品列表</h2>
-                    <p>容器设置 .card_layout 将以卡片的方式显示，包含圆角、盒子阴影、白色背景。</p>
-                    <div class="green_bg padding10 clearfix">
-                        <div class="fl card_layout w240 mr10 mb10">
-                            <div class="image_row">
-                                <img src="http://v3.bootcss.com/assets/img/devices.png" alt="baidu logo"/>
-                            </div>
-                            <div class="title_row">
-                                这是标题
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <h2>卡片式布局，多用于商品列表</h2>
+                            <p>样式包含圆角、盒子阴影、白色背景。</p>
+                            <p>结构：</p>
+                            <p>div.card_layout  卡片块容器，需加上宽度和间距设定，比如 .w240 .mr10</p>
+                            <p>----div.image_row  图片行</p>
+                            <p>--------img  图片</p>
+                            <p>----div.title_row  标题行</p>
+                            <p>示例：</p>
+                            <div class="green_bg padding10 clearfix">
+                                <div class="fl card_layout w240 mr10 mb10">
+                                    <div class="image_row">
+                                        <img src="http://v3.bootcss.com/assets/img/devices.png" alt="baidu logo" />
+                                    </div>
+                                    <div class="title_row">
+                                        这是标题
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="fl card_layout w240 mr10 mb10">
-                            <div class="image_row">
-                                .image_row 存放图片
-                            </div>
-                            <div class="title_row">
-                                .title_row 存放标题，居中对齐。
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    </div><!-- end .panel -->
+
+                </div><!-- end .floor -->
+
             </div>
-
         </div>
 
-        <!-- 表格 demo -->
-        <div class="floor">
-            <h2>表格</h2>
-            <div>
-                <p class="bold">table class="bordered" 带有边框的表格</p>
-                <table class="table bordered">
-                    <caption>表格标题</caption>
-                    <thead>
-                    <tr>
-                        <th>姓名</th>
-                        <th>星座</th>
-                        <th>电子邮箱</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>周杰伦</td>
-                        <td>魔蝎座</td>
-                        <td>zjl@163.com</td>
-                    </tr>
-                    <tr>
-                        <td>容祖儿</td>
-                        <td>双子座</td>
-                        <td>rze@qq.com</td>
-                    </tr>
-                    </tbody>
-                </table>
-                <p class="bold">table class="striped" 带有条纹的表格</p>
-                <table class="table striped">
-                    <caption>表格标题</caption>
-                    <thead>
-                    <tr>
-                        <th>姓名</th>
-                        <th>星座</th>
-                        <th>电子邮箱</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>周杰伦</td>
-                        <td>魔蝎座</td>
-                        <td>zjl@163.com</td>
-                    </tr>
-                    <tr>
-                        <td>容祖儿</td>
-                        <td>双子座</td>
-                        <td>rze@qq.com</td>
-                    </tr>
-                    <tr>
-                        <td>关心妍</td>
-                        <td>狮子座</td>
-                        <td>gxy@163.com</td>
-                    </tr>
-                    <tr>
-                        <td>麦家瑜</td>
-                        <td>射手座</td>
-                        <td>mjy@gmail.com</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div><!-- End 表格 demo -->
+        <!-- jQuery library -->
+        <script>
+            if (getBrowserLanguage() === 'zh-cn')   // 中国大陆
+            {
+                printTag('script', {src: 'https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js'});
+            }
+            else  // 国际网络
+            {
+                printTag('script', {src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'});
+            }
+        </script>
 
-        <!-- 表单 Demo -->
-        <div class="floor">
-            <h2>表单</h2>
-            <p>使用 .form 添加默认样式</p>
-            <form class="form" action="javascript:;">
-                <div class="form-group">使用 .form-group 包含控件组</div>
-                <div class="form-group">
-                    <label>这是 label 标签</label>
-                    <div>
-                        <input class="mb10" type="text" value="这是 text input 标签"/>
-                        <textarea class="mb10">这是 textarea </textarea>
-                        <input type="text" class="mb10" disabled="disabled" value="不可用"/>
-                        <input type="text" class="mb10" readonly="readonly" value="只读"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="">
-                        <input type="checkbox" class="checkbox" value="1" name="checkbox"/>
-                        多选框
-                    </label>
-                    <label class="">
-                        <input type="checkbox" class="checkbox" value="2" name="checkbox"/>
-                        多选框
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label class="">
-                        <input type="radio" value="1" name="radio"/>
-                        单选框
-                    </label>
-                    <label class="">
-                        <input type="radio" value="2" name="radio"/>
-                        单选框
-                    </label>
-                </div>
-                <div class="form-group">
-                    <input type="text" class="error mb10" value="使用 .error 类表示输入错误"/>
-                    <input type="text" class="success mb10" value="使用 .success 类表示输入正确"/>
-                    <input type="text" class="warning mb10" value="使用 .warning 类表示输入不推荐"/>
-                </div>
-                <div class="form-group">
-                    <select>
-                        <option value="">选择框</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
-                </div>
-            </form>
-        </div><!-- End 表单 Demo -->
+        <!-- common action (must after jQuery) -->
+        <script src="script/common_script/common_action.js"></script>
 
-        <div class="floor">
-            <h2>Tooltip 提示框</h2>
-            <p>
-                .displayTooltip 设置在包含提示内容的文字上
-            </p>
-            <p>
-                .tooltip 存放提示内容正文，放在 .displayTooltip 里。
-            </p>
-            <p>
-                HTML、
-                <span class="displayTooltip">
-                CSS
-                <span class="tooltip">
-                    层叠样式表
-                </span>
-            </span>
-                、JavaScript
-            </p>
-            <p>
-                HTML、
-                <span class="displayTooltip">
-                CSS 大提示框
-                <span class="tooltip w240">
-                    层叠样式表(Cascading Style Sheets)是一种用来表现HTML（标准通用标记语言的一个应用）或XML（标准通用标记语言的一个子集）等文件样式的计算机语言。
-                </span>
-            </span>
-                、JavaScript
-            </p>
-            <p class="w50p center">
-            <span class="displayTooltip">
-                左边
-                <span class="tooltip left">
-                    左边
-                </span>
-            </span>、
-                <span class="displayTooltip">
-                右边
-                <span class="tooltip right">
-                    右边
-                </span>
-            </span>、
-                <span class="displayTooltip">
-                上边
-                <span class="tooltip top">
-                    上边
-                </span>
-            </span>
-            </p>
-        </div>
-
-        <div class="floor">
-            <p>
-                i.spinner-loader
-            </p>
-            <p>
-                <i class="spinner-loader"></i>
-                加载更多中
-            </p>
-        </div>
-
-        <div class="floor">
-            <p>
-                i.refreshing-loader
-            </p>
-            <p>
-                <i class="refreshing-loader"></i>
-                刷新中
-            </p>
-        </div>
-
-    </div>
-</div>
-
-<script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
-
-</body>
+    </body>
 </html>

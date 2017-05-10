@@ -1,6 +1,7 @@
 /**
- * 
+ * common action define
  * dependent on jQuery
+ * last update:     2017-05-10 09:55
  */
 
 $(document).ready(function()

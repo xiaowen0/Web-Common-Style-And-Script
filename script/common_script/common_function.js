@@ -1,6 +1,7 @@
 /**
  * common function
- * @last update:     2017-05-09 11:05
+ * dependent on jQuery
+ * last update:     2017-05-10 09:55
  */
 
 /* --- debug function group ------------------------------------------ */
@@ -667,6 +668,27 @@ function createElement(name, options, content) {
 }
 
 /**
+ * print tag  输出一个 HTML 标记
+ * @param name     String  element name
+ * @param options  Object  element attributes
+ * @param content  Object of HTMLElement | String  element content
+ */
+function printTag(name, options, content)
+{
+    var element = createElement(name, options, content);
+    document.writeln(element.outerHTML);
+}
+
+/**
+ * print stylesheet link
+ * @param url  String
+ */
+function printStylesheetLink(url)
+{
+    document.writeln('<link rel="stylesheet" href="' + url + '"/>');
+}
+
+/**
  * set element height equal to width  设置元素高度等于宽度
  * @param element Object of HTMLElement
  */
@@ -1045,6 +1067,28 @@ function getIEsVersion() {
     var version = userAgent.match(RegExp("MSIE [0-9]+.[0-9]+;"))[0];
     version = version.replace(RegExp("MSIE ([0-9])+.[0-9]+;"), "$1");
     return Number(version);
+}
+
+/**
+ * get browser language, return lower case text like "zh-cn".
+ * @return String
+ */
+function getBrowserLanguage()
+{
+    // web standard use navigator.language API, value is no case
+    // and IE6-8 use navigator.browserLanguage API, value is lower case.
+    var lang = '';
+    try
+    {
+        lang = (navigator.language || navigator.browserLanguage).toLowerCase();
+    }
+    catch (e)
+    {
+        addConsoleLog(e);
+        return lang;
+    }
+
+    return lang;
 }
 
 /* --- file function group ----------------------------------------- */

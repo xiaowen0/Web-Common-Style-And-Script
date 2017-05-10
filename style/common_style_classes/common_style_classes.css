@@ -1,6 +1,7 @@
 @charset "utf-8";
 /**
- * common style classes
+ * classes for special style
+ * last update:     2017-05-10 09:55
  */
 
 /* display type */
@@ -15,7 +16,7 @@
 }
 
 .hidden, .hide {
-    display: none
+    display: none;
 }
 
 /* container layout */
@@ -432,9 +433,23 @@
 }
 
 .rotate2d {
+
+    /* for old version of google chrome, safari, opera */
+    -webkit-animation-name: rotate2d;
+    -webkit-animation-duration: 20s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+
+    /* for old version of firefox */
+    -moz-animation-name: rotate2d;
+    -moz-animation-duration: 20s;
+    -moz-animation-timing-function: linear;
+    -moz-animation-iteration-count: infinite;
+
     animation-name: rotate2d;
     animation-duration: 20s;
     animation-timing-function: linear;
+    animation-iteration-count: infinite;
 }
 
 /* loading icon */
@@ -933,7 +948,6 @@ p.danger {
     border-collapse: collapse;
     border-spacing: 0;
 }
-
 .table th,
 .table td {
     padding: 8px;
@@ -994,12 +1008,14 @@ table.striped tbody tr.hover > tbody > tr:hover {
     box-shadow: none;
     color: #858585;
     font-family: inherit;
-    line-height: 1.2;
+    line-height: 1.5;
     transition-duration: 0.1s;
     box-sizing: border-box;
     vertical-align: middle;
     width: 100%;
     height: 30px;
+    padding-left: 8px;
+    padding-right: 8px;
 }
 
 input.inline {
@@ -1119,56 +1135,5 @@ select.inline {
 .form .input_icon.input_icon_right {
     left: auto;
     right: 3px;
-}
-
-/**
- * Tooltip
- */
-
-.displayTooltip { /* a text which need to display tooltip */
-    /*display: inline-block;*/
-    position: relative;
-}
-
-.tooltip { /* tooltip content */
-    display: block;
-    position: absolute;
-    z-index: 1;
-    min-width: 110px;
-    visibility: hidden;
-    box-sizing: border-box;
-    background-color: black;
-    color: #fff;
-    padding: 8px 12px;
-    border-radius: 6px;
-    /*top: 100%;*/
-    /*left: 50%;*/
-    left: 0;
-}
-
-.tooltip.right {
-    top: -5px;
-    left: 105%;
-}
-
-.tooltip.left {
-    top: -5px;
-    right: 105%;
-    left: auto;
-}
-
-.tooltip.top {
-    top: auto;
-    bottom: 100%;
-    left: 0;
-    /*left: 50%;*/
-    /*margin-left: calc((attr(width)) / 2); !* Use half of the width (120/2 = 60), to center the tooltip *!*/
-}
-
-.displayTooltip:hover .tooltip,
-.displayTooltip:hover ~ .tooltip,
-.displayTooltip.hover .tooltip,
-.displayTooltip.hover ~ .tooltip {
-    visibility: visible;
 }
 
