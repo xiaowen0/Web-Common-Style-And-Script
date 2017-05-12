@@ -285,6 +285,18 @@
     font-family: "微软雅黑", "黑体";
 }
 
+.f12 {
+    font-size: 12px;
+}
+.f13 {
+    font-size: 13px;
+}
+.f14 {
+    font-size: 14px;
+}
+.f15 {
+    font-size: 15px;
+}
 .f16 {
     font-size: 16px;
 }
@@ -895,6 +907,7 @@ p.danger {
     overflow: hidden;
 }
 
+.cardBox,
 .card_layout {
     /*border: solid 1px #3a3a3a;*/
     border-radius: 4px;
@@ -904,22 +917,26 @@ p.danger {
     overflow: hidden;
 }
 
+.cardBox .rowBox,
 .card_layout .image_row,
 .card_layout .title_row {
     overflow: hidden;
     text-align: center;
 }
 
+.cardBox .imageRow,
 .card_layout .image_row {
     height: 8rem;
     background-color: #c9c9c9;
 }
 
+.cardBox .imageRow img,
 .card_layout .image_row img {
     max-width: 100%;
     height: auto;
 }
 
+.cardBox .titleRow,
 .card_layout .title_row {
     height: 28px;
     line-height: 28px;
