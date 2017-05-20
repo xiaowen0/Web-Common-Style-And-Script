@@ -1,7 +1,7 @@
 @charset "utf-8";
 /**
  * common component style
- * last update:     2017-05-10 09:55
+ * last update:     2017-05-20
  */
 
 /* page base layout */
@@ -66,6 +66,19 @@
     padding: 6px 12px;
     background-color: #FFF;
     display: block;
+}
+
+/* panel */
+
+.panel {
+	background-color: #FFF;
+	border: solid 1px #a6a3a3;
+	box-sizing: border-box;
+}
+
+.panel_header,
+.panel_body {
+	position: relative;
 }
 
 /* module frame */

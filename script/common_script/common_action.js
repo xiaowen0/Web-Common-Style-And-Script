@@ -1,19 +1,22 @@
 /**
- * common action define
+ * common action
  * dependent on jQuery
- * last update:     2017-05-10 09:55
  */
 
 $(document).ready(function()
 {
-	// dialog
-	$('.dialog').each(function(){
-		$(this).find('.dialog_header .close_button').on('click', function(){
-			var dialog = $(this).parents('.dialog');
-			dialog.fadeOut();
-		});
+	// show layer
+	$('.showLayer').on('click', function()
+	{
+		var target = $(this).data('target');
+		if (!target)
+		{
+			return;
+		}
+		
+		$(target).fadeIn();
 	});
-
+	
     // backspace button action
     $('.backspaceButton').on('click', function(){
     	var inputGroup = $(this).parents('.inputGroup');
