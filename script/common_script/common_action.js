@@ -16,6 +16,13 @@ $(document).ready(function()
 		
 		$(target).fadeIn();
 	});
+
+    // close layer panel
+	$('.layer .panel .close_button').on('click', function()
+	{
+		var layer = $(this).parents('.layer');
+		layer.fadeOut();
+	});
 	
     // backspace button action
     $('.backspaceButton').on('click', function(){

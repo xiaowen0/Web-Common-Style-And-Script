@@ -1,11 +1,14 @@
 
-.icon.weather.icon {
-	background-image:url(http://i.tq121.com.cn/i/weather2015/png/blue22.png);
+.icon.weather {
+	
+	position:relative;
+	
 	height:30px;
 	width:23px;
-	margin:0 2px;
-	position:relative;
-	top:8px;
+	
+	background-image:url(http://i.tq121.com.cn/i/weather2015/png/blue22.png);
+	
+	top: 0;
 }
 .icon.weather.ic {
 	background-image:url(http://i.tq121.com.cn/i/weather2015/png/blue22-1.png);
@@ -33,19 +36,19 @@
 .icon.weather.jpg50 {
 	background-image:url(http://i.tq121.com.cn/i/weather2015/png/blue50.png);
 	height:50px;
-	width:50px
+	width:50px;
 }
 .icon.weather.jpg80 {
-	/*background-image:url(http://i.tq121.com.cn/i/weather2015/png/blue80.png);*/
 	background-image:url(image/weather_icons_blue_80.png);
 	height:80px;
-	width:80px
+	width:80px;
 }
 .icon.weather.white80 {
 	background-image:url(image/weather_icons_white_80.png);
 	height:80px;
 	width:80px
 }
+
 .icon.weather.png40 {
 	background-image:url(http://i.tq121.com.cn/i/weather2015/png/blue30.png);
 	height:30px;
@@ -402,3 +405,45 @@
 .icon.weather.n302 {
 	background-position:-880px -400px
 }
+
+.icon.sunrise {
+	background-image: url("image/weather_icons_miscellaneous.png");
+	background-repeat: no-repeat;
+	background-position: -33px -269px;
+	width: 22px;
+	height: 22px;
+}
+
+.icon.sunset {
+	background-image: url("image/weather_icons_miscellaneous.png");
+	background-repeat: no-repeat;
+	background-position: -2px -269px;
+	width: 22px;
+	height: 22px;
+}
+
+.icon.humidity {
+	background-image: url("image/weather_icons_miscellaneous.png");
+	background-repeat: no-repeat;
+	background-position: -2px -289px;
+	width: 24px;
+	height: 24px;
+}
+
+.icon.windDirection {
+	background-image: url("image/weather_icons_miscellaneous.png");
+	background-repeat: no-repeat;
+	background-position: -36px -291px;
+	width: 24px;
+	height: 24px;
+}
+
+.icon.leaf {
+	background-image: url("image/weather_icons_miscellaneous.png");
+	background-repeat: no-repeat;
+	background-position: -2px -314px;
+	width: 24px;
+	height: 24px;
+}
+
+
