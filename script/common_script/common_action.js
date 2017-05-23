@@ -5,7 +5,13 @@
 
 $(document).ready(function()
 {
-	// show layer
+	// set music control button action to toggle music play status
+	$('#mainMusicControlButton').on('click', function()
+	{
+		toggleMusic();
+	});
+
+	// button action to show layer
 	$('.showLayer').on('click', function()
 	{
 		var target = $(this).data('target');
@@ -17,7 +23,7 @@ $(document).ready(function()
 		$(target).fadeIn();
 	});
 
-    // close layer panel
+    // close button for layer panel
 	$('.layer .panel .close_button').on('click', function()
 	{
 		var layer = $(this).parents('.layer');

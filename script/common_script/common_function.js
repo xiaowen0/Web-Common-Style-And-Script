@@ -1865,7 +1865,143 @@ function hideLoadingIcon(speed) {
     $('#loading_icon_container').fadeOut(speed ? speed : 'fast');
 }
 
+/* music controlling ---------------------------------------------- */
 
+/**
+ * get main audio controller
+ * get the audio element with ID: mainAudioController
+ * @returns Object(HTMLElement)|null
+ */
+function getMainAudioController()
+{
+    // get audio element
+    return getElement('mainAudioController');
+}
+
+/**
+ * play music
+ * play audio use audio element with ID: mainAudioController
+ * @return Boolean
+ */
+function playMusic()
+{
+    // toggle button status
+    $('#mainMusicControlButton').removeClass('stopped');
+
+    // get audio element
+    var mainAudioController = getElement('mainAudioController');
+    if (!mainAudioController)
+    {
+        // audio controller not exist
+        return false;
+    }
+
+    // try to play
+    mainAudioController.play();
+
+    // check play status
+    if (mainAudioController.paused)
+    {
+        // play fail
+        return false;
+    }
+
+    return true;
+}
+
+/**
+ * pause music
+ * pause audio use audio element with ID: mainAudioController
+ * @return Boolean
+ */
+function pauseMusic()
+{
+    // toggle button status
+    $('#mainMusicControlButton').addClass('stopped');
+
+    // get audio element
+    var mainAudioController = getElement('mainAudioController');
+    if (!mainAudioController)
+    {
+        // audio controller not exist
+        return false;
+    }
+
+    // try to pause
+    mainAudioController.pause();
+
+    // check play status
+    if (!mainAudioController.paused)
+    {
+        // still playing, pause fail
+        return false;
+    }
+
+    return true;
+}
+
+/**
+ * get music play status
+ * get audio play status use audio element with ID: mainAudioController
+ * @return Boolean
+ */
+function getMusicPlayStatus()
+{
+    // get audio element
+    var mainAudioController = getElement('mainAudioController');
+    if (!mainAudioController)
+    {
+        // audio controller not exist
+        return false;
+    }
+
+    // return status
+    return !mainAudioController.paused;
+}
+
+/**
+ * toggle music
+ * toggle audio play status use audio element with ID: mainAudioController
+ * @return Boolean
+ */
+function toggleMusic()
+{
+    // check status
+    if (getMusicPlayStatus())
+    {
+        // playing then pause
+        return pauseMusic();
+    }
+    else
+    {
+        // pausing then play
+        return playMusic();
+    }
+}
+
+/**
+ * play letter
+ */
+function playLetter(sentence_index, delay)
+{
+    // default index
+    sentence_index ? null : sentence_index = 0;
+
+    // get sentences
+    var letter_sentences = $('#letter_content_box > *');
+
+    // check index
+    if (sentence_index + 1 > letter_sentences.length)
+    {
+        return;
+    }
+
+    // show sentence
+    letter_sentences.eq(sentence_index).fadeIn(3000);
+    window.setTimeout(function(){
+        playLetter(sentence_index + 1, delay)
+    }, delay);
+}
 
 
 
