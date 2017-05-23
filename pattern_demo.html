@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <title>图案演示</title>
+
+        <!-- common function -->
+        <script src="script/common_script/common_function.js"></script>
+
+        <!-- check IE old version, add HTML5 support, use CDN. -->
+        <!--[if lt IE 9]>
+        <script>
+            if (getBrowserLanguage() === 'zh-cn')   // 中国大陆
+            {
+                printTag('script', {src: 'https://cdn.bootcss.com/html5shiv/r29/html5.min.js'});
+            }
+            else    // 国际网络
+            {
+                printTag('script', {src: 'https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js'});
+            }
+        </script>
+        <![endif]-->
+
+        <!-- Bootstrap framework , use CDN. -->
+        <script>
+            if (getBrowserLanguage() === 'zh-cn')   // 中国大陆
+            {
+                printStylesheetLink('https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css');
+                printStylesheetLink('https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap-theme.min.css');
+            }
+            else    // 国际网络
+            {
+                printStylesheetLink('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css');
+                printStylesheetLink('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap-theme.min.css');
+            }
+        </script>
+
+        <!-- common style classes library -->
+        <link rel="stylesheet" href="style/common_style_classes/common_style_classes.css" />
+
+        <style>
+            .patter_box {
+                height: 160px;
+            }
+            #patter_box_1 {
+                background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAMUlEQVQYlWNgIAf8jwv6T1ABDOOW/B+CwNgUY1OE2zpCClr/18MxXg+0/q/H7ztcigBQuEvGGTkIwQAAAABJRU5ErkJggg==);
+            }
+            #patter_box_2 {
+                background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAMElEQVQYlWNgYGD4TwRGFfjzxw+/oj9//OAYQxGyJDomzSSiFSFLYlGI3VdYFeHDAN7dhPoAIj/NAAAAAElFTkSuQmCC);
+            }
+            #patter_box_3 {
+                background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAATUlEQVQYlWNgwAL+fyn9//9L6X9sclgVE62QaMVr//cQVrj+64z/67/OwK3wxP8N/2GYfFMYGBgYkv9n/E/8T0ARAwMDA1GKkBXj0gAAeJ46LtD3RBUAAAAASUVORK5CYII=);
+            }
+            #patter_box_4 {
+                background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAS0lEQVQYlXXOoQEAIQwEQdrYQukBiacLuomjk30RmfzZWXFDjqPZRS+2NljK+gkwxJDV4BSniFHRh74MKm50Z1ARlAzax3KUHuX4AaAYQC3jNNnHAAAAAElFTkSuQmCC);
+            }
+
+        </style>
+
+    </head>
+    <body>
+        <div class="page">
+            <div class="row">
+                <div id="patter_box_1" class="col-xs-6 col-sm-3 patter_box"></div>
+                <div id="patter_box_2" class="col-xs-6 col-sm-3 patter_box"></div>
+                <div id="patter_box_3" class="col-xs-6 col-sm-3 patter_box"></div>
+                <div id="patter_box_4" class="col-xs-6 col-sm-3 patter_box"></div>
+
+            </div>
+        </div>
+    </body>
+</html>
