@@ -708,7 +708,7 @@ p.danger {
     text-align: center;
 }
 
-/* image style */
+/* shape style */
 .rounded {
     border-radius: 6px;
 }
@@ -717,6 +717,10 @@ p.danger {
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
+}
+
+.no-radius {
+    border-radius: 0;
 }
 
 .circle {
@@ -886,10 +890,6 @@ p.danger {
     border: none;
     background-color: #95a5a6;
     color: white;
-}
-
-.button.no-radius {
-    border-radius: 0;
 }
 
 .button .icon {
