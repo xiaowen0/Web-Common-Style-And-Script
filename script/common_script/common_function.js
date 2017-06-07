@@ -298,35 +298,28 @@ function getParentFolder(url)
 
 /**
  * adjust url
- * remove current directory string and current directory string
+ * remove parent directory string
  * @param String url
  * @returns String
  */
 function adjustUrl(url)
 {
-    // remove spare directory separator
-    url = url.split('//').join('/');
-
-    // current directory string
-    url = url.split('/./').join('/');
-    if (url.substr(0, 2) == './')
+    var stack = [];
+    var paths = url.split("/");
+    for (var i=0; i<paths.length; i++)
     {
-        url = url.substr(2, url.length);
+        if (paths[i] === '.') {
+            continue;
+        }
+        
+        if (paths[i] === "..") {
+            stack.pop();
+        } else {
+            stack.push(paths[i]);
+        }
     }
-
-    // remove parent directory expression string
-    var rule1 = new RegExp('([^\/]*)\/..\/');
-    while (url.search(rule1) >= 0)
-    {
-        url = url.replace(rule1, '');
-    }
-	
-	if (url.substr(0, 1) == '/')
-	{
-		url = url.substr(1, url.length);
-	}
-	
-	return url;
+    var nurl = stack.join("/");
+    return nurl;
 }
 
 /**
