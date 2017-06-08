@@ -1008,6 +1008,41 @@ function setBodyMinHeight()
 	return true;
 }
 
+/**
+ * check a wrapper if is overflow height
+ * @param  String|HTMLObject  selector  CSS selector string of wrapper or HTML object
+ * @return Boolean
+ */
+function isOverflowHeight(selector)
+{
+    var wrapperList = $(selector);
+    if (!wrapperList.length)
+    {
+        return false;
+    }
+
+    var wrapper = wrapperList[0];
+
+    var childrenList = wrapper.children;
+    var contentHeightCount = 0;
+    for (var i=0; i<childrenList.length; i++)
+    {
+        contentHeightCount += parseInt($(childrenList[i]).css('margin-top').replace('px', ''));
+        contentHeightCount += childrenList[i].offsetHeight;
+        contentHeightCount += parseInt($(childrenList[i]).css('margin-bottom').replace('px', ''));
+    }
+
+    if (contentHeightCount > wrapper.offsetHeight)
+    {
+        return true
+    }
+    else
+    {
+        return false;
+    }
+
+}
+
 function createDialog(options) {
 
 }
