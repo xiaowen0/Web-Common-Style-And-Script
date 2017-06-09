@@ -22,43 +22,66 @@
 
             <h1>行为类示例</h1>
 
-            <h2>输入框按钮</h2>
-            <div>
+            <div class="row">
 
-                <div>
-                    <p>结构：</p>
-                    <p>div.inputGroup  输入控件组</p>
-                    <p>--input[type="text"].inputbox  输入框</p>
-                    <p>--span.button_box  按钮箱子</p>
-                    <p>----button.button.backspaceButton  按钮(backspaceButton 指定删除行为)</p>
-                    <p>------i.backspaceButton  图标</p>
-                </div>
+                <div class="col-xs-12 col-sm-6">
 
-                <form class="form" action="javascript:;" method="post">
-                    <div class="form-group">
-                        <label for="nameInput">
-                            <span class="red">*</span>
-                            名称：
-                        </label>
-                        <div class="">
-                            <div class="inputGroup">
-                                <input id="nameInput" class="inputbox" type="text" name="name" required=""/>
-                                <span class="button_box">
+                    <h2>输入框按钮</h2>
+
+                    <div>
+                        <p>结构：</p>
+                        <p>div.inputGroup  输入控件组</p>
+                        <p>--input[type="text"].inputbox  输入框</p>
+                        <p>--span.button_box  按钮箱子</p>
+                        <p>----button.button.backspaceButton  按钮(backspaceButton 指定删除行为)</p>
+                        <p>------i.backspaceButton  图标</p>
+                    </div>
+
+                    <form class="form" action="javascript:;" method="post">
+                        <div class="form-group">
+                            <label for="nameInput">
+                                <span class="red">*</span>
+                                名称：
+                            </label>
+                            <div class="">
+                                <div class="inputGroup">
+                                    <input id="nameInput" class="inputbox" type="text" name="name" required=""/>
+                                    <span class="button_box">
                                     <button type="button" class="button backspaceButton">
                                         <i class="glyphicon glyphicon-arrow-left"></i>
                                         删除
                                     </button>
                                 </span>
-                            </div>
+                                </div>
 
+                            </div>
                         </div>
+                    </form>
+
+                </div>
+
+                <div class="col-xs-12 col-sm-6">
+
+                    <h2>自动翻页</h2>
+
+                    <div class="autoPageDown" style="height:200px; overflow: hidden">
+
+                        <ul class="noPadding noMargin">
+                            <script>
+                                for (var i=1; i<=20; i++)
+                                {
+                                    document.writeln('<li> Line ' + i + '</li>');
+                                }
+                            </script>
+                        </ul>
+
                     </div>
-                </form>
+
+                </div>
+
             </div>
         </div>
     </div>
-
-
 
     <script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
     <script src="script/common_script/common_function.js"></script>

@@ -43,5 +43,10 @@ $(document).ready(function()
     	text = text.substr(0, text.length - 1);
     	inputbox.val(text);
     });
+
+    // set auto page down
+    $('.autoPageDown').each(function(){
+        setAutoPageDown(this, 10);
+    });
     
 });

@@ -4,6 +4,15 @@
  * last update:     2017-05-10 09:55
  */
 
+var cdnList = {
+    'china' : {
+        'moment' : 'https://cdn.bootcss.com/moment.js/2.18.1/locale/zh-cn.js'
+    },
+    'world' : {
+        
+    }
+}
+
 /* --- debug function group ------------------------------------------ */
 
 /**
@@ -483,6 +492,42 @@ function printTime(element, format)
 }
 
 /**
+ * get am or pm
+ * @param   String|Date|Number  time expression or date object or timestamp(millsecond)
+ * @param   String  string format for time expression
+ * @return  String  am or pm or empty string
+ * require  moment library
+ */
+function getAMPM(time, format)
+{
+    if (!format)
+    {
+        format = 'YY-MM-dd HH:mm:ss';
+    }
+
+    switch (typeof(time))
+    {
+        case 'object' :
+            try
+            {
+                return time.getHours() < 12 ? 'am' : 'pm';
+            }
+            catch (e)
+            {
+                addConsoleLog(e);
+            }
+        case 'number' :
+            var oDate = new Date(time);
+            return oDate.getHours() < 12 ? 'am' : 'pm';
+        case 'string' :
+            var oMoment = moment(time, format);
+            return parseInt(oMoment.format('H'))  < 12 ? 'am' : 'pm';
+    }
+
+    return '';
+}
+
+/**
  * set a number count backwards
  * @param Object(HTMLElement)  element
  * @param Object               options
@@ -946,6 +991,58 @@ function getScrollHeight() {
         return document.body.scrollHeight;
     }
     return false;
+}
+
+/**
+ * page down wrapper
+ * @param   HTMLElement|String  element     element object or css selector
+ */
+function pageDown(element)
+{
+    if (typeof(element) === "string")
+    {
+        var elementQueryList = $(element);
+        if (!elementQueryList.length)
+        {
+            return;
+        }
+
+        element = elementQueryList[0];
+    }
+
+    // check if overflow
+    addDebugLog('scroll height: ' + element.scrollHeight);
+    addDebugLog('offset height: ' + element.offsetHeight);
+    if (element.scrollHeight > element.offsetHeight)
+    {
+        // check scroll top
+        addDebugLog('scroll top: ' + element.scrollTop);
+        if (element.scrollTop < element.scrollHeight - element.offsetHeight)
+        {
+            element.scrollTop += element.offsetHeight;
+        }
+        else
+        {
+            element.scrollTop = 0;
+        }
+    }
+}
+
+/**
+ * set a wrapper auto page down
+ * @param   HTMLElement|String  element     element object or css selector
+ * @param   Number              interval    interval time (second)
+ */
+function setAutoPageDown(element, interval)
+{
+    if (!interval)
+    {
+        interval = 10;
+    }
+
+    window.setInterval(function(){
+        pageDown(element)
+    }, interval * 1000)
 }
 
 /**
@@ -2030,6 +2127,7 @@ function playLetter(sentence_index, delay)
         playLetter(sentence_index + 1, delay)
     }, delay);
 }
+
 
 
 
