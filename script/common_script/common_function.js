@@ -4,11 +4,23 @@
  * last update:     2017-05-10 09:55
  */
 
+var dependencies = ['jquery', 'bootstrap', 'boorstrapTheme'];
+
 var cdnList = {
     'china' : {
-        'moment' : 'https://cdn.bootcss.com/moment.js/2.18.1/locale/zh-cn.js'
+        html5shiv : 'https://cdn.bootcss.com/html5shiv/r29/html5.min.js',
+        bootstrap : 'https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css',
+        boorstrapTheme : 'https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap-theme.min.css',
+        jquery : 'https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js',
+        momentWithLocales : 'https://cdn.bootcss.com/moment.js/2.18.1/moment-with-locales.min.js'
     },
-    'world' : {}
+    'world' : {
+        html5shiv : 'https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js',
+        bootstrap : 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css',
+        bootstrapTheme : 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap-theme.min.css',
+        jquery : 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js',
+        momentWithLocales : 'http://momentjs.com/downloads/moment-with-locales.min.js'
+    }
 }
 
 /* --- debug function group ------------------------------------------ */
@@ -2174,3 +2186,32 @@ function playLetter(sentence_index, delay)
     }, delay);
 }
 
+function loadDependencies()
+{
+    // check jQuery
+    if (typeof(jQuery) === "undefined")
+    {
+        if (getBrowserLanguage() === 'zh-cn')
+        {
+            printTag('script', {src: cdnList.china.jquery});
+        }
+        else
+        {
+            printTag('script', {src: cdnList.world.jquery});
+        }
+    }
+
+    // check moment library
+    if (typeof(moment) === "undefined")
+    {
+        if (getBrowserLanguage() === 'zh-cn')
+        {
+            printTag('script', {src: cdnList.china.momentWithLocales});
+        }
+        else
+        {
+            printTag('script', {src: cdnList.world.momentWithLocales});
+        }
+    }
+
+}
