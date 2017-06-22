@@ -4,12 +4,22 @@
  * last update:     2017-05-10 09:55
  */
 
+var dependencies = ['jquery', 'bootstrap', 'boorstrapTheme'];
+
 var cdnList = {
     'china' : {
-        'moment' : 'https://cdn.bootcss.com/moment.js/2.18.1/locale/zh-cn.js'
+        html5shiv : 'https://cdn.bootcss.com/html5shiv/r29/html5.min.js',
+        bootstrap : 'https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css',
+        boorstrapTheme : 'https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap-theme.min.css',
+        jquery : 'https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js',
+        momentWithLocales : 'https://cdn.bootcss.com/moment.js/2.18.1/moment-with-locales.min.js'
     },
     'world' : {
-        
+        html5shiv : 'https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js',
+        bootstrap : 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css',
+        bootstrapTheme : 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap-theme.min.css',
+        jquery : 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js',
+        momentWithLocales : 'http://momentjs.com/downloads/moment-with-locales.min.js'
     }
 }
 
@@ -19,7 +29,8 @@ var cdnList = {
  * enable debug mode
  * @return  Bool
  */
-function enableDebug() {
+function enableDebug()
+{
     try {
         // current browser not support sessionStorage
         if (typeof(sessionStorage) != 'object') {
@@ -39,7 +50,8 @@ var openDebug = enableDebug;
  * disable debug mode
  * @return  Bool
  */
-function disableDebug() {
+function disableDebug()
+{
     try {
         // current browser not support sessionStorage
         if (typeof(sessionStorage) != 'object') {
@@ -59,7 +71,8 @@ var closeDebug = disableDebug;
  * get debug status
  * @returns Bool
  */
-function getDebugStatus() {
+function getDebugStatus()
+{
     try {
         if (typeof(sessionStorage) != 'object') {
             return false;
@@ -77,7 +90,8 @@ function getDebugStatus() {
  * @param   text    String
  * @returns Bool
  */
-function addConsoleLog(text) {
+function addConsoleLog(text)
+{
     try {
         if (typeof(console) != 'object') {
             return false;
@@ -96,7 +110,8 @@ function addConsoleLog(text) {
  * @param   text    String
  * @returns Bool
  */
-function addDebugLog(text) {
+function addDebugLog(text)
+{
     if (getDebugStatus()) {
         addConsoleLog('[debug] ' + text);
         return true;
@@ -111,9 +126,11 @@ var log = addDebugLog;
  * disable user copy action
  * @returns {boolean}
  */
-function disableCopy() {
+function disableCopy()
+{
     if (typeof(document.oncopy) !== "undefined") {
-        document.oncopy = (function (e) {
+        document.oncopy = (function (e)
+        {
             return false;
         });
         return true;
@@ -126,20 +143,24 @@ function disableCopy() {
  * disable right-click context menu
  * @return {boolean}
  */
-function disableContextMenu() {
+function disableContextMenu()
+{
     if (typeof(document.oncontextmenu) === "undefined") {
         return false;
     }
 
-    document.oncontextmenu = (function () {
+    document.oncontextmenu = (function ()
+    {
         return false;
     });
     return true;
 }
 
-function disableCtrlC() {
+function disableCtrlC()
+{
     try {
-        var onkeydown = (function (e) {
+        var onkeydown = (function (e)
+        {
 
             // keyCode with C key: 67
             if (e.ctrlKey && (e.keyCode == 67)) {
@@ -166,7 +187,8 @@ function disableCtrlC() {
 
 /* --- String function group ------------------------------------------ */
 
-function str_replace(string, find, replace) {
+function str_replace(string, find, replace)
+{
     if (find == replace) {
         return string;
     }
@@ -183,7 +205,8 @@ function str_replace(string, find, replace) {
  * @param data Object  key-value pairs
  * @returns String
  */
-function replaceData(string, data) {
+function replaceData(string, data)
+{
     for (var p in data) {
         while (string.indexOf(p) >= 0) {
             string = string.replace(p, data[p]);
@@ -198,8 +221,9 @@ function replaceData(string, data) {
  * @param   String html
  * @returns String
  */
-function removeHtmlTag(html) {
-    return html.replace(/<[^<>]+?>/g,'');//删除所有HTML标签
+function removeHtmlTag(html)
+{
+    return html.replace(/<[^<>]+?>/g, '');//删除所有HTML标签
 }
 
 /**
@@ -207,11 +231,16 @@ function removeHtmlTag(html) {
  * @param   String html
  * @returns String
  */
-function escapeHtml(html) {
-    return html.replace(/[<>&"]/g,function(c){return {'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c];});
+function escapeHtml(html)
+{
+    return html.replace(/[<>&"]/g, function (c)
+    {
+        return {'<' : '&lt;', '>' : '&gt;', '&' : '&amp;', '"' : '&quot;'}[c];
+    });
 }
 
-function data2String(data) {
+function data2String(data)
+{
     var text = '';
 
     if (typeof(data) === 'object') {
@@ -240,7 +269,8 @@ function data2String(data) {
  * @param Object params
  * @return String
  */
-function createUrl(url, params) {
+function createUrl(url, params)
+{
     if (typeof(params) === 'object') {
         url += '?';
         var param_string = '';
@@ -264,19 +294,17 @@ function createUrl(url, params) {
  */
 function isRootPath(path)
 {
-	// remove last / char
-	if (path.lastIndexOf('/') == path.length - 1)
-	{
-		path = path.substr(0, path.length - 1);
-	}
-	
-	// no parent
-	if (path == '/' || path.length == 0)
-	{
-		return true;
-	}
-	
-	return false;
+    // remove last / char
+    if (path.lastIndexOf('/') == path.length - 1) {
+        path = path.substr(0, path.length - 1);
+    }
+
+    // no parent
+    if (path == '/' || path.length == 0) {
+        return true;
+    }
+
+    return false;
 }
 
 /**
@@ -290,19 +318,17 @@ function isRootPath(path)
  */
 function getParentFolder(url)
 {
-	// remove last / char
-	if (url.lastIndexOf('/') == url.length - 1)
-	{
-		url = url.substr(0, url.length - 1);
-	}
-	
-	// no parent
-	if (url.lastIndexOf('/') < 0 || url.lastIndexOf('/') == 0)
-	{
-		return '';
-	}
-	
-	return url.substr(0, url.lastIndexOf('/'));
+    // remove last / char
+    if (url.lastIndexOf('/') == url.length - 1) {
+        url = url.substr(0, url.length - 1);
+    }
+
+    // no parent
+    if (url.lastIndexOf('/') < 0 || url.lastIndexOf('/') == 0) {
+        return '';
+    }
+
+    return url.substr(0, url.lastIndexOf('/'));
 }
 
 /**
@@ -315,15 +341,15 @@ function adjustUrl(url)
 {
     var stack = [];
     var paths = url.split("/");
-    for (var i=0; i<paths.length; i++)
-    {
+    for (var i = 0; i < paths.length; i++) {
         if (paths[i] === '.') {
             continue;
         }
-        
+
         if (paths[i] === "..") {
             stack.pop();
-        } else {
+        }
+        else {
             stack.push(paths[i]);
         }
     }
@@ -344,13 +370,12 @@ function concatPath(path1, path2)
     {
         path1 += '/';
     }
-    
+
     // remove separator in the head of path
-    if (path2.substr(0, 1) === '/')
-    {
+    if (path2.substr(0, 1) === '/') {
         path2 = path2.substr(1, path2.length);
     }
-    
+
     return path1 + path2;
 }
 
@@ -364,18 +389,16 @@ function simplifyPath(url)
 {
     // current directory string
     url = url.split('/./').join('/');
-    if (url.substr(0, 2) == './')
-    {
+    if (url.substr(0, 2) == './') {
         url = url.substr(2, url.length);
     }
 
     // remove parent directory expression string
     var rule1 = new RegExp('([^\/]*)\/..\/');
-    while (url.search(rule1) >= 0)
-    {
+    while (url.search(rule1) >= 0) {
         url = url.replace(rule1, '');
     }
-    
+
     return url;
 }
 
@@ -384,7 +407,8 @@ function simplifyPath(url)
  * @param   object
  * @returns String|false
  */
-function json_encode(object) {
+function json_encode(object)
+{
     if (typeof(JSON) !== 'undefined') {
         var json_string = JSON.stringify(object);
         return json_string;
@@ -401,7 +425,8 @@ function json_encode(object) {
  * @param   string  JSON string
  * @returns Object|false
  */
-function json_decode(string) {
+function json_decode(string)
+{
     var object = null;
 
     // use JSON object
@@ -426,7 +451,8 @@ function json_decode(string) {
  * @param Array  array data
  * @returns Bool
  */
-function inArray(value, array) {
+function inArray(value, array)
+{
     for (var i = 0; i < array.length; i++) {
         if (array[i] == value) {
             return true;
@@ -443,15 +469,15 @@ function inArray(value, array) {
  * @returns String
  * require moment-with-locales library
  */
-function getFreshText(time_str) {
+function getFreshText(time_str)
+{
     var minute = 1000 * 60;
     var hour = minute * 60;
     var day = hour * 24;
     // var halfamonth = day * 15;
     var month = day * 30;
 
-    try
-    {
+    try {
         var time = moment(time_str);
         return time.fromNow();
     }
@@ -471,21 +497,18 @@ function getFreshText(time_str) {
  */
 function printTime(element, format)
 {
-    if (!format)
-    {
+    if (!format) {
         format = $(element).data('format') || 'YYYY-MM-DD H:mm:ss';
     }
 
     // update per minute
-    setInterval(function()
+    setInterval(function ()
     {
-        try
-        {
+        try {
             var current_time_string = moment().format(format);
             $(element).html(current_time_string);
         }
-        catch (e)
-        {
+        catch (e) {
             addConsoleLog(e);
         }
     }, 1000);
@@ -500,20 +523,16 @@ function printTime(element, format)
  */
 function getAMPM(time, format)
 {
-    if (!format)
-    {
+    if (!format) {
         format = 'YY-MM-dd HH:mm:ss';
     }
 
-    switch (typeof(time))
-    {
+    switch (typeof(time)) {
         case 'object' :
-            try
-            {
+            try {
                 return time.getHours() < 12 ? 'am' : 'pm';
             }
-            catch (e)
-            {
+            catch (e) {
                 addConsoleLog(e);
             }
         case 'number' :
@@ -521,7 +540,7 @@ function getAMPM(time, format)
             return oDate.getHours() < 12 ? 'am' : 'pm';
         case 'string' :
             var oMoment = moment(time, format);
-            return parseInt(oMoment.format('H'))  < 12 ? 'am' : 'pm';
+            return parseInt(oMoment.format('H')) < 12 ? 'am' : 'pm';
     }
 
     return '';
@@ -541,24 +560,21 @@ function countBackwards(element, options)
     var number = parseInt(element.innerHTML);
 
     // set timer to count
-    var timer = setInterval(function()
+    var timer = setInterval(function ()
     {
-        try
-        {
+        try {
             var number = parseInt(element.innerHTML);
 
             number--;
             element.innerHTML = number;
 
-            if (number <= 0)
-            {
+            if (number <= 0) {
                 clearInterval(timer);
                 callback ? callback(element) : null;
             }
 
         }
-        catch (e)
-        {
+        catch (e) {
             log(e);
         }
     }, 1000);
@@ -576,8 +592,7 @@ function countBackwards(element, options)
 function setCountBackwards(element, options)
 {
     // check jQuery library
-    if (typeof($) === 'undefined')
-    {
+    if (typeof($) === 'undefined') {
         log('[error] missing $ function.');
         return false;
     }
@@ -603,8 +618,7 @@ function setCountBackwards(element, options)
     // get second
     var second = options.second || parseInt(elementQuote.data('second')) || 60;
 
-    if (second <= 0)
-    {
+    if (second <= 0) {
         addConsoleLog('[error] setCountBackwards must give a second param.');
         return;
     }
@@ -613,17 +627,15 @@ function setCountBackwards(element, options)
 
     var timer = null;
 
-    var update = (function()
+    var update = (function ()
     {
-        try
-        {
+        try {
             second--;
 
             // update content
             elementQuote.html(processText.replace('{n}', second));
 
-            if (second <= 0)
-            {
+            if (second <= 0) {
                 // set finish text
                 elementQuote.html(finishText);
 
@@ -634,8 +646,7 @@ function setCountBackwards(element, options)
                 callback ? callback(element) : null;
             }
         }
-        catch (e)
-        {
+        catch (e) {
             log(e);
         }
     });
@@ -652,7 +663,8 @@ function setCountBackwards(element, options)
  * @param id String  element ID
  * @returns Object(HTMLElement) | null
  */
-function getElement(id) {
+function getElement(id)
+{
     return document.getElementById(id);
 }
 
@@ -661,7 +673,8 @@ function getElement(id) {
  * @param selector  CSS query selector
  * @returns {*}
  */
-function get(selector) {
+function get(selector)
+{
     try {
         if (typeof(document.querySelector) != 'function') {
             addConsoleLog('querySelector is not supported in current client.');
@@ -682,7 +695,8 @@ function get(selector) {
  * @param content  Object of HTMLElement | String  element content
  * @returns Object(HTMLElement) | false
  */
-function createElement(name, options, content) {
+function createElement(name, options, content)
+{
     // create element
     var element = document.createElement(name);
 
@@ -730,7 +744,8 @@ function printStylesheetLink(url)
  * set element height equal to width  设置元素高度等于宽度
  * @param element Object of HTMLElement
  */
-function setHeightEqualToWidth(element) {
+function setHeightEqualToWidth(element)
+{
     element.style.height = element.offsetWidth + "px";
 }
 
@@ -738,7 +753,8 @@ function setHeightEqualToWidth(element) {
  * set image fill
  * @param   image   Object(HTMLImageElement)    image element
  */
-function setImageFill(image) {
+function setImageFill(image)
+{
     image.onload = (function ()  // set 'onload' event
     {
         var wrapper_width = this.parentNode.offsetWidth;
@@ -770,7 +786,8 @@ function setImageFill(image) {
  * @param options   Object
  * @returns Object(Image)
  */
-function loadImage(url, options) {
+function loadImage(url, options)
+{
     var image = new Image;
 
     typeof (options) === 'object' ? null : options = {};
@@ -795,7 +812,8 @@ function loadImage(url, options) {
  * @param null|Array options  element attributes
  * @returns Object of Image
  */
-function createImage(url, options) {
+function createImage(url, options)
+{
     // create new
     var image = new Image();
 
@@ -815,11 +833,13 @@ function createImage(url, options) {
  * set image centered fill
  * @param image Object(ImageHTMLElement)
  */
-function setImageCenteredFill(image) {
+function setImageCenteredFill(image)
+{
     // check if loaded
     if (image.complete !== true) {
         // call self again
-        image.onload = (function () {
+        image.onload = (function ()
+        {
             setImageCenteredFill(this);
         });
         return;
@@ -860,7 +880,8 @@ function setImageCenteredFill(image) {
  * @param coding String  coding name
  * @return Bool  true if supported or false if not supported
  */
-function checkAudio(coding) {
+function checkAudio(coding)
+{
     var audio = createAudio();
     if (audio === false) {
         return false;
@@ -929,7 +950,8 @@ function setVideoPlaylist(element, list)
  * check canvas supported  检查画布元素支持
  * @returns Boolean
  */
-function canvasSupport() {
+function canvasSupport()
+{
     return typeof (createElement('canvas').getContext) === 'function';
 }
 
@@ -941,11 +963,13 @@ function canvasSupport() {
  * @param name String  param name  参数名
  * @param value String  param alue  参数的值
  */
-function addUrlParam(url, name, value) {
+function addUrlParam(url, name, value)
+{
     var new_url = url;
     if (url.indexOf("?") < 0) {
         new_url += "?";
-    } else {
+    }
+    else {
         new_url += "&";
     }
     new_url += name + "=" + value;
@@ -957,7 +981,8 @@ function addUrlParam(url, name, value) {
  * @param name String  param name  参数名
  * @returns fixed  param value  参数的值
  */
-function getUrlParam(name) {
+function getUrlParam(name)
+{
 
     var default_value = arguments[1] ? arguments[1] : null;
 
@@ -993,24 +1018,21 @@ function getUrlParam(name) {
  */
 function getBodyHtml(html)
 {
-	try
-	{
-		var splitResult = html.split(/\<body[^\>]*\>/);
-		if (splitResult.length < 2)
-		{
-			log('can not found string: /\<body[^\>]*\>/');
-			return false;
-		}
-		html = splitResult[1].replace('</body>', '');
-		
-	}
-	catch (e)
-	{
-		log(e);
-		return false;
-	}
-	
-	return html;
+    try {
+        var splitResult = html.split(/\<body[^\>]*\>/);
+        if (splitResult.length < 2) {
+            log('can not found string: /\<body[^\>]*\>/');
+            return false;
+        }
+        html = splitResult[1].replace('</body>', '');
+
+    }
+    catch (e) {
+        log(e);
+        return false;
+    }
+
+    return html;
 }
 
 /* --- Window function group ------------------------------------------- */
@@ -1019,7 +1041,8 @@ function getBodyHtml(html)
  * Get scroll top  获取窗口视图区域到顶部的滚动距离
  * @returns Number|false
  */
-function getScrollTop() {
+function getScrollTop()
+{
     if (document.documentElement && document.documentElement.scrollTop)		// For standard
     {
         return document.documentElement.scrollTop;
@@ -1035,7 +1058,8 @@ function getScrollTop() {
  * Get scroll height  获取窗口视图区域的高度
  * @returns Number
  */
-function getScrollHeight() {
+function getScrollHeight()
+{
     if (document.documentElement && document.documentElement.scrollHeight)		// For standard
     {
         return document.documentElement.scrollHeight;
@@ -1053,11 +1077,9 @@ function getScrollHeight() {
  */
 function pageDown(element)
 {
-    if (typeof(element) === "string")
-    {
+    if (typeof(element) === "string") {
         var elementQueryList = $(element);
-        if (!elementQueryList.length)
-        {
+        if (!elementQueryList.length) {
             return;
         }
 
@@ -1067,16 +1089,13 @@ function pageDown(element)
     // check if overflow
     addDebugLog('scroll height: ' + element.scrollHeight);
     addDebugLog('offset height: ' + element.offsetHeight);
-    if (element.scrollHeight > element.offsetHeight)
-    {
+    if (element.scrollHeight > element.offsetHeight) {
         // check scroll top
         addDebugLog('scroll top: ' + element.scrollTop);
-        if (element.scrollTop < element.scrollHeight - element.offsetHeight)
-        {
+        if (element.scrollTop < element.scrollHeight - element.offsetHeight) {
             element.scrollTop += element.offsetHeight;
         }
-        else
-        {
+        else {
             element.scrollTop = 0;
         }
     }
@@ -1089,12 +1108,12 @@ function pageDown(element)
  */
 function setAutoPageDown(element, interval)
 {
-    if (!interval)
-    {
+    if (!interval) {
         interval = 10;
     }
 
-    window.setInterval(function(){
+    window.setInterval(function ()
+    {
         pageDown(element)
     }, interval * 1000)
 }
@@ -1103,11 +1122,12 @@ function setAutoPageDown(element, interval)
  * get window height  获取窗口的高度
  * @returns Number
  */
-function getWindowHeight() {
-    var height = window.height
-        || window.innerHeight
-        || document.documentElement.clientHeight
-        || document.body.clientHeight;
+function getWindowHeight()
+{
+    // standard API: window.innerHeight
+    // wrong API: $(window).height() when body height < window height, value = body height
+    var height = window.innerHeight
+        || window.height;               // IE old version
 
     return height ? height : 0;
 }
@@ -1116,13 +1136,29 @@ function getWindowHeight() {
  * get window width  获取窗口的宽度
  * @returns Number
  */
-function getWindowWidth() {
-    var width = window.width
-        || window.innerWidth
-        || document.documentElement.clientWidth
-        || document.body.clientWidth;
+function getWindowWidth()
+{
+    // standard API: window.innerWidth
+    // wrong API: $(window).width()
+    var width = window.innerWidth
+        || window.width;            // IE old version
 
     return width ? width : 0;
+}
+
+/**
+ * get body element height
+ * @returns Number
+ */
+function getBodyHeight()
+{
+    // standard API: document.body.offsetHeight, document.documentElement.offsetHeight
+    var bodyHeight = document.body.offsetHeight ||
+        document.documentElement.offsetHeight ||
+        document.body.clientHeight ||               // IE old version
+        $(document.body).height();                   // jQuery API
+
+    return bodyHeight ? bodyHeight : 0;
 }
 
 /**
@@ -1131,32 +1167,28 @@ function getWindowWidth() {
  */
 function setBodyMinHeight()
 {
-	var bodyHeight = document.body.offsetHeight || 0;
-	var windowHeight = getWindowHeight() || 0;
-	
-	// can not get height
-	if (bodyHeight == 0 || windowHeight == 0)
-	{
-		return false;
-	}
-	
-	// set window resize event
-	$(window).on('resize', function(){
-		
-		// reset height to auto
-		$(document.body).css('height', 'auto');
-		
-		var bodyHeight = document.body.offsetHeight || 0;
-		var windowHeight = getWindowHeight() || 0;
-		
-		if (bodyHeight < windowHeight)
-		{
-			$(document.body).css('height', windowHeight + 'px');
-		}
-		
-	}).trigger('resize');
-	
-	return true;
+    // set window resize event
+    $(window).on('resize', function ()
+    {
+        // reset height to auto
+        $(document.body).css('height', 'auto');
+
+        var bodyHeight = getBodyHeight();
+        var windowHeight = getWindowHeight();
+
+        addDebugLog('bodyHeight= ' + bodyHeight);
+        addDebugLog('windowHeight= ' + windowHeight);
+
+        // can not get height
+        if (bodyHeight === 0 || windowHeight === 0) {
+            return false;
+        }
+
+        if (bodyHeight < windowHeight) {
+            $(document.body).css('height', windowHeight + 'px');
+        }
+
+    }).trigger('resize');
 }
 
 /**
@@ -1167,8 +1199,7 @@ function setBodyMinHeight()
 function isOverflowHeight(selector)
 {
     var wrapperList = $(selector);
-    if (!wrapperList.length)
-    {
+    if (!wrapperList.length) {
         return false;
     }
 
@@ -1176,25 +1207,23 @@ function isOverflowHeight(selector)
 
     var childrenList = wrapper.children;
     var contentHeightCount = 0;
-    for (var i=0; i<childrenList.length; i++)
-    {
+    for (var i = 0; i < childrenList.length; i++) {
         contentHeightCount += parseInt($(childrenList[i]).css('margin-top').replace('px', ''));
         contentHeightCount += childrenList[i].offsetHeight;
         contentHeightCount += parseInt($(childrenList[i]).css('margin-bottom').replace('px', ''));
     }
 
-    if (contentHeightCount > wrapper.offsetHeight)
-    {
+    if (contentHeightCount > wrapper.offsetHeight) {
         return true
     }
-    else
-    {
+    else {
         return false;
     }
 
 }
 
-function createDialog(options) {
+function createDialog(options)
+{
 
 }
 
@@ -1204,7 +1233,8 @@ function createDialog(options) {
  * Get browser core  获取浏览器核心
  * @returns String  core name
  */
-function getBrowserCore() {
+function getBrowserCore()
+{
     // Find known core names from the userAgent data  搜索核心名称
     var userAgent = window.navigator.userAgent;
     var isGecko = RegExp("Gecko").test(userAgent);
@@ -1234,7 +1264,8 @@ function getBrowserCore() {
  * Get IE browser core  获取 IE 的版本
  * @returns Number
  */
-function getIEsVersion() {
+function getIEsVersion()
+{
     // Check whether the current browser is IE  检查是否 IE 浏览器
     var userAgent = window.navigator.userAgent;
     var isIE = userAgent.search(RegExp("MSIE [0-9.]+;"));
@@ -1257,12 +1288,10 @@ function getBrowserLanguage()
     // web standard use navigator.language API, value is no case
     // and IE6-8 use navigator.browserLanguage API, value is lower case.
     var lang = '';
-    try
-    {
+    try {
         lang = (navigator.language || navigator.browserLanguage).toLowerCase();
     }
-    catch (e)
-    {
+    catch (e) {
         addConsoleLog(e);
         return lang;
     }
@@ -1278,7 +1307,8 @@ function getBrowserLanguage()
  * @param type string
  * @returns bool
  */
-function checkFile(file, type) {
+function checkFile(file, type)
+{
     return file.type.indexOf(type) === 0;
 }
 
@@ -1287,7 +1317,8 @@ function checkFile(file, type) {
  * @param file  Object(File)
  * @returns Boolean
  */
-function checkFileIsImage(file) {
+function checkFileIsImage(file)
+{
     if (/image\/\w+/.test(file.type)) {
         return true;
     }
@@ -1300,7 +1331,8 @@ function checkFileIsImage(file) {
  * check file reader supported  检查文件读取器支持
  * @returns Boolean
  */
-function fileReaderSupport() {
+function fileReaderSupport()
+{
     return typeof(FileReader) !== 'undefined';
 }
 
@@ -1312,7 +1344,8 @@ function fileReaderSupport() {
  * @param options  Object|null
  * 'onabort', 'onload', 'onloadend', 'onloadstart', 'onprogress'
  */
-function readFile(file, data_type, options) {
+function readFile(file, data_type, options)
+{
     if (!fileReaderSupport()) {
         addConsoleLog('[error] FileReader API is not supported.');
         return false;
@@ -1353,7 +1386,8 @@ function readFile(file, data_type, options) {
  * @param callback  Function|null   convert success callback function
  * @returns Object(CanvasHTMLElement)|false
  */
-function convertImage2Canvas(image, options, callback) {
+function convertImage2Canvas(image, options, callback)
+{
     // check canvas support
     if (!canvasSupport()) {
         return false;
@@ -1389,7 +1423,8 @@ function convertImage2Canvas(image, options, callback) {
 
     onerror ? image_object.onerror = onerror : null;
 
-    image_object.onload = (function () {
+    image_object.onload = (function ()
+    {
 
         // 宽高比例
         var image_ratio = this.width / this.height;
@@ -1471,7 +1506,8 @@ function convertImage2Canvas(image, options, callback) {
  * @param element   Object(HTMLElement)
  * @returns Object(HTMLElement)|null
  */
-function getForm(element) {
+function getForm(element)
+{
     return element.form ? element.form : null;
 }
 
@@ -1480,7 +1516,8 @@ function getForm(element) {
  * @param   form    Object(HTMLFormElement)
  * @returns Object|false
  */
-function getFormData(form) {
+function getFormData(form)
+{
     var data = {};
 
     if (typeof(form.elements) === 'undefined') {
@@ -1499,7 +1536,8 @@ function getFormData(form) {
  * @param   form    Object|String       form element or ID
  * @returns Boolean
  */
-function formIsLocked(form) {
+function formIsLocked(form)
+{
     // get element by ID
     if (typeof (form) === 'string') {
         var form = document.getElementById(form);
@@ -1524,7 +1562,8 @@ function formIsLocked(form) {
  * set a lock data
  * @param   form    Object|String       form element or ID
  */
-function lockForm(form) {
+function lockForm(form)
+{
     // get element by ID
     if (typeof (form) === 'string') {
         var form = document.getElementById(form);
@@ -1541,7 +1580,8 @@ function lockForm(form) {
  * set a lock data
  * @param   form    Object|String       form element or ID
  */
-function unlockForm(form) {
+function unlockForm(form)
+{
     // get element by ID
     if (typeof (form) === 'string') {
         var form = document.getElementById(form);
@@ -1553,7 +1593,8 @@ function unlockForm(form) {
     form.dataset.lock = 'off';
 }
 
-function formNoMoreData(form) {
+function formNoMoreData(form)
+{
     // get element by ID
     if (typeof (form) === 'string') {
         var form = document.getElementById(form);
@@ -1565,7 +1606,8 @@ function formNoMoreData(form) {
     form.dataset.noMoreData = "on";
 }
 
-function formMoreData(form) {
+function formMoreData(form)
+{
     // get element by ID
     if (typeof (form) === 'string') {
         var form = document.getElementById(form);
@@ -1577,7 +1619,8 @@ function formMoreData(form) {
     form.dataset.noMoreData = 'off';
 }
 
-function formHasMoreData(form) {
+function formHasMoreData(form)
+{
     // get element by ID
     if (typeof (form) === 'string') {
         var form = document.getElementById(form);
@@ -1600,8 +1643,10 @@ function formHasMoreData(form) {
  * set check all action
  * @param   checkbox    Object(HTMLInputElement)
  */
-function setCheckAllAction(checkbox) {
-    checkbox.onchange = (function () {
+function setCheckAllAction(checkbox)
+{
+    checkbox.onchange = (function ()
+    {
 
         // get check status
         var check_status = this.checked;
@@ -1623,7 +1668,8 @@ function setCheckAllAction(checkbox) {
  * @param   container   container for append
  * @param   options     panel options
  */
-function renderPaginationPanel(container, options) {
+function renderPaginationPanel(container, options)
+{
     var pagination_list = $('<ul class="pagination">\
         <li class="previous_page_item disabled">\
             <a class="previous_page_link" href="javascript:;" aria-label="上一页">\
@@ -1648,13 +1694,15 @@ function renderPaginationPanel(container, options) {
  * 分页元素需要用 Form 标签包含，且 Form 标签包含 ".form_page" 的隐藏类型的 Input 元素，用于更改页码。
  * @param   element     Object(HTMLElement)
  */
-function bindPaginationPanelAction(element) {
+function bindPaginationPanelAction(element)
+{
     var previous_page_link = $(element).find('.previous_page_link');
     var next_page_link = $(element).find('.next_page_link');
     var current_page_link = $(element).find('.current a');
 
     // set previous page link click action
-    previous_page_link.on('click', function () {
+    previous_page_link.on('click', function ()
+    {
 
         // check form
         var form = $(this).parents('form');
@@ -1680,7 +1728,8 @@ function bindPaginationPanelAction(element) {
     }); // End .previous_page_link click event function
 
     // set next page link click action
-    next_page_link.on('click', function () {
+    next_page_link.on('click', function ()
+    {
 
         // check form
         var form = $(this).parents('form');
@@ -1718,7 +1767,8 @@ function bindPaginationPanelAction(element) {
  * @param   element     Object(HTMLElement)     pagination panel element
  * @param   options     Object                  pagination panel data
  */
-function updatePaginationPanel(element, options) {
+function updatePaginationPanel(element, options)
+{
     var message = '[info] 更新页码面板；';
 
     var current_page = options.page ? options.page : parseInt($(element).find('.current a').html());
@@ -1765,12 +1815,14 @@ function updatePaginationPanel(element, options) {
  *     param text      textbox text
  *     param length    textbox text length
  */
-function initTextboxActions(textbox, options) {
+function initTextboxActions(textbox, options)
+{
     var change_callback = options.change ? options.change : null;
     var input_callback = options.input ? options.input : null;
 
     if (change_callback) {
-        textbox.onchange = (function () {
+        textbox.onchange = (function ()
+        {
 
             var text = this.value;
             var length = text.length;
@@ -1780,7 +1832,8 @@ function initTextboxActions(textbox, options) {
     }
 
     if (input_callback) {
-        textbox.oninput = (function () {
+        textbox.oninput = (function ()
+        {
 
             var text = this.value;
             var length = text.length;
@@ -1799,7 +1852,8 @@ function initTextboxActions(textbox, options) {
  * @Author  Kevin
  * @date    2017-01-23
  */
-function addInputboxAutocompleteValue(name, value) {
+function addInputboxAutocompleteValue(name, value)
+{
     var form = document.createElement('form');
     form.action = 'javascript:;';
     form.method = 'post';
@@ -1824,7 +1878,8 @@ function addInputboxAutocompleteValue(name, value) {
  * @param  textStatus
  * @param  errorThrown
  */
-function generalAjaxErrorCallback(XMLHttpRequest, textStatus, errorThrown) {
+function generalAjaxErrorCallback(XMLHttpRequest, textStatus, errorThrown)
+{
     var error_text = "连接失败\n";
     error_text += XMLHttpRequest.status + ' ' + XMLHttpRequest.statusText + "\n";
     addConsoleLog(error_text);
@@ -1837,7 +1892,8 @@ function generalAjaxErrorCallback(XMLHttpRequest, textStatus, errorThrown) {
  * @param data  null|Object
  * @param callback  null|Function
  */
-var ajax = (function (api_name, data, callback) {
+var ajax = (function (api_name, data, callback)
+{
 
     if (typeof(api) === 'undefined') {
         addConsoleLog('[error] api variable is undefined.');
@@ -1849,12 +1905,13 @@ var ajax = (function (api_name, data, callback) {
     var type = api[api_name].type;
 
     $.ajax({
-        'url': url,
-        'type': type,
-        'dataType': 'json',
-        'data': data,
-        'error': ajaxErrorCallback,
-        'success': function (result) {
+        'url' : url,
+        'type' : type,
+        'dataType' : 'json',
+        'data' : data,
+        'error' : ajaxErrorCallback,
+        'success' : function (result)
+        {
             if (callback) {
                 callback(result);
             }
@@ -1871,13 +1928,14 @@ var ajax = (function (api_name, data, callback) {
  * argument 3  Object  dialog options  对话框参数
  * @return Object(DivHTMLElement)  对象（DOM）
  */
-function createDialog(title, text) {
+function createDialog(title, text)
+{
     // get arguments
     var options = arguments[3] ? arguments[3] : new Object();
 
     // set dialog attributes
     var dialog_attributes = {
-        "class": "dialog"
+        "class" : "dialog"
     };
     if (options.id) {
         dialog_attributes.id = options.id;
@@ -1888,33 +1946,34 @@ function createDialog(title, text) {
 
     // dialog header
     var dialog_header = createElement("div", {
-        "class": "dialog_header"
+        "class" : "dialog_header"
     });
     dialog.appendChild(dialog_header);
 
     // dialog title
     var dialog_title = createElement("div", {
-        "class": "dialog_title"
+        "class" : "dialog_title"
     }, title);
     dialog_header.appendChild(dialog_title);
 
     // dialog buttons
     var dialog_buttons = createElement("div", {
-        "class": "dialog_buttons"
+        "class" : "dialog_buttons"
     });
     dialog_header.appendChild(dialog_buttons);
     var button_close = createElement("button", {
-        "class": "button_close dialog_close"
+        "class" : "button_close dialog_close"
     }, "x");
     dialog_buttons.appendChild(button_close);
-    button_close.onclick = (function () {
+    button_close.onclick = (function ()
+    {
         var dialog = this.parentNode.parentNode.parentNode;
         dialog.parentNode.removeChild(dialog);
     });
 
     // dialog body
     var dialog_body = createElement("div", {
-        "class": "dialog_body"
+        "class" : "dialog_body"
     }, text);
     dialog.appendChild(dialog_body);
 
@@ -1926,7 +1985,8 @@ function createDialog(title, text) {
  * remove dialog  移除对话框
  * @param dialog  String|Object(HTMLElement)  dialog ID or dialog node  对话框ID或对话框节点
  */
-function removeDialog(dialog) {
+function removeDialog(dialog)
+{
     if (!dialog || !dialog.parentNode) {
         return;
     }
@@ -1945,28 +2005,29 @@ function removeDialog(dialog) {
  * @param id  String  dialog ID string  对话框ID
  * @param percent  Number  progress percent  进度条百分比
  */
-function createProgressDialog(id, percent) {
+function createProgressDialog(id, percent)
+{
     // create a wrapper
     var dialog = createElement("div", {
-        "id": id,
-        "class": "dialog dialog_progress"
+        "id" : id,
+        "class" : "dialog dialog_progress"
     });
 
     // create a wrapper to contain progress
     var box_progress = createElement("div", {
-        "class": "box_progress"
+        "class" : "box_progress"
     });
     dialog.appendChild(box_progress);
 
     // create progress
     var progress = createElement("div", {
-        "class": "progress"
+        "class" : "progress"
     });
     box_progress.appendChild(progress);
 
     // create progress percent display
     var progress_bar = createElement("div", {
-        "class": "progress-bar progress-bar-striped active"
+        "class" : "progress-bar progress-bar-striped active"
     });
     progress.appendChild(progress_bar);
 
@@ -1983,7 +2044,8 @@ function createProgressDialog(id, percent) {
  * @param percent  Number  progress percent  进度条百分比
  * @returns Bool  true if success or false if fail  成功返回true，失败返回false
  */
-function updateProgressDialog(id, percent) {
+function updateProgressDialog(id, percent)
+{
     // get dialog node
     var dialog = getElement(id);
     if (!dialog) {
@@ -2011,7 +2073,8 @@ function updateProgressDialog(id, percent) {
  * @param id String  dialog ID string  对话框ID
  * @returns Bool  true if success or false if fail  成功返回true，失败返回false
  */
-function removeProgressDialog(id) {
+function removeProgressDialog(id)
+{
     // get dialog node
     var dialog = getElement(id);
     if (!dialog) {
@@ -2031,7 +2094,8 @@ function removeProgressDialog(id) {
  * require jQuery library
  * @param speed  fade speed
  */
-function showLoadingIcon(speed) {
+function showLoadingIcon(speed)
+{
     $('#loading_icon_container').fadeIn(speed ? speed : 'fast');
 }
 
@@ -2040,7 +2104,8 @@ function showLoadingIcon(speed) {
  * require jQuery library
  * @param speed  fade speed
  */
-function hideLoadingIcon(speed) {
+function hideLoadingIcon(speed)
+{
     $('#loading_icon_container').fadeOut(speed ? speed : 'fast');
 }
 
@@ -2069,8 +2134,7 @@ function playMusic()
 
     // get audio element
     var mainAudioController = getElement('mainAudioController');
-    if (!mainAudioController)
-    {
+    if (!mainAudioController) {
         // audio controller not exist
         return false;
     }
@@ -2079,8 +2143,7 @@ function playMusic()
     mainAudioController.play();
 
     // check play status
-    if (mainAudioController.paused)
-    {
+    if (mainAudioController.paused) {
         // play fail
         return false;
     }
@@ -2100,8 +2163,7 @@ function pauseMusic()
 
     // get audio element
     var mainAudioController = getElement('mainAudioController');
-    if (!mainAudioController)
-    {
+    if (!mainAudioController) {
         // audio controller not exist
         return false;
     }
@@ -2110,8 +2172,7 @@ function pauseMusic()
     mainAudioController.pause();
 
     // check play status
-    if (!mainAudioController.paused)
-    {
+    if (!mainAudioController.paused) {
         // still playing, pause fail
         return false;
     }
@@ -2128,8 +2189,7 @@ function getMusicPlayStatus()
 {
     // get audio element
     var mainAudioController = getElement('mainAudioController');
-    if (!mainAudioController)
-    {
+    if (!mainAudioController) {
         // audio controller not exist
         return false;
     }
@@ -2146,13 +2206,11 @@ function getMusicPlayStatus()
 function toggleMusic()
 {
     // check status
-    if (getMusicPlayStatus())
-    {
+    if (getMusicPlayStatus()) {
         // playing then pause
         return pauseMusic();
     }
-    else
-    {
+    else {
         // pausing then play
         return playMusic();
     }
@@ -2170,19 +2228,44 @@ function playLetter(sentence_index, delay)
     var letter_sentences = $('#letter_content_box > *');
 
     // check index
-    if (sentence_index + 1 > letter_sentences.length)
-    {
+    if (sentence_index + 1 > letter_sentences.length) {
         return;
     }
 
     // show sentence
     letter_sentences.eq(sentence_index).fadeIn(3000);
-    window.setTimeout(function(){
+    window.setTimeout(function ()
+    {
         playLetter(sentence_index + 1, delay)
     }, delay);
 }
 
+function loadDependencies()
+{
+    // check jQuery
+    if (typeof(jQuery) === "undefined")
+    {
+        if (getBrowserLanguage() === 'zh-cn')
+        {
+            printTag('script', {src: cdnList.china.jquery});
+        }
+        else
+        {
+            printTag('script', {src: cdnList.world.jquery});
+        }
+    }
 
+    // check moment library
+    if (typeof(moment) === "undefined")
+    {
+        if (getBrowserLanguage() === 'zh-cn')
+        {
+            printTag('script', {src: cdnList.china.momentWithLocales});
+        }
+        else
+        {
+            printTag('script', {src: cdnList.world.momentWithLocales});
+        }
+    }
 
-
-
+}

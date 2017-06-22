@@ -80,14 +80,18 @@
 
         <!-- jQuery library -->
         <script>
-            if (getBrowserLanguage() === 'zh-cn')   // 中国大陆
+            /*if (getBrowserLanguage() === 'zh-cn')   // 中国大陆
             {
                 printTag('script', {src: 'https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js'});
             }
             else  // 国际网络
             {
                 printTag('script', {src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'});
-            }
+            }*/
+        </script>
+
+        <script>
+            loadDependencies();
         </script>
 
         <!-- common action (must after jQuery) -->
