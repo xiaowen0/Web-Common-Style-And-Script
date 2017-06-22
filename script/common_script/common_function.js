@@ -872,6 +872,60 @@ function checkAudio(coding) {
 }
 
 /**
+ * set video play list
+ * @param element   HTMLElement|String  element object or id
+ * @param list      Array               array of video url string
+ */
+function setVideoPlaylist(element, list)
+{
+    if (typeof (element) === "string")
+    {
+        element = getElement(element);
+        if (!element) { return; }
+    }
+
+    try
+    {
+        if (list.length === 0)
+        {
+            // stop and remove file
+            element.pause();
+            element.src = '';
+        }
+
+        // play first video
+        element.pause();
+        element.src = list[0];
+        element.load();
+        element.play();
+
+        // auto load next video when play end
+        element.onended = (function()
+        {
+            var fileSrc = this.src;
+            var index = list.indexOf(fileSrc) || 0;
+            addConsoleLog(index);
+            index++;
+
+            if (index > list.length)
+            {
+                index = 0;
+            }
+
+            this.pause();
+            this.src = list[index];
+            this.load();
+            this.play();
+        });
+    }
+    catch(e)
+    {
+        addConsoleLog(e);
+    }
+
+}
+
+/**
  * check canvas supported  检查画布元素支持
  * @returns Boolean
  */
