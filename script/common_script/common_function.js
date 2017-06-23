@@ -227,6 +227,16 @@ function removeHtmlTag(html)
 }
 
 /**
+ * filter img tag from html code
+ * @param   String  html code
+ * @return  Array
+ */
+function filterImgTag(html)
+{
+    return new RegExp("<img[^>]*>").exec(html);
+}
+
+/**
  * escape html code
  * @param   String html
  * @returns String
@@ -891,6 +901,27 @@ function checkAudio(coding)
     }
     return false;
 }
+
+/**
+ * check a file name is video format
+ * @param   String  file name
+ * @return  Bool
+ */
+function isVideo(name)
+{
+	videoFormatList = ["webm","mp4"];
+	for (var i=0; i<videoFormatList.length; i++)
+	{
+		console.log(0-videoFormatList[i].length);
+		if (name.substr(0-videoFormatList[i].length) === videoFormatList[i])
+		{
+			return true;
+		}
+	}
+	
+	return false;
+}
+
 
 /**
  * set video play list
