@@ -947,6 +947,7 @@ function setVideoPlaylist(element, list)
         // play first video
         element.pause();
         element.src = list[0];
+        $(element).data('currentIndex', 0);
         element.load();
         element.play();
 
@@ -954,8 +955,8 @@ function setVideoPlaylist(element, list)
         element.onended = (function()
         {
             var fileSrc = this.src;
-            var index = list.indexOf(fileSrc) || 0;
-            
+            var index = $(element).data('currentIndex') || '0';
+            index = parseInt(index);
             index++;
 
             if (index > list.length)
@@ -965,6 +966,7 @@ function setVideoPlaylist(element, list)
 
             this.pause();
             this.src = list[index];
+            $(element).data('currentIndex', index);
             this.load();
             this.play();
         });
