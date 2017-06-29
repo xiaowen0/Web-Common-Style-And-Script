@@ -912,7 +912,6 @@ function isVideo(name)
 	videoFormatList = ["webm","mp4"];
 	for (var i=0; i<videoFormatList.length; i++)
 	{
-		console.log(0-videoFormatList[i].length);
 		if (name.substr(0-videoFormatList[i].length) === videoFormatList[i])
 		{
 			return true;
@@ -956,7 +955,7 @@ function setVideoPlaylist(element, list)
         {
             var fileSrc = this.src;
             var index = list.indexOf(fileSrc) || 0;
-            addConsoleLog(index);
+            
             index++;
 
             if (index > list.length)
