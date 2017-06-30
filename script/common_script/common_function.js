@@ -791,6 +791,43 @@ function setImageFill(image)
 }
 
 /**
+ * set a element middle position in his parent
+ * @param  String|Array  element CSS selector path or array
+ * @returns Boolean
+ */
+function setElementMiddlePosition(element)
+{
+    // check param type
+    if (typeof(element) === 'string')
+    {
+        var elementQuery = $(element);
+        if (elementQuery.length)
+        {
+            element = elementQuery[0];
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    // get parent
+    var parent = element.parentNode;
+
+    // set
+    $(parent).css('overflow', 'hidden');
+    $(element).css('overflow', 'hidden');
+    var parentHeight = parent.offsetHeight;
+    var elementHeight = element.offsetHeight;
+
+    // set top margin
+    var topMargin = (parentHeight - elementHeight) / 2;
+    $(element).css('margin-top', topMargin + 'px');
+
+    return true;
+}
+
+/**
  * load a image
  * @param url       String  image url
  * @param options   Object
@@ -921,6 +958,42 @@ function isVideo(name)
 	return false;
 }
 
+/**
+ * set some element take turns to show
+ * @param  String|Array  elementList
+ * @param  Object        options
+ *   interval : turn interval (second), default 10
+ *   number : show count one time, default one
+ */
+function setTakeTurns(elementList, options)
+{
+    var interval = options.interval || 10;
+    var number = options.number || 1;
+
+    setInterval(function()
+    {
+        // check element type
+        if (typeof(elementList) === 'string')
+        {
+            elementList = $(elementList);
+        }
+
+        // get hidden item count
+        var count = elementList.length;
+        var hideCount = elementList.filter(':hidden').length;
+
+        hideCount += number;
+        if (hideCount >= count)
+        {
+            hideCount = 0;
+        }
+
+        // hide some element
+        elementList.show().filter(':lt(' + hideCount + ')').hide();
+
+    }, interval * 1000);
+
+}
 
 /**
  * set video play list
@@ -977,6 +1050,8 @@ function setVideoPlaylist(element, list)
     }
 
 }
+
+
 
 /**
  * check canvas supported  检查画布元素支持
@@ -1146,8 +1221,45 @@ function setAutoPageDown(element, interval)
 
     window.setInterval(function ()
     {
-        pageDown(element)
+        pageDown(element);
     }, interval * 1000)
+}
+
+function setMarquee(element, speed)
+{
+	if (typeof(element) === "string") {
+        var elementQueryList = $(element);
+        if (!elementQueryList.length) {
+            return;
+        }
+
+        element = elementQueryList[0];
+    }
+	
+	if (!interval) {
+        interval = 10;
+    }
+	
+	var childList = element.find();
+
+    window.setInterval(function ()
+    {
+    	var step = speed / 1000;
+    	
+    	// check if overflow
+        addDebugLog('scroll height: ' + element.scrollLeft);
+        addDebugLog('offset height: ' + element.offsetWidth);
+        if (element.scrollHeight > element.offsetHeight) {
+            // check scroll top
+            addDebugLog('scroll top: ' + element.scrollTop);
+            if (element.scrollTop < element.scrollHeight - element.offsetHeight) {
+                element.scrollTop += element.offsetHeight;
+            }
+            else {
+                element.scrollTop = 0;
+            }
+        }
+    }, 1)
 }
 
 /**
