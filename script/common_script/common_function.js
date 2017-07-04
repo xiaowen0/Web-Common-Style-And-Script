@@ -1,7 +1,7 @@
 /**
  * common function
  * dependent on jQuery
- * last update:     2017-05-10 09:55
+ * last update:     2017-07-04 17:40
  */
 
 var dependencies = ['jquery', 'bootstrap', 'boorstrapTheme'];
@@ -21,7 +21,7 @@ var cdnList = {
         jquery : 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js',
         momentWithLocales : 'http://momentjs.com/downloads/moment-with-locales.min.js'
     }
-}
+};
 
 /* --- debug function group ------------------------------------------ */
 
@@ -946,16 +946,54 @@ function checkAudio(coding)
  */
 function isVideo(name)
 {
-	videoFormatList = ["webm","mp4"];
-	for (var i=0; i<videoFormatList.length; i++)
-	{
-		if (name.substr(0-videoFormatList[i].length) === videoFormatList[i])
-		{
-			return true;
-		}
-	}
-	
-	return false;
+    videoFormatList = ["webm","mp4"];
+    for (var i=0; i<videoFormatList.length; i++)
+    {
+        if (name.substr(0-videoFormatList[i].length) === videoFormatList[i])
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+/**
+ * set auto check video to play
+ * @param  String|HTMLElement  element
+ * @return Boolean
+ */
+function setAutoCheckVideoToPlay(element)
+{
+    if ( typeof(element) === 'string' )
+    {
+        var elementQuery = $(element);
+        if (elementQuery.length)
+        {
+            element = elementQuery[0];
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    if (element.tagName.toLowerCase() !== 'video')
+    {
+        addDebugLog('element param is not a video element.');
+        return false;
+    }
+
+    setInterval(function()
+    {
+        if (element.paused)
+        {
+            element.play();
+        }
+
+    }, 1000);
+
+    return true;
 }
 
 /**
@@ -1227,7 +1265,7 @@ function setAutoPageDown(element, interval)
 
 function setMarquee(element, speed)
 {
-	if (typeof(element) === "string") {
+    if (typeof(element) === "string") {
         var elementQueryList = $(element);
         if (!elementQueryList.length) {
             return;
@@ -1235,18 +1273,18 @@ function setMarquee(element, speed)
 
         element = elementQueryList[0];
     }
-	
-	if (!interval) {
+
+    if (!interval) {
         interval = 10;
     }
-	
-	var childList = element.find();
+
+    var childList = element.find();
 
     window.setInterval(function ()
     {
-    	var step = speed / 1000;
-    	
-    	// check if overflow
+        var step = speed / 1000;
+
+        // check if overflow
         addDebugLog('scroll height: ' + element.scrollLeft);
         addDebugLog('offset height: ' + element.offsetWidth);
         if (element.scrollHeight > element.offsetHeight) {
