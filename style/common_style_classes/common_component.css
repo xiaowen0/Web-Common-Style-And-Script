@@ -522,6 +522,7 @@
     z-index: 1;
     left: 50%;
     top: 50%;
+    min-width: 160px;
     background: #FFF;
     border: 1px solid #d8d8d8;
     font-size: 14px;
@@ -547,7 +548,7 @@
 .dialog .dialog_header .button {
     cursor: pointer;
     height: 30px;
-    border: solid 1px #DDD;
+    width: 30px;
 }
 
 .dialog .dialog_header .close_button {

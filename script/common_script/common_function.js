@@ -1409,6 +1409,34 @@ function createDialog(options)
 
 }
 
+/**
+ * show a message box
+ * @param message  String  message text
+ * @param title    String  message box title
+ * @return Boolean
+ */
+function showMessageBox(message, title)
+{
+    var messageBox = $('#mainMessageBox');
+    if (!messageBox)
+    {
+        addConsoleLog('Element #mainMessageBox not exist.');
+        return false;
+    }
+
+    messageBox.find('.dialog_body').html('<p>' + message + '</p>');
+
+    title ? messageBox.find('.dialog_header .dialog_title').html(title) : null;
+
+    messageBox.fadeIn();
+
+    var width = messageBox.width();
+    var marginLeft = width / 2 * -1;
+    messageBox.css('margin-left', marginLeft + 'px');
+
+    return true;
+}
+
 /* --- Browser function group ------------------------------------------ */
 
 /**

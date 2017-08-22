@@ -29,6 +29,20 @@ $(document).ready(function ()
         layer.fadeOut();
     });
 
+    $('.dialog .dialog_header .close_button').on('click', function ()
+    {
+        var dialog = $(this).parents('.dialog');
+        var layer = $('.layer');
+        if (layer.length)
+        {
+            layer.fadeOut();
+        }
+        else
+        {
+            dialog.fadeOut();
+        }
+    });
+
     // backspace button action
     $('.backspaceButton').on('click', function ()
     {
