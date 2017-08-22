@@ -1,7 +1,7 @@
 /**
  * common function
  * dependent on jQuery
- * last update:     2017-07-04 17:40
+ * last update:     2017-08-22 15:15
  */
 
 var dependencies = ['jquery', 'bootstrap', 'boorstrapTheme'];
@@ -1034,6 +1034,47 @@ function setTakeTurns(elementList, options)
 }
 
 /**
+ * set take turn to display some image
+ * @param wrapper  HTMLElement|String  element object or CSS path string
+ * @param interval  Number
+ * @return
+ */
+function setTakeTurnDisplayImage(wrapper, interval)
+{
+	wrapper = $(wrapper);
+	
+	interval ? null : interval = 5;
+	
+	// find image items
+	var imageItems = wrapper.find('.imageItem');
+	if (imageItems.length < 1)
+	{
+		return;
+	}
+	
+	// remove hidden class, and display first item.
+	imageItems.removeClass('hidden').hide().eq(0).show();
+	
+	// create a timer
+	setInterval(function(){
+		var imageItems = wrapper.find('.imageItem');
+		var visibleItems = imageItems.filter(':visible');
+		var currentIndex = imageItems.index(visibleItems);
+		currentIndex++;
+		if (currentIndex >= imageItems.length)
+		{
+			currentIndex = 0;
+		}
+		
+		// hide and after display next image
+		visibleItems.fadeOut('fast', function(){
+			imageItems.eq(currentIndex).fadeIn();
+		});
+		
+	}, interval * 1000);
+}
+
+/**
  * set video play list
  * @param element   HTMLElement|String  element object or id
  * @param list      Array               array of video url string
@@ -1417,6 +1458,8 @@ function createDialog(options)
  */
 function showMessageBox(message, title)
 {
+    title ? null : title = '提示';
+
     var messageBox = $('#mainMessageBox');
     if (!messageBox)
     {
@@ -1426,7 +1469,7 @@ function showMessageBox(message, title)
 
     messageBox.find('.dialog_body').html('<p>' + message + '</p>');
 
-    title ? messageBox.find('.dialog_header .dialog_title').html(title) : null;
+    messageBox.find('.dialog_header .dialog_title').html(title);
 
     messageBox.fadeIn();
 
