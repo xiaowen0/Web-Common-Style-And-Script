@@ -75,7 +75,7 @@
 
 .panel {
     background-color: #FFF;
-    border: solid 1px #a6a3a3;
+    border: solid 1px #ddd;
     box-sizing: border-box;
 }
 
@@ -528,6 +528,11 @@
     font-size: 14px;
 }
 
+.dialog.inline {
+    position: static;
+    display: block;
+}
+
 .dialog .dialog_header {
     box-sizing: border-box;
     height: 50px;
@@ -562,6 +567,61 @@
 .dialog .qr_image {
     width: 100%;
     height: auto;
+}
+
+.dialog.borderRadius,
+.dialog.borderRadius .button {
+    border-radius: 4px;
+}
+
+.dialog.borderRadius .dialog_header {
+    border-radius: 4px 4px 0 0;
+}
+
+.dialog.borderRadius .dialog_body {
+    border-radius: 0 0 4px 4px;
+}
+
+/* success dialog */
+.dialog.success,
+.dialog.success .dialog_header,
+.dialog.success .dialog_body {
+    border-color: #dff0d8;
+}
+
+.dialog.success .dialog_header {
+    background-color: #dff0d8;
+}
+
+.dialog.success .button {
+    background-color: #dff0d8;
+    border-color: #d2e3cc;
+    color: #3c763d;
+}
+
+.dialog.success .dialog_body {
+    color: #000;
+}
+
+/* error dialog */
+.dialog.error,
+.dialog.error .dialog_header,
+.dialog.error .dialog_body {
+    border-color: #ebccd1;
+}
+
+.dialog.error .dialog_header {
+    background-color: #f2dede;
+}
+
+.dialog.error .button {
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    color: #a94442;
+}
+
+.dialog.error .dialog_body {
+    color: #000;
 }
 
 /* exam list */
@@ -1015,6 +1075,7 @@
     -moz-box-shadow: none;
     box-shadow: none;
     overflow: hidden;
+    border-radius: 0;
 }
 
 .progress.rounded {

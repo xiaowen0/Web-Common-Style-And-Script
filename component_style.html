@@ -221,33 +221,45 @@
         <div class="floor">
 
             <div class="panel panel-default">
-                <div class="panel-body">
-                    <h2>模块</h2>
-                    <div>
-                        <p>结构：</p>
-                        <p>div.module 模块主体</p>
-                        <p>--div.module_header 模块头部(标题栏)</p>
-                        <p>----div.module_title.fl 模块的标题</p>
-                        <p>----div.others.fr 模块操作按钮区域</p>
-                        <p>------a 按钮链接</p>
-                        <p>--div.module_body 模块内容区域</p>
 
-                    </div>
-                    <p>示例：</p>
-                    <div class="clearfix yellow_bg padding20">
-                        <div class="module fl w50p mr10">
-                            <div class="module_header">
-                                <h3 class="fl module_title">最新文章</h3>
-                                <div class="others fr">
-                                    <a class="grey" href="javascript:;">更多&gt;&gt;</a>
+                <div class="panel-heading">
+                    <h2 class="panel-title">模块</h2>
+                </div>
+                <div class="panel-body yellow_bg">
+
+                    <div class="row">
+
+                        <div class="col-xs-12 col-sm-6">
+                            <h3>结构：</h3>
+                            <p>div.module 模块主体</p>
+                            <p>--div.module_header 模块头部(标题栏)</p>
+                            <p>----div.module_title.fl 模块的标题</p>
+                            <p>----div.others.fr 模块操作按钮区域</p>
+                            <p>------a 按钮链接</p>
+                            <p>--div.module_body 模块内容区域</p>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-6">
+
+                            <h3>示例：</h3>
+
+                            <div class="module fl w50p mr10">
+                                <div class="module_header">
+                                    <h3 class="fl module_title">最新文章</h3>
+                                    <div class="others fr">
+                                        <a class="grey" href="javascript:;">更多&gt;&gt;</a>
+                                    </div>
+                                </div>
+                                <div class="module_body">
+                                    <ul class="list">
+                                        <li>男子返乡4天又回京:父母嫌挣得少</li>
+                                        <li>阿斯塔纳叙利亚和谈结束 俄伊土达成强化停火共识</li>
+                                    </ul>
                                 </div>
                             </div>
-                            <div class="module_body">
-                                <ul class="list">
-                                    <li>男子返乡4天又回京:父母嫌挣得少</li>
-                                    <li>阿斯塔纳叙利亚和谈结束 俄伊土达成强化停火共识</li>
-                                </ul>
-                            </div>
+
+
+
                         </div>
                     </div>
 
@@ -259,25 +271,35 @@
         <div class="floor">
 
             <div class="panel panel-default">
+
+                <div class="panel-heading">
+                    <h2 class="panel-title">进度条</h2>
+                </div>
+
                 <div class="panel-body">
 
-                    <h2 class="mb10">进度条</h2>
-                    <div>
-                        <p>
-                            <strong>结构：</strong>
-                        </p>
-                        <p>div.progress</p>
-                        <p>--div.bar</p>
-                    </div>
-                    <p>
-                        <strong>示例：</strong>
-                    </p>
-                    <div class="progress">
-                        <div class="bar" style="width: 50%"></div>
-                    </div>
-                    <p>div.progress 添加 .rounded 可设置圆角</p>
-                    <div class="progress rounded">
-                        <div class="bar" style="width: 70%"></div>
+                    <div class="row">
+
+                        <div class="col-xs-12 col-sm-6">
+                            <h3>结构：</h3>
+                            <p>div.progress</p>
+                            <p>--div.bar</p>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-6">
+                            <h3>示例：</h3>
+
+                            <div class="progress">
+                                <div class="bar" style="width: 50%"></div>
+                            </div>
+
+                            <p>div.progress 添加 .rounded 可设置圆角</p>
+                            <div class="progress rounded">
+                                <div class="bar" style="width: 70%"></div>
+                            </div>
+
+                        </div>
+
                     </div>
 
                 </div>
@@ -288,35 +310,98 @@
 
             <div class="panel panel-default">
 
+                <div class="panel-heading">
+                    <h2 class="panel-title">对话框</h2>
+                </div>
+
                 <div class="panel-body">
-                    <h2>对话框</h2>
-                    <p>
-                        <a href="javascript:;" onclick="document.getElementById('demo_dialog').style.display='block'">打开对话框</a>
-                    </p>
-                    <p>.dialog 对话框主体</p>
-                    <p>&nbsp;&nbsp;.dialog_header 对话框头部</p>
-                    <p>&nbsp;&nbsp;&nbsp;&nbsp;.dialog_title 对话框标题</p>
-                    <p>&nbsp;&nbsp;&nbsp;&nbsp;.button_group 对话框头部按钮组</p>
-                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.close_button 关闭按钮</p>
-                    <p>&nbsp;&nbsp;.dialog_header 对话框内容部分</p>
+
+                    <div class="row">
+
+                        <div class="col-xs-12 col-sm-6">
+                            <h3>结构：</h3>
+                            <p>.dialog 对话框主体</p>
+                            <p>--.dialog_header 对话框头部</p>
+                            <p>----.dialog_title 对话框标题</p>
+                            <p>----.button_group 对话框头部按钮组</p>
+                            <p>------.close_button 关闭按钮</p>
+                            <p>--.dialog_header 对话框内容部分</p>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-6">
+                            <h3>示例：</h3>
+
+                            <div class="dialog inline">
+                                <div class="dialog_header">
+                                    <div class="dialog_title">发送成功</div>
+                                    <div class="button_group">
+                                        <button type="button" class="button close_button">X</button>
+                                    </div>
+                                </div>
+                                <div class="dialog_body">
+                                    <div class="">
+                                        <p>消息发送成功！</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p>.dialog 添加 .borderRadius 可设置圆角。</p>
+
+                            <div class="dialog borderRadius inline">
+                                <div class="dialog_header">
+                                    <div class="dialog_title">创建项目失败</div>
+                                    <div class="button_group">
+                                        <button type="button" class="button close_button">X</button>
+                                    </div>
+                                </div>
+                                <div class="dialog_body">
+                                    <p>创建项目失败。<br />
+                                        HTTP 500 request error.</p>
+                                </div>
+                            </div>
+
+                            <p>.dialog.success 可设置成功对话框样式</p>
+
+                            <div class="dialog success borderRadius inline">
+                                <div class="dialog_header">
+                                    <div class="dialog_title">成功</div>
+                                    <div class="button_group">
+                                        <button type="button" class="button close_button">X</button>
+                                    </div>
+                                </div>
+                                <div class="dialog_body">
+                                    <p>创建项目成功！</p>
+                                </div>
+                            </div>
+
+                            <p>.dialog.error 可设置错误对话框样式</p>
+
+                            <div class="dialog error borderRadius inline">
+                                <div class="dialog_header">
+                                    <div class="dialog_title">失败</div>
+                                    <div class="button_group">
+                                        <button type="button" class="button close_button">X</button>
+                                    </div>
+                                </div>
+                                <div class="dialog_body">
+                                    <p>创建项目失败。<br />
+                                        HTTP 500 request error.</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+
                 </div>
 
             </div>
         </div>
 
-        <div class="dialog" id="demo_dialog" style="width: 300px; margin-left: -150px;">
-            <div class="dialog_header">
-                <div class="dialog_title">标题</div>
-                <div class="button_group">
-                    <button type="button" class="button close_button">X</button>
-                </div>
-            </div>
-            <div class="dialog_body">
-                <div class="">
-                    <p>对话框内容对话框内容对话框内容</p>
-                </div>
-            </div>
-        </div>
+
 
     </div><!-- end .page .inner -->
 </div><!-- end .page -->

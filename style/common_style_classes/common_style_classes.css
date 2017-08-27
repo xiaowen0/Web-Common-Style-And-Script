@@ -273,6 +273,7 @@
 }
 
 .red_bg,
+.error_bg,
 .danger_bg {
     background-color: #f2dede;
 }
