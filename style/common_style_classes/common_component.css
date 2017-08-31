@@ -75,7 +75,7 @@
 
 .panel {
     background-color: #FFF;
-    border: solid 1px #ddd;
+    border: solid 1px #a6a3a3;
     box-sizing: border-box;
 }
 
@@ -286,6 +286,7 @@
     word-break: break-all;
     margin-bottom: 20px;
     padding-bottom: 20px;
+    line-height: 30px;
 }
 
 .article img {
@@ -554,6 +555,7 @@
     cursor: pointer;
     height: 30px;
     width: 30px;
+    border: solid 1px #DDD;
 }
 
 .dialog .dialog_header .close_button {
