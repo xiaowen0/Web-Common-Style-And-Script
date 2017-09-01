@@ -75,7 +75,7 @@
 
 .panel {
     background-color: #FFF;
-    border: solid 1px #a6a3a3;
+    border: solid 1px #ddd;
     box-sizing: border-box;
 }
 
@@ -524,9 +524,11 @@
     left: 50%;
     top: 50%;
     min-width: 160px;
+    /*max-width: 200px;*/
     background: #FFF;
     border: 1px solid #d8d8d8;
     font-size: 14px;
+    overflow: hidden;
 }
 
 .dialog.inline {
@@ -555,7 +557,6 @@
     cursor: pointer;
     height: 30px;
     width: 30px;
-    border: solid 1px #DDD;
 }
 
 .dialog .dialog_header .close_button {
@@ -564,6 +565,7 @@
 
 .dialog .dialog_body {
     padding: 10px;
+    word-break: break-all;
 }
 
 .dialog .qr_image {
