@@ -732,7 +732,7 @@ p.danger {
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 4px;
-    display: inline-block;
+    /*display: inline-block;*/
     height: auto;
     line-height: 1.42857;
     max-width: 100%;
