@@ -62,6 +62,71 @@ $(document).ready(function ()
     {
         setAutoPageDown(this, 10);
     });
+    if( $('.takeTurnDisplayImage').length >=1 )
+    {
+        $('.takeTurnDisplayImage').each(function(){
+            setTakeTurnDisplayImage(this);
+        });
+    }
+
+    $('.videoPlayer .playButton').on('click', function()
+    {
+        var videoPlayer     = $(this).parents('.videoPlayer');
+        var videoController = videoPlayer.find('.videoController');
+
+        if (!videoController.length)
+        {
+            return;
+        }
+
+        try
+        {
+            videoController[0].play();
+        }
+        catch (e)
+        {
+            addConsoleLog(e);
+        }
+    });
+
+    $('.videoPlayer .pauseButton').on('click', function()
+    {
+        var videoPlayer     = $(this).parents('.videoPlayer');
+        var videoController = videoPlayer.find('.videoController');
+
+        if (!videoController.length)
+        {
+            return;
+        }
+
+        try
+        {
+            videoController[0].pause();
+        }
+        catch (e)
+        {
+            addConsoleLog(e);
+        }
+    });
+
+    $('.videoPlayer .fullScreenButton').on('click', function()
+    {
+        var videoPlayer     = $(this).parents('.videoPlayer');
+        var videoController = videoPlayer.find('.videoController');
+
+        if (!videoController.length)
+        {
+            return;
+        }
+
+        videoController = videoController[0];
+
+        setFullScreenVideo(videoController);
+    });
+
+    $('.videoController').on('dblclick', function(){
+        setFullScreenVideo(this);
+    });
 
     // response element
     var responseHandle = (function()
@@ -73,8 +138,11 @@ $(document).ready(function ()
 
             // get width and ratio, calculate height
             var width = this.offsetWidth;
-            var ratio = parseFloat($(this).data('ratio') || 0);
+            addDebugLog('width=' + width);
+            var ratio = parseFloat($(this).data('size-ratio') || $(this).data('ratio') || 0);
+            addDebugLog('ratio=' + ratio);
             var height = width * ratio;
+            addDebugLog('height=' + height);
 
             // set new height
             $(this).css('height', height + 'px');

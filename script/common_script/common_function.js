@@ -959,6 +959,49 @@ function isVideo(name)
 }
 
 /**
+ * set a video element full screen
+ * @param videoElement  HTMLElement
+ * @returns Boolean
+ */
+function setFullScreenVideo(videoElement)
+{
+    try
+    {
+        if(videoElement.requestFullscreen)
+        {
+            videoElement.requestFullscreen();
+            return true;
+        }
+        else if(videoElement.mozRequestFullScreen)
+        {
+            videoElement.mozRequestFullScreen();
+            return true;
+        }
+        else if(videoElement.msRequestFullscreen)
+        {
+            videoElement.msRequestFullscreen();
+            return true;
+        }
+        else if(videoElement.oRequestFullscreen)
+        {
+            videoElement.oRequestFullscreen();
+            return true;
+        }
+        else if(videoElement.webkitRequestFullscreen)
+        {
+            videoElement.webkitRequestFullScreen();
+            return true;
+        }
+    }
+    catch (e)
+    {
+        addConsoleLog(e);
+    }
+
+    return false;
+}
+
+/**
  * set auto check video to play
  * @param  String|HTMLElement  element
  * @return Boolean
@@ -1041,37 +1084,37 @@ function setTakeTurns(elementList, options)
  */
 function setTakeTurnDisplayImage(wrapper, interval)
 {
-	wrapper = $(wrapper);
-	
-	interval ? null : interval = 5;
-	
-	// find image items
-	var imageItems = wrapper.find('.imageItem');
-	if (imageItems.length < 1)
-	{
-		return;
-	}
-	
-	// remove hidden class, and display first item.
-	imageItems.removeClass('hidden').hide().eq(0).show();
-	
-	// create a timer
-	setInterval(function(){
-		var imageItems = wrapper.find('.imageItem');
-		var visibleItems = imageItems.filter(':visible');
-		var currentIndex = imageItems.index(visibleItems);
-		currentIndex++;
-		if (currentIndex >= imageItems.length)
-		{
-			currentIndex = 0;
-		}
-		
-		// hide and after display next image
-		visibleItems.fadeOut('fast', function(){
-			imageItems.eq(currentIndex).fadeIn();
-		});
-		
-	}, interval * 1000);
+    wrapper = $(wrapper);
+
+    interval ? null : interval = 5;
+
+    // find image items
+    var imageItems = wrapper.find('.imageItem');
+    if (imageItems.length < 1)
+    {
+        return;
+    }
+
+    // remove hidden class, and display first item.
+    imageItems.removeClass('hidden').hide().eq(0).show();
+
+    // create a timer
+    setInterval(function(){
+        var imageItems = wrapper.find('.imageItem');
+        var visibleItems = imageItems.filter(':visible');
+        var currentIndex = imageItems.index(visibleItems);
+        currentIndex++;
+        if (currentIndex >= imageItems.length)
+        {
+            currentIndex = 0;
+        }
+
+        // hide and after display next image
+        visibleItems.fadeOut('fast', function(){
+            imageItems.eq(currentIndex).fadeIn();
+        });
+
+    }, interval * 1000);
 }
 
 /**
