@@ -1164,3 +1164,19 @@
     color: #FFF;
 }
 
+#debugModeTag {
+    position: absolute;
+    z-index: 2;
+    left: 2px;
+    top: 2px;
+    padding: 4px;
+    background-color: #000;
+    border: solid 1px #FFF;
+    color: #FFF;
+}
+
+#debugModeTag.whiteBg {
+    background-color: #FFF;
+    color: #000;
+    border-color: #000;
+}

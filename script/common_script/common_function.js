@@ -959,6 +959,24 @@ function isVideo(name)
 }
 
 /**
+ * check if current browser supports full screen
+ * @param name  String  element name, default is video.
+ * @return Boolean
+ */
+function supportsFullScreen(name)
+{
+    name ? null : name = 'video';
+
+    var element = createElement(name);
+
+    return element.requestFullscreen |
+        element.webkitRequestFullscreen |
+        element.mozRequestFullScreen |
+        element.msRequestFullscreen |
+        element.oRequestFullscreen;
+}
+
+/**
  * set a video element full screen
  * @param videoElement  HTMLElement
  * @returns Boolean
@@ -1494,6 +1512,20 @@ function createDialog(options)
 }
 
 /**
+ * adjust dialog widht & height
+ * @param dialog  HTMLElement
+ */
+function adjustDialog(dialog)
+{
+    var windowHeight = getWindowWidth();
+    var dialogHeight = $(dialog).outerHeight();
+    var dialogHeaderHeight = $(dialog).find('.dialog_header').outerHeight();
+
+    var dialogBodyHeight = dialogHeight - dialogHeaderHeight;
+    $(dialog).find('.dialog_body').css("height", dialogBodyHeight + 'px');
+}
+
+/**
  * show a message box
  * @param message  String  message text
  * @param title    String  message box title
@@ -1956,6 +1988,37 @@ function setCheckAllAction(checkbox)
                 form_input_list[i].checked = check_status;
             }
         }
+    });
+}
+
+/**
+ * set checkbox a action to check all children
+ * @param checkbox  HTMLElement  checkbox input
+ */
+function setCheckAllChildrenAction(checkbox)
+{
+    $(checkbox).on('change', function()
+    {
+        // get status
+        var status = this.checked;
+
+        // get parent node, it maybe is label element
+        var parent = this.parentNode;
+        if (parent.nodeName.toLowerCase() === "label")
+        {
+            parent = parent.parentNode;
+        }
+
+        // get children list and checkboxes
+        var childrenList = $(parent).find('ul');
+        var childrenCheckboxes = childrenList.find('input[type="checkbox"]');
+
+        // update checkboxes's status
+        for (var i=0; i<childrenCheckboxes.length; i++)
+        {
+            childrenCheckboxes[i].checked = status;
+        }
+
     });
 }
 

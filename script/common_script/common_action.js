@@ -5,6 +5,17 @@
 
 $(document).ready(function ()
 {
+    var debugParam = getUrlParam('debug');
+    if (debugParam)
+    {
+        $('<div id="debugModeTag">调试模式</div>').appendTo(document.body);
+    }
+
+    // init checkbox action to check all children
+    $('.checkAllChildren').each(function(){
+        setCheckAllChildrenAction(this);
+    });
+
     // set music control button action to toggle music play status
     $('#mainMusicControlButton').on('click', function ()
     {
