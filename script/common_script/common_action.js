@@ -8,7 +8,7 @@ $(document).ready(function ()
     var debugParam = getUrlParam('debug');
     if (debugParam)
     {
-        $('<div id="debugModeTag">Ë∞ÉËØïÊ®°Âºè</div>').appendTo(document.body);
+        $('<div id="debugModeTag">µ˜ ‘ƒ£ Ω</div>').appendTo(document.body);
     }
 
     // init checkbox action to check all children
@@ -40,10 +40,11 @@ $(document).ready(function ()
         layer.fadeOut();
     });
 
-    $('.dialog .dialog_header .close_button').on('click', function ()
+    $('.dialog .close_button').on('click', function ()
     {
         var dialog = $(this).parents('.dialog');
-        var layer = $('.layer');
+        var layer = $(this).parents('.layer');
+
         if (layer.length)
         {
             layer.fadeOut();
