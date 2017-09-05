@@ -520,7 +520,7 @@
 .dialog {
     position: fixed;
     display: none;
-    z-index: 1;
+    z-index: 2;
     left: 50%;
     top: 50%;
     min-width: 160px;
@@ -566,6 +566,7 @@
 .dialog .dialog_body {
     padding: 10px;
     word-break: break-all;
+    overflow: auto;
 }
 
 .dialog .qr_image {
@@ -1057,18 +1058,6 @@
     width: 160px;
     height: 160px;
     overflow: hidden;
-}
-
-.loadingIconLayer {
-    position: absolute;
-    z-index: 1;
-    top: 50%;
-    left: 50%;
-    margin-left: -25px;
-    margin-top: -25px;
-    width: 50px;
-    height: 50px;
-    text-align: center;
 }
 
 /* progress */

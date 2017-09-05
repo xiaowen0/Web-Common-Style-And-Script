@@ -1,7 +1,7 @@
 /**
  * common function
  * dependent on jQuery
- * last update:     2017-08-22 15:15
+ * last update:     2017-09-05 09:35
  */
 
 var dependencies = ['jquery', 'bootstrap', 'boorstrapTheme'];
@@ -122,21 +122,25 @@ function addDebugLog(text)
 }
 var log = addDebugLog;
 
+/* browser feature group --------------------------------------------------------- */
+
 /**
  * disable user copy action
  * @returns {boolean}
  */
 function disableCopy()
 {
-    if (typeof(document.oncopy) !== "undefined") {
-        document.oncopy = (function (e)
-        {
-            return false;
-        });
-        return true;
+    if (typeof(document.oncopy) === "undefined")
+    {
+        return false;
     }
 
-    return false;
+    document.oncopy = (function (e)
+    {
+        return false;
+    });
+
+    return true;
 }
 
 /**
@@ -156,12 +160,15 @@ function disableContextMenu()
     return true;
 }
 
+/**
+ * disable Ctrl+C hotkey
+ * @returns {boolean}
+ */
 function disableCtrlC()
 {
     try {
         var onkeydown = (function (e)
         {
-
             // keyCode with C key: 67
             if (e.ctrlKey && (e.keyCode == 67)) {
                 return false;
@@ -185,8 +192,15 @@ function disableCtrlC()
     return false;
 }
 
-/* --- String function group ------------------------------------------ */
+/* --- String function group ---------------------------------------------------------- */
 
+/**
+ * replace string
+ * @param string  String  The string being searched and replaced on.
+ * @param find    String  The value being searched for.
+ * @param replace String  The replacement value that replaces found search values.
+ * @returns String
+ */
 function str_replace(string, find, replace)
 {
     if (find == replace) {
@@ -218,7 +232,7 @@ function replaceData(string, data)
 
 /**
  * remove all html tag in html code
- * @param   String html
+ * @param   String  html  HTML code
  * @returns String
  */
 function removeHtmlTag(html)
@@ -249,6 +263,11 @@ function escapeHtml(html)
     });
 }
 
+/**
+ * convert a object or array to string
+ * @param data  Object|Array
+ * @returns mixed
+ */
 function data2String(data)
 {
     var text = '';
@@ -295,6 +314,29 @@ function createUrl(url, params)
     }
 
     return url;
+}
+
+/**
+ * get body html from html code
+ * @param  String  html
+ * @return String|false
+ */
+function getBodyHtml(html)
+{
+    try {
+        var splitResult = html.split(/\<body[^\>]*\>/);
+        if (splitResult.length < 2) {
+            log('can not found string: /\<body[^\>]*\>/');
+            return false;
+        }
+        html = splitResult[1].replace('</body>', '');
+    }
+    catch (e) {
+        log(e);
+        return false;
+    }
+
+    return html;
 }
 
 /**
@@ -457,7 +499,7 @@ function json_decode(string)
 
 /**
  * check if a value in array  检查数组是否存在某个值
- * @param fixed  value
+ * @param mixed  value
  * @param Array  array data
  * @returns Bool
  */
@@ -481,12 +523,6 @@ function inArray(value, array)
  */
 function getFreshText(time_str)
 {
-    var minute = 1000 * 60;
-    var hour = minute * 60;
-    var day = hour * 24;
-    // var halfamonth = day * 15;
-    var month = day * 30;
-
     try {
         var time = moment(time_str);
         return time.fromNow();
@@ -496,32 +532,6 @@ function getFreshText(time_str)
     }
 
     return '';
-}
-
-/**
- * print time string in a wrapper
- * it will refresh time per second
- * @param element   HTMLElement|String      HTML element or CSS path string
- * @param format    String                  date time format expression
- * require moment-with-locales library
- */
-function printTime(element, format)
-{
-    if (!format) {
-        format = $(element).data('format') || 'YYYY-MM-DD H:mm:ss';
-    }
-
-    // update per minute
-    setInterval(function ()
-    {
-        try {
-            var current_time_string = moment().format(format);
-            $(element).html(current_time_string);
-        }
-        catch (e) {
-            addConsoleLog(e);
-        }
-    }, 1000);
 }
 
 /**
@@ -554,6 +564,34 @@ function getAMPM(time, format)
     }
 
     return '';
+}
+
+/* timer function group -------------------------------------------- */
+
+/**
+ * print time string in a wrapper
+ * it will refresh time per second
+ * @param element   HTMLElement|String      HTML element or CSS path string
+ * @param format    String                  date time format expression
+ * require moment-with-locales library
+ */
+function printTime(element, format)
+{
+    if (!format) {
+        format = $(element).data('format') || 'YYYY-MM-DD H:mm:ss';
+    }
+
+    // update per minute
+    setInterval(function ()
+    {
+        try {
+            var current_time_string = moment().format(format);
+            $(element).html(current_time_string);
+        }
+        catch (e) {
+            addConsoleLog(e);
+        }
+    }, 1000);
 }
 
 /**
@@ -1258,29 +1296,7 @@ function getUrlParam(name)
     return default_value;
 }
 
-/**
- * get body html from html code
- * @param  String  html
- * @return String|false
- */
-function getBodyHtml(html)
-{
-    try {
-        var splitResult = html.split(/\<body[^\>]*\>/);
-        if (splitResult.length < 2) {
-            log('can not found string: /\<body[^\>]*\>/');
-            return false;
-        }
-        html = splitResult[1].replace('</body>', '');
 
-    }
-    catch (e) {
-        log(e);
-        return false;
-    }
-
-    return html;
-}
 
 /* --- Window function group ------------------------------------------- */
 
@@ -2599,6 +2615,9 @@ function playLetter(sentence_index, delay)
     }, delay);
 }
 
+/**
+ * auto load missing dependencies library
+ */
 function loadDependencies()
 {
     // check jQuery
