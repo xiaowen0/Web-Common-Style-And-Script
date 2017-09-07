@@ -1542,6 +1542,29 @@ function adjustDialog(dialog)
 }
 
 /**
+ * center dialog in current window
+ * @param dialog  HTMLElement
+ */
+function centerDialog(dialog)
+{
+    var windowWidth		= getWindowWidth();
+    var windowHeight	= getWindowHeight();
+
+    var dialogWidth		= $(dialog).outerWidth();
+    var dialogHeight	= $(dialog).outerHeight();
+
+    var leftOffset		= (windowWidth - dialogWidth) / 2;
+    var topOffset		= (windowHeight - dialogHeight) / 2;
+
+    $(dialog).css({
+        'margin-left' : '0',
+        'margin-top'  : '0',
+        'left'        : leftOffset + 'px',
+        'top'         : topOffset + 'px'
+    });
+}
+
+/**
  * show a message box
  * @param message  String  message text
  * @param title    String  message box title
