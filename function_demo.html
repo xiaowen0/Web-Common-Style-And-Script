@@ -52,13 +52,122 @@
 
         <div class="content row">
 
+            <div class="col-xs-12">
+                <h2>字符串类</h2>
+            </div>
+
+            <div class="col-xs-12 col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3>字符串替换 str_replace(string, find, replace)</h3>
+                        <p>把在字符串 string 中的字符串 find 全部替换成 replace</p>
+                        <p>String.replace 接口只能替换一个，这个函数可以替换全部。</p>
+                        <p>string String 要进行操作的字符串</p>
+                        <p>find String 要搜索的字符串</p>
+                        <p>replace String 替换的字符串</p>
+                        <p>返回 String 类型</p>
+                        <p>str_replace('abacd', 'a', 'd'); // "dbdcd"</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3>数据替换 replaceData(string, data)</h3>
+                        <p>按键值对映射，把字符串 string 里的 key 替换成 value</p>
+                        <p>string 要进行操作的字符串</p>
+                        <p>data 替换的数据</p>
+                        <p>返回 String 类型</p>
+                        <p>var data = {'$name': '张三', '$profession': '软件开发工程师'}</p>
+                        <p>var str1 = replaceData('$name的职业是$profession。', data);</p>
+                        <p>"张三的职业是软件开发工程师。"</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3>移除所有 HTML 标记 removeHtmlTag(html)</h3>
+                        <p>在 HTML 代码中移除所有 HTML 标记，返回一个纯文本。</p>
+                        <p>html String 操作的字符串</p>
+                        <p>返回 String 类型</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3>过滤 IMG 标记 filterImgTag(html)</h3>
+                        <p>在 HTML 代码中过滤出所有 IMG 标记元素，返回一个数组。</p>
+                        <p>html String 操作的字符串</p>
+                        <p>返回 Array 类型</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3>转义 HTML 代码 escapeHtml(html)</h3>
+                        <p>html String 操作的字符串</p>
+                        <p>返回 String 类型</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12">
+                <h2>时间类</h2>
+            </div>
+
+            <div class="col-xs-12 col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3>获取新鲜的时间描述 getFreshText(time_str)</h3>
+                        <p>通过一个时间表达式，获取新鲜时间描述，返回以下类似的描述：</p>
+                        <p>n秒前，n分钟前，n小时前，n天前，n月前</p>
+                        <p>需要 moment-with-locales 库，并加载相应的语言文件。</p>
+                        <p>time_str String 时间格式的字符串，类似：“2016-01-31 12:00:00”</p>
+                        <p>返回 String 类型</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3>打印时间到一个容器里面 printTime(element, format)</h3>
+                        <p>这个时间每秒钟更新</p>
+                        <p>需要 moment-with-locales 库，并加载相应的语言文件。</p>
+                        <p>element HTMLElement 要输出时间内容的容器</p>
+                        <p>format String 时间格式，默认为：'YYYY-MM-DD H:mm:ss'</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12">
+                <h2>元素类</h2>
+            </div>
+
+            <div class="col-xs-12 col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3>按 ID 获取元素 getElement(id)</h3>
+                        <p>id String  元素的id属性</p>
+                        <p>返回 Element 或 null</p>
+                    </div>
+                </div>
+            </div>
+
             <div class="col-xs-12 col-sm-6">
 
                 <div class="panel panel-default">
 
                     <div class="panel-body">
 
-                        <h2>显示一个对话框：showMessageBox 类</h2>
+                        <h3>显示一个对话框：showMessageBox 类</h3>
 
                         <div>
                             <button type="button" class="button" onclick="showMessageBox('操作成功！', '成功');">显示</button>

@@ -209,8 +209,9 @@ function str_replace(string, find, replace)
 
     var oStr = new String(string);
     while (oStr.indexOf(find) >= 0) {
-        string = string.replace(find, replace);
+        oStr = oStr.replace(find, replace);
     }
+    return oStr;
 }
 
 /**
@@ -2668,5 +2669,22 @@ function loadDependencies()
             printTag('script', {src: cdnList.world.momentWithLocales});
         }
     }
+}
 
+/**
+ * load a html file content
+ * @param url       String
+ * @param options   Object
+ */
+function loadHtml(url, options)
+{
+    typeof (options) === 'undefined' ? options = {} : null;
+    var target = options.target ? options.target : document.body;
+
+    $.ajax(url, {
+        dataType : 'html',
+        success : function(result){
+            $(target).append(result);
+        }
+    });
 }
