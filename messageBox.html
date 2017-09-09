@@ -1,0 +1,26 @@
+<div class="dialog messageBox" id="mainMessageBox">
+    <div class="dialog_header">
+        <div class="dialog_title">标题</div>
+        <div class="button_group">
+            <button type="button" class="button close_button">
+                &times;
+            </button>
+        </div>
+    </div>
+    <div class="dialog_body">
+        <p>对话框内容对话框内容对话框内容</p>
+    </div>
+    <div class="dialog_footer text-center mb10"></div>
+</div>
+<script>
+$('.dialog').each(function()
+{
+    var closeButton = $(this).find('.close_button');
+    closeButton.on('click', function()
+    {
+        var dialog = $(this).parents('.dialog');
+        dialog.fadeOut();
+    });
+});
+</script>
+

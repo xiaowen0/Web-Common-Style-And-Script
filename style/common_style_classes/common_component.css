@@ -556,11 +556,13 @@
 .dialog .dialog_header .button {
     cursor: pointer;
     height: 30px;
+    line-height: 30px;
     width: 30px;
 }
 
 .dialog .dialog_header .close_button {
     background: #FFF;
+    font-size: 24px;
 }
 
 .dialog .dialog_body {
