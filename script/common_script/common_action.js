@@ -8,11 +8,12 @@ $(document).ready(function ()
     var debugParam = getUrlParam('debug');
     if (debugParam)
     {
-        $('<div id="debugModeTag">µ˜ ‘ƒ£ Ω</div>').appendTo(document.body);
+        $('<div id="debugModeTag">Ë∞ÉËØïÊ®°Âºè</div>').appendTo(document.body);
     }
 
     // init checkbox action to check all children
-    $('.checkAllChildren').each(function(){
+    $('.checkAllChildren').each(function()
+    {
         setCheckAllChildrenAction(this);
     });
 
@@ -29,7 +30,6 @@ $(document).ready(function ()
         if (!target) {
             return;
         }
-
         $(target).fadeIn();
     });
 
@@ -138,6 +138,17 @@ $(document).ready(function ()
 
     $('.videoController').on('dblclick', function(){
         setFullScreenVideo(this);
+    });
+
+    // load external html
+    $('[data-html-src]').each(function()
+    {
+        var src = $(this).data('html-src');
+        var target = this.parentNode;
+        loadHtml(src + '.html', {
+            target : target
+        });
+        $(this).remove();
     });
 
     // response element
