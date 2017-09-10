@@ -33,27 +33,8 @@ $(document).ready(function ()
         $(target).fadeIn();
     });
 
-    // close button for layer panel
-    $('.layer .panel .close_button').on('click', function ()
-    {
-        var layer = $(this).parents('.layer');
-        layer.fadeOut();
-    });
-
-    $('.dialog .close_button').on('click', function ()
-    {
-        var dialog = $(this).parents('.dialog');
-        var layer = $(this).parents('.layer');
-
-        if (layer.length)
-        {
-            layer.fadeOut();
-        }
-        else
-        {
-            dialog.fadeOut();
-        }
-    });
+    // initialize dialog action
+    initDialogAction();
 
     // backspace button action
     $('.backspaceButton').on('click', function ()
@@ -144,11 +125,11 @@ $(document).ready(function ()
     $('[data-html-src]').each(function()
     {
         var src = $(this).data('html-src');
-        var target = this.parentNode;
-        loadHtml(src + '.html', {
-            target : target
-        });
-        $(this).remove();
+        if (!src)
+        {
+            return;
+        }
+        loadHtml(src + '.html', this);
     });
 
     // response element

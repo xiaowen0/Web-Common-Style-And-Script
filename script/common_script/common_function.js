@@ -1566,6 +1566,34 @@ function centerDialog(dialog)
 }
 
 /**
+ * initialize dialog action
+ */
+function initDialogAction()
+{
+    // close button for layer panel
+    $('.layer .panel .close_button').on('click', function ()
+    {
+        var layer = $(this).parents('.layer');
+        layer.fadeOut();
+    });
+
+    $('.dialog .close_button').on('click', function ()
+    {
+        var dialog = $(this).parents('.dialog');
+        var layer = $(this).parents('.layer');
+
+        if (layer.length)
+        {
+            layer.fadeOut();
+        }
+        else
+        {
+            dialog.fadeOut();
+        }
+    });
+}
+
+/**
  * show a message box
  * @param message  String  message text
  * @param title    String  message box title
@@ -2674,17 +2702,35 @@ function loadDependencies()
 /**
  * load a html file content
  * @param url       String
- * @param options   Object
+ * @param element   HTMLElement
+ * @param options   Object   $.ajax options param
  */
-function loadHtml(url, options)
+function loadHtml(url, element, options)
 {
     typeof (options) === 'undefined' ? options = {} : null;
-    var target = options.target ? options.target : document.body;
-
-    $.ajax(url, {
-        dataType : 'html',
-        success : function(result){
-            $(target).append(result);
-        }
+    options.dataType    = 'html';
+    options.success     = (function(result)
+    {
+        var jElement = $(element);
+        jElement.after(result);
+        jElement.remove();
     });
+    $.ajax(url, options);
+}
+
+/**
+ * load a html file content
+ * @param url       String
+ * @param target    HTMLElement
+ * @param options   Object
+ */
+function loadAppendHtml(url, target, options)
+{
+    typeof (options) === 'undefined' ? options = {} : null;
+    options.dataType    = 'html';
+    options.success     = (function(result){
+        $(target).append(result);
+    });
+
+    $.ajax(url, options);
 }
