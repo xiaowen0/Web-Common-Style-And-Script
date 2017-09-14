@@ -122,6 +122,22 @@ function addDebugLog(text)
 }
 var log = addDebugLog;
 
+/**
+ * alert debug log
+ * @param   text    String
+ * @returns Bool
+ */
+function alertDebugLog(text)
+{
+    if (getDebugStatus()) {
+        alert('[debug] ' + text);
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
 /* browser feature group --------------------------------------------------------- */
 
 /**
@@ -806,8 +822,9 @@ function setImageFill(image)
 {
     image.onload = (function ()  // set 'onload' event
     {
-        var wrapper_width = this.parentNode.offsetWidth;
-        var wrapper_height = this.parentNode.offsetHeight;
+        // get parent inner size
+        var wrapper_width = $(this.parentNode).innerWidth();
+        var wrapper_height = $(this.parentNode).innerHeight();
 
         this.style.width = '100%';
         this.style.height = 'auto';
@@ -822,9 +839,9 @@ function setImageFill(image)
     });
 
     // check if loaded
-    if (this.width > 0 && this.height > 0) // already loaded
+    if (image.width > 0 && image.height > 0) // already loaded
     {
-        this.onload();
+        image.onload();
     }
 
 }
