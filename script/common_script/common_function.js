@@ -1228,7 +1228,7 @@ function setVideoPlaylist(element, list)
             index = parseInt(index);
             index++;
 
-            if (index > list.length)
+            if (index >= list.length)
             {
                 index = 0;
             }
@@ -1442,11 +1442,11 @@ function setMarquee(element, speed)
  */
 function getWindowHeight()
 {
-	if (typeof($) !== 'undefined')
-	{
-		return $(window).outerHeight();
-	}
-	
+    if (typeof($) !== 'undefined')
+    {
+        return $(window).outerHeight();
+    }
+
     // standard API: window.innerHeight
     // wrong API: $(window).height() when body height < window height, value = body height
     var height = window.innerHeight
@@ -1461,11 +1461,11 @@ function getWindowHeight()
  */
 function getWindowWidth()
 {
-	if (typeof($) !== 'undefined')
-	{
-		return $(window).outerWidth();
-	}
-	
+    if (typeof($) !== 'undefined')
+    {
+        return $(window).outerWidth();
+    }
+
     // standard API: window.innerWidth
     // wrong API: $(window).width()
     var width = window.innerWidth
