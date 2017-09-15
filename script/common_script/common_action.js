@@ -135,6 +135,27 @@ $(document).ready(function ()
     // response element
     var responseHandle = (function()
     {
+        // font relative size
+        (function()
+        {
+            var baseWidth = parseInt($('body').data('base-width') || '320');
+            if (!baseWidth)
+            {
+                return;
+            }
+
+            var windowWidth = getWindowWidth();
+            if (!windowWidth)
+            {
+                addConsoleLog('get window width fail.');
+                return;
+            }
+
+            var fontSize = windowWidth / baseWidth * 10;
+            $('html').css('font-size', fontSize + 'px');
+        })();
+
+        // response class element
         $('.response').each(function ()
         {
             // reset height
