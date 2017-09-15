@@ -1547,7 +1547,6 @@ function isOverflowHeight(selector)
     else {
         return false;
     }
-
 }
 
 function createDialog(options)
@@ -1561,11 +1560,16 @@ function createDialog(options)
  */
 function adjustDialog(dialog)
 {
+    // get window height
     var windowHeight = getWindowWidth();
+    
+    // get dialog height
     var dialogHeight = $(dialog).outerHeight();
+    
     var dialogHeaderHeight = $(dialog).find('.dialog_header').outerHeight();
+    var dialogFooterHeight = $(dialog).find('.dialog_footer').outerHeight();
 
-    var dialogBodyHeight = dialogHeight - dialogHeaderHeight;
+    var dialogBodyHeight = dialogHeight - dialogHeaderHeight - dialogFooterHeight;
     $(dialog).find('.dialog_body').css("height", dialogBodyHeight + 'px');
 }
 
@@ -1642,10 +1646,12 @@ function showMessageBox(message, title)
     messageBox.find('.dialog_header .dialog_title').html(title);
 
     messageBox.fadeIn();
+    
+    centerDialog(messageBox);
 
-    var width = messageBox.width();
-    var marginLeft = width / 2 * -1;
-    messageBox.css('margin-left', marginLeft + 'px');
+    //var width = messageBox.width();
+    //var marginLeft = width / 2 * -1;
+    //messageBox.css('margin-left', marginLeft + 'px');
 
     return true;
 }
