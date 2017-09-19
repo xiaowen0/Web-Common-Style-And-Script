@@ -1562,10 +1562,10 @@ function adjustDialog(dialog)
 {
     // get window height
     var windowHeight = getWindowWidth();
-    
+
     // get dialog height
     var dialogHeight = $(dialog).outerHeight();
-    
+
     var dialogHeaderHeight = $(dialog).find('.dialog_header').outerHeight();
     var dialogFooterHeight = $(dialog).find('.dialog_footer').outerHeight();
 
@@ -1579,6 +1579,13 @@ function adjustDialog(dialog)
  */
 function centerDialog(dialog)
 {
+    // reset margin
+    $(dialog).css({
+        'margin'	: '0',
+        'left'      : '0',
+        'top'       : '0'
+    });
+
     var windowWidth		= getWindowWidth();
     var windowHeight	= getWindowHeight();
 
@@ -1646,7 +1653,7 @@ function showMessageBox(message, title)
     messageBox.find('.dialog_header .dialog_title').html(title);
 
     messageBox.fadeIn();
-    
+
     centerDialog(messageBox);
 
     //var width = messageBox.width();
