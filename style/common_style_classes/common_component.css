@@ -524,7 +524,7 @@
     left: 50%;
     top: 50%;
     min-width: 160px;
-    /*max-width: 200px;*/
+    max-width: 90%;
     background: #FFF;
     border: 1px solid #d8d8d8;
     font-size: 14px;
@@ -1171,26 +1171,26 @@
 }
 
 #selectPositionDialog {
-	width: 100%;
-	/*height: 100%;*/
-	height: 80%;
+    width: 100%;
+    /*height: 100%;*/
+    height: 80%;
 }
 
 #selectPositionDialog .dialog_footer {
-	padding: 0 10px 10px;
+    padding: 0 10px 10px;
 }
 
 #selectPositionDialog .mapContainer {
-	position: relative;
-	height: 94%;
+    position: relative;
+    height: 94%;
 }
 
 #selectPositionDialog .map {
-	height: 100%;
+    height: 100%;
 }
 
 #selectPositionDialog .markerIcon{
-	margin-top: -36px;
+    margin-top: -36px;
     margin-left: -18px;
     left: 50%;
     top: 50%;
@@ -1199,8 +1199,8 @@
 }
 
 #selectPositionDialog .location_icon {
-	background: url(image/location_marker.png) no-repeat;
-	width: 36px;
-	height: 36px;
-	display: inline-block;
+    background: url(image/location_marker.png) no-repeat;
+    width: 36px;
+    height: 36px;
+    display: inline-block;
 }
