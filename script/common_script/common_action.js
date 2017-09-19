@@ -30,6 +30,7 @@ $(document).ready(function ()
         if (!target) {
             return;
         }
+
         $(target).fadeIn();
     });
 
@@ -62,6 +63,7 @@ $(document).ready(function ()
         });
     }
 
+    // video player
     $('.videoPlayer .playButton').on('click', function()
     {
         var videoPlayer     = $(this).parents('.videoPlayer');
@@ -81,7 +83,6 @@ $(document).ready(function ()
             addConsoleLog(e);
         }
     });
-
     $('.videoPlayer .pauseButton').on('click', function()
     {
         var videoPlayer     = $(this).parents('.videoPlayer');
@@ -101,7 +102,6 @@ $(document).ready(function ()
             addConsoleLog(e);
         }
     });
-
     $('.videoPlayer .fullScreenButton').on('click', function()
     {
         var videoPlayer     = $(this).parents('.videoPlayer');
@@ -116,7 +116,6 @@ $(document).ready(function ()
 
         setFullScreenVideo(videoController);
     });
-
     $('.videoController').on('dblclick', function(){
         setFullScreenVideo(this);
     });
@@ -131,6 +130,17 @@ $(document).ready(function ()
         }
         loadHtml(src + '.html', this);
     });
+
+    if ($('.qqMapContainer').length)
+    {
+        $('.qqMapContainer').each(function(){
+            // qq map
+            new qq.maps.Map(this, {
+                center: new qq.maps.LatLng(23.027094,113.111318),
+                zoom: 15
+            });
+        });
+    }
 
     // response element
     var responseHandle = (function()
