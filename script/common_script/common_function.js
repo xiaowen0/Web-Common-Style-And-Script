@@ -2774,3 +2774,39 @@ function loadAppendHtml(url, target, options)
 
     $.ajax(url, options);
 }
+
+/**
+ * get session storage
+ * @key  String  data key string
+ * @return  String|null
+ */
+function getSessionData(key)
+{
+    if (typeof(sessionStorage) === "undefined")
+    {
+        return null
+    }
+
+    return sessionStorage.getItem(key);
+}
+
+/**
+ * set session storage
+ * @key		String  data key string
+ * @value	String  value
+ * @return  Boolean  success or not
+ */
+function setSessionData(key, value)
+{
+    if (typeof(sessionStorage) === "undefined")
+    {
+        return false
+    }
+
+    sessionStorage.setItem(key, value);
+    return true;
+}
+
+
+
+
