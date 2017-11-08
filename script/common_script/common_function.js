@@ -1954,14 +1954,65 @@ function getForm(element)
  */
 function getFormData(form)
 {
-    var data = {};
-
     if (typeof(form.elements) === 'undefined') {
         return false;
     }
 
-    for (var i = 0; i < form.elements.length; i++) {
-        data[form.elements[i].name] = form.elements[i].value;
+    var data = {};
+
+    // init key list
+    for (var i = 0; i < form.elements.length; i++)
+    {
+        var type = form.elements[i].type;
+        var name = form.elements[i].name;
+
+        if (name === "")
+        {
+            continue;
+        }
+
+        switch (type)
+        {
+            case 'checkbox' :
+                data[form.elements[i].name] = new Array(); break;
+            default :
+                data[form.elements[i].name] = "";
+        }
+    }
+
+    // get value
+    for (var i = 0; i < form.elements.length; i++)
+    {
+        var type = form.elements[i].type;
+        var name = form.elements[i].name;
+        var value = form.elements[i].value;
+
+        if (name === "")
+        {
+            continue;
+        }
+
+        switch (type)
+        {
+            case 'text' :
+                data[name] = value; break;
+            case 'radio' :
+                // check selected
+                if (form.elements[i].checked)
+                {
+                    data[name] = value;
+                }
+                break;
+            case 'checkbox' :
+                // checkbox's data is a array
+                if (form.elements[i].checked)
+                {
+                    data[name].push(value);
+                }
+                break;
+            default :
+                data[name] = value;
+        }
     }
 
     return data;
