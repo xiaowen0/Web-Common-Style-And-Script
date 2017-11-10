@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+	<meta charset="utf-8"/>
+	<title>录音 Demo</title>
+</head>
+<body>
+
+	<div class="audioRecorder">
+		<audio id="mainAudioRecorderController" controls=""></audio>
+		<div>
+			<button type="button" onclick="startRecord();">录音</button>
+			<button type="button" onclick="startRecord();">暂停</button>
+			<button type="button" onclick="stopRecord();">停止</button>
+		</div>
+	</div>
+	
+	<script>
+	
+	var constraints = { audio: true };
+	var audioChunks = [];
+	var mediaRecorder = null;
+	var mainAudioRecorderController = document.getElementById("mainAudioRecorderController");
+	
+	if (navigator.mediaDevices)
+	{
+		navigator.mediaDevices.getUserMedia(constraints)
+		  .then(function(stream) {
+
+			// create a recorder
+			mediaRecorder = new MediaRecorder(stream);
+			
+			// 
+			mediaRecorder.ondataavailable = function(e) {
+				audioChunks.push(e.data);
+			}
+		});
+	}
+	
+	function startRecord()
+	{
+		console.log('start record.');
+		
+		// audioChunks = [];
+	
+		if (mediaRecorder)
+		{
+			try
+			{
+				mediaRecorder.start();
+			}
+			catch (e)
+			{
+			}
+		}
+	}
+	
+	function pauseRecord()
+	{
+		if (mediaRecorder)
+		{
+			try
+			{
+				mediaRecorder.pause();
+			}
+			catch (e)
+			{
+			}
+		}
+	}
+	
+	function stopRecord()
+	{
+		console.log('stop record.');
+	
+		if (mediaRecorder)
+		{
+			try
+			{
+				mediaRecorder.stop();
+			}
+			catch (e)
+			{
+			}
+		}
+		
+		console.log(audioChunks);
+		
+		window.setTimeout(function(){
+			console.log(audioChunks);
+			
+						if (audioChunks.length < 1)
+			{
+				console.log('no any chunk.');
+				return;
+			}
+			
+			var audioUrl = URL.createObjectURL(audioChunks[audioChunks.length-1]);
+			console.log('audioUrl=' + audioUrl);
+			
+			mainAudioRecorderController.src = audioUrl;
+
+			
+		}, 1000);
+		
+	}
+	</script>
+	
+</body>
+</html>
