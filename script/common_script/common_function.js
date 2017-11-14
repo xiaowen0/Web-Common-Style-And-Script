@@ -552,6 +552,25 @@ function getFreshText(time_str)
 }
 
 /**
+ * format time
+ * @param String format like "YYYY-MM-DD HH:mm"
+ * @param Number|Date   millisecond or date object
+ * @return String
+ * require  moment library
+ */
+function formatTime(format, time)
+{
+	if (!time)
+	{
+		return "";
+	}
+	
+	var dateObj = typeof(time) === "object" ? time : new Date(time);
+	
+	return moment(dateObj).format(format);
+}
+
+/**
  * get am or pm
  * @param   String|Date|Number  time expression or date object or timestamp(millsecond)
  * @param   String  string format for time expression
