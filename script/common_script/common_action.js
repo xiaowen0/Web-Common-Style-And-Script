@@ -11,6 +11,12 @@ $(document).ready(function ()
         $('<div id="debugModeTag">调试模式</div>').appendTo(document.body);
     }
 
+    // init auto increase textarea
+    $('textarea.autoIncreaseHeight').each(function()
+    {
+        setTextareaAutoIncreaseHeight(this);
+    });
+
     // init checkbox action to check all children
     $('.checkAllChildren').each(function()
     {
