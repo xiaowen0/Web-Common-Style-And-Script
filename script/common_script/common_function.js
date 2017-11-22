@@ -560,14 +560,14 @@ function getFreshText(time_str)
  */
 function formatTime(format, time)
 {
-	if (!time)
-	{
-		return "";
-	}
-	
-	var dateObj = typeof(time) === "object" ? time : new Date(time);
-	
-	return moment(dateObj).format(format);
+    if (!time)
+    {
+        return "";
+    }
+
+    var dateObj = typeof(time) === "object" ? time : new Date(time);
+
+    return moment(dateObj).format(format);
 }
 
 /**
@@ -2197,6 +2197,20 @@ function setCheckAllChildrenAction(checkbox)
             childrenCheckboxes[i].checked = status;
         }
 
+    });
+}
+
+/**
+ * set a textarea element auto increase height
+ * @param  object(HTMLElement)  textarea
+ */
+function setTextareaAutoIncreaseHeight(textarea)
+{
+    $(textarea).on("input", function(){
+        if (this.offsetHeight < this.scrollHeight)
+        {
+            this.style.height = this.scrollHeight + "px";
+        }
     });
 }
 
