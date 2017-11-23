@@ -530,6 +530,29 @@ function inArray(value, array)
     return false;
 }
 
+/**
+ * remove an element from a array
+ * @param  Array  array
+ * @param  Mixed  element
+ * @returns {Array}
+ */
+function removeArrayElement(array, element)
+{
+    var newArray = new Array();
+
+    for (var i=0; i<array.length; i++)
+    {
+        if (array[i] == element)
+        {
+            continue;
+        }
+
+        newArray.push(array[i]);
+    }
+
+    return newArray;
+}
+
 /* --- Time function group ------------------------------------------ */
 
 /**
@@ -2421,6 +2444,28 @@ function addInputboxAutocompleteValue(name, value)
 
     form.submit();
     document.body.removeChild(form);
+}
+
+/**
+ * check if current browser support cross origin
+ * @returns {boolean}
+ */
+function isSupportCrossOrigin()
+{
+    if (typeof(XMLHttpRequest) == "undefined")
+    {
+        return false;
+    }
+
+    var xhr = new XMLHttpRequest();
+    if (typeof(xhr.withCredentials) == "undefined")
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
 }
 
 /**
