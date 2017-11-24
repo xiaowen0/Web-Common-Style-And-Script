@@ -36,7 +36,12 @@ var appConfig = {
             showMessageBox(errorMessage, '失败');
         }
 
-    })
+    }),
+
+    lightboxOption : {
+        alwaysShowNavOnTouchDevices : true,
+        albumLabel : "%1/%2"
+    }
 
 };
 

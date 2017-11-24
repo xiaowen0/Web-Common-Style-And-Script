@@ -211,6 +211,10 @@
     max-width: 100%;
 }
 
+.hiddenXoverflow {
+    overflow-x: hidden;
+}
+
 /* margin & padding */
 .no-margin,
 .noMargin {
