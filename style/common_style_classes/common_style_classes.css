@@ -51,6 +51,9 @@
     background-color: #fff;
 }
 
+/*
+ * cannot use in IE6
+ */
 .layer {
     position: fixed;
     z-index: 2;
@@ -756,7 +759,9 @@ p.danger {
     display: block;
 }
 
-/* button style */
+/* button style
+ * cannot use in IE6
+ */
 .button {
     display: inline-block;
     min-height: 30px;
