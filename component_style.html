@@ -393,20 +393,94 @@
 
                     </div>
 
-
-
-
                 </div>
 
             </div>
         </div>
 
+        <div class="floor">
 
+            <div class="panel panel-default">
+
+                <div class="panel-heading">
+                    <h2 class="panel-title">树结构</h2>
+                </div>
+
+                <div class="panel-body">
+
+                    <div class="row">
+
+                        <div class="col-xs-12 col-sm-6">
+                            <h3>结构：</h3>
+                            <p>.treeView 主体</p>
+                            <p>-- .folderNode 目录节点</p>
+                            <p>---- .nameRow 名称行</p>
+                            <p>------ input.checkbox 选择框控件</p>
+                            <p>------ i.folderIcon.icon 目录图标</p>
+                            <p>------ .name.folderName 目录名称</p>
+                            <p>---- .childrenContainer 子节点容器</p>
+                            <p>------ ... 其它节点</p>
+                            <p>-- .leafNode 叶子节点</p>
+                            <p>-- .leafName.name 叶子名称</p>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-6">
+
+                            <h3>示例：</h3>
+
+                            <div class="treeView">
+                                <div class="folderNode extended">
+                                    <div class="nameRow">
+                                        <input class="checkbox" type="checkbox" />
+                                        <i class="folderIcon icon"></i>
+                                        <span class="name folderName">目录一</span>
+                                    </div>
+                                    <div class="childrenContainer">
+                                        <div class="folderNode">
+                                            <div class="name folderName">目录1.1</div>
+                                            <div class="childrenContainer">
+                                                <div class="leafNode">
+                                                    <div class="name leafName">叶子1.1.1</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="leafNode">
+                                            <div class="name leafName">叶子1.2</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="folderNode">
+                                    <div class="name folderName">目录2</div>
+                                    <div class="childrenContainer">
+                                        <div class="folderNode">
+                                            <div class="name folderName">目录2.1</div>
+                                            <div class="childrenContainer">
+                                                <div class="leafNode">
+                                                    <div class="name leafName">叶子2.1.1</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="leafNode">
+                                    <div class="name leafName">叶子3</div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
 
     </div><!-- end .page .inner -->
 </div><!-- end .page -->
 
 <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+<script src="script/common_script/common_function.js"></script>
 <script src="script/common_script/common_action.js"></script>
 
 </body>

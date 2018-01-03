@@ -2936,6 +2936,19 @@ function setSessionData(key, value)
     return true;
 }
 
+/**
+ * initialize tree view
+ * @param Object(HTMLElement)|String  treeview element or CSS selector string
+ */
+function initTreeView(treeView)
+{
+    var treeviewEle = $(treeView);
 
+    var folderName = treeviewEle.find('.folderNode .folderIcon, .folderNode .folderName');
+    folderName.on('click', function(){
+        var folderNode = $(this).parent().parent();
+        folderNode.toggleClass('extended');
+    });
+}
 
 

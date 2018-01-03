@@ -1204,3 +1204,43 @@
     height: 36px;
     display: inline-block;
 }
+
+.treeView {
+    line-height: 28px;
+}
+
+.treeView .folderNode,
+.treeView .leafNode {
+    clear: both;
+}
+
+.treeView .folderNode .nameRow,
+.treeView .folderNode .childrenContainer{
+    clear: both;
+    overflow: hidden;
+}
+
+.treeView .folderNode .checkbox,
+.treeView .folderNode .icon,
+.treeView .folderNode .name {
+    float: left;
+}
+
+.treeView .folderNode .folderIcon {
+    width: 28px;
+    height: 28px;
+    background: url(image/folder.gif) no-repeat center center;
+}
+.treeView .folderNode .checkbox {
+    height: 28px;
+    width: 28px;
+}
+
+.treeView .childrenContainer {
+    padding-left: 14px;
+    display: none;
+}
+
+.treeView .folderNode.extended .childrenContainer {
+    display: block;
+}

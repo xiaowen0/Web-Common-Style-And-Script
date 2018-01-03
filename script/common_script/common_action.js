@@ -148,6 +148,11 @@ $(document).ready(function ()
         });
     }
 
+    if ($('.treeView').length)
+    {
+        initTreeView('.treeView');
+    }
+
     // response element
     var responseHandle = (function()
     {
