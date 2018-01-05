@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <title>从模板生成页面</title>
+
+        <!-- common style classes -->
+        <link rel="stylesheet" href="style/common_style_classes/common_style_classes.css" />
+        <link rel="stylesheet" href="style/common_style_classes/common_component.css" />
+
+    </head>
+    <body class="f14" data-ng-app="generatePageByTemplateApp">
+
+        <div class="page container-fluid">
+
+            <div class="inner">
+
+                <h1>生成网页框架</h1>
+
+                <p>特征：HTML5, jQuery 3, 公共样式库，公共脚本库。</p>
+
+                <div class="generatingFormContent" data-ng-controller="generatingFormController">
+
+                    <div class="form-group">
+                        <label class="form_label" for="generationFormTitleInputbox">标题</label>
+                        <input id="generationFormTitleInputbox" type="text" class="inputbox inline"
+                            placeholder="标题" data-ng-model="pageTitle"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form_label">语言</label>
+                        <select class="selectbox" data-ng-model="lang_code">
+                            <option value="zh" selected="selected">中文</option>
+                            <option value="en">英语</option>
+                            <option value="ja">日语</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>
+                            <input type="checkbox" class="checkbox" value="seo_tags"
+                                data-ng-model="seo_tags"/>
+                            SEO 标记 ？
+                        </label>
+                        <label>
+                            <input type="checkbox" class="checkbox" value="use_cdn" checked="checked"
+                                data-ng-model="use_cdn"/>
+                            使用 CDN ？（内网应用不要勾选）
+                        </label>
+                        <label>
+                            <input type="checkbox" class="checkbox" value="support_ie"
+                                data-ng-model="support_ie"/>
+                            兼容 IE ？
+                        </label>
+                        <label>
+                            <input type="checkbox" class="checkbox" value="load_moment_lib"
+                                data-ng-model="load_moment_lib"/>
+                            需要 moment 库 ？
+                        </label>
+                        <label>
+                            <input type="checkbox" class="checkbox" value="load_angularjs_lib"
+                                data-ng-model="load_angularjs_lib"/>
+                            需要 AngularJS 库 ？
+                        </label>
+
+                    </div>
+
+                    <div>
+                        <button type="submit" class="button green" data-ng-click="generate()">生成</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <script src="asset/jquery/jquery-3.1.0.min.js"></script>
+
+        <script src="https://cdn.bootcss.com/angular.js/1.6.8/angular.min.js"></script>
+
+        <!-- common function & action (require jQuery) -->
+        <script src="script/common_script/common_function.js"></script>
+        <script src="script/common_script/common_action.js"></script>
+
+        <script>
+        var generatePageByTemplateApp = angular.module('generatePageByTemplateApp', []);
+        var mainScope = null;
+        generatePageByTemplateApp.controller('generatingFormController', [
+            '$scope', function($scope){
+
+                $scope.pageTitle    = "";
+                $scope.defaultPageTitle = "页面标题";
+                $scope.lang_code    = "zh";
+                $scope.seo_tags     = false;
+                $scope.use_cdn      = true;
+                $scope.support_ie   = false;
+                $scope.load_moment_lib      = false;
+                $scope.load_angularjs_lib   = false;
+
+                $scope.templateContent = "";
+
+                $scope.generate = (function(){
+                    var pageContent = $scope.getTemplateContent();
+
+                    // set page title
+                    var pageTitle = $scope.pageTitle || $scope.defaultPageTitle;
+                    pageContent = pageContent.replace("{{PAGE_TITLE}}", $scope.pageTitle);
+
+                    // set language code
+                    pageContent = pageContent.replace("{{LANG_CODE}}", $scope.lang_code);
+
+                    // set ie support
+                    if ($scope.support_ie)
+                    {
+                        var html5_shiv_html = "<!-- check IE old version, add HTML5 support. -->\n";
+                        html5_shiv_html += "<!--[if lt IE 9]>\n";
+                        if (!$scope.use_cdn)
+                        {
+                            html5_shiv_html += '<script src="asset/html5shiv.min.js"><\/script>';
+                        }
+                        else
+                        {
+                            html5_shiv_html += '<script>\
+                                if (getBrowserLanguage() === "zh-cn")   // simplified Chinese in mainland of china\
+                                {\
+                                    printTag("script", {src: "https://cdn.bootcss.com/html5shiv/r29/html5.min.js"});\
+                                }\
+                                else    // open country\
+                                {\
+                                    printTag("script"", {src:"https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"});\
+                                }\
+                            </script>';
+                        }
+                        html5_shiv_html += "<![endif]-->\n";
+                        pageContent = pageContent.replace("{{HTML5_SHIV}}", html5_shiv_html);
+                    }
+                    else
+                    {
+                        pageContent = pageContent.replace("{{HTML5_SHIV}}", "");
+                    }
+
+                    alert(pageContent);
+
+                }); // end generate() define
+
+                $scope.getTemplateContent = (function(){
+
+                    return $scope.templateContent;
+
+                }); // end getTemplateContent() define
+
+                $.ajax("page_template.txt", {
+                    success : function(result){
+                        $scope.templateContent = result;
+                    },
+                    error : function(){
+                        alert("加载模板失败");
+                    }
+                });
+
+                mainScope = $scope;
+            }
+        ]);
+        </script>
+
+    </body>
+</html>
+

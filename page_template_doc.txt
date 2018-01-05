@@ -1,0 +1,91 @@
+﻿页面模板参数
+
+============
+
+语言，复选框，默认为 zh
+
+中文 zh
+英语 en
+日语 ja
+
+添加 <html lang="zh">
+
+--------------------------
+
+是否需要 SEO 标记
+
+<meta name="keywords" content="">
+<meta name="description" content="">
+
+------------------------------------
+
+使用 CDN ？
+
+------------------------------------
+
+需要支持 IE ？
+
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+
+<!-- check IE old version, add HTML5 support, use CDN. -->
+<!--[if lt IE 9]>
+<script>
+	if (getBrowserLanguage() === 'zh-cn')   // simplified Chinese in mainland of china
+	{
+		printTag('script', {src: 'https://cdn.bootcss.com/html5shiv/r29/html5.min.js'});
+	}
+	else    // open country
+	{
+		printTag('script', {src: 'https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js'});
+	}
+</script>
+<![endif]-->
+
+<script src="asset/html5shiv.min.js"></script>
+
+-------------------------------------------------
+
+是否需要 Bootstrap ?
+
+<!-- Bootstrap framework , use CDN. -->
+<script>
+	if (getBrowserLanguage() === 'zh-cn')   // simplified Chinese in mainland of china
+	{
+		printStylesheetLink('https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css');
+		printStylesheetLink('https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap-theme.min.css');
+	}
+	else    // open country
+	{
+		printStylesheetLink('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css');
+		printStylesheetLink('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap-theme.min.css');
+	}
+</script>
+
+-------------
+
+是否需要 moment ？
+
+<script src="asset/moment-with-locales.min.js"></script>
+
+-------------
+
+jQuery
+
+<!-- jQuery library -->
+<script>
+if (getBrowserLanguage() === 'zh-cn')   // simplified Chinese in mainland of china
+{
+	printTag('script', {src: 'https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js'});
+}
+else  // open country
+{
+	printTag('script', {src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'});
+}
+</script>
+
+<script src="asset/jquery/jquery-3.1.0.min.js"></script>
+
+-------------------
+
+是否需要 AngularJS ？
+

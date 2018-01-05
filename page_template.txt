@@ -1,85 +1,37 @@
-﻿页面模板参数
+<!DOCTYPE html>
+<html lang="{{LANG_CODE}}">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-============
+        <title>{{PAGE_TITLE}}</title>
 
-语言，复选框，默认为 zh
+        <!-- common function -->
+        <script src="script/common_script/common_function.js"></script>
 
-中文 zh
-英语 en
-日语 ja
+		{{HTML5_SHIV}}
 
-添加 <html lang="zh">
+        <!-- common style classes -->
+        <link rel="stylesheet" href="style/common_style_classes/common_style_classes.css" />
+        <link rel="stylesheet" href="style/common_style_classes/common_component.css" />
 
---------------------------
+    </head>
+    <body>
 
-是否需要 SEO 标记
+        <div class="page container-fluid">
+            <div class="inner">
+				<!-- content $CONTENT -->
+            </div>
+        </div>
 
-<meta name="keywords" content="">
-<meta name="description" content="">
+        $JQUERY
 
-------------------------------------
+        <!-- common action (must after jQuery) -->
+        <script src="script/common_script/common_action.js"></script>
 
-使用 CDN ？
+        <!-- app config -->
+        <script src="js/appConfig.js"></script>
+        <script src="js/errorMessageList.js"></script>
 
-------------------------------------
-
-需要支持 IE ？
-
-<meta name="renderer" content="webkit|ie-comp|ie-stand">
-
-<!-- check IE old version, add HTML5 support, use CDN. -->
-<!--[if lt IE 9]>
-<script>
-	if (getBrowserLanguage() === 'zh-cn')   // simplified Chinese in mainland of china
-	{
-		printTag('script', {src: 'https://cdn.bootcss.com/html5shiv/r29/html5.min.js'});
-	}
-	else    // open country
-	{
-		printTag('script', {src: 'https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js'});
-	}
-</script>
-<![endif]-->
-
-<script src="asset/html5shiv.min.js"></script>
-
--------------------------------------------------
-
-是否需要 Bootstrap ?
-
-<!-- Bootstrap framework , use CDN. -->
-<script>
-	if (getBrowserLanguage() === 'zh-cn')   // simplified Chinese in mainland of china
-	{
-		printStylesheetLink('https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css');
-		printStylesheetLink('https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap-theme.min.css');
-	}
-	else    // open country
-	{
-		printStylesheetLink('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css');
-		printStylesheetLink('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap-theme.min.css');
-	}
-</script>
-
--------------
-
-jQuery
-
-<!-- jQuery library -->
-<script>
-if (getBrowserLanguage() === 'zh-cn')   // simplified Chinese in mainland of china
-{
-	printTag('script', {src: 'https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js'});
-}
-else  // open country
-{
-	printTag('script', {src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'});
-}
-</script>
-
-<script src="asset/jquery/jquery-3.1.0.min.js"></script>
-
--------------------
-
-是否需要 AngularJS ？
-
+    </body>
+</html>
