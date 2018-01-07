@@ -2,64 +2,45 @@
 
 ============
 
-语言，复选框，默认为 zh
+页面标题，文本输入框
+
+-----------------------
+
+语言类型，选择框，默认为 zh
 
 中文 zh
 英语 en
 日语 ja
 
-添加 <html lang="zh">
+添加到 <html lang="zh">
 
 --------------------------
 
-是否需要 SEO 标记
+是否需要 SEO 标记，复选框
 
 <meta name="keywords" content="">
 <meta name="description" content="">
 
 ------------------------------------
 
-使用 CDN ？
+是否有自定义图标，复选框加一个图标路径文本框
+
+<link rel="shortcut icon" type="image/x-icon" href="" />
 
 ------------------------------------
 
 需要支持 IE ？
 
 <meta name="renderer" content="webkit|ie-comp|ie-stand">
-
-<!-- check IE old version, add HTML5 support, use CDN. -->
-<!--[if lt IE 9]>
-<script>
-	if (getBrowserLanguage() === 'zh-cn')   // simplified Chinese in mainland of china
-	{
-		printTag('script', {src: 'https://cdn.bootcss.com/html5shiv/r29/html5.min.js'});
-	}
-	else    // open country
-	{
-		printTag('script', {src: 'https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js'});
-	}
-</script>
-<![endif]-->
-
 <script src="asset/html5shiv.min.js"></script>
 
 -------------------------------------------------
 
-是否需要 Bootstrap ?
+是否需要 Bootstrap 3 ?
 
-<!-- Bootstrap framework , use CDN. -->
-<script>
-	if (getBrowserLanguage() === 'zh-cn')   // simplified Chinese in mainland of china
-	{
-		printStylesheetLink('https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css');
-		printStylesheetLink('https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap-theme.min.css');
-	}
-	else    // open country
-	{
-		printStylesheetLink('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css');
-		printStylesheetLink('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap-theme.min.css');
-	}
-</script>
+<link rel="stylesheet" src="asset/bootstrap-3.3.7/css/bootstrap.min.css"/>
+<link rel="stylesheet" src="asset/bootstrap-3.3.7/css/bootstrap-theme.min.css"/>
+<script src="asset/bootstrap-3.3.7/js/bootstrap.min.js"></script>
 
 -------------
 
@@ -67,25 +48,10 @@
 
 <script src="asset/moment-with-locales.min.js"></script>
 
--------------
-
-jQuery
-
-<!-- jQuery library -->
-<script>
-if (getBrowserLanguage() === 'zh-cn')   // simplified Chinese in mainland of china
-{
-	printTag('script', {src: 'https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js'});
-}
-else  // open country
-{
-	printTag('script', {src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'});
-}
-</script>
-
-<script src="asset/jquery/jquery-3.1.0.min.js"></script>
-
 -------------------
 
 是否需要 AngularJS ？
+
+<script src="asset/angular-1.5.8/angular.min.js"></script>
+
 

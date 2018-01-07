@@ -19,14 +19,20 @@
 
                 <h1>生成网页框架</h1>
 
-                <p>特征：HTML5, jQuery 3, 公共样式库，公共脚本库。</p>
+                <h2>特征：</h2>
+
+                <p>包含：HTML5 协议、jQuery 3.1.0 框架、公共样式库、公共脚本库。</p>
+                <p>可选：Bootstrap 3.3.7、Moment.js 2.10.6、AngularJS。</p>
+                <p>不使用 CDN，由于 CDN 不稳定，配置也较为复杂。</p>
+
+                <p>使用的框架文件：page_template.txt (可自行修改)</p>
 
                 <div class="generatingFormContent" data-ng-controller="generatingFormController">
 
                     <div class="form-group">
                         <label class="form_label" for="generationFormTitleInputbox">标题</label>
                         <input id="generationFormTitleInputbox" type="text" class="inputbox inline"
-                            placeholder="标题" data-ng-model="pageTitle"/>
+                            placeholder="标题" data-ng-model="pageTitle" value="页面标题"/>
                     </div>
 
                     <div class="form-group">
@@ -39,6 +45,17 @@
                     </div>
 
                     <div class="form-group">
+                        <label>
+                            <input type="checkbox" class="checkbox" value="page_icon"
+                                   data-ng-model="include_page_icon"/>
+                            有自定义图标 ？
+                        </label>
+                        <label for="iconTextbox" data-ng-if="include_page_icon">图标路径：</label>
+                        <input id="iconTextbox" type="text" class="textbox inline" data-ng-model="iconPath"
+                            data-ng-if="include_page_icon"/>
+                    </div>
+
+                    <div class="form-group">
 
                         <label>
                             <input type="checkbox" class="checkbox" value="seo_tags"
@@ -46,14 +63,14 @@
                             SEO 标记 ？
                         </label>
                         <label>
-                            <input type="checkbox" class="checkbox" value="use_cdn" checked="checked"
-                                data-ng-model="use_cdn"/>
-                            使用 CDN ？（内网应用不要勾选）
-                        </label>
-                        <label>
                             <input type="checkbox" class="checkbox" value="support_ie"
                                 data-ng-model="support_ie"/>
                             兼容 IE ？
+                        </label>
+                        <label>
+                            <input type="checkbox" class="checkbox" value="load_bootstrap_lib"
+                                   data-ng-model="load_bootstrap_lib"/>
+                            需要 Bootstrap 库 ？
                         </label>
                         <label>
                             <input type="checkbox" class="checkbox" value="load_moment_lib"
@@ -68,11 +85,58 @@
 
                     </div>
 
+                    <div class="form-group">
+                        <label>生成方式：</label>
+                        <div>
+                            <label>
+                                <input type="radio" data-ng-model="generatedType" value="file"
+                                    name="generatedType"/>文件
+                            </label>
+                            <label>
+                                <input type="radio" data-ng-model="generatedType" value="alert"
+                                    name="generatedType"/>对话框
+                            </label>
+                        </div>
+                    </div>
+
                     <div>
                         <button type="submit" class="button green" data-ng-click="generate()">生成</button>
                     </div>
 
+                    <p>生成后自行保存文件</p>
+
                 </div>
+
+                <div>
+                    <h2>需要的文件</h2>
+                    <div class="treeView">
+                        <div class="folderNode extended">
+                            <div class="nameRow">
+                                <i class="folderIcon icon"></i>
+                                <span class="name folderName">asset</span>
+                            </div>
+                        </div>
+                        <div class="folderNode">
+                            <div class="nameRow">
+                                <i class="folderIcon icon"></i>
+                                <span class="name folderName">js</span>
+                            </div>
+                        </div>
+                        <div class="folderNode">
+                            <div class="nameRow">
+                                <i class="folderIcon icon"></i>
+                                <span class="name folderName">script</span>
+                            </div>
+                        </div>
+                        <div class="folderNode">
+                            <div class="nameRow">
+                                <i class="folderIcon icon"></i>
+                                <span class="name folderName">style</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -90,58 +154,115 @@
         generatePageByTemplateApp.controller('generatingFormController', [
             '$scope', function($scope){
 
-                $scope.pageTitle    = "";
                 $scope.defaultPageTitle = "页面标题";
+                $scope.pageTitle    = $scope.defaultPageTitle;
                 $scope.lang_code    = "zh";
+                $scope.include_page_icon    = false;
+                $scope.iconPath     = "image/icon.png";
                 $scope.seo_tags     = false;
-                $scope.use_cdn      = true;
                 $scope.support_ie   = false;
-                $scope.load_moment_lib      = false;
-                $scope.load_angularjs_lib   = false;
+                $scope.load_bootstrap_lib   = true;
+                $scope.load_moment_lib      = true;
+                $scope.load_angularjs_lib   = true;
 
                 $scope.templateContent = "";
 
+                $scope.generatedType = "file";
+
                 $scope.generate = (function(){
+
                     var pageContent = $scope.getTemplateContent();
 
                     // set page title
                     var pageTitle = $scope.pageTitle || $scope.defaultPageTitle;
-                    pageContent = pageContent.replace("{{PAGE_TITLE}}", $scope.pageTitle);
+                    pageContent = pageContent.replace("PAGE_TITLE", pageTitle);
 
                     // set language code
-                    pageContent = pageContent.replace("{{LANG_CODE}}", $scope.lang_code);
+                    pageContent = pageContent.replace("HTML_LANG_ATTR", $scope.lang_code);
+
+                    // include icon
+                    if ($scope.include_page_icon)
+                    {
+                        var icon_link_tag = '<link rel="shortcut icon" type="image/x-icon" href="' + $scope.iconPath + '" />';
+                        pageContent = pageContent.replace('<!--ICON_LINK_TAG-->', icon_link_tag);
+                    }
+                    else
+                    {
+                        pageContent = pageContent.replace('<!--ICON_LINK_TAG-->', '');
+                    }
+
+                    // seo tags
+                    if ($scope.seo_tags)
+                    {
+                        var seoTags     = '<meta name="keywords" content="">' + "\n";
+                        seoTags         += '<meta name="description" content="">';
+                        pageContent = pageContent.replace('<!--SEO_TAGS-->', seoTags);
+                    }
+                    else
+                    {
+                        pageContent = pageContent.replace('<!--SEO_TAGS-->', '');
+                    }
 
                     // set ie support
                     if ($scope.support_ie)
                     {
                         var html5_shiv_html = "<!-- check IE old version, add HTML5 support. -->\n";
                         html5_shiv_html += "<!--[if lt IE 9]>\n";
-                        if (!$scope.use_cdn)
-                        {
-                            html5_shiv_html += '<script src="asset/html5shiv.min.js"><\/script>';
-                        }
-                        else
-                        {
-                            html5_shiv_html += '<script>\
-                                if (getBrowserLanguage() === "zh-cn")   // simplified Chinese in mainland of china\
-                                {\
-                                    printTag("script", {src: "https://cdn.bootcss.com/html5shiv/r29/html5.min.js"});\
-                                }\
-                                else    // open country\
-                                {\
-                                    printTag("script"", {src:"https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"});\
-                                }\
-                            </script>';
-                        }
+                        html5_shiv_html += '<script src="asset/html5shiv.min.js"><\/script>' + "\n";
                         html5_shiv_html += "<![endif]-->\n";
-                        pageContent = pageContent.replace("{{HTML5_SHIV}}", html5_shiv_html);
+                        pageContent = pageContent.replace('<!--HTML5_SHIV-->', html5_shiv_html);
                     }
                     else
                     {
-                        pageContent = pageContent.replace("{{HTML5_SHIV}}", "");
+                        pageContent = pageContent.replace('<!--HTML5_SHIV-->', '');
                     }
 
-                    alert(pageContent);
+                    // bootstrap 3
+                    if ($scope.load_bootstrap_lib)
+                    {
+                        var bootstrap_stylesheets   = '<link rel="stylesheet" src="asset/bootstrap-3.3.7/css/bootstrap.min.css"/>' + "\n";
+                        bootstrap_stylesheets       += '<link rel="stylesheet" src="asset/bootstrap-3.3.7/css/bootstrap-theme.min.css"/>';
+                        pageContent = pageContent.replace('<!--BOOTSTRAP_3_STYLESHEET-->', bootstrap_stylesheets);
+
+                        var bootstrap_scripts = '<script src="asset/bootstrap-3.3.7/js/bootstrap.min.js"><\/script>';
+                        pageContent = pageContent.replace('<!--BOOTSTRAP_3_SCRIPT-->', bootstrap_scripts);
+                    }
+                    else
+                    {
+                        pageContent = pageContent.replace('<!--BOOTSTRAP_3_STYLESHEET-->', '');
+                        pageContent = pageContent.replace('<!--BOOTSTRAP_3_SCRIPT-->', '');
+                    }
+
+                    // moment lib
+                    if ($scope.load_moment_lib)
+                    {
+                        pageContent = pageContent.replace('<!--$MOMENT_LIB-->', '<script src="asset/moment-with-locales.min.js"><\/script>');
+                    }
+                    else
+                    {
+                        pageContent = pageContent.replace('<!--$MOMENT_LIB-->', '');
+                    }
+
+                    // angularjs
+                    if ($scope.load_angularjs_lib)
+                    {
+                        pageContent = pageContent.replace("<!--ANGULARJS_LIB-->", '<script src="asset/angular-1.5.8/angular.min.js"><\/script>');
+                    }
+                    else
+                    {
+                        pageContent = pageContent.replace("<!--ANGULARJS_LIB-->", '');
+                    }
+
+                    // generate
+                    switch ($scope.generatedType)
+                    {
+                        case 'file' :   // output to new page
+                            var pageWindow = window.open("");
+                            pageWindow.document.write(pageContent);
+                            break;
+                        case 'alert' :
+                            alert(pageContent);
+                    }
 
                 }); // end generate() define
 
