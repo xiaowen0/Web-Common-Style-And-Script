@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="HTML_LANG_ATTR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <title>PAGE_TITLE</title>
+
+        <meta name="renderer" content="webkit|ie-comp|ie-stand" />
+
+        <!--SEO_TAGS-->
+
+        <!--ICON_LINK_TAG-->
+
+        <!--BOOTSTRAP_3_STYLESHEET-->
+
+        <link rel="stylesheet" href="style/common_style_classes/common_style_classes.css" />
+        <link rel="stylesheet" href="style/common_style_classes/common_component.css" />
+
+        <!--HTML5_SHIV-->
+
+    </head>
+    <body>
+
+        <div class="page container-fluid">
+            <div class="inner">
+				<!--CONTENT-->
+            </div>
+        </div>
+
+        <script src="script/common_script/common_function.js"></script>
+
+        <script src="asset/jquery/jquery-3.1.0.min.js"></script>
+
+        <!--$MOMENT_LIB-->
+        <!--BOOTSTRAP_3_SCRIPT-->
+        <!--ANGULARJS_LIB-->
+
+        <!-- app config -->
+        <script src="js/appConfig.js"></script>
+        <script src="js/errorMessageList.js"></script>
+
+        <!-- common action (it must after jQuery) -->
+        <script src="script/common_script/common_action.js"></script>
+
+    </body>
+</html>
