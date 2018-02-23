@@ -723,6 +723,18 @@ p.danger {
     text-align: center;
 }
 
+.settingIcon {
+    width: 32px;
+    height: 32px;
+    background: url("image/settings_icon_32x32.png") no-repeat;
+}
+
+.settingIcon.big {
+    width: 64px;
+    height: 64px;
+    background: url("image/settings_icon_64x64.png") no-repeat;
+}
+
 /* shape style */
 .rounded {
     border-radius: 6px;
@@ -1283,5 +1295,13 @@ select.inline {
 .form .input_icon.input_icon_right {
     left: auto;
     right: 3px;
+}
+
+.colorSelectorButton {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border: solid 1px #eee;
+    vertical-align: middle;
 }
 
