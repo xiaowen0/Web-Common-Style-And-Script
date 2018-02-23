@@ -1244,3 +1244,24 @@
 .treeView .folderNode.extended .childrenContainer {
     display: block;
 }
+
+#settingIconContainer {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+}
+
+#settingIconContainer .settingButton {
+    transition: all .8s ease-in-out 0.1s;
+    -webkit-transition: all .8s ease-out;
+    -o-transition: all .8s ease-in-out 0.1s;
+    -moz-transition: all .8s ease-in-out 0.1s;
+}
+
+#settingIconContainer .settingButton:hover {
+    transform: rotate(180deg);
+    -ms-transform: rotate(180deg); 	/* IE 9 */
+    -moz-transform: rotate(180deg); 	/* Firefox */
+    -webkit-transform: rotate(180deg); /* Safari 和 Chrome */
+    -o-transform: rotate(180deg); 	/* Opera */
+}

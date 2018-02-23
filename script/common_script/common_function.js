@@ -1597,7 +1597,7 @@ function createDialog(options)
 }
 
 /**
- * adjust dialog widht & height
+ * adjust dialog width & height
  * @param dialog  HTMLElement
  */
 function adjustDialog(dialog)
@@ -2951,4 +2951,83 @@ function initTreeView(treeView)
     });
 }
 
+function setUISetting(name, value)
+{
+    var id = 'ui_setting_' + name;
+
+    localStorage.setItem(id, value);
+}
+
+function getUISetting(name, defaultValue)
+{
+    defaultValue = defaultValue || null;
+
+    var id = 'ui_setting_' + name;
+    return localStorage.getItem(id) || defaultValue;
+}
+
+/**
+ * init UI setting form
+ * @param form  String|HTMLElement   element id or object
+ * @param options  Object   special options
+ * -- onchange  Function   extra action on controls's change
+ * require jQuery library
+ */
+function initUISettingForm(form, options)
+{
+    addDebugLog('init UI setting form.');
+
+    if (typeof(form) == "string")
+    {
+        form = getElement(form);
+        if (!form)
+        {
+            addConsoleLog('[error] form not found.');
+            return;
+        }
+    }
+
+    options = options || {};
+    var onchange = options.onchange || null;
+
+    // set value and event
+    for (var controlIndex = 0; controlIndex < form.length; controlIndex++)
+    {
+        var control = form[controlIndex];
+        var target = control.dataset.target || document.body;
+        var name = control.name;
+
+        if (!name)
+        {
+            continue;
+        }
+
+        // get setting value by name
+        var setting = getUISetting(name);
+
+        // update control's value
+        switch (control.type)
+        {
+            case 'text' :
+                control.value = setting; break;
+            default :
+                control.value = setting; break;
+        }
+
+        // set change event
+        $(control).on('change', function(event){
+
+            var target = this.dataset.target || 'body';
+
+            setUISetting(this.name, this.value);
+            $(target).css(this.name, this.value);
+            onchange ? onchange() : null;
+        });
+        console.log('control trigger change');
+        $(control).change();
+    }
+
+    // trigger once change event
+    onchange ? onchange() : null;
+}
 

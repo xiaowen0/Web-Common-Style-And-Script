@@ -5,6 +5,11 @@
 
 $(document).ready(function ()
 {
+    if ($(document.body).hasClass('fullHeight'))
+    {
+        setBodyMinHeight();
+    }
+
     var debugParam = getUrlParam('debug');
     if (debugParam)
     {
@@ -151,6 +156,21 @@ $(document).ready(function ()
     if ($('.treeView').length)
     {
         initTreeView('.treeView');
+    }
+
+    // setting button
+    if ($('#settingIconContainer .settingButton').length)
+    {
+        $('#settingIconContainer .settingButton').on('click', function(){
+            $('#UISettingDialog').fadeIn();
+            adjustDialog('#UISettingDialog');
+            centerDialog('#UISettingDialog');
+        });
+    }
+
+    if ($('#UISettingForm').length)
+    {
+        initUISettingForm($('#UISettingForm')[0]);
     }
 
     // response element

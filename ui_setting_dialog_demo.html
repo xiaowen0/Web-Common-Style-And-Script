@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <title>UI 组件样式示例</title>
+
+    <!-- Bootstrap framework -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"/>
+
+    <!-- common style classes library -->
+    <link rel="stylesheet" href="style/common_style_classes/common_style_classes.css"/>
+    <link rel="stylesheet" href="style/common_style_classes/common_component.css"/>
+
+</head>
+<body>
+
+<div class="page">
+
+    <div class="inner container">
+
+        <header class="header pageHeader mobileStyle">
+            <div class="inner">
+                <div class="leftBox">
+                    <a class="button" href="index.html">返回</a>
+                </div>
+                <div class="title"></div>
+                <div class="rightBox">
+                </div>
+            </div>
+        </header>
+
+        <div class="content pageContent">
+            <h1>HTML</h1>
+            <h2>HTML 的概念</h2>
+            <p>超文本标记语言，标准通用标记语言下的一个应用。“超文本”就是指页面内可以包含图片、链接，甚至音乐、程序等非文字元素。</p>
+        </div>
+
+    </div><!-- end .page .inner -->
+</div><!-- end .page -->
+
+<div class="dialog" id="UISettingDialog">
+    <div class="dialog_header">
+        <div class="dialog_title">设置</div>
+        <div class="button_group">
+            <button type="button" class="button close_button">&times;</button>
+        </div>
+    </div>
+    <div class="dialog_body">
+        <div class="padding10">
+            <form class="form" id="UISettingForm" action="javascript:saveSetting();">
+                <div class="form-group">
+                    <label>文字大小：</label>
+                    <!--
+                      name property's value reference CSS property
+                      data-target property's value reference jQuery's selector expression
+                    -->
+                    <input class="inputbox inline" type="range" name="font-size" data-target=".page"
+                       min="20%" max="180%" value="100%" />
+                </div>
+                <div class="form-group">
+                    <label>背景颜色：</label>
+                    <input class="colorSelectorButton" type="color" name="background-color" data-target="body" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="settingIconContainer">
+    <a class="button settingButton icon settingIcon" href="javascript:;"></a>
+</div>
+
+<script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+<script src="script/common_script/common_function.js"></script>
+<script src="script/common_script/common_action.js"></script>
+
+</body>
+</html>
