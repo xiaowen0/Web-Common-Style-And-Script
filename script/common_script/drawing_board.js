@@ -1,0 +1,188 @@
+/**
+ * functions for drawing board
+ * require common_function.js jQuery 3.x
+ * Created by wen on 2018/2/24.
+ */
+
+/**
+ * initialize drawing board
+ * @param element  String|Object(HTMLElement)
+ */
+function initDrawingBoard(element)
+{
+    var drawingBoardJq = $(element);
+    if (drawingBoardJq.length < 1)
+    {
+        addConsoleLog('[warnning] element not found in initDrawingBoard().');
+        return null;
+    }
+
+    var canvasJq    = drawingBoardJq.find('canvas');
+    var canvas      = drawingBoardJq.find('canvas')[0];
+
+    // canvas's size is not the size in CSS
+    canvas.width    = canvas.offsetWidth;
+    canvas.height   = canvas.offsetHeight;
+
+    // create drawingBoard object
+    var drawingBoard = {
+        name : 'drawingBoard',
+        target : canvas,
+        isTouching : false,
+        touchPoint : {
+            x : 0,
+            y : 0
+        },
+        canvasContext : canvas.getContext('2d'),
+        canvasOffsetLeft : canvas.offsetLeft,
+        canvasOffsetTop : canvas.offsetTop,
+        canvasWidth : canvas.width,
+        canvasHeight : canvas.height,
+
+        updateTouchPoint: function (point) {
+            this.touchPoint = point;
+        },
+
+        drawLine : function(point1, point2){
+
+            this.canvasContext.beginPath();
+
+            this.canvasContext.moveTo(point1.x, point1.y);
+            this.canvasContext.lineTo(point2.x, point2.y);
+
+            this.canvasContext.stroke();
+
+            this.canvasContext.closePath();
+
+            // this.canvasContext.draw(true);
+        }
+    };
+
+    // set default canvas params
+    var canvasContext   = drawingBoard.canvasContext;
+    canvasContext.lineWidth     = drawingBoardJq.find('.toolbar .strokeSizeInputbox').val();;
+    canvasContext.strokeStyle   = drawingBoardJq.find('.toolbar .colorSelectorButton').val();
+
+    // set toolbar
+    drawingBoardJq.find('.toolbar .strokeSizeInputbox').on('change', function(){
+        drawingBoard.canvasContext.lineWidth = this.value;
+    });
+    drawingBoardJq.find('.toolbar .colorSelectorButton').on('change', function(){
+        drawingBoard.canvasContext.strokeStyle = this.value;
+    });
+    drawingBoardJq.find('.toolbar .cleanCanvasButton').on('click', function(){
+        drawingBoard.canvasContext.fillStyle="#FFF";
+        // drawingBoard.canvasContext.fillRect(0,0,300,150);
+        drawingBoard.canvasContext.clearRect(0,0,
+            drawingBoard.canvasWidth,drawingBoard.canvasHeight);
+    });
+
+    // set touch start event
+    canvas.ontouchstart = (function(event)
+    {
+        addDebugLog('touch start.');
+
+        if (event.touches.length > 1)
+        {
+            return;
+        }
+
+        drawingBoard.isTouching = true;
+
+        var newTouchPoint = {
+            x: event.touches[0].pageX - drawingBoard.canvasOffsetLeft,
+            y: event.touches[0].pageY - drawingBoard.canvasOffsetTop
+        };
+
+        drawingBoard.updateTouchPoint(newTouchPoint);
+    });
+
+    // set touch end event
+    canvas.ontouchend = (function (event)
+    {
+        addDebugLog('touch end.');
+        drawingBoard.isTouching =  false;
+    });
+
+    // set touch move event
+    canvas.ontouchmove = (function (event)
+    {
+        event.preventDefault();
+
+        addDebugLog('touch move.');
+        if (event.touches.length > 1) {
+            return;
+        }
+
+        var newTouchPoint = {
+            x: event.touches[0].pageX - drawingBoard.canvasOffsetLeft,
+            y: event.touches[0].pageY - drawingBoard.canvasOffsetTop
+        };
+        if (drawingBoard.isTouching && drawingBoard.touchPoint)
+        {
+            drawingBoard.drawLine(drawingBoard.touchPoint, newTouchPoint);
+        }
+
+        drawingBoard.updateTouchPoint(newTouchPoint);
+    });
+
+    var drawDemoImage = (function(ctx){
+        // Draw coordinates
+        ctx.arc(100, 75, 50, 0, 2 * Math.PI);
+        ctx.fillStyle = '#EEEEEE';
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.moveTo(40, 75);
+        ctx.lineTo(160, 75);
+        ctx.moveTo(100, 15);
+        ctx.lineTo(100, 135);
+        ctx.strokeStyle = '#AAAAAA';
+        ctx.stroke();
+
+        ctx.fontSize = 12;
+        ctx.fillStyle = '#000';
+        ctx.fillText('0', 165, 78);
+        ctx.fillText('0.5*PI', 83, 145);
+        ctx.fillText('1*PI', 15, 78);
+        ctx.fillText('1.5*PI', 83, 10);
+
+        // Draw points
+        ctx.beginPath();
+        ctx.arc(100, 75, 2, 0, 2 * Math.PI);
+        ctx.fillStyle = '#3E3';
+        ctx.fill();
+
+        ctx.beginPath()
+        ctx.arc(100, 25, 2, 0, 2 * Math.PI);
+        ctx.fillStyle = '#33E';
+        ctx.fill();
+
+        ctx.beginPath()
+        ctx.arc(150, 75, 2, 0, 2 * Math.PI);
+        ctx.fillStyle = '#E33';
+        ctx.fill();
+
+        // Draw arc
+        ctx.beginPath()
+        ctx.arc(100, 75, 50, 0, 1.5 * Math.PI);
+        ctx.fillStyle = '#333';
+        ctx.stroke();
+
+        // ctx.draw();
+    });
+    // drawDemoImage(drawingBoard.canvasContext);
+
+    // return drawingBoard object
+    return drawingBoard;
+}
+
+$(document).ready(function(){
+    if ( $('.drawingBoard').length )
+    {
+        $('.drawingBoard').each(function(){
+            initDrawingBoard(this);
+        });
+    }
+});
+
