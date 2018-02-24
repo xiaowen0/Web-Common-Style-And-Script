@@ -1,5 +1,6 @@
 /**
- * Created by wen on 2017-4-17.
+ * Created by wen on 2017-04-17
+ * Updated by wen on 2018-02-24
  */
 
 /**
@@ -9,6 +10,12 @@
  */
 function getWeatherIconClassByText(text)
 {
+	if (!text)
+	{
+		addDebugLog('[error] text not found.');
+		return '';
+	}
+	
     var classMap = {
         d0 : '晴',
         d1 : '多云',
