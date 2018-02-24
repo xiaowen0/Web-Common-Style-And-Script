@@ -2061,15 +2061,74 @@ function getFormData(form)
 }
 
 /**
+ * set form control
+ * @param form  Object(HTMLElement)|String  form dom quote or ID
+ * @param name  String                      form control's name property
+ * @param value                             form control's new value
+ * @return Boolean
+ */
+function setFormControl(form, name, value)
+{
+    // get element by ID
+    if (typeof (form) === 'string') {
+        var formId = form;
+        form = document.getElementById(form);
+        if (!form) {
+            addDebugLog('form dom with id:' + formId + ' not found.');
+            return false;
+        }
+    }
+
+    // get form controls
+    var controls = $(form).find('*[name="' + name + '"]');
+
+    for (var controlIndex = 0; controlIndex < controls.length; controlIndex++)
+    {
+        var controlItem = controls[controlIndex];
+
+        // check element name
+        switch (controlItem.nodeName.toLowerCase())
+        {
+            case 'input' :
+                switch(controlItem.type)
+                {
+                    case 'checkbox':
+                    case 'radio' :
+                        controlItem.value == value ? controlItem.checked = true : null;
+                        break;
+                    case 'password' :
+                        addDebugLog('skip inputbox type:password.');
+                        break;
+                    case 'file' :
+                        addDebugLog('skip inputbox type:file.');
+                        break;
+                    case 'text' :
+                    default :   // other like email, number, url ...
+                        controlItem.value = value;
+                }
+                break;
+            case 'textarea' :
+                controls[controlIndex].innerHTML = value;
+                break;
+            case 'select' :
+            default :   // extension for the future
+                controlItem.value = value;
+        }
+    }
+
+    return true;
+}
+
+/**
  * check a form element is locked
- * @param   form    Object|String       form element or ID
+ * @param   form    Object(HTMLElement)|String       form element or ID
  * @returns Boolean
  */
 function formIsLocked(form)
 {
     // get element by ID
     if (typeof (form) === 'string') {
-        var form = document.getElementById(form);
+        form = document.getElementById(form);
         if (!form) {
             return false;
         }
@@ -2122,11 +2181,15 @@ function unlockForm(form)
     form.dataset.lock = 'off';
 }
 
+/**
+ * set form node no more data
+ * @param form  String|Object(HTMLElement)  form ID or dom quote
+ */
 function formNoMoreData(form)
 {
     // get element by ID
     if (typeof (form) === 'string') {
-        var form = document.getElementById(form);
+        form = document.getElementById(form);
         if (!form) {
             return;
         }
@@ -2135,11 +2198,15 @@ function formNoMoreData(form)
     form.dataset.noMoreData = "on";
 }
 
+/**
+ * set form has more data
+ * @param form  String|Object(HTMLElement)  form ID or dom quote
+ */
 function formMoreData(form)
 {
     // get element by ID
     if (typeof (form) === 'string') {
-        var form = document.getElementById(form);
+        form = document.getElementById(form);
         if (!form) {
             return;
         }
@@ -2148,11 +2215,16 @@ function formMoreData(form)
     form.dataset.noMoreData = 'off';
 }
 
+/**
+ * check if the form has more data
+ * @param form  String|Object(HTMLElement)  form ID or dom quote
+ * @returns {boolean}
+ */
 function formHasMoreData(form)
 {
-    // get element by ID
+    // if form is a string, then get element by ID
     if (typeof (form) === 'string') {
-        var form = document.getElementById(form);
+        form = document.getElementById(form);
         if (!form) {
             return true;
         }
@@ -2165,6 +2237,7 @@ function formHasMoreData(form)
         return form.dataset.noMoreData === 'off';
     }
 
+    // default has more data
     return true;
 }
 
@@ -2176,7 +2249,6 @@ function setCheckAllAction(checkbox)
 {
     checkbox.onchange = (function ()
     {
-
         // get check status
         var check_status = this.checked;
 
@@ -2951,6 +3023,11 @@ function initTreeView(treeView)
     });
 }
 
+/**
+ * set UI setting, save in local storage.
+ * @param name  String  setting name
+ * @param value String  setting value
+ */
 function setUISetting(name, value)
 {
     var id = 'ui_setting_' + name;
@@ -2958,6 +3035,12 @@ function setUISetting(name, value)
     localStorage.setItem(id, value);
 }
 
+/**
+ * get UI setting value, get data in local storage, if not found, then return default value.
+ * @param name          String  setting name
+ * @param defaultValue  String  default value, if not defined, then it's null
+ * @returns {String|null}
+ */
 function getUISetting(name, defaultValue)
 {
     defaultValue = defaultValue || null;
@@ -2993,38 +3076,57 @@ function initUISettingForm(form, options)
     // set value and event
     for (var controlIndex = 0; controlIndex < form.length; controlIndex++)
     {
-        var control = form[controlIndex];
-        var target = control.dataset.target || document.body;
-        var name = control.name;
-
+        var control     = form[controlIndex];
+        var name        = control.name;
         if (!name)
         {
             continue;
         }
-
-        // get setting value by name
-        var setting = getUISetting(name);
-
-        // update control's value
-        switch (control.type)
-        {
-            case 'text' :
-                control.value = setting; break;
-            default :
-                control.value = setting; break;
-        }
+        var target          = control.dataset.target || document.body;
+        var defaultValue    = control.dataset.default || "";
+        var expression      = control.dataset.expression || "";
 
         // set change event
         $(control).on('change', function(event){
 
-            var target = this.dataset.target || 'body';
+            var target      = this.dataset.target || 'body';
+            var expression  = this.dataset.expression || "";
+            var name        = this.name;
+            var value       = this.value;
 
-            setUISetting(this.name, this.value);
-            $(target).css(this.name, this.value);
+            // save value
+            setUISetting(this.name, value);
+
+            // update style
+            if (expression)
+            {
+                try
+                {
+                    eval('value = ' + expression)
+                }
+                catch (e)
+                {
+                    addConsoleLog('[error] ' + e.message);
+                }
+            }
+
+            console.log(expression);
+            console.log(name);
+            console.log(value);
+            $(target).css(name, value);
+
             onchange ? onchange() : null;
         });
-        console.log('control trigger change');
-        $(control).change();
+
+        // get setting value by name
+        var setting = getUISetting(name);
+
+        // update control's value if has special setting and is not a default value
+        if (setting && setting != defaultValue)
+        {
+            setFormControl(form, name, setting);
+            $(control).change();
+        }
     }
 
     // trigger once change event

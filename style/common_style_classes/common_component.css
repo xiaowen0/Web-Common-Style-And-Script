@@ -1252,10 +1252,21 @@
 }
 
 #settingIconContainer .settingButton {
+    width: 32px;
+    height: 32px;
+    background: url("image/settings_icon_32x32.png") transparent no-repeat;
+    border: none 0;
+    padding: 0;
     transition: all .8s ease-in-out 0.1s;
     -webkit-transition: all .8s ease-out;
     -o-transition: all .8s ease-in-out 0.1s;
     -moz-transition: all .8s ease-in-out 0.1s;
+}
+
+#settingIconContainer .settingButton.big {
+    width: 64px;
+    height: 64px;
+    background: url("image/settings_icon_64x64.png") transparent no-repeat;
 }
 
 #settingIconContainer .settingButton:hover {

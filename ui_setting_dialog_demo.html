@@ -56,13 +56,15 @@
                     <!--
                       name property's value reference CSS property
                       data-target property's value reference jQuery's selector expression
+                      data-default property set default value
+                      data-expression set CSS value expression, this variable quote current form control
                     -->
                     <input class="inputbox inline" type="range" name="font-size" data-target=".page"
-                       min="20%" max="180%" value="100%" />
+                       min="20" max="180" value="100" data-default="100" data-expression="this.value + '%'"/>
                 </div>
                 <div class="form-group">
                     <label>背景颜色：</label>
-                    <input class="colorSelectorButton" type="color" name="background-color" data-target="body" />
+                    <input class="colorSelectorButton" type="color" name="background-color" data-target="body"/>
                 </div>
             </form>
         </div>
@@ -70,7 +72,7 @@
 </div>
 
 <div id="settingIconContainer">
-    <a class="button settingButton icon settingIcon" href="javascript:;"></a>
+    <a class="button settingButton" href="javascript:;"></a>
 </div>
 
 <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
