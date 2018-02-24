@@ -777,16 +777,14 @@ p.danger {
 .button {
     display: inline-block;
     min-height: 30px;
-    padding-left: 6px;
-    padding-right: 6px;
-    font-size: 100%;
-    line-height: 1.5;
+    line-height: 1;
     white-space: nowrap;
     vertical-align: middle;
     cursor: pointer;
     background-color: #FFF;
     border: solid 1px #DDD;
     color: #666;
+    padding: 0.8ex;
 }
 
 .button.large,

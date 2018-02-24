@@ -3077,25 +3077,38 @@ function initUISettingForm(form, options)
     for (var controlIndex = 0; controlIndex < form.length; controlIndex++)
     {
         var control     = form[controlIndex];
-        var name        = control.name;
+        var name            = control.name;
+        var target          = control.dataset.target || 'body';
+        var property        = control.dataset.property || "";
+        var defaultValue    = control.dataset.default || "";
+        var expression      = control.dataset.expression || "";
         if (!name)
         {
             continue;
         }
-        var target          = control.dataset.target || document.body;
-        var defaultValue    = control.dataset.default || "";
-        var expression      = control.dataset.expression || "";
+        if (!property)
+        {
+            addConsoleLog('[warnning] control missing data-property value.');
+            continue;
+        }
 
         // set change event
         $(control).on('change', function(event){
 
-            var target      = this.dataset.target || 'body';
-            var expression  = this.dataset.expression || "";
             var name        = this.name;
+            var target      = this.dataset.target || 'body';
+            var property    = this.dataset.property || "";
+            var expression  = this.dataset.expression || "";
             var value       = this.value;
 
+            if (!property)
+            {
+                addConsoleLog('[warnning] control missing data-property value.');
+                return;
+            }
+
             // save value
-            setUISetting(this.name, value);
+            setUISetting(name, value);
 
             // update style
             if (expression)
@@ -3109,7 +3122,7 @@ function initUISettingForm(form, options)
                     addConsoleLog('[error] ' + e.message);
                 }
             }
-            $(target).css(name, value);
+            $(target).css(property, value);
 
             onchange ? onchange() : null;
         });

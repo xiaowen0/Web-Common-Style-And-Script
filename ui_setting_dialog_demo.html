@@ -14,6 +14,48 @@
     <link rel="stylesheet" href="style/common_style_classes/common_style_classes.css"/>
     <link rel="stylesheet" href="style/common_style_classes/common_component.css"/>
 
+    <style id="settingIconStyle">
+        #settingIconContainer {
+            position: fixed;
+            right: 10px;
+            bottom: 10px;
+        }
+        #settingIconContainer .settingButton {
+            width: 32px;
+            height: 32px;
+            background: url("style/common_style_classes/image/settings_icon_32x32.png") transparent no-repeat;
+            border: none 0;
+            padding: 0;
+            transition: all .8s ease-in-out 0.1s;
+            -webkit-transition: all .8s ease-out;
+            -o-transition: all .8s ease-in-out 0.1s;
+            -moz-transition: all .8s ease-in-out 0.1s;
+        }
+
+        #settingIconContainer .settingButton.big {
+            width: 64px;
+            height: 64px;
+            background: url("style/common_style_classes/image/settings_icon_64x64.png") transparent no-repeat;
+        }
+
+        #settingIconContainer .settingButton:hover {
+            transform: rotate(180deg);
+            -ms-transform: rotate(180deg); 	/* IE 9 */
+            -moz-transform: rotate(180deg); 	/* Firefox */
+            -webkit-transform: rotate(180deg); /* Safari 和 Chrome */
+            -o-transform: rotate(180deg); 	/* Opera */
+        }
+
+        #UISettingDialog {
+            width: 90%;
+        }
+        @media screen and (min-width: 640px) {
+            #UISettingDialog {
+                width: 500px;
+            }
+        }
+    </style>
+
 </head>
 <body>
 
@@ -21,7 +63,7 @@
 
     <div class="inner container">
 
-        <header class="header pageHeader mobileStyle">
+        <header class="header pageHeader">
             <div class="inner">
                 <div class="leftBox">
                     <a class="button" href="index.html">返回</a>
@@ -33,9 +75,35 @@
         </header>
 
         <div class="content pageContent">
-            <h1>HTML</h1>
-            <h2>HTML 的概念</h2>
-            <p>超文本标记语言，标准通用标记语言下的一个应用。“超文本”就是指页面内可以包含图片、链接，甚至音乐、程序等非文字元素。</p>
+
+            <h1 class="title">自定义设置的对话框说明</h1>
+
+            <h2 class="title">1. 需要的资源</h2>
+
+            <p>style/common_style_classes/common_style_classes.css</p>
+            <p>style/common_style_classes/common_component.css</p>
+            <p>jQuery 3.x</p>
+            <p>script/common_script/common_function.js</p>
+            <p>script/common_script/common_action.js</p>
+
+            <h2 class="title">2. 实现方法</h2>
+
+            <p class="indent_2em">界面使用表单+控件的方式进行设置，数据保存在 localStorage 里面。
+                页面加载后，检查 #UISettingForm 是否存在，如果存在则初始化该表单，这个操作已集成到 common_action.js 里面。
+                在初始化过程，程序获取表单所有控件，为控件添加 change 事件，并从 localStorage 中获取数据并赋予过去保存的设置。
+                当控件的值发生改变时，根据 name 属性存储新值，根据 data-property 和 data-target 设置对应节点的样式。
+            </p>
+
+            <h2 class="title">3. 表单控件说明</h2>
+
+            <p>name 属性(必须的)：指定存储到 localStorage 的名称，该名称必须唯一。</p>
+            <p>data-target 属性(必须的)：指定目标对象的选择器表达式，参考 jQuery 的选择器表达式格式。</p>
+            <p>data-property 属性(必须的)：指定需要更改的样式属性，参考 CSS 的属性。</p>
+            <p>data-default 属性(可选的)：指定控件的默认值，当设置值不同于默认值时，对元素样式进行更改。</p>
+            <p>data-expression 属性(可选的)：指定 CSS 属性值的表达式，this 变量引用当前的控件。
+                比如 "this.value + 'px'" 可以为数值加上单位。
+            </p>
+
         </div>
 
     </div><!-- end .page .inner -->
@@ -50,21 +118,43 @@
     </div>
     <div class="dialog_body">
         <div class="padding10">
-            <form class="form" id="UISettingForm" action="javascript:saveSetting();">
+            <form class="form" id="UISettingForm" action="javascript:;">
                 <div class="form-group">
                     <label>文字大小：</label>
                     <!--
-                      name property's value reference CSS property
+                      name property set setting id, it is unique
                       data-target property's value reference jQuery's selector expression
+                      data-property property's value reference CSS property
                       data-default property set default value
                       data-expression set CSS value expression, this variable quote current form control
                     -->
-                    <input class="inputbox inline" type="range" name="font-size" data-target=".page"
-                       min="20" max="180" value="100" data-default="100" data-expression="this.value + '%'"/>
+                    <input class="inputbox inline" type="range" name="baseFontSize"
+                        min="20" max="180" value="100" data-property="font-size" data-target=".page"
+                        data-default="100" data-expression="this.value + '%'"/>
+                </div>
+                <div class="form-group">
+                    <label>标题文字颜色：</label>
+                    <input class="colorSelectorButton" type="color" name="titleColor"
+                        data-property="color" data-target=".title"/>
+                </div>
+                <div class="form-group">
+                    <label>正文文字颜色：</label>
+                    <input class="colorSelectorButton" type="color" name="textColor"
+                        data-property="color" data-target="p"/>
                 </div>
                 <div class="form-group">
                     <label>背景颜色：</label>
-                    <input class="colorSelectorButton" type="color" name="background-color" data-target="body"/>
+                    <input class="colorSelectorButton" type="color" name="bgColor"
+                        data-property="background-color"/>
+                </div>
+                <div class="form-group">
+                    <label>对话框文字大小：</label>
+                    <input class="inputbox inline" type="range" name="dialogFontSize"
+                           min="20" max="180" value="100" data-property="font-size" data-target=".dialog"
+                           data-default="100" data-expression="this.value + '%'"/>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="button success" onclick="$('#UISettingDialog').fadeOut();">确定</button>
                 </div>
             </form>
         </div>
@@ -72,6 +162,7 @@
 </div>
 
 <div id="settingIconContainer">
+    <!-- setting button, add class 'big' set a bigger button -->
     <a class="button settingButton" href="javascript:;"></a>
 </div>
 
