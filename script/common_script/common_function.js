@@ -3109,10 +3109,6 @@ function initUISettingForm(form, options)
                     addConsoleLog('[error] ' + e.message);
                 }
             }
-
-            console.log(expression);
-            console.log(name);
-            console.log(value);
             $(target).css(name, value);
 
             onchange ? onchange() : null;
