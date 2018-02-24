@@ -173,6 +173,31 @@ $(document).ready(function ()
         initUISettingForm($('#UISettingForm')[0]);
     }
 
+    // type Array
+    var showTagCodeList = $('.showTagCode');
+    if (showTagCodeList.length)
+    {
+        showTagCodeList.each(function(){
+            var source = this.dataset.source || "";
+            if (!source)
+            {
+                addConsoleLog('[warnning] data-source property not defined.');
+                return;
+            }
+
+            var sourceTag = $(source);
+            if (sourceTag.length < 1)
+            {
+                addConsoleLog('[warnning] source: ' + source + ' not found.');
+                return;
+            }
+
+            var content = escapeFormatHtml(sourceTag[0].outerHTML);
+
+            this.innerHTML = content;
+        });
+    }
+
     // response element
     var responseHandle = (function()
     {
