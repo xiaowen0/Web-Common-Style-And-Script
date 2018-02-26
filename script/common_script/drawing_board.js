@@ -7,6 +7,7 @@
 /**
  * initialize drawing board
  * @param element  String|Object(HTMLElement)
+ * @return Object(drawingBoard)
  */
 function initDrawingBoard(element)
 {
@@ -55,6 +56,30 @@ function initDrawingBoard(element)
             this.canvasContext.closePath();
 
             // this.canvasContext.draw(true);
+        },
+
+        setRainbowColor : function()
+        {
+            var gradient = this.canvasContext.createLinearGradient(
+                0,0,
+                this.canvasWidth,this.canvasHeight
+            );
+
+            gradient.addColorStop(0,"#f50a0a");
+            gradient.addColorStop(0.083,"#f57f0a");
+            gradient.addColorStop(0.16,"#f5f50a");
+            gradient.addColorStop(0.25,"#7ff50a");
+            gradient.addColorStop(0.333,"#0af50a");
+            gradient.addColorStop(0.41,"#0af57f");
+            gradient.addColorStop(0.5,"#0af5f5");
+            gradient.addColorStop(0.583,"#0a7ff5");
+            gradient.addColorStop(0.66,"#0a0af5");
+            gradient.addColorStop(0.75,"#7f0af5");
+            gradient.addColorStop(0.833,"#f50af5");
+            gradient.addColorStop(0.91,"#f50a7f");
+            gradient.addColorStop(1.0,"#f50a0a");
+
+            this.canvasContext.strokeStyle = gradient;
         }
     };
 
@@ -62,6 +87,7 @@ function initDrawingBoard(element)
     var canvasContext   = drawingBoard.canvasContext;
     canvasContext.lineWidth     = drawingBoardJq.find('.toolbar .strokeSizeInputbox').val();;
     canvasContext.strokeStyle   = drawingBoardJq.find('.toolbar .colorSelectorButton').val();
+    canvasContext.lineCap       = 'round';
 
     // set toolbar
     drawingBoardJq.find('.toolbar .strokeSizeInputbox').on('change', function(){
@@ -173,6 +199,8 @@ function initDrawingBoard(element)
     });
     // drawDemoImage(drawingBoard.canvasContext);
 
+    drawingBoard.setRainbowColor();
+
     // return drawingBoard object
     return drawingBoard;
 }
@@ -180,8 +208,10 @@ function initDrawingBoard(element)
 $(document).ready(function(){
     if ( $('.drawingBoard').length )
     {
+        app.drawBoardList = [];
+
         $('.drawingBoard').each(function(){
-            initDrawingBoard(this);
+            app.drawBoardList.push(initDrawingBoard(this));
         });
     }
 });
