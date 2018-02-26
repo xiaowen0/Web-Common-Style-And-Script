@@ -238,6 +238,12 @@ $(document).ready(function ()
             // set new height
             $(this).css('height', height + 'px');
         });
+
+        // adjust dialog
+        $('.dialog').each(function(){
+            adjustDialog(this);
+            centerDialog(this);
+        });
     });
     responseHandle();
     $(window).on('resize', responseHandle);
