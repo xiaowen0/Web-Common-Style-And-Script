@@ -45,3 +45,5 @@ var appConfig = {
 
 };
 
+var application = {};
+var app = application;
