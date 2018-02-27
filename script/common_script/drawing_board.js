@@ -28,12 +28,13 @@ function initDrawingBoard(element)
     // create drawingBoard object
     var drawingBoard = {
         name : 'drawingBoard',
-        target : canvas,
+        target : element,
         isTouching : false,
         touchPoint : {
             x : 0,
             y : 0
         },
+        canvas : canvas,
         canvasContext : canvas.getContext('2d'),
         canvasOffsetLeft : canvas.offsetLeft,
         canvasOffsetTop : canvas.offsetTop,
@@ -113,6 +114,11 @@ function initDrawingBoard(element)
             return;
         }
 
+        if (getDebugStatus())
+        {
+            console.log(event.touches[0]);
+        }
+
         drawingBoard.isTouching = true;
 
         var newTouchPoint = {
@@ -127,6 +133,12 @@ function initDrawingBoard(element)
     canvas.ontouchend = (function (event)
     {
         addDebugLog('touch end.');
+
+        if (getDebugStatus())
+        {
+            console.log(event.touches[0]);
+        }
+
         drawingBoard.isTouching =  false;
     });
 
@@ -136,14 +148,21 @@ function initDrawingBoard(element)
         event.preventDefault();
 
         addDebugLog('touch move.');
+
         if (event.touches.length > 1) {
             return;
+        }
+
+        if (getDebugStatus())
+        {
+            console.log(event.touches[0]);
         }
 
         var newTouchPoint = {
             x: event.touches[0].pageX - drawingBoard.canvasOffsetLeft,
             y: event.touches[0].pageY - drawingBoard.canvasOffsetTop
         };
+
         if (drawingBoard.isTouching && drawingBoard.touchPoint)
         {
             drawingBoard.drawLine(drawingBoard.touchPoint, newTouchPoint);
@@ -210,7 +229,13 @@ $(document).ready(function(){
     {
         app.drawBoardList = [];
 
-        $('.drawingBoard').each(function(){
+        $('.drawingBoard').each(function()
+        {
+            // skip hidden element
+            if (this.offsetWidth == 0 || this.offsetHeight == 0)
+            {
+                return;
+            }
             app.drawBoardList.push(initDrawingBoard(this));
         });
     }

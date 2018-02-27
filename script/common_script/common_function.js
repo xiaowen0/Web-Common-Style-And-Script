@@ -138,6 +138,26 @@ function alertDebugLog(text)
     }
 }
 
+/**
+ * print object info to page.
+ * @param object  Object
+ */
+function printObject(object)
+{
+    var info = createElement('div');
+    var list = createElement('ul');
+
+    for (var name in object)
+    {
+        var property = createElement('li');
+        property.innerHTML	 = name + ': ' + object[name];
+        list.appendChild(property);
+    }
+
+    info.appendChild(list);
+    document.body.appendChild(info);
+}
+
 /* browser feature group --------------------------------------------------------- */
 
 /**
