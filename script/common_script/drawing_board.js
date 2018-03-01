@@ -36,17 +36,16 @@ function initDrawingBoard(element)
         },
         canvas : canvas,
         canvasContext : canvas.getContext('2d'),
-        canvasOffsetLeft : canvas.offsetLeft,
-        canvasOffsetTop : canvas.offsetTop,
         canvasWidth : canvas.width,
         canvasHeight : canvas.height,
 
-        updateTouchPoint: function (point) {
+        updateTouchPoint: function (point)
+        {
             this.touchPoint = point;
         },
 
-        drawLine : function(point1, point2){
-
+        drawLine: function (point1, point2)
+        {
             this.canvasContext.beginPath();
 
             this.canvasContext.moveTo(point1.x, point1.y);
@@ -59,11 +58,11 @@ function initDrawingBoard(element)
             // this.canvasContext.draw(true);
         },
 
-        setRainbowColor : function()
+        setRainbowColor: function ()
         {
             var gradient = this.canvasContext.createLinearGradient(
-                0,0,
-                this.canvasWidth,this.canvasHeight
+                0, 0,
+                this.canvasWidth, this.canvasHeight
             );
 
             gradient.addColorStop(0,"#f50a0a");
@@ -91,21 +90,30 @@ function initDrawingBoard(element)
     canvasContext.lineCap       = 'round';
 
     // set toolbar
-    drawingBoardJq.find('.toolbar .strokeSizeInputbox').on('change', function(){
+    drawingBoardJq.find('.toolbar .strokeSizeInputbox').on('change', function ()
+    {
         drawingBoard.canvasContext.lineWidth = this.value;
     });
-    drawingBoardJq.find('.toolbar .colorSelectorButton').on('change', function(){
+    drawingBoardJq.find('.toolbar .colorSelectorButton').on('change', function ()
+    {
         drawingBoard.canvasContext.strokeStyle = this.value;
     });
-    drawingBoardJq.find('.toolbar .cleanCanvasButton').on('click', function(){
-        drawingBoard.canvasContext.fillStyle="#FFF";
+    drawingBoardJq.find('.toolbar .refreshCanvasButton').on('click', function ()
+    {
+        console.log('click the refresh canvas button.')
+        initDrawingBoard(element);
+    });
+
+    drawingBoardJq.find('.toolbar .cleanCanvasButton').on('click', function ()
+    {
+        drawingBoard.canvasContext.fillStyle = "#FFF";
         // drawingBoard.canvasContext.fillRect(0,0,300,150);
-        drawingBoard.canvasContext.clearRect(0,0,
-            drawingBoard.canvasWidth,drawingBoard.canvasHeight);
+        drawingBoard.canvasContext.clearRect(0, 0,
+            drawingBoard.canvasWidth, drawingBoard.canvasHeight);
     });
 
     // set touch start event
-    canvas.ontouchstart = (function(event)
+    canvas.ontouchstart = (function (event)
     {
         addDebugLog('touch start.');
 
@@ -122,8 +130,8 @@ function initDrawingBoard(element)
         drawingBoard.isTouching = true;
 
         var newTouchPoint = {
-            x: event.touches[0].pageX - drawingBoard.canvasOffsetLeft,
-            y: event.touches[0].pageY - drawingBoard.canvasOffsetTop
+            x: event.touches[0].pageX - drawingBoard.canvas.offsetLeft,
+            y: event.touches[0].pageY - drawingBoard.canvas.offsetTop
         };
 
         drawingBoard.updateTouchPoint(newTouchPoint);
@@ -139,7 +147,7 @@ function initDrawingBoard(element)
             console.log(event.touches[0]);
         }
 
-        drawingBoard.isTouching =  false;
+        drawingBoard.isTouching = false;
     });
 
     // set touch move event
@@ -149,7 +157,8 @@ function initDrawingBoard(element)
 
         addDebugLog('touch move.');
 
-        if (event.touches.length > 1) {
+        if (event.touches.length > 1)
+        {
             return;
         }
 
@@ -159,8 +168,8 @@ function initDrawingBoard(element)
         }
 
         var newTouchPoint = {
-            x: event.touches[0].pageX - drawingBoard.canvasOffsetLeft,
-            y: event.touches[0].pageY - drawingBoard.canvasOffsetTop
+            x: event.touches[0].pageX - drawingBoard.canvas.offsetLeft,
+            y: event.touches[0].pageY - drawingBoard.canvas.offsetTop
         };
 
         if (drawingBoard.isTouching && drawingBoard.touchPoint)
@@ -171,7 +180,8 @@ function initDrawingBoard(element)
         drawingBoard.updateTouchPoint(newTouchPoint);
     });
 
-    var drawDemoImage = (function(ctx){
+    var drawDemoImage = (function (ctx)
+    {
         // Draw coordinates
         ctx.arc(100, 75, 50, 0, 2 * Math.PI);
         ctx.fillStyle = '#EEEEEE';
@@ -224,12 +234,13 @@ function initDrawingBoard(element)
     return drawingBoard;
 }
 
-$(document).ready(function(){
-    if ( $('.drawingBoard').length )
+$(document).ready(function ()
+{
+    if ($('.drawingBoard').length)
     {
         app.drawBoardList = [];
 
-        $('.drawingBoard').each(function()
+        $('.drawingBoard').each(function ()
         {
             // skip hidden element
             if (this.offsetWidth == 0 || this.offsetHeight == 0)
