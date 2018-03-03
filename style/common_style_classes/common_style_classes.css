@@ -1253,6 +1253,13 @@ textarea.warning,
     vertical-align: middle;
 }
 
+.checkboxLabel,
+.checkboxItem,
+.radioLabel,
+.radioItem {
+    font-weight: normal;
+}
+
 .form select,
 .selectbox {
     background-color: #fff;
