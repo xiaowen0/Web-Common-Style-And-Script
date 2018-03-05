@@ -868,6 +868,41 @@ function printStylesheetLink(url)
 }
 
 /**
+ * load style sheet
+ * @param url  String  url to style sheet file.
+ */
+function loadStylesheet(url)
+{
+    var stylesheetLink = createElement('link', {
+        href : url,
+        rel : "stylesheet"
+    });
+    document.head.appendChild(stylesheetLink);
+}
+
+/**
+ * load script
+ * @param url  String  url to script file.
+ * @param options  Object  options for this action
+ */
+function loadScript(url, options)
+{
+    options = options || {};
+
+    var scriptLink = createElement('script', {
+        src : url
+    });
+
+    var onload = options.onload || (function(){});
+    if (onload)
+    {
+        scriptLink.onload = onload;
+    }
+
+    document.body.appendChild(scriptLink);
+}
+
+/**
  * set element height equal to width  设置元素高度等于宽度
  * @param element Object of HTMLElement
  */
