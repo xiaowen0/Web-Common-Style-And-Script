@@ -1250,3 +1250,19 @@
     display: block;
 }
 
+.debugButtonLayer {
+    left: auto;
+    top: auto;
+    right: 10px;
+    bottom: 10px;
+    width: auto;
+    height: auto;
+}
+
+#debugInfoDialog {
+    width: 96%;
+    height: 96%;
+}
+
+
+

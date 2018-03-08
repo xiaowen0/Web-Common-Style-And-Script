@@ -13,7 +13,9 @@ $(document).ready(function ()
     var debugParam = getUrlParam('debug');
     if (debugParam)
     {
+        enableDebug();
         $('<div id="debugModeTag">调试模式</div>').appendTo(document.body);
+        $('.debugButtonLayer').removeClass('hide').show();
     }
 
     // init auto increase textarea
