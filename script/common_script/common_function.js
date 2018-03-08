@@ -27,7 +27,7 @@ var cdnList = {
 
 /**
  * enable debug mode
- * @return  Bool
+ * @return  boolean
  */
 function enableDebug()
 {
@@ -48,7 +48,7 @@ var openDebug = enableDebug;
 
 /**
  * disable debug mode
- * @return  Bool
+ * @return  boolean
  */
 function disableDebug()
 {
@@ -69,7 +69,7 @@ var closeDebug = disableDebug;
 
 /**
  * get debug status
- * @returns Bool
+ * @returns boolean
  */
 function getDebugStatus()
 {
@@ -77,7 +77,6 @@ function getDebugStatus()
         if (typeof(sessionStorage) != 'object') {
             return false;
         }
-
         return sessionStorage.getItem('debug') === 'on';
     }
     catch (e) {
@@ -88,7 +87,7 @@ function getDebugStatus()
 /**
  * add console log
  * @param   text    String
- * @returns Bool
+ * @returns boolean
  */
 function addConsoleLog(text)
 {
@@ -108,7 +107,7 @@ function addConsoleLog(text)
 /**
  * add debug log
  * @param   text    String
- * @returns Bool
+ * @returns boolean
  */
 function addDebugLog(text)
 {
@@ -123,9 +122,25 @@ function addDebugLog(text)
 var log = addDebugLog;
 
 /**
+ * add error log
+ * @param   text    String
+ * @returns boolean
+ */
+function addErrorLog(text)
+{
+    if (getDebugStatus()) {
+        addConsoleLog('[error] ' + text);
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+/**
  * alert debug log
  * @param   text    String
- * @returns Bool
+ * @returns boolean
  */
 function alertDebugLog(text)
 {
@@ -158,11 +173,58 @@ function printObject(object)
     document.body.appendChild(info);
 }
 
+/**
+ * set debug's content
+ * @param content  String|Array   content name or array of content name
+ * @returns boolean
+ */
+function setDebuggingContent(content)
+{
+    if (typeof(content)=="object")
+    {
+        content = content.join('|');
+    }
+
+    try {
+        if (typeof(sessionStorage) != 'object') {
+            return false;
+        }
+        return sessionStorage.setItem('debugging_content', content);
+    }
+    catch (e) {
+        return false;
+    }
+}
+
+/**
+ * check if exist debugging content
+ * @param name  String
+ * @return boolean
+ */
+function existDebuggingContent(name)
+{
+    try {
+        if (typeof(sessionStorage) != 'object') {
+            return false;
+        }
+        var debuggingContentString = sessionStorage.getItem('debugging_content');
+        if (!debuggingContentString)
+        {
+            return false;
+        }
+        var debuggingContentList = debuggingContentString.split('|');
+        return inArray(name, debuggingContentList);
+    }
+    catch (e) {
+        return false;
+    }
+}
+
 /* browser feature group --------------------------------------------------------- */
 
 /**
  * disable user copy action
- * @returns {boolean}
+ * @returns boolean
  */
 function disableCopy()
 {
@@ -181,7 +243,7 @@ function disableCopy()
 
 /**
  * disable right-click context menu
- * @return {boolean}
+ * @return boolean
  */
 function disableContextMenu()
 {
@@ -198,7 +260,7 @@ function disableContextMenu()
 
 /**
  * disable Ctrl+C hotkey
- * @returns {boolean}
+ * @returns boolean
  */
 function disableCtrlC()
 {
@@ -379,7 +441,7 @@ function getBodyHtml(html)
 /**
  * check a path if root
  * @param String path
- * @returns Boolean
+ * @returns boolean
  */
 function isRootPath(path)
 {
@@ -538,7 +600,7 @@ function json_decode(string)
  * check if a value in array  检查数组是否存在某个值
  * @param mixed  value
  * @param Array  array data
- * @returns Bool
+ * @returns boolean
  */
 function inArray(value, array)
 {
@@ -946,7 +1008,7 @@ function setImageFill(image)
 /**
  * set a element middle position in his parent
  * @param  String|Array  element CSS selector path or array
- * @returns Boolean
+ * @returns boolean
  */
 function setElementMiddlePosition(element)
 {
@@ -1095,7 +1157,7 @@ function checkAudio(coding)
 /**
  * check a file name is video format
  * @param   String  file name
- * @return  Bool
+ * @return  boolean
  */
 function isVideo(name)
 {
@@ -1114,7 +1176,7 @@ function isVideo(name)
 /**
  * check if current browser supports full screen
  * @param name  String  element name, default is video.
- * @return Boolean
+ * @return boolean
  */
 function supportsFullScreen(name)
 {
@@ -1132,7 +1194,7 @@ function supportsFullScreen(name)
 /**
  * set a video element full screen
  * @param videoElement  HTMLElement
- * @returns Boolean
+ * @returns boolean
  */
 function setFullScreenVideo(videoElement)
 {
@@ -1175,7 +1237,7 @@ function setFullScreenVideo(videoElement)
 /**
  * set auto check video to play
  * @param  String|HTMLElement  element
- * @return Boolean
+ * @return boolean
  */
 function setAutoCheckVideoToPlay(element)
 {
@@ -1194,7 +1256,7 @@ function setAutoCheckVideoToPlay(element)
 
     if (element.tagName.toLowerCase() !== 'video')
     {
-        addDebugLog('element param is not a video element.');
+        addErrorLog('element param is not a video element.');
         return false;
     }
 
@@ -1222,6 +1284,12 @@ function setTakeTurns(elementList, options)
     var interval = options.interval || 10;
     var number = options.number || 1;
 
+    if (getDebugStatus() && existDebuggingContent('setTakeTurns'))
+    {
+        addDebugLog('interval=' + interval);
+        addDebugLog('number=' + number);
+    }
+
     setInterval(function()
     {
         // check element type
@@ -1238,6 +1306,11 @@ function setTakeTurns(elementList, options)
         if (hideCount >= count)
         {
             hideCount = 0;
+        }
+
+        if (getDebugStatus() && existDebuggingContent('setTakeTurns'))
+        {
+            addDebugLog('hideCount=' + hideCount);
         }
 
         // hide some element
@@ -1348,7 +1421,7 @@ function setVideoPlaylist(element, list)
 
 /**
  * check canvas supported  检查画布元素支持
- * @returns Boolean
+ * @returns boolean
  */
 function canvasSupport()
 {
@@ -1464,12 +1537,16 @@ function pageDown(element)
         element = elementQueryList[0];
     }
 
+    if ( getDebugStatus() && existDebuggingContent('pageDown') )
+    {
+        addDebugLog('scroll height: ' + element.scrollHeight);
+        addDebugLog('offset height: ' + element.offsetHeight);
+    }
+
     // check if overflow
-    addDebugLog('scroll height: ' + element.scrollHeight);
-    addDebugLog('offset height: ' + element.offsetHeight);
     if (element.scrollHeight > element.offsetHeight) {
+
         // check scroll top
-        addDebugLog('scroll top: ' + element.scrollTop);
         if (element.scrollTop < element.scrollHeight - element.offsetHeight) {
             element.scrollTop += element.offsetHeight;
         }
@@ -1496,6 +1573,12 @@ function setAutoPageDown(element, interval)
     }, interval * 1000)
 }
 
+/**
+ * set a use marquee effect
+ * @param element  Object(HTMLElement)|String   element node quote or CSS selector string
+ * @param speed
+ * @return boolean|number  'false' if fail, or interval quote if success.
+ */
 function setMarquee(element, speed)
 {
     if (typeof(element) === "string") {
@@ -1513,16 +1596,21 @@ function setMarquee(element, speed)
 
     var childList = element.find();
 
-    window.setInterval(function ()
+    var timer = window.setInterval(function ()
     {
         var step = speed / 1000;
 
-        // check if overflow
-        addDebugLog('scroll height: ' + element.scrollLeft);
-        addDebugLog('offset height: ' + element.offsetWidth);
-        if (element.scrollHeight > element.offsetHeight) {
-            // check scroll top
+        if ( getDebugStatus() && existDebuggingContent('setMarquee') )
+        {
+            addDebugLog('scroll height: ' + element.scrollLeft);
+            addDebugLog('offset height: ' + element.offsetWidth);
             addDebugLog('scroll top: ' + element.scrollTop);
+        }
+
+        // check if overflow
+        if (element.scrollHeight > element.offsetHeight)
+        {
+            // check scroll top
             if (element.scrollTop < element.scrollHeight - element.offsetHeight) {
                 element.scrollTop += element.offsetHeight;
             }
@@ -1530,7 +1618,9 @@ function setMarquee(element, speed)
                 element.scrollTop = 0;
             }
         }
-    }, 1)
+    }, 1);
+
+    return timer;
 }
 
 /**
@@ -1588,7 +1678,7 @@ function getBodyHeight()
 
 /**
  * set body min height
- * @returns Boolean
+ * @returns boolean
  */
 function setBodyMinHeight()
 {
@@ -1601,8 +1691,11 @@ function setBodyMinHeight()
         var bodyHeight = getBodyHeight();
         var windowHeight = getWindowHeight();
 
-        addDebugLog('bodyHeight= ' + bodyHeight);
-        addDebugLog('windowHeight= ' + windowHeight);
+        if ( getDebugStatus() && existDebuggingContent('setBodyMinHeight') )
+        {
+            addDebugLog('bodyHeight= ' + bodyHeight);
+            addDebugLog('windowHeight= ' + windowHeight);
+        }
 
         // can not get height
         if (bodyHeight === 0 || windowHeight === 0) {
@@ -1619,7 +1712,7 @@ function setBodyMinHeight()
 /**
  * check a wrapper if is overflow height
  * @param  String|HTMLObject  selector  CSS selector string of wrapper or HTML object
- * @return Boolean
+ * @return boolean
  */
 function isOverflowHeight(selector)
 {
@@ -1732,7 +1825,7 @@ function initDialogAction()
  * show a message box
  * @param message  String  message text
  * @param title    String  message box title
- * @return Boolean
+ * @return boolean
  */
 function showMessageBox(message, title)
 {
@@ -1838,7 +1931,7 @@ function getBrowserLanguage()
  * check file type
  * @param file object(File)
  * @param type string
- * @returns bool
+ * @returns boolean
  */
 function checkFile(file, type)
 {
@@ -1848,7 +1941,7 @@ function checkFile(file, type)
 /**
  * check file is image type
  * @param file  Object(File)
- * @returns Boolean
+ * @returns boolean
  */
 function checkFileIsImage(file)
 {
@@ -1862,7 +1955,7 @@ function checkFileIsImage(file)
 
 /**
  * check file reader supported  检查文件读取器支持
- * @returns Boolean
+ * @returns boolean
  */
 function fileReaderSupport()
 {
@@ -1934,14 +2027,16 @@ function convertImage2Canvas(image, options, callback)
     var image_min_height = options.image_min_height ? options.image_min_height : -1;
     var image_max_width = options.image_max_width ? options.image_max_width : -1;
     var image_max_height = options.image_max_height ? options.image_max_height : -1;
-    addDebugLog('image_max_width: ' + image_max_width);
-    addDebugLog('image_max_height: ' + image_max_height);
+
+    if ( getDebugStatus() && existDebuggingContent('convertImage2Canvas') )
+    {
+        addDebugLog('image_max_width: ' + image_max_width);
+        addDebugLog('image_max_height: ' + image_max_height);
+    }
 
     // canvas size
     var canvas_width = options.canvas_width ? options.canvas_width : -1;
     var canvas_height = options.canvas_height ? options.canvas_height : -1;
-    //addDebugLog('canvas_width: ' + canvas_width);
-    //addDebugLog('canvas_height: ' + canvas_height);
 
     // error event
     var onerror = options.onerror ? options.onerror : null;
@@ -2120,7 +2215,7 @@ function getFormData(form)
  * @param form  Object(HTMLElement)|String  form dom quote or ID
  * @param name  String                      form control's name property
  * @param value                             form control's new value
- * @return Boolean
+ * @return boolean
  */
 function setFormControl(form, name, value)
 {
@@ -2129,7 +2224,7 @@ function setFormControl(form, name, value)
         var formId = form;
         form = document.getElementById(form);
         if (!form) {
-            addDebugLog('form dom with id:' + formId + ' not found.');
+            addErrorLog('form dom with id:' + formId + ' not found.');
             return false;
         }
     }
@@ -2152,10 +2247,16 @@ function setFormControl(form, name, value)
                         controlItem.value == value ? controlItem.checked = true : null;
                         break;
                     case 'password' :
-                        addDebugLog('skip inputbox type:password.');
+                        if ( getDebugStatus() && existDebuggingContent('setFormControl') )
+                        {
+                            addDebugLog('skip inputbox type:password.');
+                        }
                         break;
                     case 'file' :
-                        addDebugLog('skip inputbox type:file.');
+                        if ( getDebugStatus() && existDebuggingContent('setFormControl') )
+                        {
+                            addDebugLog('skip inputbox type:file.');
+                        }
                         break;
                     case 'text' :
                     default :   // other like email, number, url ...
@@ -2177,7 +2278,7 @@ function setFormControl(form, name, value)
 /**
  * check a form element is locked
  * @param   form    Object(HTMLElement)|String       form element or ID
- * @returns Boolean
+ * @returns boolean
  */
 function formIsLocked(form)
 {
@@ -2273,7 +2374,7 @@ function formMoreData(form)
 /**
  * check if the form has more data
  * @param form  String|Object(HTMLElement)  form ID or dom quote
- * @returns {boolean}
+ * @returns boolean
  */
 function formHasMoreData(form)
 {
@@ -2447,7 +2548,10 @@ function bindPaginationPanelAction(element)
         var page_count = parseInt(pagination.data('count'));
         if (page_count && page === page_count)  // 已经是最后1页了
         {
-            addDebugLog('[warning] 已经是最后1页了');
+            if ( getDebugStatus() && existDebuggingContent('bindPaginationPanelAction') )
+            {
+                addDebugLog('已经是最后1页了。');
+            }
             return false;
         }
 
@@ -2502,8 +2606,10 @@ function updatePaginationPanel(element, options)
         }
     }
 
-    addDebugLog(message);
-
+    if ( getDebugStatus() && existDebuggingContent('updatePaginationPanel') )
+    {
+        addDebugLog(message);
+    }
 }
 
 /**
@@ -2575,7 +2681,7 @@ function addInputboxAutocompleteValue(name, value)
 
 /**
  * check if current browser support cross origin
- * @returns {boolean}
+ * @returns boolean
  */
 function isSupportCrossOrigin()
 {
@@ -2765,7 +2871,7 @@ function createProgressDialog(id, percent)
  * update progress dialog  更新一个进度条对话框
  * @param id  String  dialog ID string  对话框ID
  * @param percent  Number  progress percent  进度条百分比
- * @returns Bool  true if success or false if fail  成功返回true，失败返回false
+ * @returns boolean  true if success or false if fail  成功返回true，失败返回false
  */
 function updateProgressDialog(id, percent)
 {
@@ -2794,7 +2900,7 @@ function updateProgressDialog(id, percent)
 /**
  * remove progress dialog  移除进度条对话框
  * @param id String  dialog ID string  对话框ID
- * @returns Bool  true if success or false if fail  成功返回true，失败返回false
+ * @returns boolean  true if success or false if fail  成功返回true，失败返回false
  */
 function removeProgressDialog(id)
 {
@@ -2848,7 +2954,7 @@ function getMainAudioController()
 /**
  * play music
  * play audio use audio element with ID: mainAudioController
- * @return Boolean
+ * @return boolean
  */
 function playMusic()
 {
@@ -2877,7 +2983,7 @@ function playMusic()
 /**
  * pause music
  * pause audio use audio element with ID: mainAudioController
- * @return Boolean
+ * @return boolean
  */
 function pauseMusic()
 {
@@ -2906,7 +3012,7 @@ function pauseMusic()
 /**
  * get music play status
  * get audio play status use audio element with ID: mainAudioController
- * @return Boolean
+ * @return boolean
  */
 function getMusicPlayStatus()
 {
@@ -2924,7 +3030,7 @@ function getMusicPlayStatus()
 /**
  * toggle music
  * toggle audio play status use audio element with ID: mainAudioController
- * @return Boolean
+ * @return boolean
  */
 function toggleMusic()
 {
@@ -3050,7 +3156,7 @@ function getSessionData(key)
  * set session storage
  * @key		String  data key string
  * @value	String  value
- * @return  Boolean  success or not
+ * @return  boolean  success or not
  */
 function setSessionData(key, value)
 {
@@ -3113,7 +3219,10 @@ function getUISetting(name, defaultValue)
  */
 function initUISettingForm(form, options)
 {
-    addDebugLog('init UI setting form.');
+    if ( getDebugStatus() && existDebuggingContent('initUISettingForm') )
+    {
+        addDebugLog('init UI setting form.');
+    }
 
     if (typeof(form) == "string")
     {

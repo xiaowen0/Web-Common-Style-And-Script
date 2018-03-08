@@ -231,11 +231,15 @@ $(document).ready(function ()
 
             // get width and ratio, calculate height
             var width = this.offsetWidth;
-            addDebugLog('width=' + width);
             var ratio = parseFloat($(this).data('size-ratio') || $(this).data('ratio') || 0);
-            addDebugLog('ratio=' + ratio);
             var height = width * ratio;
-            addDebugLog('height=' + height);
+
+            if ( getDebugStatus() && existDebuggingContent('response') )
+            {
+                addDebugLog('width=' + width);
+                addDebugLog('ratio=' + ratio);
+                addDebugLog('height=' + height);
+            }
 
             // set new height
             $(this).css('height', height + 'px');
