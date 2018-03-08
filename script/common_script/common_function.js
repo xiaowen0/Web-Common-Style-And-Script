@@ -1278,6 +1278,7 @@ function setAutoCheckVideoToPlay(element)
  * @param  Object        options
  *   interval : turn interval (second), default 10
  *   number : show count one time, default one
+ * @return number  timer quote
  */
 function setTakeTurns(elementList, options)
 {
@@ -1290,7 +1291,7 @@ function setTakeTurns(elementList, options)
         addDebugLog('number=' + number);
     }
 
-    setInterval(function()
+    var timer = setInterval(function()
     {
         // check element type
         if (typeof(elementList) === 'string')
@@ -1310,6 +1311,9 @@ function setTakeTurns(elementList, options)
 
         if (getDebugStatus() && existDebuggingContent('setTakeTurns'))
         {
+        	addDebugLog('interval=' + interval);
+            addDebugLog('number=' + number);
+        	addDebugLog('count=' + count);
             addDebugLog('hideCount=' + hideCount);
         }
 
@@ -1318,6 +1322,7 @@ function setTakeTurns(elementList, options)
 
     }, interval * 1000);
 
+    return timer;
 }
 
 /**
