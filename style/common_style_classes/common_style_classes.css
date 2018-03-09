@@ -255,6 +255,10 @@
     padding: 20px;
 }
 
+.padding20mm {
+    padding: 20mm;
+}
+
 .no-padding,
 .noPadding {
     padding: 0;
@@ -375,6 +379,10 @@
 .align_justify,
 .justify {
     text-align: justify;
+}
+
+.alignTop {
+    vertical-align: top;
 }
 
 /* font */

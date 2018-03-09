@@ -11,3 +11,7 @@ body {
     border: solid 1px #333;
     padding: 0.8em;
 }
+
+.reportTable th {
+    word-break: break-all;
+}
