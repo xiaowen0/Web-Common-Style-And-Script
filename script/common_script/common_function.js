@@ -330,6 +330,32 @@ function replaceData(string, data)
 }
 
 /**
+ * get random chinese name
+ * @param options  Object
+ * @return String
+ */
+function getRandomChineseName(options)
+{
+    var surnameList = [
+        '赵','钱','孙','李','周','吴','郑','王',
+        '冯','陈','褚','卫','蒋','沈','韩','杨',
+        '朱','秦','尤','许','何','吕','施','张',
+        '孔','曹','严','华','金','魏','陶','姜'
+    ];
+
+    var secondWordList = ['云','化','京','彦','小','志','书','健','思','嘉','明'];
+
+    var thirdWordList = ['腾','东','宏','龙','川','东','福','林','聪','诚','珠'];
+
+    var surname     = surnameList[Math.ceil(Math.random() * (surnameList.length - 1))];
+    var secondWord  = secondWordList[Math.ceil(Math.random() * (secondWordList.length - 1))];
+    var thirdWord   = thirdWordList[Math.ceil(Math.random() * (thirdWordList.length - 1))];
+
+    var fullname = surname + secondWord + thirdWord;
+    return fullname;
+}
+
+/**
  * remove all html tag in html code
  * @param   String  html  HTML code
  * @returns String
@@ -1311,9 +1337,9 @@ function setTakeTurns(elementList, options)
 
         if (getDebugStatus() && existDebuggingContent('setTakeTurns'))
         {
-        	addDebugLog('interval=' + interval);
+            addDebugLog('interval=' + interval);
             addDebugLog('number=' + number);
-        	addDebugLog('count=' + count);
+            addDebugLog('count=' + count);
             addDebugLog('hideCount=' + hideCount);
         }
 
