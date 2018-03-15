@@ -154,6 +154,26 @@ function alertDebugLog(text)
 }
 
 /**
+ * add debug information
+ * @param text  String
+ * @param type  String
+ */
+function addDebugInfo(text, type)
+{
+	var infoType = type ? type : 'info';
+	
+    if ( !$('#debugInfoDialog').length )
+	{
+    	addConsoleLog('[warnning] element: #debugInfoDialog not exist.');
+    	return;
+	}
+    
+    var fulltext = '[' + infoType + '] ' + text;
+	var info = '<p>' + fulltext + '</p>';
+	$('#debugInfoDialog .infoContainer').append(info);
+}
+
+/**
  * print object info to page.
  * @param object  Object
  */
