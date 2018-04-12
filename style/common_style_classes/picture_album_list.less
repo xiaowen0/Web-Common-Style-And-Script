@@ -1,0 +1,49 @@
+.picture_album_list {
+
+  .layoutBlock {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 50%;
+    float: left;
+
+    .inner {
+      padding: 4px;
+    }
+  }
+
+  .picture_album_item {
+    margin-left: auto;
+    margin-right: auto;
+    border: solid 1px #CCCCCC;
+    margin-bottom: 20px;
+
+    &:hover {
+      border-color: #000;
+    }
+
+    .inner_box {
+      padding: 10px;
+    }
+
+    .image_box {
+      height: 80px;
+      overflow: hidden;
+      background-color: #ccc;
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    .title_box {
+      height: 20px;
+      line-height: 20px;
+      overflow: hidden;
+      padding-left: 10px;
+      padding-right: 10px;
+      text-align: center;
+    }
+  }
+}
