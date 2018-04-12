@@ -203,6 +203,14 @@ $(document).ready(function ()
     // response element
     var responseHandle = (function()
     {
+        // screen direction
+        (function()
+        {
+            $('.page').removeClass('landscape portrait').addClass(
+                getWindowWidth() > getWindowHeight() ? 'landscape' : 'portrait'
+            );
+        })();
+
         // font relative size
         (function()
         {
