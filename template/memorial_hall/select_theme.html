@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Home</title>
+    <style>
+    .header { height: 200px; }
+    </style>
+</head>
+<body>
+
+    <div class="header" id="pageHeader">
+        <div class="titleContainer">
+            <div class="title">{{title}}</div>
+        </div>
+    </div>
+
+    <div id="selectThemeContainer">
+        <form>
+            <div class="form-group">
+                <label>主题：</label>
+                <div class="selectThemeGroup">
+                    <label>
+                        <input class="form-control themeOption" type="radio" value="blue" name="theme"
+                            v-on:click="selectTheme('blue')"/>蓝色
+                    </label>
+                    <label>
+                        <input class="form-control themeOption" type="radio" value="green" name="theme"
+                            v-on:click="selectTheme('green')"/>绿色
+                    </label>
+                    <label>
+                        <input class="form-control themeOption" type="radio" value="red" name="theme"
+                            v-on:click="selectTheme('red')"/>红色
+                    </label>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script src="../../asset/jquery/jquery-3.1.0.min.js"></script>
+    <script src="../../asset/vue.2.5.16.js"></script>
+    <script src="js/pageHeaderModule.js"></script>
+    <script src="js/selectThemeContainer.js"></script>
+
+</body>
+</html>
