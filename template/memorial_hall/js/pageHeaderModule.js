@@ -6,9 +6,9 @@ define(['vue', 'jquery'], function (Vue){
     var pageHeaderModule = new Vue({
         el: '#pageHeader',
         data: {
-            titleEditingState : false,
-            title: '',
-            titleDraft : '',
+            nameEditingState : false,
+            name: '',
+            nameDraft : '',
             editable : false
         },
         methods : {
@@ -30,20 +30,20 @@ define(['vue', 'jquery'], function (Vue){
             preventDefault : function(event){
                 event.preventDefault();
             },
-            editTitle : function(event){
+            editName : function(event){
                 if (!this.editable)
                 {
                     return;
                 }
-                this.titleDraft = this.title;
-                this.titleEditingState = true;
+                this.nameDraft = this.name;
+                this.nameEditingState = true;
             },
-            saveNewTitle : function(){
-                this.title = this.titleDraft;
-                this.titleEditingState = false;
+            saveNewName : function(){
+                this.name = this.nameDraft;
+                this.nameEditingState = false;
             },
-            cancelEditTitle : function(){
-                this.titleEditingState = false;
+            cancelEditName : function(){
+                this.nameEditingState = false;
             }
         }
     });

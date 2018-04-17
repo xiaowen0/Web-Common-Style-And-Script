@@ -1,4 +1,7 @@
 {
-  "title" : "张国荣纪念馆",
+  "name" : "张国荣",
+  "birthday" : "1956-09-12",
+  "passAwayDate" : "2003-04-01",
+  "desc" : "永远的哥哥",
   "editable" : true
 }

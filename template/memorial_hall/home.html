@@ -15,11 +15,11 @@
     <div class="header" id="pageHeader">
         <div class="inner">
             <div class="titleContainer">
-                <div class="title" v-if="!titleEditingState" v-on:click="editTitle">{{title}}</div>
-                <div class="titleEditingContainer" v-if="titleEditingState">
-                    <input type="text" name="title" v-model="titleDraft" />
-                    <button type="button" v-on:click="saveNewTitle">保存</button>
-                    <button type="button" v-on:click="cancelEditTitle">取消</button>
+                <div class="title" v-if="!nameEditingState" v-on:click="editName">{{name}}纪念馆</div>
+                <div class="nameEditingContainer" v-if="nameEditingState">
+                    <input type="text" name="title" v-model="nameDraft" />
+                    <button type="button" v-on:click="saveNewName">保存</button>
+                    <button type="button" v-on:click="cancelEditName">取消</button>
                 </div>
             </div>
         </div>
