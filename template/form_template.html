@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <title>表单模板</title>
+
+    <!-- Bootstrap framework -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"/>
+
+    <!-- common style classes library -->
+    <link rel="stylesheet" href="../style/common_style_classes/common_style_classes.css"/>
+    <link rel="stylesheet" href="../style/common_style_classes/common_component.css"/>
+
+    <style>
+        .codeContainer {
+            color: green;
+        }
+        h2 {
+            background-color: #f2f2f2;
+            padding: 8px;
+            border-radius: 6px;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="page container-fluid">
+    <div class="inner padding10">
+
+        <h1>各种 form 代码生成</h1>
+
+        <div id="basicFormCodeGenerator">
+
+            <h2>基本表单代码</h2>
+
+            <div class="row">
+
+                <div class="col-xs-12 col-md-6">
+
+                    <p>选项</p>
+
+                    <form>
+                        <div class="row">
+                            <div class="form-group col-xs-12 col-md-6">
+                                <label>ID</label>
+                                <div class="">
+                                    <input class="form-control" type="text" v-model="id"/>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-md-6">
+                                <label>class 类</label>
+                                <div class="">
+                                    <input class="form-control" type="text" v-model="classAttr"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="form-group col-xs-12 col-md-6">
+                                <label>action 动作</label>
+                                <div class="">
+                                    <input class="form-control" type="text" v-model="action"
+                                           placeholder="不填为当前网址"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-xs-12 col-md-6">
+                                <label>method 提交方法</label>
+                                <div class="">
+                                    <label class="radio-inline">
+                                        <input type="radio" value="post" name="method" v-model="method"/>POST
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" value="" name="method" v-model="method"/>GET (默认)
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>是否需要上传文件(需使用post方法)</label>
+                            <div class="">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" v-model="needUploadFile" value="true" />是
+                                </label>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div><!-- end .col-* -->
+
+                <div class="col-xs-12 col-md-6">
+
+                    <p>表单代码</p>
+
+                    <div class="codeContainer border_radius">
+                        &lt;form<span v-if="classAttr"> class=&quot;{{classAttr}}&quot;</span><span v-if="id"> id=&quot;{{id}}&quot;</span> action=&quot;{{action}}&quot;<span v-if="method"> method=&quot;{{method}}&quot;</span><span v-if="needUploadFile"> enctype=&quot;multipart/form-data&quot;</span>&gt;<br/>
+                        表单内容...<br/>
+                        &lt;/form&gt;
+                    </div>
+
+                </div>
+            </div><!-- end .row -->
+
+        </div><!-- end #basicFormCodeGenerator -->
+
+        <div id="textboxCodeGenerator">
+
+            <h2>文本输入框组</h2>
+
+            <div class="row">
+
+                <div class="col-xs-12 col-md-6">
+
+                    <form>
+                        <div class="row">
+                            <div class="form-group col-xs-12 col-md-6">
+                                <label>label 文本</label>
+                                <div class="">
+                                    <input type="text" class="form-control" v-model="label"/>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-md-6">
+                                <label>ID</label>
+                                <div class="">
+                                    <input type="text" class="form-control" v-model="id"/>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-md-6">
+                                <label>class 类</label>
+                                <div class="">
+                                    <input type="text" class="form-control" v-model="classAttr"/>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-md-6">
+                                <label>name</label>
+                                <div class="">
+                                    <input type="text" class="form-control" v-model="name"/>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-md-6">
+                                <label>required 必填？</label>
+                                <div class="">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" value="yes" v-model="required"/>是
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-md-6">
+                                <label>placeholder</label>
+                                <div class="">
+                                    <input type="text" class="form-control" v-model="placeholder"/>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-md-6">
+                                <label>autocomplete 自动完成</label>
+                                <div class="">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" value="on" v-model="autocomplete"/>ON
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-md-6">
+                                <label>autofocus 自动获取焦点<br/>（一般设置在第一个上）</label>
+                                <div class="">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" value="autofocus" v-model="autofocus"/>ON
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-xs-12 col-md-6">
+
+                    <div class="mb10">
+                        <p>演示：</p>
+                        <div>
+                            <label v-bind:for="id">
+                                {{label}}
+                                <span class="red" v-if="required">*</span>
+                            </label>
+                            <input v-bind:id="id" v-bind:class="classAttr" type="text" v-bind:name="name"
+                                   v-bind:placeholder="placeholder"/>
+                        </div>
+                    </div>
+
+                    <div class="mb10">
+                        <p>代码：</p>
+                        <div class="codeContainer">
+                            &lt;div&gt;<br/>
+                                &lt;label<span v-if="id"> for=&quot;{{id}}&quot;</span>&gt;<br/>
+                                    {{label}}<span v-if="required">&lt;span class=&quot;red&quot;&gt;*&lt;/span&gt;</span><br/>
+                                &lt;/label&gt;<br/>
+                                &lt;input<span v-if="id"> id=&quot;{{id}}&quot;</span><span v-if="classAttr"> class=&quot;{{classAttr}}&quot;</span> type=&quot;text&quot;<span v-if="name"> name=&quot;{{name}}&quot;</span><span v-if="placeholder"> placeholder=&quot;{{placeholder}}&quot;</span><span v-if="required"> required=&quot;required&quot;</span><span v-if="autocomplete"> autocomplete=&quot;on&quot;</span><span v-if="autofocus"> autofocus=&quot;autofocus&quot;</span>/&gt;<br/>
+                            &lt;/div&gt;
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-xs-12 col-md-6">
+
+                <form>
+                    <div class="form-group">
+                        <label for="textInputbox">文本输入
+                            <span class="red">*</span>
+                        </label>
+                        <div>
+                            <input class="form-control" id="textInputbox" type="text"  name=""
+                                placeholder="输入文本"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="passwordInputbox">
+                            密码输入
+                            <span class="red">*</span>
+                        </label>
+                        <div>
+                            <input class="form-control" id="passwordInputbox" type="password" name=""
+                                placeholder="输入密码"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="emailInputbox">输入 E-mail</label>
+                        <div>
+                            <input class="form-control" id="emailInputbox" type="email" name=""
+                                placeholder="输入电子邮箱地址"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>电话号码输入</label>
+                        <div>
+                            <input class="form-control" type="tel" name="" value="1"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>网址输入</label>
+                        <div>
+                            <input class="form-control" type="url" name="" value="1"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>数字输入</label>
+                        <div>
+                            <input class="form-control" type="number" name="" value="1"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>有范围的滑动条</label>
+                        <div>
+                            <input class="form-control" type="range" name="" value="1"
+                                min="1" max="100"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>日期输入</label>
+                        <div>
+                            <input class="form-control" type="date" name="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>datetime 输入 (Chrome 支持)</label>
+                        <div>
+                            <input class="form-control" type="datetime" name="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>datetime-local 输入 (Chrome 支持)</label>
+                        <div>
+                            <input class="form-control" type="datetime-local" name="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>月份输入 (Chrome 支持)</label>
+                        <div>
+                            <input class="form-control" type="month" name="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>星期（周）输入 (Chrome 支持)</label>
+                        <div>
+                            <input class="form-control" type="week" name="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>时间（时、分、秒）输入</label>
+                        <div>
+                            <input class="form-control" type="time" name="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>颜色选择</label>
+                        <div>
+                            <input class="form-control" type="color" name="" value="#FFF" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>单选按钮组</label>
+                        <div>
+                            <label class="checkbox-inline">
+                                <input type="radio" name="radio" value="A"
+                                    checked="checked"/>
+                                A
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="radio" name="radio" value="B"/>
+                                B
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="radio" name="radio" value="C"/>
+                                C
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>多选按钮组</label>
+                        <div>
+                            <label class="radio-inline">
+                                <input type="checkbox" name="checkbox" value="1"/>
+                                A
+                            </label>
+                            <label class="radio-inline">
+                                <input type="checkbox" name="checkbox" value="2"/>
+                                B
+                            </label>
+                            <label class="radio-inline">
+                                <input type="checkbox" name="checkbox" value="3"/>
+                                C
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>下拉选项（单选）</label>
+                        <div>
+                            <select class="form-control">
+                                <option value="A" selected="selected">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>选项菜单（多选）</label>
+                        <div>
+                            <select class="form-control" multiple="multiple">
+                                <option value="A" selected="selected">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>选择文件(单文件)</label>
+                        <div>
+                            <input type="file" name="file"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>选择文件(多文件)</label>
+                        <div>
+                            <input type="file" name="files" multiple="multiple"/>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script src="../asset/vue.2.5.16.js"></script>
+<script src="../script/common_script/common_function.js"></script>
+<script src="../script/common_script/common_action.js"></script>
+
+<script>
+    $('code').each(function(){
+        var src = $(this).data('code-src');
+        if (!src)
+        {
+            return;
+        }
+
+        var srcEle = $(src);
+        if (!srcEle.length)
+        {
+            return;
+        }
+        var htmlCode = srcEle[0].outerHTML;
+        var htmlCodeLines = htmlCode.split("\n");
+        htmlCodeLines = removeSpaceInAheadOfLine(htmlCodeLines);
+        this.innerHTML = EncodeHtml(htmlCodeLines.join("\n"));
+    });
+</script>
+
+<script>
+    var basicFormCodeGgenerator = new Vue({
+        el : '#basicFormCodeGenerator',
+        data : {
+            id : '',
+            classAttr : 'form',
+            action : '',
+            method : '',
+            needUploadFile : false
+        }
+    });
+    var textboxCodeGenerator = new Vue({
+        el : '#textboxCodeGenerator',
+        data : {
+            label : 'label 文本',
+            id : '',
+            name : '',
+            classAttr : 'form-control',
+            required : '',
+            placeholder : '',
+            autocomplete : 'on',
+            autofocus : ''
+        }
+    })
+</script>
+
+</body>
+</html>
