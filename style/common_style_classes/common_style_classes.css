@@ -19,6 +19,12 @@
     display: none;
 }
 
+/* code container */
+.codeContainer {
+    padding: 10px;
+    border: solid 1px #EEE;
+}
+
 /* container layout */
 .center,
 .centered {
@@ -265,6 +271,10 @@
 }
 
 /* background */
+.no_bg {
+    background: none;
+}
+
 .white_bg {
     background-color: white;
 }
@@ -1269,13 +1279,13 @@ textarea.warning,
     outline: 0 none;
 }
 
-.form input[type="checkbox"],
-.checkbox,
-.form input[type="radio"],
-.radio {
-    margin-right: 6px;
-    vertical-align: middle;
-}
+/*.form input[type="checkbox"],*/
+/*.checkbox,*/
+/*.form input[type="radio"],*/
+/*.radio {*/
+    /*margin-right: 6px;*/
+    /*vertical-align: middle;*/
+/*}*/
 
 .checkboxLabel,
 .checkboxItem,
