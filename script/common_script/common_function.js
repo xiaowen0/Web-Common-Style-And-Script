@@ -409,6 +409,60 @@ function escapeHtml(html)
 }
 
 /**
+ * encode html
+ * @param String  str
+ * @returns String
+ */
+function EncodeHtml(str)
+{
+    var s = "";
+    if (str.length == 0) return "";
+    s = str.replace(/&/g, "&amp;");
+    s = s.replace(/</g, "&lt;");
+    s = s.replace(/>/g, "&gt;");
+    s = s.replace(/ /g, "&nbsp;");
+    s = s.replace(/\'/g, "&#39;");
+    s = s.replace(/\"/g, "&quot;");
+    s = s.replace(/\n/g, "<br/>");
+    return s;
+}
+
+/**
+ * decode html
+ * @param String  str
+ * @returns String
+ */
+function DecodeHtml(str)
+{
+    var s = "";
+    if (str.length == 0) return "";
+    s = str.replace(/&amp;/g, "&");
+    s = s.replace(/&lt;/g, "<");
+    s = s.replace(/&gt;/g, ">");
+    s = s.replace(/&nbsp;/g, " ");
+    s = s.replace(/&#39;/g, "\'");
+    s = s.replace(/&quot;/g, "\"");
+    s = s.replace(/<br\/>/g, "\n");
+    return s;
+}
+
+/**
+ * remove space in ahead of line
+ * @param String|Array  single string or array of string
+ * @returns String|Array
+ */
+function removeSpaceInAheadOfLine(string)
+{
+    var type = typeof(string);
+    var stringList = (type == "object") ? string : [string];
+    for (var i=0; i<stringList.length; i++)
+    {
+        stringList[i] = stringList[i].replace(new RegExp('^( )+'), '');
+    }
+    return (type == "object") ? stringList : stringList[0];
+}
+
+/**
  * convert a object or array to string
  * @param data  Object|Array
  * @returns mixed
