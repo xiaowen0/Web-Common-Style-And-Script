@@ -15,7 +15,7 @@ define(['vue', 'jquery'], function (Vue)
                     $('#themeStyleSheet').remove();
                 }
 
-                var themeStyleSheetUrl = '../../style/theme/' + name + '.css';
+                var themeStyleSheetUrl = 'theme/' + name + '.css';
                 var themeStyleSheetLink = $('<link rel="stylesheet" id="themeStyleSheet"/>')
                     .attr('href', themeStyleSheetUrl).appendTo(document.head);
             }
