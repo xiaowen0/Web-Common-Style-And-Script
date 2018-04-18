@@ -9,7 +9,7 @@ require.config({
         "vue": "../../asset/vue.2.5.16",
         "underscore": "https://cdn.bootcss.com/underscore.js/1.8.3/underscore",
         "backbone": "https://cdn.bootcss.com/backbone.js/1.3.3/backbone",
-        "pageHeaderModule": "js/pageHeaderModule"
+        "pageHeaderModule": "js/module/pageHeaderModule"
     }
 });
 

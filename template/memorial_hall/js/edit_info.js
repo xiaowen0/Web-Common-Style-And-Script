@@ -5,6 +5,6 @@
 
 require([
     'pageHeaderModule',
-    'js/editInfoModule'
+    'js/module/editInfoModule'
 ]);
 
