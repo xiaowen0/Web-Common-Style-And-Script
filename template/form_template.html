@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<html lang="zh-cn" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -112,24 +112,32 @@
 
         <div id="textboxCodeGenerator">
 
-            <h2>文本输入框组</h2>
+            <h2>输入框组</h2>
 
             <div class="row">
 
                 <div class="col-xs-12 col-md-6">
 
+                    <p>选项：</p>
+
                     <form>
                         <div class="row">
-                            <div class="form-group col-xs-12 col-md-6">
+                            <div class="form-group col-xs-12 col-md-4">
                                 <label>label 文本</label>
                                 <div class="">
                                     <input type="text" class="form-control" v-model="label"/>
                                 </div>
                             </div>
-                            <div class="form-group col-xs-12 col-md-6">
+                            <div class="form-group col-xs-12 col-md-4">
                                 <label>ID</label>
                                 <div class="">
                                     <input type="text" class="form-control" v-model="id"/>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-md-4">
+                                <label>name</label>
+                                <div class="">
+                                    <input type="text" class="form-control" v-model="name"/>
                                 </div>
                             </div>
                             <div class="form-group col-xs-12 col-md-6">
@@ -138,13 +146,68 @@
                                     <input type="text" class="form-control" v-model="classAttr"/>
                                 </div>
                             </div>
-                            <div class="form-group col-xs-12 col-md-6">
-                                <label>name</label>
+
+                            <div class="form-group col-xs-12">
+                                <label>type 输入类型</label>
                                 <div class="">
-                                    <input type="text" class="form-control" v-model="name"/>
+                                    <label class="radio-inline">
+                                        <input type="radio" value="text" v-model="type"/>文本
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" value="password" v-model="type"/>密码
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" value="email" v-model="type"/>E-mail
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" value="number" v-model="type"/>数值
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" value="tel" v-model="type"/>电话号码
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" value="url" v-model="type"/>网址
+                                    </label>
+                                    <br/>
+                                    <label class="radio-inline">
+                                        <input type="radio" value="date" v-model="type"/>日期
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" value="time" v-model="type"/>时间
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" value="datetime-local" v-model="type"/>
+                                        本地日期时间(webkit核心支持)
+                                    </label>
+                                    <br/>
+                                    <label class="radio-inline">
+                                        <input type="radio" value="month" v-model="type"/>
+                                        月份(webkit核心支持)
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" value="week" v-model="type"/>
+                                        星期(周)(webkit核心支持)
+                                    </label>
+
+
                                 </div>
                             </div>
+
                             <div class="form-group col-xs-12 col-md-6">
+                                <label>value 初始值</label>
+                                <div class="">
+                                    <input type="text" class="form-control" v-model="value"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-xs-12 col-md-6">
+                                <label>placeholder</label>
+                                <div class="">
+                                    <input type="text" class="form-control" v-model="placeholder"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-xs-12 col-md-3">
                                 <label>required 必填？</label>
                                 <div class="">
                                     <label class="checkbox-inline">
@@ -152,13 +215,8 @@
                                     </label>
                                 </div>
                             </div>
-                            <div class="form-group col-xs-12 col-md-6">
-                                <label>placeholder</label>
-                                <div class="">
-                                    <input type="text" class="form-control" v-model="placeholder"/>
-                                </div>
-                            </div>
-                            <div class="form-group col-xs-12 col-md-6">
+
+                            <div class="form-group col-xs-12 col-md-3">
                                 <label>autocomplete 自动完成</label>
                                 <div class="">
                                     <label class="checkbox-inline">
@@ -188,7 +246,7 @@
                                 {{label}}
                                 <span class="red" v-if="required">*</span>
                             </label>
-                            <input v-bind:id="id" v-bind:class="classAttr" type="text" v-bind:name="name"
+                            <input v-bind:id="id" v-bind:class="classAttr" v-bind:type="type" v-bind:name="name"
                                    v-bind:placeholder="placeholder"/>
                         </div>
                     </div>
@@ -196,119 +254,232 @@
                     <div class="mb10">
                         <p>代码：</p>
                         <div class="codeContainer">
-                            &lt;div&gt;<br/>
+                            &lt;div class=&quot;form-group&quot;&gt;<br/>
                                 &lt;label<span v-if="id"> for=&quot;{{id}}&quot;</span>&gt;<br/>
                                     {{label}}<span v-if="required">&lt;span class=&quot;red&quot;&gt;*&lt;/span&gt;</span><br/>
                                 &lt;/label&gt;<br/>
-                                &lt;input<span v-if="id"> id=&quot;{{id}}&quot;</span><span v-if="classAttr"> class=&quot;{{classAttr}}&quot;</span> type=&quot;text&quot;<span v-if="name"> name=&quot;{{name}}&quot;</span><span v-if="placeholder"> placeholder=&quot;{{placeholder}}&quot;</span><span v-if="required"> required=&quot;required&quot;</span><span v-if="autocomplete"> autocomplete=&quot;on&quot;</span><span v-if="autofocus"> autofocus=&quot;autofocus&quot;</span>/&gt;<br/>
+                                &lt;input<span v-if="id"> id=&quot;{{id}}&quot;</span><span v-if="classAttr"> class=&quot;{{classAttr}}&quot;</span> type=&quot;{{type}}&quot;<span v-if="value"> value=&quot;{{value}}&quot;</span><span v-if="name"> name=&quot;{{name}}&quot;</span><span v-if="placeholder"> placeholder=&quot;{{placeholder}}&quot;</span><span v-if="required"> required=&quot;required&quot;</span><span v-if="autocomplete"> autocomplete=&quot;on&quot;</span><span v-if="autofocus"> autofocus=&quot;autofocus&quot;</span>/&gt;<br/>
                             &lt;/div&gt;
                         </div>
                     </div>
 
                 </div>
-            </div>
+            </div><!-- end .row -->
 
-        </div>
+        </div><!-- end #textboxCodeGenerator -->
+
+        <div id="rangeSliderCodeGenerator">
+
+            <h2>范围滑动条组</h2>
+
+            <div class="row">
+
+                <div class="col-xs-12 col-md-6">
+
+                    <p>选项：</p>
+
+                    <form>
+                        <div class="row">
+                            <div class="form-group col-xs-12 col-md-4">
+                                <label>label 文本</label>
+                                <div class="">
+                                    <input type="text" class="form-control" v-model="label"/>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-md-4">
+                                <label>ID</label>
+                                <div class="">
+                                    <input type="text" class="form-control" v-model="id"/>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-md-4">
+                                <label>name</label>
+                                <div class="">
+                                    <input type="text" class="form-control" v-model="name"/>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-md-6">
+                                <label>class 类</label>
+                                <div class="">
+                                    <input type="text" class="form-control" v-model="classAttr"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-xs-12 col-md-6">
+                                <label>value 初始值</label>
+                                <div class="">
+                                    <input type="text" class="form-control" v-model="value"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-xs-12 col-md-6">
+                                <label>最小值</label>
+                                <div class="">
+                                    <input type="number" class="form-control" v-model="min"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-xs-12 col-md-6">
+                                <label>最大值</label>
+                                <div class="">
+                                    <input type="number" class="form-control" v-model="max"/>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-xs-12 col-md-6">
+
+                    <div class="mb10">
+                        <p>演示：</p>
+                        <div>
+                            <label v-bind:for="id">
+                                {{label}}
+                            </label>
+                            <input v-bind:id="id" v-bind:class="classAttr" type="range" v-bind:name="name"
+                                v-bind:min="min" v-bind:max="max"/>
+                        </div>
+                    </div>
+
+                    <div class="mb10">
+                        <p>代码：</p>
+                        <div class="codeContainer">
+                            &lt;div class=&quot;form-group&quot;&gt;<br/>
+                            &lt;label<span v-if="id"> for=&quot;{{id}}&quot;</span>&gt;{{label}}<br/>
+                            &lt;/label&gt;<br/>
+                            &lt;input<span v-if="id"> id=&quot;{{id}}&quot;</span><span v-if="classAttr"> class=&quot;{{classAttr}}&quot;</span> type=&quot;{{type}}&quot;<span v-if="value"> value=&quot;{{value}}&quot;</span><span v-if="min"> min=&quot;{{min}}&quot;</span><span v-if="max"> max=&quot;{{max}}&quot;</span><span v-if="name"> name=&quot;{{name}}&quot;</span>/&gt;<br/>
+                            &lt;/div&gt;
+                        </div>
+                    </div>
+
+                </div>
+            </div><!-- end .row -->
+
+        </div><!-- end #rangeSliderCodeGenerator -->
+
+        <div id="buttonCodeGenerator">
+
+            <h2>按钮</h2>
+
+            <div class="row">
+
+                <div class="col-xs-12 col-md-6">
+
+                    <p>选项：</p>
+
+                    <form>
+                        <div class="row">
+                            <div class="form-group col-xs-12 col-md-6">
+                                <label>text 文本</label>
+                                <div class="">
+                                    <input type="text" class="form-control" v-model="text"/>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-md-6">
+                                <label>type 类型</label>
+                                <div class="">
+                                    <label class="radio-inline">
+                                        <input type="radio" value="button"
+                                            v-model="type"/>button
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" value="submit"
+                                               v-model="type"/>submit
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" value="reset"
+                                               v-model="type"/>reset
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="form-group col-xs-12 col-md-6">
+                                <label>class 类</label>
+                                <div class="">
+                                    <input type="text" class="form-control" v-model="classAttr"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-xs-12 col-md-6">
+                                <label>圆角？</label>
+                                <div class="">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" value="yes" v-model="radius"/>是
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-xs-12 col-md-8">
+                                <label>尺寸</label>
+                                <div class="">
+                                    <button type="button" class="button xs" v-on:click="sizeClass='xs'">超小按钮</button>
+                                    <button type="button" class="button small" v-on:click="sizeClass='small'">小按钮</button>
+                                    <button type="button" class="button" v-on:click="sizeClass=''">普通按钮</button>
+                                    <button type="button" class="button large" v-on:click="sizeClass='large'">大按钮</button>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-xs-12 col-md-8">
+                                <label>颜色</label>
+                                <div class="">
+                                    <button type="button" class="button" v-on:click="colorClass=''">默认</button>
+                                    <button type="button" class="button red"
+                                         v-on:click="colorClass='red'">红色</button>
+                                    <button type="button" class="button darkred"
+                                         v-on:click="colorClass='darkred'">深红色</button>
+                                    <button type="button" class="button orange"
+                                         v-on:click="colorClass='orange'">橙色</button>
+                                    <button type="button" class="button yellow"
+                                         v-on:click="colorClass='yellow'">黄色</button>
+                                    <button type="button" class="button green"
+                                         v-on:click="colorClass='green'">绿色</button>
+                                    <button type="button" class="button darkgreen"
+                                         v-on:click="colorClass='darkgreen'">深绿色</button>
+                                    <button type="button" class="button cyan"
+                                         v-on:click="colorClass='cyan'">青色(蓝绿色)</button>
+                                    <button type="button" class="button blue"
+                                         v-on:click="colorClass='blue'">蓝色</button>
+                                    <button type="button" class="button pink"
+                                         v-on:click="colorClass='pink'">粉红色</button>
+                                    <button type="button" class="button purple"
+                                         v-on:click="colorClass='purple'">紫色</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-xs-12 col-md-6">
+
+                    <div class="mb10">
+                        <p>演示：</p>
+                        <div>
+                            <button v-bind:class="getClassAttr()" v-bind:type="type">{{text}}</button>
+                        </div>
+                    </div>
+
+                    <div class="mb10">
+                        <p>代码：</p>
+                        <div class="codeContainer">
+                            &lt;button class=&quot;{{getClassAttr()}}&quot; type=&quot;{{type}}&quot;&gt;{{text}}&lt;/button&gt;<br/>
+                        </div>
+                    </div>
+
+                </div>
+            </div><!-- end .row -->
+
+        </div><!-- end #buttonCodeGenerator -->
 
         <div class="row">
 
             <div class="col-xs-12 col-md-6">
 
                 <form>
-                    <div class="form-group">
-                        <label for="textInputbox">文本输入
-                            <span class="red">*</span>
-                        </label>
-                        <div>
-                            <input class="form-control" id="textInputbox" type="text"  name=""
-                                placeholder="输入文本"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="passwordInputbox">
-                            密码输入
-                            <span class="red">*</span>
-                        </label>
-                        <div>
-                            <input class="form-control" id="passwordInputbox" type="password" name=""
-                                placeholder="输入密码"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="emailInputbox">输入 E-mail</label>
-                        <div>
-                            <input class="form-control" id="emailInputbox" type="email" name=""
-                                placeholder="输入电子邮箱地址"/>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>电话号码输入</label>
-                        <div>
-                            <input class="form-control" type="tel" name="" value="1"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>网址输入</label>
-                        <div>
-                            <input class="form-control" type="url" name="" value="1"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>数字输入</label>
-                        <div>
-                            <input class="form-control" type="number" name="" value="1"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>有范围的滑动条</label>
-                        <div>
-                            <input class="form-control" type="range" name="" value="1"
-                                min="1" max="100"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>日期输入</label>
-                        <div>
-                            <input class="form-control" type="date" name="" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>datetime 输入 (Chrome 支持)</label>
-                        <div>
-                            <input class="form-control" type="datetime" name="" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>datetime-local 输入 (Chrome 支持)</label>
-                        <div>
-                            <input class="form-control" type="datetime-local" name="" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>月份输入 (Chrome 支持)</label>
-                        <div>
-                            <input class="form-control" type="month" name="" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>星期（周）输入 (Chrome 支持)</label>
-                        <div>
-                            <input class="form-control" type="week" name="" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>时间（时、分、秒）输入</label>
-                        <div>
-                            <input class="form-control" type="time" name="" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>颜色选择</label>
-                        <div>
-                            <input class="form-control" type="color" name="" value="#FFF" />
-                        </div>
-                    </div>
                     <div class="form-group">
                         <label>单选按钮组</label>
                         <div>
@@ -391,23 +562,23 @@
 <script src="../script/common_script/common_action.js"></script>
 
 <script>
-    $('code').each(function(){
-        var src = $(this).data('code-src');
-        if (!src)
-        {
-            return;
-        }
+$('code').each(function(){
+    var src = $(this).data('code-src');
+    if (!src)
+    {
+        return;
+    }
 
-        var srcEle = $(src);
-        if (!srcEle.length)
-        {
-            return;
-        }
-        var htmlCode = srcEle[0].outerHTML;
-        var htmlCodeLines = htmlCode.split("\n");
-        htmlCodeLines = removeSpaceInAheadOfLine(htmlCodeLines);
-        this.innerHTML = EncodeHtml(htmlCodeLines.join("\n"));
-    });
+    var srcEle = $(src);
+    if (!srcEle.length)
+    {
+        return;
+    }
+    var htmlCode = srcEle[0].outerHTML;
+    var htmlCodeLines = htmlCode.split("\n");
+    htmlCodeLines = removeSpaceInAheadOfLine(htmlCodeLines);
+    this.innerHTML = EncodeHtml(htmlCodeLines.join("\n"));
+});
 </script>
 
 <script>
@@ -428,12 +599,48 @@
             id : '',
             name : '',
             classAttr : 'form-control',
+            type: 'text',
+            value : '',
             required : '',
             placeholder : '',
             autocomplete : 'on',
             autofocus : ''
         }
-    })
+    });
+    var rangeSliderCodeGenerator = new Vue({
+        el : '#rangeSliderCodeGenerator',
+        data : {
+            label : 'label 文本',
+            id : '',
+            name : '',
+            classAttr : '',
+            value : '',
+            min : '',
+            max : '',
+            autofocus : ''
+        }
+    });
+    var buttonCodeGenerator = new Vue({
+        el : '#buttonCodeGenerator',
+        data : {
+            text : '提交',
+            type : 'submit',
+            radius : 'yes',
+            sizeClass : '',
+            colorClass : '',
+            classAttr : 'button'
+        },
+        methods : {
+            getClassAttr : function(){
+                var classList = this.classAttr.split(' ');
+                this.sizeClass ? classList.push(this.sizeClass) : null;
+                this.colorClass ? classList.push(this.colorClass) : null;
+                this.radius ? classList.push('rounded') : null;
+                return classList.join(' ');
+            }
+        }
+    });
+
 </script>
 
 </body>
