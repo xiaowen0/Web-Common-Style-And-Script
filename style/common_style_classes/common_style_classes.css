@@ -801,36 +801,43 @@ p.danger {
  */
 .button {
     display: inline-block;
-    min-height: 30px;
-    line-height: 1;
+    height: 30px;
+    line-height: 28px;
     white-space: nowrap;
     vertical-align: middle;
     cursor: pointer;
     background-color: #FFF;
     border: solid 1px #DDD;
     color: #666;
-    padding: 0.8ex;
+    padding: 0 1.6ex;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    font-size: 100%;
 }
 
 .button.large,
 .button.lg {
-    padding: 10px 16px;
-    font-size: 18px;
-    line-height: 1.3333333;
+    height: 40px;
+    line-height: 38px;
+    /*font-size: 150%;*/
+    padding: 0 2.4ex;
 }
 
 .button.small,
 .button.sm {
-    padding: 5px 10px;
-    font-size: 12px;
-    line-height: 1.5;
+    height: 20px;
+    line-height: 18px;
+    padding: 0 1.2ex;
+    font-size: 80%;
 }
 
 .button.extra_small,
 .button.xs {
-    padding: 1px 5px;
-    font-size: 12px;
-    line-height: 1.5;
+    height: 14px;
+    line-height: 12px;
+    padding: 0 0.8ex;
+    font-size: 60%;
 }
 
 .button.red,
