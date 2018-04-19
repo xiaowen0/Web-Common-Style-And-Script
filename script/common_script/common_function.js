@@ -1927,6 +1927,44 @@ function initDialogAction()
 }
 
 /**
+ * open dialog
+ * @param String|Object(HTMLElement)  css_selector  CSS selector string for dialog
+ * @param Object  options
+ * - Function onConfirm(Object dialog)  trigger when click confirm button
+ * - Function onCancel(Object dialog)  trigger when click cancel button
+ */
+function openDialog(css_selector, options)
+{
+    typeof (options) == 'object' ? null : options = {};
+
+    var onConfirm   = options.onConfirm || function(){};
+    var onCancel    = options.onCancel || function(){};
+
+    var jDialog = $(css_selector);
+
+    var jFormEle    = jDialog.find('.dialog_body form');
+    var form        = jFormEle.length ? jFormEle[0] : null;
+
+    jDialog.find('.confirmButton').on('click', function(){
+        onConfirm(jDialog[0], form);
+    });
+    jDialog.find('.cancelButton').on('click', function(){
+        onCancel(jDialog[0]);
+    });
+
+    $(css_selector).fadeIn();
+}
+
+/**
+ * close dialog
+ * @param String|Object(HTMLElement)  css_selector  CSS selector string for dialog
+ */
+function closeDialog(css_selector)
+{
+    $(css_selector).fadeOut();
+}
+
+/**
  * show a message box
  * @param message  String  message text
  * @param title    String  message box title
