@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <title>对话框代码生成</title>
+
+    <!-- Bootstrap framework -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"/>
+
+    <!-- common style classes library -->
+    <link rel="stylesheet" href="../style/common_style_classes/common_style_classes.css"/>
+    <link rel="stylesheet" href="../style/common_style_classes/common_component.css"/>
+
+    <style>
+        .codeContainer {
+            color: green;
+        }
+        h2 {
+            background-color: #f2f2f2;
+            padding: 8px;
+            border-radius: 6px;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="page container-fluid">
+    <div class="inner padding10">
+
+        <h1>对话框代码生成</h1>
+
+        <div id="dialogCodeGenerator">
+
+            <div class="row">
+
+                <div class="col-xs-12 col-md-6">
+                    <p>选项</p>
+
+                    <form>
+
+                        <div class="row">
+                            <div class="form-group col-xs-12 col-md-6">
+                                <label>ID</label>
+                                <div class="">
+                                    <input class="form-control" type="text" v-model="id"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-xs-12 col-md-6">
+                                <label>对话框类型</label>
+                                <div class="">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="dialog_type" value="" v-model="dialog_type"/>普通
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="dialog_type" value="messageBox"
+                                            v-model="dialog_type"/>消息框
+                                    </label>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group col-xs-12 col-md-6">
+                                <label>标题</label>
+                                <div class="">
+                                    <input class="form-control" type="text" v-model="title"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-xs-12 col-md-6">
+                                <label>需要对话框脚部？</label>
+                                <div class="">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" v-model="needDialogFooter"/>是
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </form>
+                </div>
+
+                <div class="col-xs-12 col-md-6">
+                    <p>预览</p>
+                    <div>
+                        <div class="dialog inline">
+                            <div class="dialog_header">
+                                <div class="dialog_title">{{title}}</div>
+                                <div class="button_group">
+                                    <button type="button" class="button close_button">&times;</button>
+                                </div>
+                            </div>
+                            <div class="dialog_body">
+                                <p>对话框内容...</p>
+                            </div>
+                            <div class="dialog_footer text-center mb10" v-if="needDialogFooter">
+                                脚部
+                            </div>
+                        </div>
+                    </div>
+                    <p>代码</p>
+                    <div class="codeContainer">
+                        &lt;div<span v-if="id"> id=&quot;{{id}}&quot;</span> class=&quot;dialog<span v-if="dialog_type"> {{dialog_type}}</span>&quot;&gt;<br/>
+                        &lt;div class=&quot;dialog_header&quot;&gt;<br/>
+                                &lt;div class=&quot;dialog_title&quot;&gt;{{title}}&lt;/div&gt;<br/>
+                                &lt;div class=&quot;button_group&quot;&gt;<br/>
+                                    &lt;button type=&quot;button&quot; class=&quot;button close_button&quot;&gt;&amp;times;&lt;/button&gt;<br/>
+                                &lt;/div&gt;<br/>
+                            &lt;/div&gt;<br/>
+                            &lt;div class=&quot;dialog_body&quot;&gt;<br/>
+                                &lt;p&gt;对话框内容...</p&gt;<br/>
+                            &lt;/div&gt;<br/>
+                            <span v-if="needDialogFooter">&lt;div class=&quot;dialog_footer text-center mb10&quot;&gt;<br/>
+                                脚部<br/>
+                                &lt;/div&gt;<br/></span>
+                        &lt;/div&gt;
+                    </div>
+
+                </div>
+
+            </div><!-- end .row -->
+
+        </div><!-- #dialogCodeGenerator -->
+
+    </div>
+</div>
+
+<script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script src="../asset/vue.2.5.16.js"></script>
+<script src="../script/common_script/common_function.js"></script>
+<script src="../script/common_script/common_action.js"></script>
+
+<script>
+var dialogCodeGenerator = new Vue({
+    el : '#dialogCodeGenerator',
+    data : {
+        id : '',
+        dialog_type : '',
+        title : '对话框标题',
+        needDialogFooter : ''
+    },
+    methods : {
+    }
+});
+</script>
+
+</body>
+</html>
