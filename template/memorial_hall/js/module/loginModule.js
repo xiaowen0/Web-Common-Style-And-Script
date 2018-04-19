@@ -1,6 +1,6 @@
 /**
  * Created by wen on 2018/4/17.
- * module for edit information
+ * module for login form
  */
 
 define(['vue', 'jquery'], function (Vue){
