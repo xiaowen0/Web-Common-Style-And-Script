@@ -1932,6 +1932,7 @@ function initDialogAction()
  * @param Object  options
  * - Function onConfirm(Object dialog)  trigger when click confirm button
  * - Function onCancel(Object dialog)  trigger when click cancel button
+ * - Function onShow(Object dialog)  trigger when dialog show
  */
 function openDialog(css_selector, options)
 {
@@ -1939,6 +1940,7 @@ function openDialog(css_selector, options)
 
     var onConfirm   = options.onConfirm || function(){};
     var onCancel    = options.onCancel || function(){};
+    var onShow      = options.onShow || function(){};
 
     var jDialog = $(css_selector);
 
@@ -1952,7 +1954,9 @@ function openDialog(css_selector, options)
         onCancel(jDialog[0]);
     });
 
-    $(css_selector).fadeIn();
+    $(css_selector).fadeIn(function(){
+        onShow(jDialog[0]);
+    });
 }
 
 /**
