@@ -1957,6 +1957,9 @@ function openDialog(css_selector, options)
     $(css_selector).fadeIn(function(){
         onShow(jDialog[0]);
     });
+
+    adjustDialog(jDialog[0]);
+    centerDialog(jDialog[0]);
 }
 
 /**

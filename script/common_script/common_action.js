@@ -253,8 +253,9 @@ $(document).ready(function ()
             $(this).css('height', height + 'px');
         });
 
-        // adjust dialog
-        $('.dialog').each(function(){
+        // adjust visible dialog
+        $('.dialog:visible').each(function()
+        {
             adjustDialog(this);
             centerDialog(this);
         });
