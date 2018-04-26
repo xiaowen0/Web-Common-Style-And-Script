@@ -508,6 +508,51 @@
     color: #666
 }
 
+/* blink */
+
+@keyframes blink_keyframes {
+    0%{opacity: 1;}
+    50%{opacity: 1;}
+    50.01%{opacity: 0;} /* 注意这里定义50.01%立刻透明度为０，可以设置闪烁效果 */
+    100%{opacity: 0;}
+}
+
+@-webkit-keyframes blink_keyframes {
+    0% { opacity: 1; }
+    50% { opacity: 1; }
+    50.01% { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+@-moz-keyframes blink_keyframes {
+    0% { opacity: 1; }
+    50% { opacity: 1; }
+    50.01% { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+@-ms-keyframes blink_keyframes {
+    0% { opacity: 1; }
+    50% { opacity: 1; }
+    50.01% { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+@-o-keyframes blink_keyframes {
+    0% { opacity: 1; }
+    50% { opacity: 1; }
+    50.01% { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+.blink {
+    -webkit-animation: blink_keyframes .75s linear infinite;
+    -moz-animation: blink_keyframes .75s linear infinite;
+    -ms-animation: blink_keyframes .75s linear infinite;
+    -o-animation: blink_keyframes .75s linear infinite;
+    animation: blink_keyframes .75s linear infinite;
+}
+
 /* mouse cursor */
 .hand {
     cursor: pointer
