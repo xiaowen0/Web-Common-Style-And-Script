@@ -913,6 +913,32 @@
     border-radius: 0 6px 6px 0;
 }
 
+.toolbarV2 {
+    background-color: #EEE;
+    border: solid 1px #DDD;
+    padding: 10px;
+}
+.toolbarV2:before,
+.toolbarV2:after {
+    display: table;
+    content: '';
+    width: 0;
+    height: 0;
+    line-height: 0;
+    clear: both;
+}
+
+.toolbarV2 .button {
+    height: 40px;
+    line-height: 20px;
+    box-sizing: border-box;
+    padding: 9px 18px;
+    float: left;
+    _float: none;
+    _display: inline-block;
+    margin-right: 10px;
+}
+
 /* progress */
 .progress {
     background: #e8edf2;
