@@ -160,17 +160,17 @@ function alertDebugLog(text)
  */
 function addDebugInfo(text, type)
 {
-	var infoType = type ? type : 'info';
-	
+    var infoType = type ? type : 'info';
+
     if ( !$('#debugInfoDialog').length )
-	{
-    	addConsoleLog('[warnning] element: #debugInfoDialog not exist.');
-    	return;
-	}
-    
+    {
+        addConsoleLog('[warnning] element: #debugInfoDialog not exist.');
+        return;
+    }
+
     var fulltext = '[' + infoType + '] ' + text;
-	var info = '<p>' + fulltext + '</p>';
-	$('#debugInfoDialog .infoContainer').append(info);
+    var info = '<p>' + fulltext + '</p>';
+    $('#debugInfoDialog .infoContainer').append(info);
 }
 
 /**
@@ -1062,6 +1062,45 @@ function loadScript(url, options)
     }
 
     document.body.appendChild(scriptLink);
+}
+
+/**
+ * download a file, not display in window
+ * @param url  String
+ */
+function downloadFile(url)
+{
+    if (isIE())
+    {
+        var imageWindow = window.open(url);
+        imageWindow.onload = (function()
+        {
+            // open design mode
+            // reference: https://developer.mozilla.org/zh-CN/docs/Web/API/Document/designMode
+            this.document.designMode = "ON";
+            // only IE support SaveAs action
+            this.document.execCommand("SaveAs");
+
+            this.close();
+        });
+        if (imageWindow.document.readyState == "complete")
+        {
+            imageWindow.onload();
+        }
+    }
+    else
+    {
+        var linkElm = createElement('a', {
+            href : url,
+            target : '_blank',
+            download : ''
+        });
+        linkElm.style.display = 'none';
+        document.body.appendChild(linkElm);
+        linkElm.click();
+        linkElm = null;
+    }
+
 }
 
 /**
@@ -2034,6 +2073,15 @@ function getBrowserCore()
 
     // Return "unknown" as unknown core  不是主流浏览器
     return "unknown";
+}
+
+/**
+ * check if is IE
+ * @returns boolean
+ */
+function isIE()
+{
+    return getBrowserCore() == "Trident";
 }
 
 /**
