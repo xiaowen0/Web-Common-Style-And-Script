@@ -1,7 +1,7 @@
 /**
  * common function
  * dependent on jQuery
- * last update:     2017-09-05 09:35
+ * last update:     2018-05-17 16:43
  */
 
 var dependencies = ['jquery', 'bootstrap', 'boorstrapTheme'];
