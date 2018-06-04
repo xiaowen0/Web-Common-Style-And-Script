@@ -1,7 +1,7 @@
 /**
  * common function
  * dependent on jQuery
- * last update:     2018-05-17 16:43
+ * last update:     2018-06-14 14:19
  */
 
 var dependencies = ['jquery', 'bootstrap', 'boorstrapTheme'];
@@ -1432,15 +1432,12 @@ function setTakeTurns(elementList, options)
 
     var timer = setInterval(function()
     {
-        // check element type
-        if (typeof(elementList) === 'string')
-        {
-            elementList = $(elementList);
-        }
+		var list = typeof(elementList) === 'string' ?
+			$(elementList) : elementList;
 
         // get hidden item count
-        var count = elementList.length;
-        var hideCount = elementList.filter(':hidden').length;
+        var count = list.length;
+        var hideCount = list.filter(':hidden').length;
 
         hideCount += number;
         if (hideCount >= count)
@@ -1457,7 +1454,7 @@ function setTakeTurns(elementList, options)
         }
 
         // hide some element
-        elementList.show().filter(':lt(' + hideCount + ')').hide();
+        list.show().filter(':lt(' + hideCount + ')').hide();
 
     }, interval * 1000);
 
