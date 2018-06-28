@@ -199,6 +199,31 @@
                 </div>
             </div>
 
+            <div class="col-xs-12 col-sm-6">
+                <div class="panel panel-default">
+
+                    <div class="panel-body">
+
+                        <h3>初始化导入按钮</h3>
+
+                        <p>var fileImportHelper1 = initImportButton('#importFileButton', {name : 'file'});</p>
+
+                        <p>第一个参数：导入按钮的引用，或 CSS Selector。</p>
+                        <p>第二个参数：导入选项。</p>
+
+                        <p>action: String 接收文件上传的 URL</p>
+                        <p>valid_extensions:  Array  可接受上传的文件扩展名</p>
+                        <p>params: Object  其他请求参数</p>
+                        <p>onComplete: function(response)  完成后回调</p>
+                        <p>onStart: function()  开始上传后回调</p>
+                        <p>onCancel: function()  取消上传后的回调</p>
+
+                        <button type="button" id="importFileButton" class="button">导入</button>
+                    </div>
+
+                </div>
+            </div>
+
         </div>
 
     </div>
@@ -232,11 +257,36 @@
     loadDependencies();
 </script>
 
+<script src="../asset/jQuery.AjaxFileUpload/jquery.ajaxfileupload.js"></script>
+
 <!-- common action (must after jQuery) -->
 <script src="../script/common_script/common_action.js"></script>
 
 <script src="../js/errorMessageList.js"></script>
 <script src="../js/appConfig.js"></script>
+
+<script>
+
+    $(document).ready(function(){
+        var fileImportHelper1 = initImportButton('#importFileButton', {
+            name : 'pdf',
+            action: '/pdf2img',
+            valid_extensions : ['pdf'],
+            params: {},
+            onComplete: function(response) {
+                console.log('custom handler for file:');
+                alert(JSON.stringify(response));
+            },
+            onStart: function() {
+                if(0) return false; // cancels upload
+            },
+            onCancel: function() {
+                console.log('no file selected');
+            }
+        });
+    });
+
+</script>
 
 </body>
 </html>

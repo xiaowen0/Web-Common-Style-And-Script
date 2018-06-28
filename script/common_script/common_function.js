@@ -23,6 +23,31 @@ var cdnList = {
     }
 };
 
+/* --- Number function group --------------------------------------- */
+
+
+function fixFloatingPointNumber(number, bit) {
+	
+	var numberStr = new String(number);
+	if (numberStr.indexOf('.') < 0)	// no point, fill 0
+	{
+		return numberStr + '.' + repeatString('0', bit);
+	}
+	
+	var a1 = numberStr.split('.');  a1[1].length;
+	
+	if (a1[1].length < bit)
+	{
+		a1[1] += repeatString('0', bit - a1[1].length);
+	}
+	else if (a1[1].length > bit)
+	{
+		a1[1] = a1[1].substr(0, bit);
+	}
+	
+	return a1.join('.');
+}
+
 /* --- debug function group ------------------------------------------ */
 
 /**
@@ -194,6 +219,46 @@ function printObject(object)
 }
 
 /**
+ * clone object
+ * @param   Object  object
+ * @return  Object
+ */
+function cloneObject(object)
+{
+    var newObject = new Object();
+
+    for (var name in object)
+    {
+        newObject[name] = object[name];
+    }
+
+    return newObject;
+}
+
+/**
+ * merge 2 object to a new object
+ * @param   Object  obj1
+ * @param   Object  obj2
+ * @return  Object
+ */
+function mergeObject(obj1, obj2)
+{
+    var newObject = new Object();
+
+    var name;
+    for (name in obj1)
+    {
+        newObject[name] = obj1[name];
+    }
+    for (name in obj2)
+    {
+        newObject[name] = obj2[name];
+    }
+
+    return newObject;
+}
+
+/**
  * set debug's content
  * @param content  String|Array   content name or array of content name
  * @returns boolean
@@ -311,6 +376,23 @@ function disableCtrlC()
 }
 
 /* --- String function group ---------------------------------------------------------- */
+
+/**
+ * repeat string
+ * @param String  string
+ * @param Number  times
+ */
+function repeatString(string, times)
+{
+	var result = "";
+	
+	for (var i=1; i<=times; i++)
+	{
+		result += string;
+	}
+	
+	return result;
+}
 
 /**
  * replace string
@@ -2658,6 +2740,42 @@ function setTextareaAutoIncreaseHeight(textarea)
             this.style.height = this.scrollHeight + "px";
         }
     });
+}
+
+/**
+ * init importing file button
+ * @param element   String|HTMLElement  css selector for element or element quoto
+ * @param options   Object
+ * @return      Object(ImportHelper)
+ */
+function initImportButton(element, options)
+{
+    var defaultOptions = {
+        type : 'file'
+    };
+
+    typeof(options) === 'object' ? null : options = {};
+    var name = options.name || '';
+
+    var realOptions = mergeObject(defaultOptions, {
+        name : name
+    });
+
+    var helper = {
+        name : 'ImportHelper',
+        control : createElement('input', realOptions)
+    };
+
+    $(helper.control).hide();
+    document.body.appendChild(helper.control);
+
+    $(helper.control).ajaxfileupload(options);
+
+    $(element).on('click', function(){
+        $(helper.control).trigger('click');
+    });
+
+    return helper;
 }
 
 /**
