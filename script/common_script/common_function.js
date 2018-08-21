@@ -1,7 +1,7 @@
 /**
  * common function
  * dependent on jQuery
- * last update:     2018-06-14 14:19
+ * last update:     2018-08-21 10:35
  */
 
 var dependencies = ['jquery', 'bootstrap', 'boorstrapTheme'];
@@ -2407,7 +2407,7 @@ function convertImage2Canvas(image, options, callback)
 /* --- Form function group ----------------------------------------------- */
 
 /**
- * get form element
+ * get form by element
  * @param element   Object(HTMLElement)
  * @returns Object(HTMLElement)|null
  */
@@ -2553,6 +2553,38 @@ function setFormControl(form, name, value)
 }
 
 /**
+ * check form is validate
+ * @param   form    Object(HTMLFormElement) | String    form element or id
+ * @returns boolean
+ */
+function checkForm(form)
+{
+	// get element by ID
+    if (typeof (form) === 'string') {
+        var formId = form;
+        form = document.getElementById(form);
+        if (!form) {
+            addErrorLog('form dom with id:' + formId + ' not found.');
+            return false;
+        }
+    }
+    
+    for (var i=0; i<form.length; i++)
+	{
+    	var required = form[i].required || false;
+    	var value = form[i].value;
+    	
+    	if (required && value === "")
+		{
+    		form[i].focus();
+    		return false;
+		}
+	}
+    
+	return form.checkValidity();
+}
+
+/**
  * check a form element is locked
  * @param   form    Object(HTMLElement)|String       form element or ID
  * @returns boolean
@@ -2577,6 +2609,7 @@ function formIsLocked(form)
     return form.dataset.lock === 'on';
 
 }
+var isLockedForm = formIsLocked;
 
 /**
  * lock form
@@ -2630,6 +2663,7 @@ function formNoMoreData(form)
 
     form.dataset.noMoreData = "on";
 }
+var setFormNoMoreData = formNoMoreData;
 
 /**
  * set form has more data
@@ -2647,6 +2681,7 @@ function formMoreData(form)
 
     form.dataset.noMoreData = 'off';
 }
+var setFormHasMoreData = formMoreData;
 
 /**
  * check if the form has more data
@@ -2673,6 +2708,7 @@ function formHasMoreData(form)
     // default has more data
     return true;
 }
+var isFormHasMoreData = formHasMoreData;
 
 /**
  * set check all action
