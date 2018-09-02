@@ -2711,6 +2711,33 @@ function formHasMoreData(form)
 var isFormHasMoreData = formHasMoreData;
 
 /**
+ * add some options to selectbox
+ * @param selectbox     Object(HTMLElemet)
+ * @param list          Array
+ */
+function selectboxAddOptions(selectbox, list)
+{
+    if (typeof(selectbox) === "string")
+    {
+        var selectboxJq = $(selectbox);
+        if (!selectboxJq.length)
+        {
+            return;
+        }
+        selectbox = selectboxJq[0];
+    }
+
+    for (var i=0; i<list.length; i++)
+    {
+        var option = createElement('option', {
+            value : list[i].id
+        });
+        option.innerHTML = list[i].name;
+        selectbox.appendChild(option);
+    }
+}
+
+/**
  * set check all action
  * @param   checkbox    Object(HTMLInputElement)
  */
