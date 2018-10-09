@@ -918,6 +918,21 @@ function printTime(element, format)
 }
 
 /**
+ * get now time
+ * @param String  format
+ * @return String
+ */
+function getNowTime(format)
+{
+    if (!format)
+    {
+        format = 'YYYY-MM-DD H:mm:ss';
+    }
+
+    return moment().format(format);
+}
+
+/**
  * set a number count backwards
  * @param Object(HTMLElement)  element
  * @param Object               options
