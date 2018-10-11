@@ -1232,6 +1232,15 @@ table.striped tbody tr.hover > tbody > tr:hover {
     margin-bottom: 15px;
 }
 
+.form_row {
+    line-height: 30px;
+}
+
+.form_row > * {
+    height: 30px;
+    margin-bottom: 0;
+}
+
 .form label,
 .label,
 .form_label {
@@ -1245,7 +1254,8 @@ table.striped tbody tr.hover > tbody > tr:hover {
 .form textarea,
 .form .text,
 .inputbox,
-.textbox {
+.textbox,
+.selectbox {
     background-color: #fff;
     border: 1px solid #d5d5d5;
     border-radius: 0;
@@ -1256,7 +1266,7 @@ table.striped tbody tr.hover > tbody > tr:hover {
     transition-duration: 0.1s;
     box-sizing: border-box;
     vertical-align: middle;
-    width: 100%;
+    /*width: 100%; cancel in v2.0 */
     height: 30px;
     padding-left: 8px;
     padding-right: 8px;
@@ -1267,6 +1277,7 @@ input.inline {
     width: auto;
 }
 
+/* textarea tag */
 .form textarea,
 textarea.inputbox,
 textarea.textbox {
@@ -1274,6 +1285,7 @@ textarea.textbox {
     min-height: 80px;
 }
 
+/* error status */
 input[type="text"].error,
 textarea.error,
 .inputbox.error,
@@ -1285,6 +1297,7 @@ textarea.error,
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
 }
 
+/* success status */
 input[type="text"].success,
 textarea.success,
 .inputbox.success,
@@ -1296,6 +1309,7 @@ textarea.success,
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
 }
 
+/* warning status */
 input[type="text"].warning,
 textarea.warning,
 .inputbox.warning,
@@ -1307,6 +1321,7 @@ textarea.warning,
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
 }
 
+/* disabled and readonly status */
 .form input[type="text"][disabled],
 .form input[type="text"][readonly],
 .form textarea[disabled],
@@ -1346,6 +1361,7 @@ textarea.warning,
     font-weight: normal;
 }
 
+/* selectbox */
 .form select,
 .selectbox {
     background-color: #fff;
@@ -1388,6 +1404,7 @@ select.inline {
     right: 3px;
 }
 
+/* color selector button */
 .colorSelectorButton {
     width: 30px;
     height: 30px;
