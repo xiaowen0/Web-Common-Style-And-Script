@@ -27,25 +27,25 @@ var cdnList = {
 
 
 function fixFloatingPointNumber(number, bit) {
-	
-	var numberStr = new String(number);
-	if (numberStr.indexOf('.') < 0)	// no point, fill 0
-	{
-		return numberStr + '.' + repeatString('0', bit);
-	}
-	
-	var a1 = numberStr.split('.');  a1[1].length;
-	
-	if (a1[1].length < bit)
-	{
-		a1[1] += repeatString('0', bit - a1[1].length);
-	}
-	else if (a1[1].length > bit)
-	{
-		a1[1] = a1[1].substr(0, bit);
-	}
-	
-	return a1.join('.');
+
+    var numberStr = new String(number);
+    if (numberStr.indexOf('.') < 0)	// no point, fill 0
+    {
+        return numberStr + '.' + repeatString('0', bit);
+    }
+
+    var a1 = numberStr.split('.');  a1[1].length;
+
+    if (a1[1].length < bit)
+    {
+        a1[1] += repeatString('0', bit - a1[1].length);
+    }
+    else if (a1[1].length > bit)
+    {
+        a1[1] = a1[1].substr(0, bit);
+    }
+
+    return a1.join('.');
 }
 
 /* --- debug function group ------------------------------------------ */
@@ -384,14 +384,14 @@ function disableCtrlC()
  */
 function repeatString(string, times)
 {
-	var result = "";
-	
-	for (var i=1; i<=times; i++)
-	{
-		result += string;
-	}
-	
-	return result;
+    var result = "";
+
+    for (var i=1; i<=times; i++)
+    {
+        result += string;
+    }
+
+    return result;
 }
 
 /**
@@ -427,6 +427,23 @@ function replaceData(string, data)
             string = string.replace(p, data[p]);
         }
     }
+
+    return string;
+}
+
+/**
+ * first letter upper case
+ * @param string  String
+ * @returns String
+ */
+function firstLetterUpperCase(string)
+{
+    if (string.length == 0)
+    {
+        return string;
+    }
+    var firstLetter = string[0].toUpperCase();
+    string = firstLetter + string.substring(1, string.length);
 
     return string;
 }
@@ -732,6 +749,19 @@ function simplifyPath(url)
         url = url.replace(rule1, '');
     }
 
+    return url;
+}
+
+/**
+ * get absolute base url like: http://www.example.com/
+ * @return String
+ */
+function getAbsoluteBaseUrl()
+{
+    var protocol = location.protocol;
+    var hostname = location.hostname;
+
+    var url = protocol + "://" + hostname + "/";
     return url;
 }
 
@@ -1174,14 +1204,36 @@ function downloadFile(url)
         {
             // open design mode
             // reference: https://developer.mozilla.org/zh-CN/docs/Web/API/Document/designMode
-            this.document.designMode = "ON";
-            // only IE support SaveAs action
-            this.document.execCommand("SaveAs");
-
-            this.close();
+            try
+            {
+                this.document.designMode = "ON";
+            }
+            catch(e)
+            {
+                addConsoleLog(e.message);
+            }
+            
+            try
+            {
+                // only IE support SaveAs action
+                this.document.execCommand("SaveAs");
+                this.close();
+            }
+            catch(e)
+            {
+                addConsoleLog(e.message);
+            }
         });
-        if (imageWindow.document.readyState == "complete")
+        try
         {
+            if (imageWindow.document.readyState == "complete")
+            {
+                imageWindow.onload();
+            }
+        }
+        catch(e)
+        {
+            addConsoleLog(e.message);
             imageWindow.onload();
         }
     }
@@ -1529,8 +1581,8 @@ function setTakeTurns(elementList, options)
 
     var timer = setInterval(function()
     {
-		var list = typeof(elementList) === 'string' ?
-			$(elementList) : elementList;
+        var list = typeof(elementList) === 'string' ?
+            $(elementList) : elementList;
 
         // get hidden item count
         var count = list.length;
@@ -2574,7 +2626,7 @@ function setFormControl(form, name, value)
  */
 function checkForm(form)
 {
-	// get element by ID
+    // get element by ID
     if (typeof (form) === 'string') {
         var formId = form;
         form = document.getElementById(form);
@@ -2583,20 +2635,20 @@ function checkForm(form)
             return false;
         }
     }
-    
+
     for (var i=0; i<form.length; i++)
-	{
-    	var required = form[i].required || false;
-    	var value = form[i].value;
-    	
-    	if (required && value === "")
-		{
-    		form[i].focus();
-    		return false;
-		}
-	}
-    
-	return form.checkValidity();
+    {
+        var required = form[i].required || false;
+        var value = form[i].value;
+
+        if (required && value === "")
+        {
+            form[i].focus();
+            return false;
+        }
+    }
+
+    return form.checkValidity();
 }
 
 /**
