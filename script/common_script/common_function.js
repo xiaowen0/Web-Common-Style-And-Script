@@ -760,8 +760,14 @@ function getAbsoluteBaseUrl()
 {
     var protocol = location.protocol;
     var hostname = location.hostname;
+    var port = location.port;
 
-    var url = protocol + "://" + hostname + "/";
+    var url = protocol + "//" + hostname;
+    if (port != 80 || port != 443)
+    {
+        url += ":" + port;
+    }
+    url += "/";
     return url;
 }
 
