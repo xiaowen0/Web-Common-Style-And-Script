@@ -1,7 +1,7 @@
 /**
  * common function
  * dependent on jQuery
- * last update:     2018-08-21 10:35
+ * last update:     2018-11-22 12:00
  */
 
 var dependencies = ['jquery', 'bootstrap', 'boorstrapTheme'];
@@ -373,6 +373,49 @@ function disableCtrlC()
         ;
     }
     return false;
+}
+
+/**
+ * get browser finger printing
+ * it use different canvas algorithm of browser to generate different image code
+ * use this code can classify browser, then prevent user agent is altered.
+ * @return String
+ */
+function getBrowserFingerPrinting()
+{
+    // create canvas element
+    var canvas = document.createElement('canvas');
+
+    if (typeof(canvas.getContext) === "undefined")
+    {
+        addConsoleLog("Not support browser finger printing on current browser.");
+        return "";
+    }
+
+    var ctx;
+    try
+    {
+        ctx = canvas.getContext('2d');
+    }
+    catch (e)
+    {
+        addConsoleLog(e);
+        return "";
+    }
+
+    // write host name
+    var txt = "http://" + location.hostname;
+    ctx.textBaseline = "top";
+    ctx.font = "14px 'Arial'";
+    ctx.textBaseline = location.hostname;
+    ctx.fillStyle = "#f60";
+    ctx.fillRect(125,1,62,20);
+    ctx.fillStyle = "#069";
+    ctx.fillText(txt, 2, 15);
+    ctx.fillStyle = "rgba(102, 204, 0, 0.7)";
+    ctx.fillText(txt, 4, 17);
+
+    return canvas.toDataURL();
 }
 
 /* --- String function group ---------------------------------------------------------- */
@@ -1218,7 +1261,7 @@ function downloadFile(url)
             {
                 addConsoleLog(e.message);
             }
-            
+
             try
             {
                 // only IE support SaveAs action
