@@ -1,7 +1,7 @@
 /**
  * common function
  * dependent on jQuery
- * last update:     2018-11-22 12:00
+ * last update:     2018-12-04 16:00
  */
 
 var dependencies = ['jquery', 'bootstrap', 'boorstrapTheme'];
@@ -1255,6 +1255,45 @@ function loadScript(url, options)
     }
 
     document.body.appendChild(scriptLink);
+}
+
+/**
+ * execute script from a file
+ * @param String    url
+ * @param Function  callback
+ * -- Object|null   error   a object save error information
+ * -- String        text    script text content
+ */
+function execScript(url, callback)
+{
+    $.ajax(url, {
+        dataType : 'text',
+        success : function (text)
+        {
+            try
+            {
+                eval(text);
+            }
+            catch (e)
+            {
+                callback(e, '');
+            }
+
+            if (callback)
+            {
+                callback(null, text);
+            }
+        },
+        error : function (request, message){
+            if (callback)
+            {
+                callback({
+                    request : request,
+                    message : message
+                }, '');
+            }
+        }
+    });
 }
 
 /**

@@ -200,6 +200,30 @@
     }
 }
 
+/* tag in article element */
+.article h1 {
+    margin-bottom: 30px;
+}
+.article h2,
+.article h3,
+.article h4,
+.article table {
+    margin-bottom: 20px;
+}
+
+.article h5,
+.article h6,
+.article p,
+.article ul,
+.article ol {
+    margin-bottom: 10px;
+}
+
+.article ul,
+.article ol {
+    padding-left: 20px;
+}
+
 .article .articleNav {
     overflow: visible;
 }
