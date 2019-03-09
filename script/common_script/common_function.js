@@ -1,7 +1,7 @@
 /**
  * common function
  * dependent on jQuery
- * last update:     2018-12-04 16:00
+ * last update:     2019-03-09
  */
 
 var dependencies = ['jquery', 'bootstrap', 'boorstrapTheme'];
@@ -4070,3 +4070,25 @@ function initLanguageSelectbox(selectbox, options)
     });
 }
 
+/**
+ * parse a text to native language text
+ * @param String text
+ * @return String
+ */
+function parseNativeLang(text)
+{
+    if (typeof(window.nativeLanguage) == 'undefined')
+    {
+        window.nativeLanguage = {};
+    }
+
+    for (var key in window.nativeLanguage)
+    {
+        if (key == text)
+        {
+            return window.nativeLanguage[key];
+        }
+    }
+
+    return text;
+}
