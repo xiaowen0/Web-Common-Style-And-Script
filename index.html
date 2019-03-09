@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Web-Common-Style-And-Script readme</title>
+
+    <meta name="renderer" content="webkit|ie-comp|ie-stand" />
+
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="stylesheet" href="../style/common_style_classes/common_style_classes.css" />
+
+    <link rel="stylesheet" href="../style/common_style_classes/common_component.css" />
+
+    <!-- check IE old version, add HTML5 support. -->
+    <!--[if lt IE 9]>
+    <script src="../asset/html5shiv.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+<div class="page container-fluid">
+
+    <div class="inner">
+
+        <!--CONTENT-->
+		<article id="article">
+		
+		</article>
+
+    </div>
+
+</div>
+
+<script src="script/common_script/common_function.js"></script>
+
+<script src="asset/jquery/jquery-3.1.0.min.js"></script>
+<script src="asset/showdown/dist/showdown.js"></script>
+
+<script>
+$.ajax('readme.md', {
+	success : function (content)
+	{
+		var converter = new showdown.Converter(); //初始化转换器
+		var htmlcontent = converter.makeHtml(content); //将MarkDown转为html格式的内容
+		$("#article").html(htmlcontent); //添加到 div 中 显示出来
+	}
+});
+</script>
+
+</body>
+
+</html>
