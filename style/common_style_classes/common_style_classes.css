@@ -1048,6 +1048,10 @@ p.danger {
     border-radius: 50% 50%;
 }
 
+.menuButton .icon-bar {
+    background-color: #000;
+}
+
 /* list style */
 .list {
     margin: 0;
