@@ -1,7 +1,7 @@
 /**
  * common function
  * dependent on jQuery
- * last update:     2019-03-09
+ * last update:     2019-04-09
  */
 
 var dependencies = ['jquery', 'bootstrap', 'boorstrapTheme'];
@@ -658,18 +658,27 @@ function data2String(data)
  */
 function createUrl(url, params)
 {
-    if (typeof(params) === 'object') {
-        url += '?';
-        var param_string = '';
-
-        for (var name in params) {
-            param_string.length ? param_string += '&' : null;
-
-            param_string += name + '=' + params[name];
-        }
-
-        url += param_string;
+    if (typeof(params) !== 'object')
+    {
+        return url;
     }
+
+    var param_string = '';
+
+    for (var name in params) {
+        param_string.length ? param_string += '&' : null;
+
+        param_string += name + '=' + params[name];
+    }
+
+    if (url.indexOf('?') >= 0)
+    {
+        url += '&';
+    }
+    else {
+        url += '?';
+    }
+    url += param_string;
 
     return url;
 }
