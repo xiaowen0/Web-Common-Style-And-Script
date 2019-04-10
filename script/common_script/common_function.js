@@ -1,7 +1,7 @@
 /**
  * common function
  * dependent on jQuery
- * last update:     2019-04-09
+ * last update:     2019-04-10
  */
 
 var dependencies = ['jquery', 'bootstrap', 'boorstrapTheme'];
@@ -1373,6 +1373,20 @@ function downloadFile(url)
 function setHeightEqualToWidth(element)
 {
     element.style.height = element.offsetWidth + "px";
+}
+
+/**
+ * reload image
+ * @param HTMLElement image
+ */
+function reloadImage(image)
+{
+    var src = image.src;
+    var url = src.split('?')[0];
+    var newUrl = createUrl(url, {
+        t : new Date().getTime().toString().substring(-4, 4)
+    });
+    image.src = newUrl;
 }
 
 /**
