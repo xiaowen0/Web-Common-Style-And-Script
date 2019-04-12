@@ -1,10 +1,10 @@
 /**
  * common function
  * dependent on jQuery
- * last update:     2019-04-10
+ * last update:     2019-04-12
  */
 
-var dependencies = ['jquery', 'bootstrap', 'boorstrapTheme'];
+var dependencies = ['jquery', 'moment'];
 
 var cdnList = {
     'china' : {
@@ -29,7 +29,7 @@ var cdnList = {
 function fixFloatingPointNumber(number, bit) {
 
     var numberStr = new String(number);
-    if (numberStr.indexOf('.') < 0)	// no point, fill 0
+    if (numberStr.indexOf('.') < 0) // no point, fill 0
     {
         return numberStr + '.' + repeatString('0', bit);
     }
@@ -210,7 +210,7 @@ function printObject(object)
     for (var name in object)
     {
         var property = createElement('li');
-        property.innerHTML	 = name + ': ' + object[name];
+        property.innerHTML   = name + ': ' + object[name];
         list.appendChild(property);
     }
 
@@ -1912,11 +1912,11 @@ function getUrlParam(name)
  */
 function getScrollTop()
 {
-    if (document.documentElement && document.documentElement.scrollTop)		// For standard
+    if (document.documentElement && document.documentElement.scrollTop)     // For standard
     {
         return document.documentElement.scrollTop;
     }
-    else if (document.body)		// For Internet Explorer old version
+    else if (document.body)     // For Internet Explorer old version
     {
         return document.body.scrollTop;
     }
@@ -1929,11 +1929,11 @@ function getScrollTop()
  */
 function getScrollHeight()
 {
-    if (document.documentElement && document.documentElement.scrollHeight)		// For standard
+    if (document.documentElement && document.documentElement.scrollHeight)      // For standard
     {
         return document.documentElement.scrollHeight;
     }
-    else if (document.body)		// For Internet Explorer
+    else if (document.body)     // For Internet Explorer
     {
         return document.body.scrollHeight;
     }
@@ -2189,19 +2189,19 @@ function centerDialog(dialog)
 {
     // reset margin
     $(dialog).css({
-        'margin'	: '0',
+        'margin'    : '0',
         'left'      : '0',
         'top'       : '0'
     });
 
-    var windowWidth		= getWindowWidth();
-    var windowHeight	= getWindowHeight();
+    var windowWidth     = getWindowWidth();
+    var windowHeight    = getWindowHeight();
 
-    var dialogWidth		= $(dialog).outerWidth();
-    var dialogHeight	= $(dialog).outerHeight();
+    var dialogWidth     = $(dialog).outerWidth();
+    var dialogHeight    = $(dialog).outerHeight();
 
-    var leftOffset		= (windowWidth - dialogWidth) / 2;
-    var topOffset		= (windowHeight - dialogHeight) / 2;
+    var leftOffset      = (windowWidth - dialogWidth) / 2;
+    var topOffset       = (windowHeight - dialogHeight) / 2;
 
     $(dialog).css({
         'margin-left' : '0',
@@ -2904,6 +2904,37 @@ function formHasMoreData(form)
     return true;
 }
 var isFormHasMoreData = formHasMoreData;
+
+/**
+ * submit form use ajax
+ * @param HTMLElement form     form element
+ * @param Object      options  ajax request options, base on jQuery.ajax function's options
+ * @return boolean
+ */
+function formAjaxSubmit(form, options)
+{
+    options ? null : options = {};
+
+    if (typeof(options.url) === 'undefined')
+    {
+        options.url = form.dataset.api || '';
+        if (!options.url)
+        {
+            addConsoleLog('[error] missing url param for ajax submit form.');
+            return false;
+        }
+    }
+    if (typeof(options.type) === 'undefined')
+    {
+        options.type = form.method || 'post';
+    }
+
+    options.data = $(form).serialize();
+
+    $.ajax(options);
+
+    return true;
+}
 
 /**
  * add some options to selectbox
@@ -3646,7 +3677,39 @@ function playLetter(sentence_index, delay)
 function loadDependencies()
 {
     // check jQuery
-    if (typeof(jQuery) === "undefined")
+    if (inArray(new String('jQuery').toLowerCase(), dependencies) && typeof(jQuery) === "undefined")
+    {
+        if (getBrowserLanguage() === 'zh-cn')
+        {
+            document.body.appendChild(createElement('script', {src: cdnList.china.jquery}));
+        }
+        else
+        {
+            document.body.appendChild(createElement('script', {src: cdnList.world.jquery}));
+        }
+    }
+
+    // check moment library
+    if (inArray('moment', dependencies) && typeof(moment) === "undefined")
+    {
+        if (getBrowserLanguage() === 'zh-cn')
+        {
+            document.body.appendChild(createElement('script', {src: cdnList.china.momentWithLocales}));
+        }
+        else
+        {
+            document.body.appendChild(createElement('script', {src: cdnList.world.momentWithLocales}));
+        }
+    }
+}
+
+/**
+ * include missing dependencies library
+ */
+function includeDependencies()
+{
+    // check jQuery
+    if (inArray(new String('jQuery').toLowerCase(), dependencies) && typeof(jQuery) === "undefined")
     {
         if (getBrowserLanguage() === 'zh-cn')
         {
@@ -3659,7 +3722,7 @@ function loadDependencies()
     }
 
     // check moment library
-    if (typeof(moment) === "undefined")
+    if (inArray('moment', dependencies) && typeof(moment) === "undefined")
     {
         if (getBrowserLanguage() === 'zh-cn')
         {
@@ -3725,8 +3788,8 @@ function getSessionData(key)
 
 /**
  * set session storage
- * @key		String  data key string
- * @value	String  value
+ * @key     String  data key string
+ * @value   String  value
  * @return  boolean  success or not
  */
 function setSessionData(key, value)
