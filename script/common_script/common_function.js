@@ -1,7 +1,7 @@
 /**
  * common function
  * dependent on jQuery
- * last update:     2019-04-12
+ * last update:     2019-04-15
  */
 
 var dependencies = ['jquery', 'moment'];
@@ -1422,6 +1422,25 @@ function setImageFill(image)
 }
 
 /**
+ * check a file name is image format
+ * @param   String  file name
+ * @return  boolean
+ */
+function isImage(name)
+{
+    formatList = ["jpg","jpeg","png","gif","svg"];
+    for (var i=0; i<formatList.length; i++)
+    {
+        if (name.substr(0-formatList[i].length) === formatList[i])
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+/**
  * set a element middle position in his parent
  * @param  String|Array  element CSS selector path or array
  * @returns boolean
@@ -1577,10 +1596,10 @@ function checkAudio(coding)
  */
 function isVideo(name)
 {
-    videoFormatList = ["webm","mp4"];
-    for (var i=0; i<videoFormatList.length; i++)
+    formatList = ["webm","mp4"];
+    for (var i=0; i<formatList.length; i++)
     {
-        if (name.substr(0-videoFormatList[i].length) === videoFormatList[i])
+        if (name.substr(0-formatList[i].length) === formatList[i])
         {
             return true;
         }
