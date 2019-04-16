@@ -492,6 +492,52 @@ function replaceData(string, data)
 }
 
 /**
+ * convert different columns name of object
+ * example: {created_date : 123, user_name : 'abc'} => {createdDate : 123, userName : 'abc'}
+ * @param  Object  data
+ * @param  Object  mapping of columns: newProperty => oldProperty
+ * @return Object
+ */
+function dataColumnConvert(data, mapping)
+{
+    var newData = {};
+
+    // clone all properties
+    for (var key in data)
+    {
+        newData[key] = data[key];
+    }
+
+    // change property in mapping
+    for (var mapKey in mapping)
+    {
+        newData[mapKey] = newData[mapping[mapKey]];
+        delete newData[mapping[mapKey]];
+    }
+
+    return newData;
+}
+
+/**
+ * convert a list of object's different columns name
+ * example: [{created_date : 123, user_name : 'abc'}] => [{createdDate : 123, userName : 'abc'}]
+ * @param  Array   list
+ * @param  Object  mapping of columns: newProperty => oldProperty
+ * @return Object
+ */
+function listDataColumnConvert(list, mapping)
+{
+    var newList = [];
+    for (var i=0; i<list.length; i++)
+    {
+        var newItem = dataColumnConvert(list[i], mapping);
+        newList.push(newItem);
+    }
+
+    return newList;
+}
+
+/**
  * first letter upper case
  * @param string  String
  * @returns String
@@ -552,6 +598,25 @@ function removeHtmlTag(html)
 function filterImgTag(html)
 {
     return new RegExp("<img[^>]*>").exec(html);
+}
+
+/**
+ * filter image url list from html code
+ * @param   String  html code
+ * @return  Array
+ */
+function filterImageUrlList(html)
+{
+    var tempEle = $(html);
+    var imageList = tempEle.find('img');
+    var urlList = [];
+
+    for (var i=0; i<imageList.length; i++)
+    {
+        urlList.push(imageList.eq(i).attr('src'));
+    }
+
+    return urlList;
 }
 
 /**

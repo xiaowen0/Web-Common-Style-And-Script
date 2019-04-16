@@ -223,6 +223,52 @@
 
                 </div>
             </div>
+			
+			<div class="col-xs-12 col-sm-6">
+                <div class="panel panel-default">
+
+                    <div class="panel-body">
+
+                        <h3>数据字段转换</h3>
+
+						<p>保持内容模板的独立性，网页上的数据的字段名称可以与接口获取的不一致。</p>
+						
+						<p class="bold">dataColumnConvert(data, mapping)</p>
+						
+						<p>第一个参数：源数据，对象类型。</p>
+                        <p>第二个参数：名称映射键值对，对象类型。</p>
+						
+						<p>例子：有一模板如下</p>
+						<p>标题：{{title}}，作者：{{author}}，阅读：{{readedCount}}</p>
+						<p>接口数据：{"title":"标题","createdUser":"比尔盖茨","clicks":2465}</p>
+						
+						<p>
+							<code>var newData = dataColumnConvert(data, {<br/>
+								author : 'createdUser',<br/>
+								readedCount : 'clicks'<br/>
+							});
+							</code>
+						</p>
+						
+						<p>
+							<script>
+							var data = {"title":"标题","createdUser":"比尔盖茨","clicks":2465};
+							var newData = dataColumnConvert(data, {
+								author : 'createdUser',
+								readedCount : 'clicks'
+							});
+							document.writeln(JSON.stringify(newData));
+							</script>
+						</p>
+
+                        
+						
+						
+						
+                    </div>
+
+                </div>
+            </div>
 
         </div>
 
