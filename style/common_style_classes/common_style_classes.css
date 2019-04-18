@@ -1,7 +1,7 @@
 @charset "utf-8";
 /**
  * classes for special style
- * last update:     2017-05-10 09:55
+ * last update:     2019-04-18
  */
 
 /* display type */
@@ -786,6 +786,14 @@ p.danger {
     color: #a94442;
 }
 
+/* image style */
+
+.imageArea img,
+.imageBox img {
+    max-width: 100%;
+    height: auto;
+}
+
 /* icon class 图标类 */
 
 .icon {
@@ -1350,8 +1358,8 @@ textarea.warning,
 /*.checkbox,*/
 /*.form input[type="radio"],*/
 /*.radio {*/
-    /*margin-right: 6px;*/
-    /*vertical-align: middle;*/
+/*margin-right: 6px;*/
+/*vertical-align: middle;*/
 /*}*/
 
 .checkboxLabel,
