@@ -1,7 +1,6 @@
 /**
  * common function
  * dependent on jQuery
- * last update:     2019-04-15
  */
 
 var dependencies = ['jquery', 'moment'];
@@ -578,6 +577,26 @@ function getRandomChineseName(options)
 
     var fullname = surname + secondWord + thirdWord;
     return fullname;
+}
+
+/**
+ * remove line-break char
+ * @param  String  string
+ * @return String
+ */
+function removeLineBreak(string)
+{
+	return string.replace(/[\r\n]/g, '');;
+}
+
+/**
+ * remove space char
+ * @param  String  string
+ * @return String
+ */
+function removeSpace(string)
+{
+	return string.replace(/\ +/g,"");
 }
 
 /**
