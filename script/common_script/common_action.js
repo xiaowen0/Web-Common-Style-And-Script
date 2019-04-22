@@ -214,7 +214,7 @@ $(document).ready(function ()
         // font relative size
         (function()
         {
-            var baseWidth = parseInt($('body').data('base-width') || '320');
+            var baseWidth = parseInt($('body').data('base-width'));
             if (!baseWidth)
             {
                 return;
