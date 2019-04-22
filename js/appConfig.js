@@ -1,6 +1,6 @@
 /**
  * web application client config
- * Created by wen on 2017/8/27.
+ * recommend use app.js
  */
 
 var appConfig = {
