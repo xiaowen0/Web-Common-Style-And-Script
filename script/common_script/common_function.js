@@ -4281,3 +4281,70 @@ function parseNativeLang(text)
 
     return text;
 }
+
+/**
+ * init a block element auto move in window
+ * @param  Object(HTMLElement) element
+ */
+function initAutoMoveInWindow(element)
+{
+    $(element).css({
+        position: 'fixed',
+        top: '50%',
+        left: '50%'
+    });
+
+    var moveStep;
+    moveStep = function (element)
+    {
+        var windowWidth = getWindowWidth();
+        var windowHeight = getWindowHeight();
+
+        var width = element.offsetWidth;
+        var height = element.offsetHeight;
+        var left = element.offsetLeft;
+        var top = element.offsetTop;
+
+        var leftRange = windowWidth - width;
+        var topRange = windowHeight - height;
+
+        var targetLeft = 0;
+        var targetTop = 0;
+
+        // direction, 1: top 2: right 3: bottom 4: left
+        var dir = parseInt(element.dataset.dir || 1);
+        dir = dir+1 > 4 ? 1 : dir+1;
+
+        switch (dir)
+        {
+            case 1 :
+                targetLeft = Math.random() * (leftRange - 1);
+                break;
+            case 2 :
+                targetTop = Math.random() * (topRange - 1);
+                targetLeft = leftRange;
+                break;
+            case 3 :
+                targetLeft = Math.random() * (leftRange - 1);
+                targetTop = topRange;
+                break;
+            case 4 :
+                targetTop = Math.random() * (topRange - 1);
+                break;
+        }
+
+        // speed : point/second
+        var speed = parseInt(element.dataset.speed || 80);
+        var distance = Math.sqrt(Math.pow(targetLeft - left, 2) + Math.pow(targetTop - top, 2));
+
+        $(element).attr('data-dir', dir).animate({
+            left : targetLeft,
+            top : targetTop
+        }, distance / speed * 1000, 'linear', function (){
+            moveStep(element);
+        });
+    };
+
+    moveStep(element);
+}
+
