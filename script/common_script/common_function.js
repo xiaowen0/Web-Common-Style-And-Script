@@ -4291,12 +4291,23 @@ function initAutoMoveInWindow(element)
     $(element).css({
         position: 'fixed',
         top: '50%',
-        left: '50%'
-    });
+        left: '50%',
+        bottom: 'auto',
+        right: 'auto'
+    }).attr('data-run', 'on');
 
     var moveStep;
     moveStep = function (element)
     {
+        var status = element.dataset.run || 'on';
+        if (status != 'on')
+        {
+            setTimeout(function (){
+                moveStep(element);
+            }, 1000);
+            return;
+        }
+
         var windowWidth = getWindowWidth();
         var windowHeight = getWindowHeight();
 
