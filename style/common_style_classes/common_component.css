@@ -1,7 +1,6 @@
 @charset "utf-8";
 /**
  * common component style, include UI component and UI component framework
- * last update:     2017-05-20
  */
 
 /* page base layout */
@@ -78,6 +77,13 @@
     padding: 6px 12px;
     background-color: #FFF;
     display: block;
+}
+
+.pageNumberInputbox {
+	display: inline-block;
+	width: 80px;
+	text-align: center;
+	padding: 0;
 }
 
 /* panel */
