@@ -3171,6 +3171,68 @@ function initImportButton(element, options)
 }
 
 /**
+ * init file upload
+ * init a file input element, can auto upload file when it changed.
+ * @param  String|HTMLElement  element  file input element object or jquery selector
+ * @param  Object  options
+ * - success  Function  success callback
+ * - error    Function  error callback
+ * - complete Function  complete callback
+ * - method   String    request method, default: POST
+ * - url      String    request url
+ * @required  jQuery
+ */
+function initFileUpload(element, options)
+{
+    typeof (options) === 'undefined' ? options = {} : null;
+
+    var success = options.success || null;
+    var error   = options.error || null;
+    var complete = options.complete || null;
+    var method  = options.method || 'POST';
+    var url     = options.url || '';
+
+    // $(element).each(function(){
+
+    //     var imageTagSelector = $(this).attr('data-imageTag') || '';
+    //     var formControlSelector = $(this).attr('data-formControl') || '';
+
+    //     var imageTag = $(imageTagSelector);
+    //     var formControl = $(formControlSelector);
+    //     var me = $(this);
+
+    // });
+
+    $(element).on('change', function (){
+
+        var me = this;
+
+        // build form data
+        var formData = new FormData();
+        formData.append(this.name || 'file',this.files[0]);
+
+        $.ajax({
+            url : url,
+            type:'post',
+            dataType : 'json',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success : function (result, textStatus, jqXHR) {
+
+                if (success)
+                {
+                    success(result, textStatus, jqXHR, me);
+                }
+
+            },
+            error : error,
+            complete : complete
+        });
+    });
+}
+
+/**
  * render a pagination panel
  * @param   container   container for append
  * @param   options     panel options
