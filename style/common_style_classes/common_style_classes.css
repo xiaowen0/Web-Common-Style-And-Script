@@ -794,6 +794,21 @@ p.danger {
     height: auto;
 }
 
+/* containner included img tag */
+.photoFrame,
+.pictureFrame {
+    min-width: 80px;
+    min-height: 80px;
+    background-color: #f9f9f9;
+    padding: 10px;
+}
+
+.photoFrame img,
+.pictureFrame img {
+    width: 100%;
+    height: auto;
+}
+
 /* icon class 图标类 */
 
 .icon {
