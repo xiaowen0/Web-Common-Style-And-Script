@@ -1194,6 +1194,7 @@
 }
 
 .selectedImageList {
+    list-style: none none;
     clear : both;
 }
 
@@ -1204,13 +1205,14 @@
     width: 120px;
     height: 120px;
     box-sizing: border-box;
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 8px;
 }
 
 .selectedImageList .imageItem .inner {
-    padding: 10px;
-    border-radius: 8px;
+    height: 100px;
+    overflow: hidden;
 }
 
 .selectedImageList .imageItem img {
@@ -1225,6 +1227,8 @@
     height: 22px;
     left: 0;
     top: 0;
+    
+    text-decoration: none;
 
     line-height: 18px;
     text-align: center;
