@@ -586,7 +586,7 @@ function getRandomChineseName(options)
  */
 function removeLineBreak(string)
 {
-	return string.replace(/[\r\n]/g, '');;
+    return string.replace(/[\r\n]/g, '');;
 }
 
 /**
@@ -596,7 +596,7 @@ function removeLineBreak(string)
  */
 function removeSpace(string)
 {
-	return string.replace(/\ +/g,"");
+    return string.replace(/\ +/g,"");
 }
 
 /**
@@ -1387,6 +1387,111 @@ function execScript(url, callback)
             }
         }
     });
+}
+
+/**
+ * load content from html,css,script
+ * @param  Object  options
+ * - id      String  (required) content id
+ * - html    String  (required) html file url, example: 'modules/article.html'
+ * - css     String  css file url, example: 'style/article.css'
+ * - script  String  script file url, example: 'js/article.js'
+ * - target  HTMLElement|String  default: body, element object or selector string
+ * - cache   Boolean  default: false, use SessionStorage to cache content
+ * - callback  Function  callback when content dom ready
+ * @return Boolean
+ */
+function loadContent(options)
+{
+    var id     = options.id || '';
+    var html   = options.html || '';
+    var css    = options.css || '';
+    var script = options.script || '';
+    var target = options.target || document.body;
+    var cache  = options.cache || false;
+    var callback  = options.callback || null;
+
+    if (!id)
+    {
+        addConsoleLog('[error] missing id param for loadContent function.');
+        return false;
+    }
+
+    if (!html)
+    {
+        addConsoleLog('[error] missing html param for loadContent function.');
+        return false;
+    }
+
+    var htmlCode = '';
+
+    // run when content dom is ready
+    var init = (function (){
+
+        if (script)
+        {
+            loadScript(script);
+        }
+
+        if (callback)
+        {
+            callback();
+        }
+
+    });
+
+    var loadHtml = (function (htmlUrl){
+
+        $.ajax({
+            url : htmlUrl,
+            success : function (result){
+
+                htmlCode = result;
+
+                // save cache
+                if (cache)
+                {
+                    var cache_key = id + '_html';
+                    setSessionData(cache_key, htmlCode);
+                }
+
+                // insert content and init
+                $(target).append(htmlCode);
+                init();
+            },
+            error : function (){
+                setTimeout(function (){
+                    loadHtml(htmlUrl);
+                }, 5000);
+            }
+        });
+
+    });
+
+    // try to get content from cache
+    if (cache)
+    {
+        var cache_key = id + '_html';
+        htmlCode = getSessionData(cache_key) || '';
+    }
+    if (htmlCode)  // has cache data
+    {
+        // insert content and init
+        $(target).append(htmlCode);
+        init();
+    }
+    else  // no cache data
+    {
+        loadHtml(html);
+    }
+
+    // load css if need
+    if (css)
+    {
+        loadStylesheet(css);
+    }
+
+    return true;
 }
 
 /**
