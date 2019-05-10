@@ -2893,6 +2893,32 @@ function getFormData(form)
 /**
  * set form control
  * @param form  Object(HTMLElement)|String  form dom quote or ID
+ * @param data  Object                      form data
+ * @return boolean
+ */
+function setFormData(form, data)
+{
+    // get element by ID
+    if (typeof (form) === 'string') {
+        var formId = form;
+        form = document.getElementById(form);
+        if (!form) {
+            addErrorLog('form dom with id:' + formId + ' not found.');
+            return false;
+        }
+    }
+
+    for (var key in data)
+    {
+        setFormControl(form, key, data[key]);
+    }
+
+    return true;
+}
+
+/**
+ * set form control
+ * @param form  Object(HTMLElement)|String  form dom quote or ID
  * @param name  String                      form control's name property
  * @param value                             form control's new value
  * @return boolean
