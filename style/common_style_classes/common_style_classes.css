@@ -803,6 +803,29 @@ p.danger {
     padding: 10px;
 }
 
+.photoFrame.roundedCorner,
+.photoFrame.rounded,
+.pictureFrame.roundedCorner,
+.pictureFrame.rounded {
+    border-radius: 8px;
+}
+
+.photoFrame.dark,
+.pictureFrame.dark {
+    background-color: #999;
+}
+
+.photoFrame.orange,
+.pictureFrame.orange {
+    background-color: orange;
+}
+
+.photoFrame.green,
+.pictureFrame.green {
+    background-color: green;
+}
+
+
 .photoFrame img,
 .pictureFrame img {
     width: 100%;
