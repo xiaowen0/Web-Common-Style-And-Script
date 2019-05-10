@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <title>元素在窗口内自动移动 initAutoMoveInWindow()</title>
+
+        <!-- Bootstrap framework -->
+        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"/>
+
+        <!-- common style classes -->
+        <link rel="stylesheet" href="../style/common_style_classes/common_style_classes.css" />
+        <link rel="stylesheet" href="../style/common_style_classes/common_component.css" />
+
+    </head>
+    <body>
+    
+        <article class="article">
+            
+            <h1 class="title">initAutoMoveInWindow(element) &nbsp;&nbsp; 初始化窗口内自动移动</h1>
+
+            <p>把一个元素设置在窗口内自动移动，建议放在 body 里面，不影响父节点的布局。</p>
+
+            <p>element 参数：&nbsp;&nbsp; Object(HTMLElement) &nbsp;&nbsp; HTML 元素对象。</p>
+
+            <h2>标签参数：</h2>
+
+            <table class="table">
+
+                <thead>
+                    <tr>
+                        <th>属性名</th>
+                        <th>说明</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>data-speed</td>
+                        <td>速度（每秒钟移动的像素）</td>
+                    </tr>
+                    <tr>
+                        <td>data-run</td>
+                        <td>运行状态，on 代表运行，off 代表暂停。</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </article>
+
+        <div id="moveingIconBlock">
+            <img src="../image/girl_picture.jpg" width="64" alt=""/>
+        </div>
+
+        <!-- common function -->
+        <script src="../script/common_script/common_function.js"></script>
+
+        <!-- jQuery library -->
+        <script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+        <!-- common action (must after jQuery) -->
+        <script src="../script/common_script/common_action.js"></script>
+        
+        <script>
+        initAutoMoveInWindow(getElement('moveingIconBlock'));
+        </script>
+
+    </body>
+</html>
