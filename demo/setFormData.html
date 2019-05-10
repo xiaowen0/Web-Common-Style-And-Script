@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <title>获取表单数据示例 getFormData()</title>
+        <title>设置表单数据示例 setFormData()</title>
 
         <!-- common function -->
         <script src="../script/common_script/common_function.js"></script>
@@ -116,7 +116,8 @@
                     </div>
 
                     <div>
-                        <button type="submit" class="btn btn-primary">获取表单数据</button>
+                        <button type="submit" class="btn btn-primary">设置表单数据</button>
+                        <button type="reset" class="btn btn-primary">清空表单数据</button>
                     </div>
 
                 </form>
@@ -141,7 +142,25 @@
 
         <script>
             $('#demoForm').on('submit', function(){
-                alert(JSON.stringify(getFormData(this)));
+
+                var me = this;
+
+                // ajax load data, and set data to form element
+                var result = {
+                    data : {
+                        name : '小明',
+                        gender : '男',
+                        interest : ['美食','体育'],
+                        introduction : '小明是一个金牛座的男孩，喜欢美食和体育。',
+                        xingzuo : '金牛座'
+                    }
+                };
+
+                var success = (function(result){
+                    setFormData(me, result.data);
+                });
+
+                success(result);
             });
         </script>
 

@@ -2949,6 +2949,8 @@ function setFormControl(form, name, value)
                 switch(controlItem.type)
                 {
                     case 'checkbox':
+                        inArray(controlItem.value, value) ? controlItem.checked = true : null;
+                        break;
                     case 'radio' :
                         controlItem.value == value ? controlItem.checked = true : null;
                         break;
