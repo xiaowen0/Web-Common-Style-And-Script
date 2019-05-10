@@ -559,8 +559,22 @@
 }
 
 /* border */
+
+.border {
+	border: solid 1px #efefef;
+}
+.lightBorder {
+    border: solid 1px lightgrey;
+}
+.darkBorder {
+    border: solid 1px darkgrey;
+}
+
 .bottomBorder {
     border-bottom: solid 1px #CCCCCC;
+}
+.roundedBorder {
+    border-radius: 8px;
 }
 
 /* rotate animation
