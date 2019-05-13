@@ -126,6 +126,17 @@
     box-sizing: border-box;
 }
 
+/* banner content */
+
+.bannerBlock {
+    clear: both;
+}
+
+.bannerBlock img {
+    width: 100%;
+    height: auto;
+}
+
 /* panel */
 
 .panel {
@@ -1262,11 +1273,14 @@
     display: block;
     padding: 8px;
     border: 0 none;
+
+    height: auto;
     line-height: 125%;
+
     text-align: center;
 }
 .mobileBottomMenuLayout .icon {
-    font-size: 1.6rem;
+    font-size: 2.4rem;
     margin-bottom: 0;
 }
 .mobileBottomMenuLayout a {
