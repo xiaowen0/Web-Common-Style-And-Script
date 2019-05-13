@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+    <head>
+        <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+        <meta charset="UTF-8"/>
+
+        <title>商城首页</title>
+
+        <!-- reset element default style -->
+        <link rel="stylesheet" href="../../asset/normalize.css"/>
+
+        <link rel="stylesheet" href="../../style/common_style_classes/common_style_classes.css"/>
+        <link rel="stylesheet" href="../../style/common_style_classes/common_component.css"/>
+        <link rel="stylesheet" href="../../asset/font-awesome-4.7.0/css/font-awesome.min.css"/>
+
+        <!-- common style -->
+        <link rel="stylesheet" href="style/common.css"/>
+
+        <!-- special style for current page -->
+        <link rel="stylesheet/less" type="text/css" href="index.less" />
+
+    </head>
+
+    <!-- dangdang site: font size : window width ratio = 24 : 375 =  -->
+    <body class="fullHeight" data-base-width="375">
+
+        <div class="page max640">
+            <div class="inner">
+
+                <header class="header pageHeader" id="pageHeader">
+                    <div class="logoBlock">
+                        <a href="index.html">
+                            <img src="image/tmall-logo-480-260.png" alt="logo"/>
+                        </a>
+                    </div>
+                    <div class="searchBlock">
+
+                        <form id="index_search_form" method="get" action="">
+
+                            <div class="keywordsInputbox">
+
+                                <input id="keyword" name="keyword" type="text" placeholder="儿童玩具，每满100减50" class="inputbox" autocomplete="off"/>
+
+                                <button type="submit" class="searchButton">
+                                    <i class="fa fa-search"></i>
+                                </button>
+
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="header-category">
+                        <a class="icon" href="category.html">
+                            <i class="fa fa-navicon"></i>
+                        </a>
+                    </div>
+
+                </header>
+
+                <!-- banner-1 for home page -->
+                <div class="bannerBlock" id="homeBanner">
+                    <a href="javascript:;">
+                        <img src="image/banner/home1.jpg" alt=""/>
+                    </a>
+                </div>
+
+                <div class="goodsBlock">
+                    
+                    <ul class="clearfix">
+                        <li class="goodsItem" data-pid="000">
+                            <a href="goods.html">
+                                <div class="imageBox">
+                                    <img class="" src="http://img3m7.ddimg.cn/18/12/27862677-1_h_16.jpg" alt="">
+                                </div>
+                                <span class="name">最初之前（预售24小时狂销售10余万，平均每分钟1000册，霸榜新书总榜第一名，张皓宸2019长篇新作，限时特供签名版）</span>
+                                <p class="labels">
+                                    <span class="label">当当自营</span>
+                                    <span class="label">预售</span>
+                                </p>
+                                <em class="money">
+                                    ￥34.30
+                                </em>
+                            </a>
+                        </li>
+                        <li class="goodsItem" data-pid="000">
+                            <a href="goods.html">
+                                <div class="imageBox">
+                                    <img class="" src="http://img3m7.ddimg.cn/18/12/27862677-1_h_16.jpg" alt="">
+                                </div>
+                                <span class="name">最初之前（预售24小时狂销售10余万，平均每分钟1000册，霸榜新书总榜第一名，张皓宸2019长篇新作，限时特供签名版）</span>
+                                <p class="labels">
+                                    <span class="label">当当自营</span>
+                                    <span class="label">预售</span>
+                                </p>
+                                <em class="money">
+                                    ￥34.30
+                                </em>
+                            </a>
+                        </li>
+                    </ul>
+
+                </div>
+
+            </div>
+        </div>
+
+        <nav class="mobileBottomMenuContainer mobileBottomMenuLayout">
+            <ul class="menu">
+                <li class="item active">
+                    <a class="button" href="index.html">
+                        <i class="icon fa fa-home"></i><br/>首页
+                    </a>
+                </li>
+                <li class="item">
+                    <a class="button" href="cat.html">
+                        <i class="icon fa fa-navicon"></i><br/>分类
+                    </a>
+                </li>
+                <li class="item">
+                    <a class="button" href="cart.html">
+                        <i class="icon fa fa-shopping-cart"></i><br/>购物车
+                    </a>
+                </li>
+                <li class="item">
+                    <a class="button" href="me.html">
+                        <i class="icon fa fa-user"></i><br/>我的
+                    </a>
+                </li>
+                <!-- <li class="item">
+                    <a class="button">首页</a>
+                </li> -->
+            </ul>
+        </nav>
+        
+        <script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+        <script src="../../script/common_script/common_function.js"></script>
+        <script src="../../script/common_script/common_action.js"></script>
+
+    </body>
+    
+</html>

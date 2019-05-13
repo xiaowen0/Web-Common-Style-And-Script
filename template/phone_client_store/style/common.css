@@ -1,0 +1,123 @@
+
+
+body {
+	font-size: 100%;
+	background-color: #ededed;
+}
+
+@media screen and (min-width: 640px) {
+	body {
+		font-size: 14px;
+	}
+}
+
+a {
+	text-decoration: none;
+}
+
+.mobileBottomMenuContainer .item.active a,
+.mobileBottomMenuContainer .item.active a:visited {
+	color: #bb5204;
+}
+
+.pageHeader {
+	position: relative;
+
+	/*line-height: 43.992rem; /* 4.3992px */
+
+	padding: 0 5.2rem 0 4rem;
+	/*padding-left: 4rem;*/
+	/*padding-right: 5.2rem;*/
+
+	background-color: #FFF;
+}
+
+.logoBlock {
+	position: absolute;
+	width: 4rem;
+    height: 3rem;
+    top: 0;
+    left: 0;
+
+	vertical-align: middle;
+	text-align: center;
+}
+
+.logoBlock a {
+	display: block;
+	height: 100%;
+}
+
+.logoBlock img {
+	width: 100%;
+	height: auto;
+    max-width: 100%;
+}
+
+.searchBlock {
+	position: relative;
+    padding: 0.8rem 0;
+    overflow: hidden;
+}
+
+.header-category {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 5.2rem;
+    height: 4rem;
+}
+
+.header-category a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    text-align: center;
+    font-size: 2.4rem;
+    color: #7a8992;
+    line-height: 3.6rem;
+}
+
+.pageHeader .searchBlock .keywordsInputbox {
+	position: relative;
+	box-sizing: border-box;
+	height: 2rem;
+	border-radius: 1.5rem;	/* height: 30px */
+
+	padding-right: 2rem;
+	border: solid 1px #ddd;
+}
+
+.pageHeader .searchBlock .keywordsInputbox .inputbox {
+
+	width: 100%;
+	height: 100%;
+	border: 0 none;
+
+	line-height: 100%;
+
+	background: transparent;
+}
+
+.pageHeader .searchBlock .keywordsInputbox .searchButton {
+	position: absolute;
+    right: 0;
+    top: 0;
+
+	border: 0 none;
+	background: transparent;
+
+	line-height: 100%;
+	font-size: 1.8rem;
+    color: #ddd;
+}
+
+.goodsBlock {
+
+	padding: 1rem 0;
+	background-color: #ededed;
+
+}
+
+
