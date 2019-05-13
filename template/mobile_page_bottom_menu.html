@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+    <head>
+        <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+        <meta charset="UTF-8"/>
+
+        <title>手机端网页</title>
+
+        <!-- reset element default style -->
+        <link rel="stylesheet" href="../asset/normalize.css"/>
+
+        <link rel="stylesheet" href="../style/common_style_classes/common_style_classes.css"/>
+        <link rel="stylesheet" href="../style/common_style_classes/common_component.css"/>
+        <link rel="stylesheet" href="../asset/font-awesome-4.7.0/css/font-awesome.min.css"/>
+
+        <!-- common style -->
+        <!-- <link rel="stylesheet" href="style/common.css"/> -->
+
+        <!-- special style for current page -->
+        <!-- <link rel="stylesheet/less" type="text/css" href="pageName.less" /> -->
+
+        <style>
+
+        </style>
+
+    </head>
+    <body class="fullHeight" data-base-width="320">
+
+        <div class="page max640">
+            <div class="inner">
+
+                <article class="article">
+
+                    <h1 class="title">手机端底部菜单</h1>
+
+                    <h2>结构</h2>
+
+                    <div>
+                        nav.mobileBottomMenuLayout <br/>
+                        - ul.menu <br/>
+                        --- li.item <br/>
+                        ----- a.button <br/>
+                    </div>
+
+                    <p>标签名可以换成其它的。</p>
+
+                    <p>菜单项使用 flex 布局，根据菜单项目数量平分容器宽度。</p>
+
+                </article>
+
+                <nav class="mobileBottomMenuContainer mobileBottomMenuLayout">
+                    <ul class="menu">
+                        <li class="item">
+                            <a class="button" href="index.html">
+                                <i class="icon fa fa-home"></i><br/>首页
+                            </a>
+                        </li>
+                        <li class="item">
+                            <a class="button" href="cat.html">
+                                <i class="icon fa fa-navicon"></i><br/>分类
+                            </a>
+                        </li>
+                        <li class="item">
+                            <a class="button" href="cart.html">
+                                <i class="icon fa fa-shopping-cart"></i><br/>购物车
+                            </a>
+                        </li>
+                        <li class="item">
+                            <a class="button" href="me.html">
+                                <i class="icon fa fa-user"></i><br/>我的
+                            </a>
+                        </li>
+                        <!-- <li class="item">
+                            <a class="button">第5个按钮</a>
+                        </li> -->
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+        
+        <script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+        <script src="../script/common_script/common_function.js"></script>
+        <script src="../script/common_script/common_action.js"></script>
+
+        <!-- special script for current page -->
+        <!-- <script src="js/pageName.js"></script> -->
+
+    </body>
+    
+</html>
