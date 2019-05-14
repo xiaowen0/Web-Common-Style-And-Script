@@ -1320,7 +1320,8 @@
     display: block;
     background-color: white;
     overflow: hidden;
-    padding-bottom: 1rem;
+    /*padding-bottom: 1rem;*/
+    height: 100%;
 }
 
 .goodsBlock .goodsItem .imageBox {
