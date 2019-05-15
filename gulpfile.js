@@ -13,7 +13,11 @@ var gulp=require('gulp'),  //gulp基础库
     cache = require('gulp-cache'),//图片压缩缓存
     clean = require('gulp-clean'),//清空文件夹
     plumber=require('gulp-plumber'),//检测错误
-    gutil=require('gulp-util');//如果有自定义方法，会用到
+    gutil=require('gulp-util'),//如果有自定义方法，会用到
+    fs = require('fs');
+
+var packageInfo = JSON.parse(fs.readFileSync('./package.json'));
+var version = packageInfo.version;
 
 function errrHandler(e)
 {
@@ -35,7 +39,7 @@ gulp.task('copy_style_image', function (){
         'style/**/*.jpg',
         'style/**/*.png',
         'style/**/*.gif'
-    ]).pipe(gulp.dest('dist/style/'))            //输出文件目录
+    ]).pipe(gulp.dest('dist/' + version + '/style/'))            //输出文件目录
       .pipe(notify({message:'copy style image task ok'})); //提示成功
 });
 
@@ -46,7 +50,7 @@ gulp.task('minifycss',function(){
        //.pipe(gulp.dest('dist/css'))          //设置输出路径
        .pipe(rename({suffix:'.min'}))          //修改文件名
        .pipe(minifycss())                      //压缩文件
-       .pipe(gulp.dest('dist/style'))            //输出文件目录
+       .pipe(gulp.dest('dist/' + version + '/style'))            //输出文件目录
        .pipe(notify({message:'minify css task ok'})); //提示成功
 });
 
@@ -65,7 +69,7 @@ gulp.task('minifyjs',function(){
        //.pipe(gulp.dest('dist/js'))      //输出
        .pipe(rename({suffix:'.min'}))     //重命名
        .pipe(uglify())                    //压缩
-       .pipe(gulp.dest('dist/script/'))        //输出 
+       .pipe(gulp.dest('dist/' + version + '/script/'))        //输出 
        .pipe(notify({message:"minify js task ok"}));    //提示
 	   
 	return true;
