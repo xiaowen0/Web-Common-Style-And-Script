@@ -1159,7 +1159,8 @@ p.danger {
     opacity: 0.8
 }
 
-.hoverNoOpacity {
+.hoverNoOpacity:hover,
+.hoverNoOpacity.hover {
     opacity: 1;
 }
 
@@ -1183,16 +1184,16 @@ p.danger {
     border: 3px solid #000
 }
 
-.cart {
+/*.cart {
     box-shadow: 0 0 2px 3px rgba(0, 0, 0, 0.5)
-}
+}*/
 
-.embossed {
+/*.embossed {
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.8),
     0 2px 0 rgba(255, 255, 255, 0.5),
     0 -5px 0 rgba(0, 0, 0, 0.6),
     0 -9px 0 rgba(255, 255, 255, 0.3);
-}
+}*/
 
 .card_content_container {
     overflow: hidden;
