@@ -2149,6 +2149,29 @@ function getScrollHeight()
 }
 
 /**
+ * init load more action
+ * @param  Object  options
+ * - Number  bottomDistance  distance of approach bottom, default 40.
+ * @param  Function  callback
+ */
+function initLoadMore(options, callback)
+{
+    options ? null : options = {};
+    var bottomDistance = options.bottomDistance || 40;
+
+    $(window).on('scroll', function() {
+            var scrollTop = $(this).scrollTop();
+            var scrollHeight = $(document).height();
+            var windowHeight = $(this).height();
+
+            if (scrollTop + windowHeight >= scrollHeight - bottomDistance) {
+                callback();
+            }
+        }
+    );
+}
+
+/**
  * page down wrapper
  * @param   HTMLElement|String  element     element object or css selector
  */
