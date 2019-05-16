@@ -1237,7 +1237,7 @@
     height: 22px;
     left: 0;
     top: 0;
-    
+
     text-decoration: none;
 
     line-height: 18px;
@@ -1309,8 +1309,8 @@
     margin-bottom: .5rem;
     float: left;
     width: 50%;
-    height: 26.928rem;
-    
+    height: 22rem;
+
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -1328,13 +1328,22 @@
     display: block;
     position: relative;
 
+    height: 12rem;
+    overflow: hidden;
+
+    background-color: #a0a0a0;
+
     margin-bottom: .5rem;
+}
+
+.goodsBlock .goodsItem .imageBox img {
+    min-height: 100%;
 }
 
 .goodsBlock .goodsItem .name {
     color: #232323;
     padding: 0 .5rem 0 .5rem;
-    
+
     margin-bottom: 0;
     display: block;
     overflow: hidden;
@@ -1347,11 +1356,11 @@
 }
 
 .goodsBlock .goodsItem .labels {
-    height: 1.56rem;
+    height: 2.2rem;
     overflow: hidden;
     font-size: 0;
     padding: .5rem .5rem 0 .5rem;
-    margin-bottom: 1rem;
+    margin-bottom: .5rem;
 }
 
 .goodsBlock .goodsItem .label {
@@ -1368,11 +1377,12 @@
 }
 
 .goodsBlock .goodsItem .money {
-    color: #e53e30;
+    /*color: #e53e30;*/
     font-size: .625rem;
     margin-left: .1rem;
-    float: left;
+    /*float: left;*/
     margin-right: .35rem;
+    padding: .5rem .5rem 0 .5rem;
 }
 
 
