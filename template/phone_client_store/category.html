@@ -61,160 +61,130 @@
                     </a>
                 </div>
 
-                <!-- category block -->
-                <section class="categoryBlock">
-                    <div class="titleBox">
-                        <p class="title">
-                            <a href="javascript:;">女士服装</a>
+                <div id="productCategoryContent">
+
+                    <!-- category block -->
+                    <section class="categoryBlock">
+                        <div class="titleBox">
+                            <p class="title">
+                                <a href="javascript:;">女士服装</a>
+                            </p>
+                            <!-- <a id="showhide" data-up="收起" data-down="展开" class="" style="display: block;">
+                                <em>展开</em>
+                                <i></i>
+                            </a> -->
+                        </div>
+                        <ul data-default="2" class="subCategoryList">
+                            <li>
+                                <a href="category.html?cid=4003844">全部</a></li>
+                            <li>
+                                <a href="category.html?cid=4008149" class="on">连衣裙</a></li>
+                            <li>
+                                <a href="category.html?cid=4008154">外套</a></li>
+                            <li>
+                                <a href="category.html?cid=4008152">裤装</a></li>
+                            <li>
+                                <a href="category.html?cid=4010998">卫衣</a></li>
+                            <li>
+                                <a href="category.html?cid=4008150">T恤</a></li>
+                            <li>
+                                <a href="category.html?cid=4008151">衬衫</a></li>
+                            <li>
+                                <a href="category.html?cid=4008153">针织衫/毛衣</a></li>
+                            <li>
+                                <a href="category.html?cid=4008148">中老年服装</a></li>
+                            <li>
+                                <a href="category.html?cid=4006411">大码女装</a></li>
+                            <li>
+                                <a href="category.html?cid=4010275">羽绒服</a></li>
+                            <li>
+                                <a href="category.html?cid=4008146">羊绒</a></li>
+                            <li>
+                                <a href="category.html?cid=4010196">真丝</a></li>
+                            <li>
+                                <a href="category.html?cid=4008156">婚纱礼服</a></li>
+                            <li>
+                                <a href="category.html?cid=4010621">少女装</a></li>
+                            <li>
+                                <a href="category.html?cid=4010622">少淑装</a></li>
+                            <li>
+                                <a href="category.html?cid=4010623">淑女装</a></li>
+                            <li>
+                                <a href="category.html?cid=4010624">成熟女装</a></li>
+                            <li>
+                                <a href="category.html?cid=4010706">套装</a></li>
+                            <li>
+                                <a href="category.html?cid=4010949">亲子装</a></li>
+                            <li>
+                                <a href="category.html?cid=4011007">半身裙</a></li>
+                            <li>
+                                <a href="category.html?cid=4011008">牛仔裤</a></li>
+                            <li>
+                                <a href="category.html?cid=4011009">休闲裤</a></li>
+                            <li>
+                                <a href="category.html?cid=4011010">短裤</a></li>
+                            <li>
+                                <a href="category.html?cid=4011011">风衣</a></li>
+                            <li>
+                                <a href="category.html?cid=4011012">毛呢外套</a></li>
+                            <li>
+                                <a href="category.html?cid=4011013">西装</a></li>
+                        </ul>
+                    </section><!-- end category block -->
+
+                    <section class="goods_filters_block" tyle="top: 0px; display: block;">
+                        <ul class="list">
+                            <li>
+                                <a href="javascript:;" data-status="default_0" class="on">默认</a></li>
+                            <li>
+                                <a href="javascript:;" data-status="sales_1"class="">销量</a></li>
+                            <li>
+                                <a href="javascript:;" data-status="price_" data-up="0" data-down="1" class="">
+                                    <del>价格
+                                        <i class="arrow_up"></i>
+                                        <i class="arrow_down"></i>
+                                    </del>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;" data-status="score_1" class="">好评</a></li>
+                            <li>
+                                <a href="javascript:;" data-status="time_1">最新</a></li>
+                        </ul>
+                    </section><!-- end goods_filters_block -->
+
+                    <div class="goodsBlock">
+                        
+                        <ul class="clearfix">
+                            <li class="goodsItem" v-for="item in productList" v-bind:data-pid="item.id">
+                                <a v-bind:href="'goods_detail.html?id=' + item.id">
+                                    <div class="imageBox">
+                                        <img v-bind:src="item.coverImg" alt=""/>
+                                    </div>
+                                    <span class="name">{{item.title}}</span>
+                                    <p class="labels">
+                                        <span class="label">平台自营</span>
+                                        <span class="label" v-if="item.recommend">推荐</span>
+                                    </p>
+                                    <p class="money">
+                                        <span class="block mb10" style="text-decoration: line-through; font-size: 80%">市场价：￥{{item.marketPrice}}</span>
+                                        <span class="block mb10 bold red" style="font-size: 170%">优惠价：￥{{item.price}}</span>
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <p v-if="status=='loading'" class="align-center">
+                            <i class="spinner-loader"></i>
                         </p>
-                        <!-- <a id="showhide" data-up="收起" data-down="展开" class="" style="display: block;">
-                            <em>展开</em>
-                            <i></i>
-                        </a> -->
-                    </div>
-                    <ul data-default="2" class="subCategoryList">
-                        <li>
-                            <a href="category.html?cid=4003844">全部</a></li>
-                        <li>
-                            <a href="category.html?cid=4008149" class="on">连衣裙</a></li>
-                        <li>
-                            <a href="category.html?cid=4008154">外套</a></li>
-                        <li>
-                            <a href="category.html?cid=4008152">裤装</a></li>
-                        <li>
-                            <a href="category.html?cid=4010998">卫衣</a></li>
-                        <li>
-                            <a href="category.html?cid=4008150">T恤</a></li>
-                        <li>
-                            <a href="category.html?cid=4008151">衬衫</a></li>
-                        <li>
-                            <a href="category.html?cid=4008153">针织衫/毛衣</a></li>
-                        <li>
-                            <a href="category.html?cid=4008148">中老年服装</a></li>
-                        <li>
-                            <a href="category.html?cid=4006411">大码女装</a></li>
-                        <li>
-                            <a href="category.html?cid=4010275">羽绒服</a></li>
-                        <li>
-                            <a href="category.html?cid=4008146">羊绒</a></li>
-                        <li>
-                            <a href="category.html?cid=4010196">真丝</a></li>
-                        <li>
-                            <a href="category.html?cid=4008156">婚纱礼服</a></li>
-                        <li>
-                            <a href="category.html?cid=4010621">少女装</a></li>
-                        <li>
-                            <a href="category.html?cid=4010622">少淑装</a></li>
-                        <li>
-                            <a href="category.html?cid=4010623">淑女装</a></li>
-                        <li>
-                            <a href="category.html?cid=4010624">成熟女装</a></li>
-                        <li>
-                            <a href="category.html?cid=4010706">套装</a></li>
-                        <li>
-                            <a href="category.html?cid=4010949">亲子装</a></li>
-                        <li>
-                            <a href="category.html?cid=4011007">半身裙</a></li>
-                        <li>
-                            <a href="category.html?cid=4011008">牛仔裤</a></li>
-                        <li>
-                            <a href="category.html?cid=4011009">休闲裤</a></li>
-                        <li>
-                            <a href="category.html?cid=4011010">短裤</a></li>
-                        <li>
-                            <a href="category.html?cid=4011011">风衣</a></li>
-                        <li>
-                            <a href="category.html?cid=4011012">毛呢外套</a></li>
-                        <li>
-                            <a href="category.html?cid=4011013">西装</a></li>
-                    </ul>
-                </section><!-- end category block -->
 
-                <section class="goods_filters_block" tyle="top: 0px; display: block;">
-                    <ul class="list">
-                        <li>
-                            <a href="javascript:;" data-status="default_0" class="on">默认</a></li>
-                        <li>
-                            <a href="javascript:;" data-status="sales_1"class="">销量</a></li>
-                        <li>
-                            <a href="javascript:;" data-status="price_" data-up="0" data-down="1" class="">
-                                <del>价格
-                                    <i class="arrow_up"></i>
-                                    <i class="arrow_down"></i>
-                                </del>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;" data-status="score_1" class="">好评</a></li>
-                        <li>
-                            <a href="javascript:;" data-status="time_1">最新</a></li>
-                    </ul>
-                </section>
+                        <p class="align-center" v-if="status=='ready' && page >= pageCount">没有更多啦，亲！</p>
 
-                <div class="goodsBlock">
-                    
-                    <ul class="clearfix">
-                        <li class="goodsItem" data-pid="000">
-                            <a href="goods_detail.html">
-                                <div class="imageBox">
-                                    <img src="image/goods/01.jpg" alt="">
-                                </div>
-                                <span class="name">最初之前（预售24小时狂销售10余万，平均每分钟1000册，霸榜新书总榜第一名，张皓宸2019长篇新作，限时特供签名版）</span>
-                                <p class="labels">
-                                    <span class="label">当当自营</span>
-                                    <span class="label">预售</span>
-                                </p>
-                                <span class="money">
-                                    ￥34.30
-                                </span>
-                            </a>
-                        </li>
-                        <li class="goodsItem" data-pid="000">
-                            <a href="goods_detail.html">
-                                <div class="imageBox">
-                                    <img src="image/goods/02.jpg" alt="">
-                                </div>
-                                <span class="name">最初之前（预售24小时狂销售10余万，平均每分钟1000册，霸榜新书总榜第一名，张皓宸2019长篇新作，限时特供签名版）</span>
-                                <p class="labels">
-                                    <span class="label">当当自营</span>
-                                    <span class="label">促销</span>
-                                </p>
-                                <span class="money">
-                                    ￥34.30
-                                </span>
-                            </a>
-                        </li>
-                        <li class="goodsItem" data-pid="000">
-                            <a href="goods_detail.html">
-                                <div class="imageBox">
-                                    <img src="image/goods/01.jpg" alt="">
-                                </div>
-                                <span class="name">最初之前（预售24小时狂销售10余万，平均每分钟1000册，霸榜新书总榜第一名，张皓宸2019长篇新作，限时特供签名版）</span>
-                                <p class="labels">
-                                    <span class="label">当当自营</span>
-                                    <span class="label">预售</span>
-                                </p>
-                                <span class="money">
-                                    ￥34.30
-                                </span>
-                            </a>
-                        </li>
-                        <li class="goodsItem" data-pid="000">
-                            <a href="goods_detail.html">
-                                <div class="imageBox">
-                                    <img src="image/goods/02.jpg" alt="">
-                                </div>
-                                <span class="name">最初之前（预售24小时狂销售10余万，平均每分钟1000册，霸榜新书总榜第一名，张皓宸2019长篇新作，限时特供签名版）</span>
-                                <p class="labels">
-                                    <span class="label">当当自营</span>
-                                    <span class="label">促销</span>
-                                </p>
-                                <span class="money">
-                                    ￥34.30
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
+                        <p class="align-center" v-if="status=='ready' && productList.length < 1">暂无任何商品</p>
+
+                        <p class="align-center" v-if="status=='error'">加载数据失败</p>
+
+                    </div><!-- end goodsBlock -->
 
                 </div>
 
@@ -244,14 +214,17 @@
                     </a>
                 </li>
                 <!-- <li class="item">
-                    <a class="button">首页</a>
+                    <a class="button">第5个菜单，建议不超过4个。</a>
                 </li> -->
             </ul>
         </nav>
         
         <script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+        <script src="../../asset/vue.2.6.10.min.js"></script>
         <script src="../../script/common_script/common_function.js"></script>
         <script src="../../script/common_script/common_action.js"></script>
+
+        <script src="js/category.js"></script>
 
     </body>
     
