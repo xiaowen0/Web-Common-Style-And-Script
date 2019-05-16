@@ -3,7 +3,7 @@
 body {
     font-size: 100%;
     background-color: #ededed;
-    padding-bottom: 50px;
+    padding-bottom: 70px;
 }
 
 @media screen and (min-width: 640px) {
@@ -14,6 +14,23 @@ body {
 
 a {
     text-decoration: none;
+}
+
+.c_checkbox {
+    width: 2rem;
+    height: 2rem;
+    background-image: url(../images/c_checkbox_off.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 2rem 2rem;
+    background-color: transparent;
+    border-radius: 1rem;
+    display: block;
+    margin: .575rem 1rem 0 0;
+}
+
+.c_checkbox:checked {
+    background-image: url(../images/c_checkbox_on.png);
 }
 
 .mobileBottomMenuContainer .item.active a,
@@ -111,6 +128,71 @@ a {
     line-height: 100%;
     font-size: 1.8rem;
     color: #ddd;
+}
+
+/* sub page header */
+
+.subPageHeader {
+    z-index: 5;
+    position: relative;
+    top: 0;
+    left: 0;
+    margin: 0 auto;
+    overflow: hidden;
+    width: 100%;
+    line-height: 44px;
+    background-color: #fff;
+    color: #333;
+}
+
+.subPageHeader a,
+.subPageHeader a:visited {
+    color: #a7a7a7;
+}
+
+.subPageHeader .back {
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 44px;
+
+    text-align: center;
+
+    font-size: 2.4rem;
+}
+
+.subPageHeader .title {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+
+    width: 100%;
+    height: 44px;
+
+    text-align: center;
+    font-size: 17px;
+    font-weight: normal;
+    color: #333;
+    padding: 0 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border-bottom: 1px solid #d8d8d8;
+}
+
+.subPageHeader .menu {
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 44px;
+
+    text-align: center;
+
+    line-height: 44px;
+    font-size: 1.8rem;
 }
 
 .goodsBlock {
@@ -553,4 +635,103 @@ a {
     color: #c1c1c1;
 }
 
+/* cart content */
+
+.cartContent .shopBlock {
+    border-top: 1px solid #ebebeb;
+    margin-top: .5rem;
+    background: #fff;
+    overflow: auto;
+}
+
+.shop_title {
+    height: 3.5rem;
+}
+
+.shop_title .c_checkbox {
+    width: 4rem;
+    height: 3.5rem;
+    margin: 0;
+}
+
+.shop_title .shopIcon {
+    width: 2rem;
+    height: 2rem;
+    background: url(../images/dangdang.png) no-repeat left top;
+    background-size: 2rem;
+    margin-top: 0.8rem;
+    padding-right: 0.5rem;
+}
+
+.shop_title div,
+.shop_title .shop_link,
+.shop_title .edit_operate {
+    font-size: 1.4rem;
+    line-height: 3.5rem;
+    display: block;
+    padding-right: .4rem;
+    height: 3.5rem;
+    overflow: hidden;
+    max-width: 60%;
+}
+
+.cartContent .shopBlock .shopLine {
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.cartContent .shopBlock .cart_item {
+    margin-top: 1px;
+    border-bottom: 1px solid #fafafa;
+}
+
+.cartContent .shopBlock .c_checkbox {
+    /*margin: 2rem 0rem 0 0;*/
+    padding: 2rem 2rem;
+    background-position: center;
+    background-color: transparent;
+}
+
+.cartContent .cart_item .pro_pic,
+.cartContent .giftList .pro_pic {
+    width: 9rem;
+    height: 9rem;
+    margin: 1rem 1rem 1rem 0;
+    text-align: right;
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
+
+.cartContent .cart_item .pic {
+    max-width: 100%;
+    height: auto;
+}
+
+.cartContent .cart_item .item_show {
+    position: relative;
+    height: 9rem;
+    margin: 1rem 0 0 0;
+}
+
+.cartContent .cart_item .detail {
+    font-size: 1.2rem;
+    /* padding: .8rem 1rem 0 0; */
+    margin-right: 1rem;
+}
+
+.cartContent .cart_item .prd_desc {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.promoFitShow, .shopPromoFit {
+    padding: 0 1rem;
+    font-size: 1rem;
+    color: #646464;
+    background-color: #fafafa;
+    line-height: 3.25rem;
+    padding-top: 2px;
+}
 
