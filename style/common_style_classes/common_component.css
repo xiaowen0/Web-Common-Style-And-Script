@@ -3,6 +3,10 @@
  * common component style, include UI component and UI component framework
  */
 
+[v-cloak]{
+    display: none;
+}
+
 /* page base layout */
 .page {
     margin-left: auto;
@@ -1297,6 +1301,13 @@
 
 }
 
+.goodsBlock .title {
+    margin: 0;
+    padding: 20px 10px;
+    font-size: 150%;
+    color: #565656;
+}
+
 .goodsBlock ul {
     list-style: none none;
     padding: 0;
@@ -1309,7 +1320,7 @@
     margin-bottom: .5rem;
     float: left;
     width: 50%;
-    height: 24rem;
+    height: 22rem;
 
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
