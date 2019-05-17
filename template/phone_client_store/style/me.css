@@ -1,0 +1,96 @@
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/** 用户信息 **/
+.user-info{width:100%;border-bottom:.05rem solid #f6f6f6;overflow:hidden;background-color:#ffffff;}
+.user-info .user-basic{position:relative;padding:0 1.350rem;min-height:11.5rem;color:#ffffff;z-index:2;background:url(http://img61.ddimg.cn/upload_img/00610/home/user-bg.jpg) no-repeat center center;background-size:100% 100%;}
+.user-info .user-basic .table{display:table;width:100%;height:11.5rem;}
+.user-info .user-basic .table .cell{display:table-cell;vertical-align:middle;text-align:center;}
+.user-info .user-basic .wrap{position:relative;min-height:7.16rem;overflow:hidden;padding:2.05rem 0;}
+.user-info .user-basic .user-img{
+	display:block;position:absolute;
+	z-index:3;
+	overflow:hidden;
+
+	left:0;
+	top: 2.05rem;
+    width: 7.4rem;
+    height: 7.4rem;
+}
+.user-info .user-basic .user-img a.myimg{display:block;}
+.user-info .user-basic .user-img a.myimg img{display:block;width:100%;height:auto;border-radius:0.8rem;}
+.user-info .user-basic .user-detail{margin-left:8.9rem;font-size:0;}
+.user-info .user-basic .login-link{display:inline-block;line-height:1.85rem;padding:0 2.25rem;border:.05rem solid #ffffff;border-radius:1.9rem;font-size:6.4rem;text-align:center;color:#ffffff;}
+.user-info .user-basic .user-name{
+	font-size:1.6rem;line-height:2rem;display:inline-block;max-width:100%;
+	-webkit-box-sizing:border-box;-moz-box-sizing:border-box;-ms-box-sizing:
+	border-box;-o-box-sizing:border-box;box-sizing:border-box;position:relative;padding-right:2.4rem;
+
+}
+.user-info .user-basic .user-name a.my{display:block;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;height:2rem;}
+.user-info .user-basic .member-badge{display:block;height:2rem;width:2rem;background: url('../images/v0.png') no-repeat center center;background-size:contain;overflow:hidden;text-indent:-999rem;position:absolute;top:0;right:0;}
+.user-info .user-basic .toggle{display:block;background:url(http://img61.ddimg.cn/upload_img/00610/passport/toggle.png) transparent 6.4rem .3rem no-repeat;background-size:auto 1.2rem;font-size:1.1rem;padding:.2rem 1rem .2rem 2.4rem;border:1px solid #ffe89a;border-radius:.5rem;float:left;line-height:1.5rem;color:#ffd061;margin-top:3.2rem;}
+.user-info .user-basic .member-badge.v0{background-image: url('../images/v0.png');}
+.user-info .user-basic .member-badge.v3{background-image: url('../images/v1.png');}
+.user-info .user-basic .member-badge.v1{background-image: url('../images/v2.png');}
+.user-info .user-basic .member-badge.v2{background-image: url('../images/v3.png');}
+.user-info .user-basic .remaining{overflow:hidden;font-size:.6rem;margin-top:-.3rem;}
+.user-info .user-basic .remaining.sign_style{margin-top:.2rem;}
+.user-info .user-basic .remaining a{display:block;float:left;margin-right:.1rem;line-height:2rem;padding:0 .1rem;white-space:nowrap;color:#ffffff;padding-top:.6rem;}
+.user-info .user-basic .remaining.sign_style a{padding-top:0;}
+.user-info .user-basic .remaining a.sign_tag{position:relative;}
+.user-info .user-basic .remaining em{font-style: normal;}
+.user-info .user-basic .user-main{
+	display: block;position: absolute;
+	width: 9rem;height: 3rem;bottom:.850rem;
+	right:0;
+	background-image: url(../images/personal.png);
+	background-size: 9rem 3rem;
+	background-repeat: no-repeat;
+}
+.user-info .user-stat{background-color:#ffffff;color:#000000;}
+.user-info .user-stat a{float: left;display:block;width:33.3333%;padding: 1rem 0;text-align:center;line-height: 1.5	rem;font-size: 1.3rem;color: inherit;}
+.user-info .user-stat a:nth-child(2){position: relative;width: 33.3334%;}
+.user-info .user-stat a:nth-child(2):before,.user-info .user-stat a:nth-child(2):after{content: "";position:absolute;top:1rem;height:3.4rem;width: 0;border-left: .1rem solid #e5e5e5;font-size:0;line-height:0;}
+.user-info .user-stat a:nth-child(2):before{left:0;}
+.user-info .user-stat a:nth-child(2):after{right:0;}
+.user-info .user-stat a em{display:block;font-style:normal;padding-bottom:.4rem;}
+
+/** 功能区块 **/
+.f-section{margin-bottom: 1rem;background-color: #fff;}
+.f-section .order-nav{border-bottom: .1rem solid #f6f6f6;text-align: center;font-size: 1.2rem;}
+.f-section .order-nav ul{display: block;list-style: none;}
+.f-section .order-nav ul:after{content: "";display: block;clear: both;height: 0;}
+.f-section .order-nav ul li{display: inline-block;float: left;width: 25%;}
+.f-section .order-nav ul li a{position: relative;display: inline-block;width: 100%;padding: 3.6rem 0 .5rem;background: url("../images/pd-pay.png") no-repeat center .8rem;background-size: 2.4rem;line-height: 1.2rem;color: #4d525d;}
+.f-section .order-nav ul li a .badge{position: absolute;top: .4rem;right: 28%;display: inline-block;min-width: 1.6rem;height: 1.6rem;border-radius: .8rem;padding: 0 .1rem;background-color: #fe463c;line-height: 1.6rem;font-size: 1.2rem;color: #fff;}
+.f-section .order-nav ul li .pd-pay{background-image: url("../images/pd-pay.png");}
+.f-section .order-nav ul li .pd-receipt{background-image: url("../images/pd-receipt.png");}
+.f-section .order-nav ul li .pd-comment{background-image: url("../images/pd-comment.png");}
+.f-section .order-nav ul li .pd-return{background-image: url("../images/pd-return.png");}
+
+/** 内容控件 **/
+.slide-link{position:relative;display:block;padding:.575rem 7% .575rem .5rem;border-bottom:.05rem solid rgb(246,246,246);background:url(../images/rightarrow_new.png) no-repeat 96% center;background-size:.325rem;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;line-height:1.1rem;font-size:.7rem;color:#4d525d !important;}
+.slide-link img{float:left;height:1.1rem;margin-right:.25rem;}
+.slide-link em{float:right;display:inline-block;font-size:.55rem;font-style:normal;color:#999;}
+.slide-link.badged::after{z-index:2;content:"";position:absolute;top:.56rem;left:1.45rem;display:inline-block;height:.3rem;width:.3rem;border-radius:.15rem;background-color:#fe463c;}
+
+/* 签到入口*/
+
+.sign_tag{
+    position: relative;
+}
+.sign_tag::before{
+    content: '';
+    display: block;
+    position: absolute;
+    left:1.4rem;
+    top:.2rem;
+    width:4.416rem;
+    height: 1.334rem;
+    background: url('../images/sign_tag.gif') no-repeat;
+    background-size: 100% 100%;
+}
+
