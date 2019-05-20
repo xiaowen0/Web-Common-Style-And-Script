@@ -247,7 +247,7 @@
                                 <span class="red" v-if="required">*</span>
                             </label>
                             <input v-bind:id="id" v-bind:class="classAttr" v-bind:type="type" v-bind:name="name"
-                                   v-bind:placeholder="placeholder"/>
+                                   v-bind:placeholder="placeholder" v-bind:value="value"/>
                         </div>
                     </div>
 
@@ -258,7 +258,14 @@
                                 &lt;label<span v-if="id"> for=&quot;{{id}}&quot;</span>&gt;<br/>
                                     {{label}}<span v-if="required">&lt;span class=&quot;red&quot;&gt;*&lt;/span&gt;</span><br/>
                                 &lt;/label&gt;<br/>
-                                &lt;input<span v-if="id"> id=&quot;{{id}}&quot;</span><span v-if="classAttr"> class=&quot;{{classAttr}}&quot;</span> type=&quot;{{type}}&quot;<span v-if="value"> value=&quot;{{value}}&quot;</span><span v-if="name"> name=&quot;{{name}}&quot;</span><span v-if="placeholder"> placeholder=&quot;{{placeholder}}&quot;</span><span v-if="required"> required=&quot;required&quot;</span><span v-if="autocomplete"> autocomplete=&quot;on&quot;</span><span v-if="autofocus"> autofocus=&quot;autofocus&quot;</span>/&gt;<br/>
+                                &lt;input<span v-if="id"> id=&quot;{{id}}&quot;</span>
+								<span v-if="classAttr"> class=&quot;{{classAttr}}&quot;</span> type=&quot;{{type}}&quot;
+								<span v-if="value"> value=&quot;{{value}}&quot;</span>
+								<span v-if="name"> name=&quot;{{name}}&quot;</span>
+								<span v-if="placeholder"> placeholder=&quot;{{placeholder}}&quot;</span>
+								<span v-if="required"> required=&quot;required&quot;</span>
+								<span v-if="autocomplete"> autocomplete=&quot;on&quot;</span>
+								<span v-if="autofocus"> autofocus=&quot;autofocus&quot;</span>/&gt;<br/>
                             &lt;/div&gt;
                         </div>
                     </div>
