@@ -69,6 +69,11 @@
 .pagination {
     padding-left: 0;
 }
+.pagination,
+.pagination .button,
+.pagination input {
+    line-height: 2em;
+}
 
 .pagination li {
     /*display: inline;*/
@@ -82,12 +87,39 @@
     background-color: #FFF;
     display: block;
 }
+.pagination .item {
+    display: inline-block;
+    margin: 0 8px 0 0;
+}
 
-.pageNumberInputbox {
+.pagination.alignCenter .item {
+    margin: 0 4px 0 4px;
+}
+.pagination.alignRight .item {
+    margin: 0 0 0 8px;
+}
+
+.pagination .button {
+    height: auto;
+    box-sizing: border-box;
+}
+
+.pagination .pageNumberInputbox {
     display: inline-block;
     width: 80px;
-    text-align: center;
+    height: auto;
     padding: 0;
+    text-align: center;
+}
+.pagination .number {
+    font-weight: 700;
+}
+.pagination.blueTheme .button {
+    color: #007bff;
+    border-color: #c4e0ff;
+}
+.pagination.blueTheme input {
+    border-color: #c4e0ff;
 }
 
 .pagination.bookPaginationLayout {

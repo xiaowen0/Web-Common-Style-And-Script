@@ -1809,10 +1809,10 @@ function supportsFullScreen(name)
     var element = createElement(name);
 
     return element.requestFullscreen |
-        element.webkitRequestFullscreen |
-        element.mozRequestFullScreen |
-        element.msRequestFullscreen |
-        element.oRequestFullscreen;
+     element.webkitRequestFullscreen |
+     element.mozRequestFullScreen |
+     element.msRequestFullscreen |
+     element.oRequestFullscreen;
 }
 
 /**
@@ -1918,7 +1918,7 @@ function setTakeTurns(elementList, options)
     var timer = setInterval(function()
     {
         var list = typeof(elementList) === 'string' ?
-            $(elementList) : elementList;
+         $(elementList) : elementList;
 
         // get hidden item count
         var count = list.length;
@@ -2159,16 +2159,16 @@ function initLoadMore(options, callback)
     options ? null : options = {};
     var bottomDistance = options.bottomDistance || 40;
 
-    $(window).on('scroll', function() {
-            var scrollTop = $(this).scrollTop();
-            var scrollHeight = $(document).height();
-            var windowHeight = $(this).height();
+    $(window).on("scroll", function ()
+    {
+        var scrollTop = $(this).scrollTop();
+        var scrollHeight = $(document).height();
+        var windowHeight = $(this).height();
 
-            if (scrollTop + windowHeight >= scrollHeight - bottomDistance) {
-                callback();
-            }
+        if (scrollTop + windowHeight >= scrollHeight - bottomDistance) {
+            callback();
         }
-    );
+    });
 }
 
 /**
@@ -2286,7 +2286,7 @@ function getWindowHeight()
     // standard API: window.innerHeight
     // wrong API: $(window).height() when body height < window height, value = body height
     var height = window.innerHeight
-        || window.height;               // IE old version
+     || window.height;               // IE old version
 
     return height ? height : 0;
 }
@@ -2305,7 +2305,7 @@ function getWindowWidth()
     // standard API: window.innerWidth
     // wrong API: $(window).width()
     var width = window.innerWidth
-        || window.width;            // IE old version
+     || window.width;            // IE old version
 
     return width ? width : 0;
 }
@@ -2318,9 +2318,9 @@ function getBodyHeight()
 {
     // standard API: document.body.offsetHeight, document.documentElement.offsetHeight
     var bodyHeight = document.body.offsetHeight ||
-        document.documentElement.offsetHeight ||
-        document.body.clientHeight ||               // IE old version
-        $(document.body).height();                   // jQuery API
+     document.documentElement.offsetHeight ||
+     document.body.clientHeight ||               // IE old version
+     $(document.body).height();                   // jQuery API
 
     return bodyHeight ? bodyHeight : 0;
 }
@@ -2681,7 +2681,7 @@ function readFile(file, data_type, options)
     }
 
     typeof (options) === 'object' ?
-        null : options = {};
+     null : options = {};
 
     var onabort = options.onabort ? options.onabort : null;
     var onload = options.onload ? options.onload : null;
@@ -2762,10 +2762,10 @@ function convertImage2Canvas(image, options, callback)
 
         // limit size
         if (
-            image_min_width > -1 ||
-            image_min_height > -1 ||
-            image_max_width > -1 ||
-            image_max_height > -1
+         image_min_width > -1 ||
+         image_min_height > -1 ||
+         image_max_width > -1 ||
+         image_max_height > -1
         ) {
             // min size limit
             if (this.width < image_min_width || this.height < image_min_height) {
@@ -4317,7 +4317,7 @@ function applyNativeLanguage(language, defaultLanguage, supportedList, options)
             }
 
             var nativeLangText = typeof(window.nativeLanguage[text]) == 'string' ?
-                window.nativeLanguage[text] : '';
+             window.nativeLanguage[text] : '';
             if (!nativeLangText)
             {
                 return;
@@ -4577,3 +4577,143 @@ function initAutoMoveInWindow(element)
     moveStep(element);
 }
 
+/**
+ * init vue table list content
+ * @param  Object  options
+ * @return  Object(Vue)
+ * @requires Vue, jQuery
+ */
+function initVueTableList(options)
+{
+    var elementSelector = options.el || '';
+    var editingDialog   = options.editingDialog || '';
+    var editingPageUrl  = options.editingPageUrl || '';
+    var apiConfig       = options.apiConfig || {};
+    var customData      = options.data || {};
+    var customMethods   = options.methods || {};
+
+    var data = {
+        page : 1,
+        size : 10,
+        count : 0,
+        pageCount : 1,
+        keywords : '',
+        filters : {},
+        list : [],
+        ajaxLock : false
+    };
+    for (var key in customData)
+    {
+        data[key] = customData[key];
+    }
+
+    var methods = {
+
+        loadPage : function(page){
+
+            if (this.ajaxLock)
+            {
+                return;
+            }
+            this.ajaxLock = true;
+
+            if (page)
+            {
+                this.page = page;
+            }
+            var me = this;
+
+            $.ajax({
+                url : apiConfig.list.url,
+                type : apiConfig.list.method || 'get',
+                data : {
+                    page : this.page,
+                    size : this.size,
+                    filters : this.filters,
+                    keywords : me.keywords
+                },
+                success : function(result){
+                    me.list         = result.data.rows;
+                    me.pageCount    = result.data.totalPage;
+                    me.count        = result.data.totalCount;
+                },
+                complete : function()
+                {
+                    me.ajaxLock = false;
+                },
+                error : appConfig.ajaxErrorHandle
+            });
+        },
+        loadFirstPage : function(){
+            this.loadPage(1);
+        },
+        loadPrevPage : function(){
+
+            if (this.page == 1)
+            {
+                return;
+            }
+
+            this.loadPage(this.page-1);
+        },
+        loadNextPage : function(){
+
+            if (this.page + 1 > this.pageCount)
+            {
+                return;
+            }
+
+            this.loadPage(this.page+1);
+        },
+        onPageNumClick : function(event){
+            this.loadPage(event.target.innerHTML);
+        },
+        onPageNumChange : function (event){
+            var page = parseInt(this.value) || 0;
+            this.loadPage(page);
+        },
+        onAlter : function(event) {
+
+            var id = event.target.dataset.id;
+            if (editingDialog)
+            {
+                $(editingDialog).modal();
+            }
+            else if (editingPageUrl)
+            {
+                location.href = editingPageUrl + '?id=' + id;
+            }
+        },
+        create : function(){
+            if (editingDialog)
+            {
+                $(editingDialog).modal();
+            }
+            else if (editingPageUrl)
+            {
+                location.href = editingPageUrl;
+            }
+        },
+        onQuery : function()
+        {
+            this.loadPage(1);
+        },
+        init : function()
+        {
+            var me = this;
+            me.loadPage(1);
+        }
+    };
+    for (var key in customMethods)
+    {
+        methods[key] = customMethods[key];
+    }
+
+    var vueController = new Vue({
+        el : elementSelector,
+        data : data,
+        methods : methods
+    });
+
+    return vueController;
+}
