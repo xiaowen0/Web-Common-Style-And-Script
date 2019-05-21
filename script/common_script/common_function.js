@@ -3223,6 +3223,60 @@ function selectboxAddOptions(selectbox, list)
 }
 
 /**
+ * load selectbox's data for options
+ * @param  Object(HTMLElement)  element object
+ * @param  Object  ajaxOptions  options for $.ajax
+ * @param  Object  processOptions  options for setting data
+ */
+function loadSelectboxData(element, ajaxOptions, processOptions)
+{
+    typeof (ajaxOptions)    === 'undefined' ?   ajaxOptions     = {} : null;
+    typeof (processOptions) === 'undefined' ?   processOptions  = {} : null;
+
+    var afterLoad   = processOptions.afterLoad || null;
+    var afterRender = processOptions.afterRender || null;
+    var mapping     = processOptions.mapping || {};
+
+    if (typeof(ajaxOptions.success) === 'undefined')
+    {
+        ajaxOptions.success = (function (result, textStatus, jqXHR){
+
+            var data;
+            if (afterLoad)
+            {
+                data = afterLoad(result, textStatus, jqXHR);
+            }
+            else {
+                data = result;
+            }
+
+            data = listDataColumnConvert(data, mapping);
+
+            for (var i=0; i<data.length; i++)
+            {
+                var tOption = createElement('option', {
+                    value : data[i].value
+                });
+                tOption.innerHTML = data[i].title;
+                element.appendChild(tOption);
+            }
+
+            if (data.length)
+            {
+                $(element).val(data[0].value).trigger('change');
+            }
+
+            if (afterRender)
+            {
+                afterRender();
+            }
+        });
+    }
+
+    $.ajax(ajaxOptions);
+}
+
+/**
  * set check all action
  * @param   checkbox    Object(HTMLInputElement)
  */
@@ -4592,6 +4646,8 @@ function initVueTableList(options)
     var customData      = options.data || {};
     var customMethods   = options.methods || {};
 
+    var editingColumns = options.editingColumns || {};
+
     var data = {
         page : 1,
         size : 10,
@@ -4678,6 +4734,8 @@ function initVueTableList(options)
             if (editingDialog)
             {
                 $(editingDialog).modal();
+                this.editingDialogController.init();
+                this.editingDialogController.loadData(id);
             }
             else if (editingPageUrl)
             {
@@ -4688,6 +4746,7 @@ function initVueTableList(options)
             if (editingDialog)
             {
                 $(editingDialog).modal();
+                this.editingDialogController.itemData = $.extend(editingColumns);
             }
             else if (editingPageUrl)
             {
@@ -4702,6 +4761,15 @@ function initVueTableList(options)
         {
             var me = this;
             me.loadPage(1);
+        },
+        checkAll : function (event)
+        {
+            // get check status
+            var check_status = event.currentTarget.checked;
+
+            $(this.$el).find('input[type="checkbox"]').each(function(){
+                this.checked = check_status;
+            });
         }
     };
     for (var key in customMethods)
@@ -4714,6 +4782,211 @@ function initVueTableList(options)
         data : data,
         methods : methods
     });
+    vueController.init();
+
+    if (editingDialog)
+    {
+        vueController.editingDialogController = new Vue({
+            el : editingDialog,
+            data : {
+                title : '编辑',
+                itemData : $.extend(editingColumns)
+            },
+            methods : {
+                init : function (){
+                    var editors = $(this.el).find('.editor');
+                    if (editors.length)
+                    {
+                        editors.each(function (){
+                            CKEDITOR.replace(this.id);
+                        });
+                    }
+                },
+                loadData : function (id){
+
+                    var me = this;
+                    $.ajax({
+                        url : apiConfig.get.url,
+                        type : apiConfig.get.method || 'get',
+                        data : {
+                            id : id
+                        },
+                        success : function(result){
+                            me.itemData = result.data;
+                        },
+                        complete : function()
+                        {
+                            me.ajaxLock = false;
+                        },
+                        error : appConfig.ajaxErrorHandle
+                    });
+                },
+                save : function (){
+
+                    var me = this;
+
+                    var editors = $(this.el).find('.editor');
+                    if (editors.length)
+                    {
+                        editors.each(function (){
+                            var editor = CKEDITOR.instances[this.id];
+                            if (!editor)
+                            {
+                                return;
+                            }
+
+                            this.value = editor.getData();
+                        });
+                    }
+
+                    var apiUrl      = this.itemData.id ? apiConfig.update.url : apiConfig.add.url;
+                    var apiMethod   = this.itemData.id ? apiConfig.update.method : apiConfig.add.method;
+
+                    $.ajax({
+                        url : apiUrl,
+                        method : apiMethod,
+                        data : me.itemData,
+                        success : function (result){
+
+                        }
+                    });
+                }
+            }
+        });
+    }
+    vueController.init();
 
     return vueController;
 }
+
+/**
+ * init vue form content
+ * @param  Object  options
+ * @return  Object(Vue)
+ * @requires Vue, jQuery
+ */
+function initVueForm(options)
+{
+    var elementSelector = options.el || '';
+    var apiConfig       = options.apiConfig || {};
+    var customData      = options.data || {};
+    var customMethods   = options.methods || {};
+
+    var editingColumns = options.editingColumns || {};
+
+    var data = {
+        title : '编辑',
+        editors : [],
+        itemData : cloneObject(editingColumns)
+    };
+    for (var key in customData)
+    {
+        data[key] = customData[key];
+    }
+
+    /**
+     * call before submit data
+     * @type null|Function
+     * @param  Object  data
+     */
+    var beforeSubmit = options.beforeSubmit || null;
+
+    var methods = {
+        init : function (){
+
+            var me = this;
+            var editors = $(elementSelector).find('.editor');
+            if (editors.length)
+            {
+                editors.each(function (){
+                    CKEDITOR.replace(this.id);
+                    me.editors.push(CKEDITOR.instances[this.id]);
+                });
+            }
+        },
+        loadData : function (id){
+
+            var me = this;
+            $.ajax({
+                url : apiConfig.get.url,
+                type : apiConfig.get.method || 'get',
+                data : {
+                    id : id
+                },
+                success : function(result){
+                    me.itemData = result.data;
+                    me.updateEditors();
+                },
+                complete : function()
+                {
+                    me.ajaxLock = false;
+                },
+                error : appConfig.ajaxErrorHandle
+            });
+        },
+        updateEditors : function (){
+            for (var i=0; i<this.editors.length; i++)
+            {
+                var tId     = this.editors[i].id;
+                var text    = $('#' + tId).val();
+                this.editors[i].setData(text);
+            }
+        },
+        save : function (){
+
+            var me = this;
+
+            var editors = $(this.$el).find('.editor');
+            if (editors.length)
+            {
+                for (var i=0; i<editors.length; i++)
+                {
+                    var tEditor = CKEDITOR.instances[editors.eq(i).attr('id')];
+                    if (!tEditor)
+                    {
+                        continue;
+                    }
+
+                    var content = tEditor.getData();
+                    editors.eq(i).text(content);
+                }
+            }
+
+            var apiUrl      = this.itemData.id ? apiConfig.update.url : apiConfig.add.url;
+            var apiMethod   = this.itemData.id ? apiConfig.update.method : apiConfig.add.method;
+
+            var data = me.itemData;
+            if (beforeSubmit)
+            {
+                data = beforeSubmit(data);
+            }
+
+            $.ajax({
+                url : apiUrl,
+                method : apiMethod,
+                data : me.itemData,
+                success : function (result){
+
+                }
+            });
+
+            return false;
+
+        }   // end save function
+    };
+    for (var key in customMethods)
+    {
+        methods[key] = customMethods[key];
+    }
+
+    var vueController = new Vue({
+        el : elementSelector,
+        data : data,
+        methods : methods
+    });
+    vueController.init();
+
+    // vueController.init();
+    return vueController;
+}
+
