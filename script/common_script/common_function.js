@@ -1,6 +1,8 @@
 /**
  * common function
- * dependent on jQuery
+ * author: Kevin Kwan
+ * E-mail: zhiwen2720@163.com
+ * url: https://github.com/xiaowen0/Web-Common-Style-And-Script
  */
 
 var dependencies = ['jquery', 'moment'];
@@ -4742,6 +4744,10 @@ function initVueTableList(options)
                 location.href = editingPageUrl + '?id=' + id;
             }
         },
+        onSelectRow : function (event){
+            var target = event.currentTarget;
+            $(target).toggleClass('selected');
+        },
         create : function(){
             if (editingDialog)
             {
@@ -4753,6 +4759,42 @@ function initVueTableList(options)
                 location.href = editingPageUrl;
             }
         },
+        onRemove : function (){
+
+            var me = this;
+            var ids = this.getSelectedIds();
+
+            if (ids.length < 1)
+            {
+                app.showMessageBox('请先勾选需要删除的数据。');
+                return;
+            }
+
+            if (!window.confirm('确认要删除这些数据吗？（该操作不可逆）'))
+            {
+                return;
+            }
+
+            var taskCount = ids.length;
+            var taskFinishedCount = 0;
+
+            for (var i=0; i<ids.length; i++)
+            {
+                $.ajax({
+                    url : apiConfig.delete.url,
+                    data : {
+                        id : ids[i]
+                    },
+                    complete : function (){
+                        taskFinishedCount++;
+                        if (taskFinishedCount==taskCount)   // all task are finish, then reload data
+                        {
+                            me.loadFirstPage();
+                        }
+                    }
+                });
+            }
+        },
         onQuery : function()
         {
             this.loadPage(1);
@@ -4761,6 +4803,27 @@ function initVueTableList(options)
         {
             var me = this;
             me.loadPage(1);
+        },
+        /**
+         * get selected id array
+         * @returns  Array
+         */
+        getSelectedIds : function (){
+            var rowCheckboxList = $(this.$el).find('table .rowCheckbox');
+            var ids = [];
+            for (var i=0; i<rowCheckboxList.length; i++)
+            {
+                var tId = rowCheckboxList.eq(i).attr('data-id');
+                if (!tId) { continue; }
+
+                var checked = rowCheckboxList[i].checked;
+                if (checked)
+                {
+                    ids.push(tId);
+                }
+            }
+
+            return ids;
         },
         checkAll : function (event)
         {
@@ -4873,6 +4936,7 @@ function initVueForm(options)
     var customMethods   = options.methods || {};
 
     var editingColumns = options.editingColumns || {};
+    var onSubmitSuccess = options.onSubmitSuccess || {};
 
     var data = {
         title : '编辑',
@@ -4895,16 +4959,42 @@ function initVueForm(options)
         init : function (){
 
             var me = this;
+
+            var id = getUrlParam('id');
+            if (id)
+            {
+                this.loadData(id, function callback(data){
+                    me.initEditors(data);
+                });
+            }
+            else
+            {
+                this.initEditors();
+            }
+        },
+        initEditors : function (data){
+            var me = this;
             var editors = $(elementSelector).find('.editor');
             if (editors.length)
             {
                 editors.each(function (){
-                    CKEDITOR.replace(this.id);
-                    me.editors.push(CKEDITOR.instances[this.id]);
+
+                    var controlName = this.name;
+                    if (controlName && typeof(data[this.name]) !== 'undefined')
+                    {
+                        this.innerHTML = data[this.name];
+                    }
+
+                    var id = this.id;
+
+                    setTimeout(function(){
+                        CKEDITOR.replace(id);
+                        me.editors.push(CKEDITOR.instances[id]);
+                    }, 800);
                 });
             }
         },
-        loadData : function (id){
+        loadData : function (id, callback){
 
             var me = this;
             $.ajax({
@@ -4915,7 +5005,11 @@ function initVueForm(options)
                 },
                 success : function(result){
                     me.itemData = result.data;
-                    me.updateEditors();
+
+                    if (callback)
+                    {
+                        callback(result.data);
+                    }
                 },
                 complete : function()
                 {
@@ -4948,6 +5042,12 @@ function initVueForm(options)
                     }
 
                     var content = tEditor.getData();
+
+                    var key = editors.eq(i).attr('name');
+                    if (key)
+                    {
+                        me.itemData[key] = content;
+                    }
                     editors.eq(i).text(content);
                 }
             }
@@ -4966,8 +5066,12 @@ function initVueForm(options)
                 method : apiMethod,
                 data : me.itemData,
                 success : function (result){
-
-                }
+                    if (onSubmitSuccess)
+                    {
+                        onSubmitSuccess(result);
+                    }
+                },
+                error : appConfig.ajaxErrorHandle
             });
 
             return false;
