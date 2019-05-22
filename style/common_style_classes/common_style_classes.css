@@ -561,7 +561,7 @@
 /* border */
 
 .border {
-	border: solid 1px #efefef;
+    border: solid 1px #efefef;
 }
 .lightBorder {
     border: solid 1px lightgrey;
@@ -1067,6 +1067,17 @@ p.danger {
     margin-bottom: 4px;
     padding: 0;
     min-width: 0;
+}
+
+.payButton,
+.payBtn{
+    background-color: #FB4741;
+    color: #fff;
+    border-radius: 0;
+    width: 6rem;
+    height: 4.5rem;
+    line-height: 100%;
+    font-size: 180%;
 }
 
 .button.musicNote {
