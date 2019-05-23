@@ -3265,12 +3265,13 @@ function loadSelectboxData(element, ajaxOptions, processOptions)
 
             if (data.length)
             {
-                $(element).val(data[0].value).trigger('change');
+                // select first option
+                $(element).find('option:first-child').attr('selected', 'selected');
             }
 
             if (afterRender)
             {
-                afterRender();
+                afterRender(element);
             }
         });
     }
@@ -4633,6 +4634,54 @@ function initAutoMoveInWindow(element)
     moveStep(element);
 }
 
+/**************************
+ * CKEditor
+ ***************************/
+
+/**
+ * init CKEditor component
+ * @param  HTMLElement|String  element quote or css selector string
+ * @param  Function  callback(HTMLElement, editor)
+ * @requires jQuery, CKEditor
+ */
+function initCKEditors(element, callback)
+{
+    // get editors
+    var editors = $(element);
+    if (!editors.length)
+    {
+        return;
+    }
+
+    editors.each(function ()
+    {
+        var control = this;
+        var id = this.id;
+
+        CKEDITOR.replace(id, {
+            on: {
+                /**
+                 * @type  Function
+                 * @param  Object  event
+                 * - editor : Object
+                 */
+                instanceReady : function( event ) {
+                    if (callback)
+                    {
+                        callback(control, event.editor);
+                    }
+                }
+            }
+        });
+
+    });
+
+    // CKEDITOR.on( 'loaded', function(event)
+    // {
+    //
+    // } );
+}
+
 /**
  * init vue table list content
  * @param  Object  options
@@ -4865,7 +4914,7 @@ function initVueTableList(options)
                         });
                     }
                 },
-                loadData : function (id){
+                loadData : function (id, callback){
 
                     var me = this;
                     $.ajax({
@@ -4876,6 +4925,11 @@ function initVueTableList(options)
                         },
                         success : function(result){
                             me.itemData = result.data;
+
+                            if (callback)
+                            {
+                                callback;
+                            }
                         },
                         complete : function()
                         {
@@ -4936,7 +4990,9 @@ function initVueForm(options)
     var customMethods   = options.methods || {};
 
     var editingColumns = options.editingColumns || {};
-    var onSubmitSuccess = options.onSubmitSuccess || {};
+    var onSubmitSuccess = options.onSubmitSuccess || null;
+    var onDataLoaded    = options.onDataLoaded || null;
+    var onMounted       = options.onMounted || null;
 
     var data = {
         title : '编辑',
@@ -4958,44 +5014,12 @@ function initVueForm(options)
     var methods = {
         init : function (){
 
-            var me = this;
-
-            var id = getUrlParam('id');
-            if (id)
-            {
-                this.loadData(id, function callback(data){
-                    me.initEditors(data);
-                });
-            }
-            else
-            {
-                this.initEditors();
-            }
         },
-        initEditors : function (data){
-            var me = this;
-            var editors = $(elementSelector).find('.editor');
-            if (editors.length)
-            {
-                editors.each(function (){
-
-                    var controlName = this.name;
-                    if (controlName && typeof(data[this.name]) !== 'undefined')
-                    {
-                        this.innerHTML = data[this.name];
-                    }
-
-                    var id = this.id;
-
-                    setTimeout(function(){
-                        CKEDITOR.replace(id);
-                        me.editors.push(CKEDITOR.instances[id]);
-                    }, 800);
-                });
-            }
+        initEditors : function (callback){
+            initCKEditors('.editor', callback);
         },
-        loadData : function (id, callback){
-
+        loadData : function (id, callback)
+        {
             var me = this;
             $.ajax({
                 url : apiConfig.get.url,
@@ -5004,11 +5028,20 @@ function initVueForm(options)
                     id : id
                 },
                 success : function(result){
-                    me.itemData = result.data;
 
+                    var data = result.data;
+
+                    // data process if need
+                    if (onDataLoaded)
+                    {
+                        data = onDataLoaded(result.data);
+                    }
+                    me.itemData = data;
+
+                    // do other something
                     if (callback)
                     {
-                        callback(result.data);
+                        callback(data);
                     }
                 },
                 complete : function()
@@ -5064,7 +5097,7 @@ function initVueForm(options)
             $.ajax({
                 url : apiUrl,
                 method : apiMethod,
-                data : me.itemData,
+                data : data,
                 success : function (result){
                     if (onSubmitSuccess)
                     {
@@ -5086,11 +5119,28 @@ function initVueForm(options)
     var vueController = new Vue({
         el : elementSelector,
         data : data,
-        methods : methods
-    });
-    vueController.init();
+        methods : methods,
+        mounted : function (){
 
-    // vueController.init();
+            var me = this;
+
+            var id = getUrlParam('id');
+
+            if (id)
+            {
+                // 必须先加载数据再初始化编辑器，否则 Vue 会重新渲染视图。
+                me.loadData(id, function (){
+                    setTimeout(function(){
+                        me.initEditors();
+                    }, 800);
+                });
+            }
+            else
+            {
+                me.initEditors();
+            }
+        }
+    });
     return vueController;
 }
 
