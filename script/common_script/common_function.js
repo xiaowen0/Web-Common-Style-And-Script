@@ -4697,15 +4697,22 @@ function initVueTableList(options)
     var customData      = options.data || {};
     var customMethods   = options.methods || {};
 
-    var editingColumns = options.editingColumns || {};
+    var size        = options.size || 10;
+    var pageParam   = options.pageParam || 'page';
+    var sizeParam   = options.sizeParam || 'size';
+
+    var editingColumns  = options.editingColumns || {};
+    var filterColumns   = options.filterColumns || {};
+
+    var afterLoadData   = options.afterLoadData || null;
 
     var data = {
         page : 1,
-        size : 10,
+        size : size,
         count : 0,
         pageCount : 1,
         keywords : '',
-        filters : {},
+        filters : filterColumns,
         list : [],
         ajaxLock : false
     };
@@ -4730,19 +4737,32 @@ function initVueTableList(options)
             }
             var me = this;
 
+            var params = {};
+            params[pageParam] = this.page;
+            params[sizeParam] = this.size;
+            for (var key in this.filters)
+            {
+                if (this.filters[key])
+                {
+                    params[key] = this.filters[key];
+                }
+            }
+
             $.ajax({
                 url : apiConfig.list.url,
                 type : apiConfig.list.method || 'get',
-                data : {
-                    page : this.page,
-                    size : this.size,
-                    filters : this.filters,
-                    keywords : me.keywords
-                },
+                data : params,
                 success : function(result){
-                    me.list         = result.data.rows;
-                    me.pageCount    = result.data.totalPage;
-                    me.count        = result.data.totalCount;
+                    if (afterLoadData)
+                    {
+                        afterLoadData(result);
+                    }
+                    else
+                    {
+                        me.list         = result.data.rows;
+                        me.pageCount    = result.data.totalPage || 1;
+                        me.count        = result.data.totalCount || me.list.length;
+                    }
                 },
                 complete : function()
                 {
@@ -4778,6 +4798,9 @@ function initVueTableList(options)
         onPageNumChange : function (event){
             var page = parseInt(this.value) || 0;
             this.loadPage(page);
+        },
+        onQuery : function (event) {
+            this.loadFirstPage();
         },
         onAlter : function(event) {
 
@@ -4844,10 +4867,6 @@ function initVueTableList(options)
                 });
             }
         },
-        onQuery : function()
-        {
-            this.loadPage(1);
-        },
         init : function()
         {
             var me = this;
@@ -4882,6 +4901,12 @@ function initVueTableList(options)
             $(this.$el).find('input[type="checkbox"]').each(function(){
                 this.checked = check_status;
             });
+        },
+        formatDate : function (timestamp) {
+            return moment(timestamp).format('YYYY-MM-DD');
+        },
+        formatDateTime : function (timestamp) {
+            return moment(timestamp).format('YYYY-MM-DD HH:mm:ss');
         }
     };
     for (var key in customMethods)
