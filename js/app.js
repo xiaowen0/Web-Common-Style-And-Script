@@ -5,8 +5,12 @@
  */
 var appConfig = {
 
+    resourceList : [
+        '../asset/font-awesome-4.7.0/css/font-awesome.min.css'
+    ],
+
     loadWechatJSSDKConfigUrl : '',
-    
+
     /**
      * api base url, prefix of api url.
      */
@@ -94,6 +98,12 @@ var application = {
     config : appConfig,
 
     /**
+     * app config
+     * @type  Array
+     */
+    resourceList : [],
+
+    /**
      * sub page source url, if use div or iframe to load external page (html)
      */
     subPageUrl : '',
@@ -103,7 +113,57 @@ var application = {
      * @type Object
      */
     subPageParams : {},
-    
+
+    init : function ()
+    {
+        // clean resource record
+        this.resourceList = [];
+
+        // collect link tags
+        var linkList = $('link');
+        for (var i=0; i<linkList.length; i++)
+        {
+            this.resourceList.push(linkList[i].href);
+        }
+
+        // collect script tags
+        var scriptList = $('script');
+        for (var i=0; i<scriptList.length; i++)
+        {
+            this.resourceList.push(scriptList[i].href);
+        }
+
+        // load resources from config
+        var resources = this.config.resourceList;
+        for (var i=0; i<resources.length; i++)
+        {
+            this.import(resources[i]);
+        }
+    },
+
+    /**
+     * import a resource
+     * @param  String  url
+     */
+    import : function (url)
+    {
+        if (inArray(url, this.resourceList))
+        {
+            return;
+        }
+
+        // record and avoid repeat import
+        this.resourceList.push(url);
+        if (isCSSFile(url))
+        {
+            loadStylesheet(url);
+        }
+        else if (isScriptFile(url))
+        {
+            loadScript(url);
+        }
+    },
+
     /**
      * show message use messagebox
      * @param  String  content
@@ -119,7 +179,7 @@ var application = {
             alert(content);
         }
     },
-    
+
     /**
      * load wechat jssdk config
      * @param Object options
@@ -132,9 +192,9 @@ var application = {
         var jsApiList = options.jsApiList || [];
         var onReady = options.onReady || null;
         var onError = options.onError || null;
-        
+
         var me = this;
-        
+
         $.ajax({
             type: "get",
             url: Link.prefix.realmName + "base/wx/jssdkconfig/jssdk",
@@ -151,9 +211,9 @@ var application = {
                     signature: data.data.signature,
                     jsApiList: jsApiList
                 });
-                
+
                 wx.ready(onReady);
-                
+
                 if (onError)
                 {
                     wx.error(onError);
@@ -244,3 +304,10 @@ var application = {
  * @alias application
  */
 var app = application;
+
+$(function(){
+    app.init();
+
+    // app.import('asset/font-awesome-4.7.0/css/font-awesome.min.css');
+});
+

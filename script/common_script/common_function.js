@@ -1331,9 +1331,20 @@ function loadStylesheet(url)
 }
 
 /**
+ * check a url if is CSS file
+ * @param  String  url
+ * @return Boolean
+ */
+function isCSSFile(url)
+{
+    return url.substr(-4) == '.css';
+}
+
+/**
  * load script
  * @param url  String  url to script file.
  * @param options  Object  options for this action
+ * - onload  Function
  */
 function loadScript(url, options)
 {
@@ -1350,6 +1361,27 @@ function loadScript(url, options)
     }
 
     document.body.appendChild(scriptLink);
+}
+
+/**
+ * check a url if is script type file
+ * @param  String  url
+ * @return Boolean
+ */
+function isScriptFile(url)
+{
+    var scriptTypeList = ['js'];
+
+    for (var i=0; i<scriptTypeList.length; i++)
+    {
+        // each ext name in scriptTypeList
+        var tExtStr = '.' + scriptTypeList[i];
+        if (url.substr(0 - tExtStr.length) == tExtStr)
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
 /**
