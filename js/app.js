@@ -92,6 +92,12 @@ var appConfig = {
 var application = {
 
     /**
+     * url base path
+     * @type  String
+     */
+    baseUrl : '',
+
+    /**
      * app config
      * @type  Object
      */
@@ -304,10 +310,4 @@ var application = {
  * @alias application
  */
 var app = application;
-
-$(function(){
-    app.init();
-
-    // app.import('asset/font-awesome-4.7.0/css/font-awesome.min.css');
-});
 
