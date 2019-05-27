@@ -126,17 +126,17 @@ var application = {
         this.resourceList = [];
 
         // collect link tags
-        var linkList = $('link');
+        var linkList = document.getElementsByTagName('link');
         for (var i=0; i<linkList.length; i++)
         {
             this.resourceList.push(linkList[i].href);
         }
 
         // collect script tags
-        var scriptList = $('script');
+        var scriptList = document.getElementsByTagName('script');
         for (var i=0; i<scriptList.length; i++)
         {
-            this.resourceList.push(scriptList[i].href);
+            this.resourceList.push(scriptList[i].src);
         }
 
         // load resources from config
@@ -153,20 +153,27 @@ var application = {
      */
     import : function (url)
     {
-        if (inArray(url, this.resourceList))
+        var fileName = getUrlFileName(url);
+
+        // check if ready import
+        for (var i=0; i<this.resourceList.length; i++)
         {
-            return;
+            var tFilename = getUrlFileName(this.resourceList[i]);
+            if (fileName === tFilename)
+            {
+                return;
+            }
         }
 
         // record and avoid repeat import
-        this.resourceList.push(url);
+        // this.resourceList.push(url);
         if (isCSSFile(url))
         {
-            loadStylesheet(url);
+            this.resourceList.push(loadStylesheet(url));
         }
         else if (isScriptFile(url))
         {
-            loadScript(url);
+            this.resourceList.push(loadScript(url));
         }
     },
 
