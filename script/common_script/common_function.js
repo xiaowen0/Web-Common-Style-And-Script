@@ -770,6 +770,17 @@ function createUrl(url, params)
 }
 
 /**
+ * get file name from a url string
+ * @param    String url
+ * @return   String
+ */
+function getUrlFileName(url)
+{
+    var paths = url.split('/');
+    return paths[paths.length-1];
+}
+
+/**
  * get body html from html code
  * @param  String  html
  * @return String|false
@@ -1320,6 +1331,7 @@ function printStylesheetLink(url)
 /**
  * load style sheet
  * @param url  String  url to style sheet file.
+ * @return  String  absolute path for file url
  */
 function loadStylesheet(url)
 {
@@ -1328,6 +1340,7 @@ function loadStylesheet(url)
         rel : "stylesheet"
     });
     document.head.appendChild(stylesheetLink);
+    return stylesheetLink.href;
 }
 
 /**
@@ -1345,6 +1358,7 @@ function isCSSFile(url)
  * @param url  String  url to script file.
  * @param options  Object  options for this action
  * - onload  Function
+ * @return  String  absolute path for file url
  */
 function loadScript(url, options)
 {
@@ -1361,6 +1375,7 @@ function loadScript(url, options)
     }
 
     document.body.appendChild(scriptLink);
+    return scriptLink.src;
 }
 
 /**
@@ -1843,10 +1858,10 @@ function supportsFullScreen(name)
     var element = createElement(name);
 
     return element.requestFullscreen |
-     element.webkitRequestFullscreen |
-     element.mozRequestFullScreen |
-     element.msRequestFullscreen |
-     element.oRequestFullscreen;
+        element.webkitRequestFullscreen |
+        element.mozRequestFullScreen |
+        element.msRequestFullscreen |
+        element.oRequestFullscreen;
 }
 
 /**
@@ -1952,7 +1967,7 @@ function setTakeTurns(elementList, options)
     var timer = setInterval(function()
     {
         var list = typeof(elementList) === 'string' ?
-         $(elementList) : elementList;
+            $(elementList) : elementList;
 
         // get hidden item count
         var count = list.length;
@@ -2320,7 +2335,7 @@ function getWindowHeight()
     // standard API: window.innerHeight
     // wrong API: $(window).height() when body height < window height, value = body height
     var height = window.innerHeight
-     || window.height;               // IE old version
+        || window.height;               // IE old version
 
     return height ? height : 0;
 }
@@ -2339,7 +2354,7 @@ function getWindowWidth()
     // standard API: window.innerWidth
     // wrong API: $(window).width()
     var width = window.innerWidth
-     || window.width;            // IE old version
+        || window.width;            // IE old version
 
     return width ? width : 0;
 }
@@ -2352,9 +2367,9 @@ function getBodyHeight()
 {
     // standard API: document.body.offsetHeight, document.documentElement.offsetHeight
     var bodyHeight = document.body.offsetHeight ||
-     document.documentElement.offsetHeight ||
-     document.body.clientHeight ||               // IE old version
-     $(document.body).height();                   // jQuery API
+        document.documentElement.offsetHeight ||
+        document.body.clientHeight ||               // IE old version
+        $(document.body).height();                   // jQuery API
 
     return bodyHeight ? bodyHeight : 0;
 }
@@ -2715,7 +2730,7 @@ function readFile(file, data_type, options)
     }
 
     typeof (options) === 'object' ?
-     null : options = {};
+        null : options = {};
 
     var onabort = options.onabort ? options.onabort : null;
     var onload = options.onload ? options.onload : null;
@@ -2796,10 +2811,10 @@ function convertImage2Canvas(image, options, callback)
 
         // limit size
         if (
-         image_min_width > -1 ||
-         image_min_height > -1 ||
-         image_max_width > -1 ||
-         image_max_height > -1
+            image_min_width > -1 ||
+            image_min_height > -1 ||
+            image_max_width > -1 ||
+            image_max_height > -1
         ) {
             // min size limit
             if (this.width < image_min_width || this.height < image_min_height) {
@@ -4406,7 +4421,7 @@ function applyNativeLanguage(language, defaultLanguage, supportedList, options)
             }
 
             var nativeLangText = typeof(window.nativeLanguage[text]) == 'string' ?
-             window.nativeLanguage[text] : '';
+                window.nativeLanguage[text] : '';
             if (!nativeLangText)
             {
                 return;
