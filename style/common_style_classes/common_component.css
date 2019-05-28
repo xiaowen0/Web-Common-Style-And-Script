@@ -196,6 +196,24 @@
     height: auto;
 }
 
+/* form component */
+
+.form.row_mb10 .form_row {
+    margin-bottom: 10px;
+}
+
+.form.row_mb20 .form_row {
+    margin-bottom: 20px;
+}
+
+.form.verticalLayout .form_label,
+.form.verticalLayout .inputbox,
+.form.verticalLayout .textbox,
+.form.verticalLayout .selectbox {
+    display: block;
+    width: 100%;
+}
+
 /* panel */
 
 .panel {
