@@ -42,7 +42,43 @@
 
             <div class="panel panel-default">
                 <div class="panel-body">
+
+                    <p>使用 .form 应用特别样式</p>
+
+                    <form class="form row_mb10">
+                        <h3>普通布局的表单</h3>
+                        <div class="form_row">
+                            <label class="form_label fl w20p">ID:</label>
+                            <input type="text" class="inputbox fl w80p" placeholder="请输入 ID 号."/>
+                        </div>
+                        <div class="form_row">
+                            <label class="form_label fl w20p">密码:</label>
+                            <input type="password" class="inputbox fl w80p" placeholder="请输入密码"/>
+                        </div>
+                        <div class="form_row">
+                            <label class="form_label fl w20p">多行文本:</label>
+                            <textarea class="textbox fl w80p"></textarea>
+                        </div>
+                        <div class="form_row">
+                            <label class="form_label fl w20p">姓名:</label>
+                            <div class="fl w80p">
+                                <label class="radioLabel">
+                                    <input type="radio" name="gender" class="radioItem" value="1" checked="checked"/>
+                                    男
+                                </label>
+                                <label class="radioLabel">
+                                    <input type="radio" name="gender" class="radioItem" value="2"/>
+                                    女
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form_row">
+                            <button class="button green rounded">提交</button>
+                        </div>
+                    </form>
+
                     <form class="form row_mb10 verticalLayout">
+                        <h3>垂直布局的表单 .verticalLayout</h3>
                         <div class="form_row">
                             <label class="form_label">ID:</label>
                             <input type="text" class="inputbox" placeholder="please input the ID."/>
@@ -72,6 +108,7 @@
                             <button class="button green rounded">Submit</button>
                         </div>
                     </form>
+
                 </div><!-- end .panel-body -->
             </div><!-- end .panel -->
         </div><!-- end .floor -->

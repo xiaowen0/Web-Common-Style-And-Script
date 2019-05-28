@@ -198,6 +198,12 @@
 
 /* form component */
 
+.form .form_row:before,
+.form .form_row:after {
+    display: table;
+    content: " ";
+    clear: both;
+}
 .form.row_mb10 .form_row {
     margin-bottom: 10px;
 }
