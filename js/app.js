@@ -194,6 +194,34 @@ var application = {
     },
 
     /**
+     * load city data (include province, city, district)
+     * @param  Function  callback(data, error)
+     * - data  Object|null  object if success
+     * - error Object|null  object if error
+     */
+    loadCityData : function (callback){
+        $.ajax({
+            url : '../../data/cities.json',
+            dataType : 'json',
+            success : function (data){
+                if (callback)
+                {
+                    callback(data, null);
+                }
+            },
+            error : function (XMLHttpRequest, errorText){
+                if (callback)
+                {
+                    callback(null, {
+                        XMLHttpRequest : XMLHttpRequest,
+                        errorText : errorText,
+                    });
+                }
+            }
+        });
+    },
+
+    /**
      * load wechat jssdk config
      * @param Object options
      * - jsApiList Array

@@ -1,0 +1,29 @@
+{
+  "errorCode": 0,
+  "msg": null,
+  "data": [{
+    "id": "061760e84ba640f5939b813ff07d3afc",
+    "userName": "李小明",
+    "phone": "13012345678",
+    "userId": "d4bd1a2b90414565a209ac8d6785b0d6",
+    "zipCode": "528000",
+    "province": "广东省",
+    "city": "佛山市",
+    "district": "禅城区",
+    "address": "祖庙路1号18楼",
+    "isDefault": 1,
+    "modifiedTime": 1558497438000
+  }, {
+    "id": "1cc1cba2604a46468cdcab8d48fb5929",
+    "userName": "小明",
+    "phone": "13012341234",
+    "userId": "d4bd1a2b90414565a209ac8d6785b0d6",
+    "zipCode": "528020",
+    "province": "广东省",
+    "city": "佛山市",
+    "district": "南海区",
+    "address": "南海大道11号B座1106",
+    "isDefault": 0,
+    "modifiedTime": 1558497429000
+  }]
+}
