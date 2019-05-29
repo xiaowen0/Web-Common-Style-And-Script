@@ -1,0 +1,71 @@
+{
+  "errorCode": 0,
+  "msg": null,
+  "data": [{
+    "id": "1",
+    "name": "师讯官方旗舰店",
+    "trolleysList": [{
+      "id": "12",
+      "productId": "cf3a4bd97cf94262b57d4e66ea3e8364",
+      "productCount": 2,
+      "userId": "d4bd1a2b90414565a209ac8d6785b0d6",
+      "createTime": 1557324584000,
+      "updateTime": 1558949163000,
+      "isShow": 1,
+      "productTitle": "【十三月上新！！！】全是假的，不要买！求你了。 我快亏死了",
+      "productImg": "http://img0.imgtn.bdimg.com/it/u=1003510977,37135527&fm=26&gp=0.jpg",
+      "productPrice": 250,
+      "distributionPrice": 0.00,
+      "supplierId": "1",
+      "supplierName": "师讯官方旗舰店"
+    }, {
+      "id": "204ff8d7ec76427684052d48f35848f4",
+      "productId": "46223d753f15430dbe2d64850ac4e5ef",
+      "productCount": 2,
+      "userId": "d4bd1a2b90414565a209ac8d6785b0d6",
+      "createTime": 1557755069000,
+      "updateTime": 1559007163000,
+      "isShow": 1,
+      "productTitle": "【十三月上新！！！】全是假的，不要买！求你了。 我快亏死了",
+      "productImg": "http://img0.imgtn.bdimg.com/it/u=1003510977,37135527&fm=26&gp=0.jpg",
+      "productPrice": 250,
+      "distributionPrice": 0.00,
+      "supplierId": "1",
+      "supplierName": "师讯官方旗舰店"
+    }],
+    "spplierTotalPrice": 1000.00
+  },{
+    "id": "1",
+    "name": "师讯佛山直营店",
+    "trolleysList": [{
+      "id": "12",
+      "productId": "cf3a4bd97cf94262b57d4e66ea3e8364",
+      "productCount": 2,
+      "userId": "d4bd1a2b90414565a209ac8d6785b0d6",
+      "createTime": 1557324584000,
+      "updateTime": 1558949163000,
+      "isShow": 1,
+      "productTitle": "【十三月上新！！！】全是假的，不要买！求你了。 我快亏死了",
+      "productImg": "http://img0.imgtn.bdimg.com/it/u=1003510977,37135527&fm=26&gp=0.jpg",
+      "productPrice": 250,
+      "distributionPrice": 0.00,
+      "supplierId": "1",
+      "supplierName": "师讯佛山直营店"
+    }, {
+      "id": "204ff8d7ec76427684052d48f35848f4",
+      "productId": "46223d753f15430dbe2d64850ac4e5ef",
+      "productCount": 2,
+      "userId": "d4bd1a2b90414565a209ac8d6785b0d6",
+      "createTime": 1557755069000,
+      "updateTime": 1559007163000,
+      "isShow": 1,
+      "productTitle": "【十三月上新！！！】全是假的，不要买！求你了。 我快亏死了",
+      "productImg": "http://img0.imgtn.bdimg.com/it/u=1003510977,37135527&fm=26&gp=0.jpg",
+      "productPrice": 250,
+      "distributionPrice": 0.00,
+      "supplierId": "1",
+      "supplierName": "师讯佛山直营店"
+    }],
+    "spplierTotalPrice": 1000.00
+  }]
+}

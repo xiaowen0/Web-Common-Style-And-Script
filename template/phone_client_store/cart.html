@@ -24,7 +24,7 @@
     <!-- dangdang site: font size : window width ratio = 24 : 375 =  -->
     <body data-base-width="375">
 
-        <div class="page max640">
+        <div class="page max640" id="infoItem">
             <div class="inner">
 
                 <header class="header subPageHeader">
@@ -48,14 +48,14 @@
 
                     <!-- shop item -->
                     <div class="shopBlock">
-                        <div class="cart_list">
+                        <div class="cart_list" v-for="items in itemInfo">
                             <!--店铺级模块-->
                             <!--店铺头-->
                             <div class="shop_title clearfix" data-shop-id="10748">
-                                <input type="checkbox" class="fl c_checkbox" checked="">
+                                <input type="checkbox" class="fl c_checkbox" v-bind:data-storeid="items.id" v-on:change="checkAll" checked="">
                                 <div class="shopIcon fl common"></div>
                                 <a class="fl shop_link" href="">
-                                    <p class="title">百丽集团童鞋旗舰店</p>
+                                    <p class="title">{{items.name}}</p>
                                     <p class="shop_in"></p>
                                 </a>
                             </div>
@@ -66,230 +66,58 @@
                             <!--店铺商品-->
 
                             <!-- cart item -->
-                            <div class="cart_item" item_id="749578692" ordnum="1">
-
-                                <input type="checkbox" class="fl c_checkbox" checked="">
-
-                                <!--商品图片-->
-                                <a href="1241402814.html?ref=cart" class="fl pro_pic">
-                                    <!-- discount image -->
-                                    <img style="width:2.8rem;height:2.8rem;position: absolute;z-index: 1;right: 0rem;bottom: 0rem;" src="image/three_discount.png" alt=""/>
-                                    <img class="pic" src="image/goods/01.jpg">
-                                </a>
-                                <!--商品图片end-->
-
-                                <div class="item_show">
-                                    <div class="detail clearfix">
-
-                                        <!--商品名称-->
-                                        <p class="fl prd_tit">
-                                            <a href="1241402814.html?ref=cart" >【3折后到手价：104.4元】迪士尼Disney童鞋2019春季新款儿童运动鞋毛毛虫童鞋男女童运动鞋女童休闲鞋透气织布跑步鞋(0-13岁）DS3501_桃红-睡美人,14/参考脚长134mm</a>
-                                        </p>
-                                        <!--商品名称end-->
-
-                                        <!--商品价格-->
-                                        <p class="fl prd_price ">
-                                            <span class="dangdang_price">￥348.00</span>
-                                        </p>
-                                        <!--商品价格end-->
-
-                                        <!--商品标签-->
-                                        <p class="clear tags clearfix"></p>
-                                        <!--商品标签end-->
-                                    </div>
-
-                                    <!--商品数量颜色尺码-->
-                                    <div class="prd_desc clearfix">
-                                        <div class="prd_info clearfix fl">
-                                            <span class="num fl eclipse">x1</span>
-                                            <span class="color_size fl eclipse">桃红-睡美人/14/参考脚长134mm</span>
-                                        </div>
-                                    </div>
-                                    <!--商品数量颜色尺码end-->
-                                </div>
-
-                            </div>
-                            <!--集合促销商品end-->
-
-                            <!--集合促销小计-->
-                            <div class="promoFitShow row">
-                                <div class="fitInfo fl"></div>
-                                <div class="fitMoney fr">满N件折小计：
-                                    <span>￥348.00</span>
-                                </div>
-                            </div>
-                            <!--集合促销小计end-->
-
-                            <!--店铺商品end-->
-
-                            <!--店铺合计-->
-
-                            <!-- <div class="shopPromoFit">
-                            <div class="fitMoney fr">
-                            店铺合计：<span>￥348.00</span></div>
-                            </div> -->
-                            <!--店铺合计end-->
-                            <!--店铺级模块end-->
-                        </div><!-- end cart_list -->
-                    </div><!-- end shopBlock -->
-
-                    <!-- shop item -->
-                    <div class="shopBlock">
-                        <div class="cart_list">
-                            <!--店铺级模块-->
-                            <!--店铺头-->
-                            <div class="shop_title clearfix" data-shop-id="10748">
-                                <input type="checkbox" class="fl c_checkbox" checked="">
-                                <div class="shopIcon fl common"></div>
-                                <a class="fl shop_link" href="">
-                                    <p class="title">百丽集团童鞋旗舰店</p>
-                                    <p class="shop_in"></p>
-                                </a>
-                            </div>
-                            <!--店铺头end-->
-
-                            <div class="shopLine"></div>
-
                             <!--店铺商品-->
+                            <div v-for="item in items.trolleysList">
+                                <!-- cart item -->
+                                <div class="cart_item" v-bind:item_id="item.productId" ordnum="1">
+                                    <input type="checkbox" class="fl c_checkbox" v-model="item.checked">
+                                    <!--商品图片-->
+                                    <a v-bind:href="'goods_detail.html?id='+item.productId" class="fl pro_pic">
+                                        <!-- discount image -->
+                                        <img style="width:2.8rem;height:2.8rem;position: absolute;z-index: 1;right: 0rem;bottom: 0rem;"
+                                             src="../../image/three_discount.png" alt=""/>
+                                        <img class="pic" v-bind:src="item.productImg">
+                                    </a>
+                                    <!--商品图片end-->
 
-                            <!-- cart item -->
-                            <div class="cart_item" item_id="749578692" ordnum="1">
-
-                                <input type="checkbox" class="fl c_checkbox" checked="">
-
-                                <!--商品图片-->
-                                <a href="1241402814.html?ref=cart" class="fl pro_pic">
-                                    <!-- discount image -->
-                                    <img style="width:2.8rem;height:2.8rem;position: absolute;z-index: 1;right: 0rem;bottom: 0rem;" src="image/three_discount.png" alt=""/>
-                                    <img class="pic" src="image/goods/01.jpg">
-                                </a>
-                                <!--商品图片end-->
-
-                                <div class="item_show">
-                                    <div class="detail clearfix">
-
-                                        <!--商品名称-->
-                                        <p class="fl prd_tit">
-                                            <a href="1241402814.html?ref=cart">【3折后到手价：104.4元】迪士尼Disney童鞋2019春季新款儿童运动鞋毛毛虫童鞋男女童运动鞋女童休闲鞋透气织布跑步鞋(0-13岁）DS3501_桃红-睡美人,14/参考脚长134mm</a>
-                                        </p>
-                                        <!--商品名称end-->
-
-                                        <!--商品价格-->
-                                        <p class="fl prd_price ">
-                                            <span class="dangdang_price">￥348.00</span>
-                                        </p>
-                                        <!--商品价格end-->
-
-                                        <!--商品标签-->
-                                        <p class="clear tags clearfix"></p>
-                                        <!--商品标签end-->
-                                    </div>
-
-                                    <!--商品数量颜色尺码-->
-                                    <div class="prd_desc clearfix">
-                                        <div class="prd_info clearfix fl">
-                                            <span class="num fl eclipse">x1</span>
-                                            <span class="color_size fl eclipse">桃红-睡美人/14/参考脚长134mm</span>
+                                    <div class="item_show">
+                                        <div class="detail clearfix">
+                                            <!--商品名称-->
+                                            <p class="fl prd_tit">
+                                                <a v-bind:href="'goods_detail.html?id='+item.productId">{{item.productTitle}}</a>
+                                            </p>
+                                            <!--商品名称end-->
+                                            <!--商品价格-->
+                                            <p class="fl prd_price ">
+                                                <span class="dangdang_price">￥{{item.productPrice}}</span>
+                                            </p>
+                                            <!--商品价格end-->
+                                            <!--商品标签-->
+                                            <p class="clear tags clearfix"></p>
+                                            <!--商品标签end-->
                                         </div>
-                                    </div>
-                                    <!--商品数量颜色尺码end-->
-                                </div>
 
+                                        <!--商品数量颜色尺码-->
+                                        <div class="clearfix alignRight" style="margin-right: 1rem;">
+                                            <!--<span class="num fl eclipse">x1</span>-->
+                                            <!--<span class="color_size fl eclipse">桃红-睡美人/14/参考脚长134mm</span>-->
+                                            <div class="goodsNumberControl">
+                                                <button class="add" v-bind:data-productid="item.productId" data-type="1" v-on:click="doAddOrDe">+</button>
+                                                <span class="count">{{item.productCount}}</span>
+                                                <button class="reduce"v-bind:data-productid="item.productId" data-type="0" v-on:click="doAddOrDe">-</button>
+                                            </div>
+                                        </div>
+                                        <!--商品数量颜色尺码end-->
+                                    </div>
+
+                                </div>
                             </div>
                             <!--集合促销商品end-->
 
                             <!--集合促销小计-->
-                            <div class="promoFitShow row">
-                                <div class="fitInfo fl"></div>
-                                <div class="fitMoney fr">满N件折小计：
-                                    <span>￥348.00</span>
-                                </div>
-                            </div>
-                            <!--集合促销小计end-->
-
-                            <!--店铺商品end-->
-
-                            <!--店铺合计-->
-
-                            <!-- <div class="shopPromoFit">
-                            <div class="fitMoney fr">
-                            店铺合计：<span>￥348.00</span></div>
-                            </div> -->
-                            <!--店铺合计end-->
-                            <!--店铺级模块end-->
-                        </div><!-- end cart_list -->
-                    </div><!-- end shopBlock -->
-
-                    <!-- shop item -->
-                    <div class="shopBlock">
-                        <div class="cart_list">
-                            <!--店铺级模块-->
-                            <!--店铺头-->
-                            <div class="shop_title clearfix" data-shop-id="10748">
-                                <input type="checkbox" class="fl c_checkbox" checked="">
-                                <div class="shopIcon fl common"></div>
-                                <a class="fl shop_link" href="">
-                                    <p class="title">百丽集团童鞋旗舰店</p>
-                                    <p class="shop_in"></p>
-                                </a>
-                            </div>
-                            <!--店铺头end-->
-
-                            <div class="shopLine"></div>
-
-                            <!--店铺商品-->
-
-                            <!-- cart item -->
-                            <div class="cart_item" item_id="749578692" ordnum="1">
-
-                                <input type="checkbox" class="fl c_checkbox" checked="">
-
-                                <!--商品图片-->
-                                <a href="1241402814.html?ref=cart" class="fl pro_pic">
-                                    <!-- discount image -->
-                                    <img style="width:2.8rem;height:2.8rem;position: absolute;z-index: 1;right: 0rem;bottom: 0rem;" src="image/three_discount.png" alt=""/>
-                                    <img class="pic" src="image/goods/01.jpg">
-                                </a>
-                                <!--商品图片end-->
-
-                                <div class="item_show">
-                                    <div class="detail clearfix">
-
-                                        <!--商品名称-->
-                                        <p class="fl prd_tit">
-                                            <a href="1241402814.html?ref=cart">【3折后到手价：104.4元】迪士尼Disney童鞋2019春季新款儿童运动鞋毛毛虫童鞋男女童运动鞋女童休闲鞋透气织布跑步鞋(0-13岁）DS3501_桃红-睡美人,14/参考脚长134mm</a>
-                                        </p>
-                                        <!--商品名称end-->
-
-                                        <!--商品价格-->
-                                        <p class="fl prd_price ">
-                                            <span class="dangdang_price">￥348.00</span>
-                                        </p>
-                                        <!--商品价格end-->
-
-                                        <!--商品标签-->
-                                        <p class="clear tags clearfix"></p>
-                                        <!--商品标签end-->
-                                    </div>
-
-                                    <!--商品数量颜色尺码-->
-                                    <div class="prd_desc clearfix">
-                                        <div class="prd_info clearfix fl">
-                                            <span class="num fl eclipse">x1</span>
-                                            <span class="color_size fl eclipse">桃红-睡美人/14/参考脚长134mm</span>
-                                        </div>
-                                    </div>
-                                    <!--商品数量颜色尺码end-->
-                                </div>
-
-                            </div>
-                            <!--集合促销商品end-->
-
-                            <!--集合促销小计-->
-                            <div class="promoFitShow row">
-                                <div class="fitInfo fl"></div>
-                                <div class="fitMoney fr">满N件折小计：
-                                    <span>￥348.00</span>
+                            <div class="shopPromoFit">
+                                <div class="fitMoney fr">
+                                    店铺合计：<span >￥{{getStorePrice(items,1)}}</span>
                                 </div>
                             </div>
                             <!--集合促销小计end-->

@@ -7,7 +7,7 @@ var baseUrl = '../../';
 var cart = new Vue({
     el: '#infoItem',
     data: {
-        url: baseUrl + 'portal/shop/product/trolleysList',
+        url: baseUrl + 'data/cartData.json',
         trolleysUrl: baseUrl + 'portal/shop/product/updateProductCount',
         status: '',
         limit: 99999,
@@ -18,12 +18,7 @@ var cart = new Vue({
     methods: {
         init: function () {
             var me = this;
-            Link.verifyLoin(function (user) {
-                me.loadPage();
-                me.getAd();
-            });
-
-
+            this.loadPage();
         },
         loadPage: function () {
             var me = this;
@@ -38,7 +33,7 @@ var cart = new Vue({
                 },
                 success: function (result) {
                     if (result.errorCode) {
-                        dialog.msg(msg);
+                        app.showMessageBox(msg);
                         return;
                     }
                     for (var i = 0; i < result.data.length; i++) {
@@ -124,7 +119,7 @@ var cart = new Vue({
                             } else {
                                 count = me.itemInfo[i].trolleysList[b].productCount - 1 ;
                                 if(count<=0){
-                                    dialog.msg("已经最小啦~")
+                                    app.showMessageBox("已经最小啦~")
                                     return
                                 }
                                 me.itemInfo[i].trolleysList[b].productCount=count
@@ -146,7 +141,7 @@ var cart = new Vue({
                     }
                 },
                 error: function (result) {
-                    dialog.msg(result.msg)
+                    app.showMessageBox(result.msg)
                 }
             })
         },
@@ -166,7 +161,7 @@ var cart = new Vue({
                     });
                 },
                 error: function (result) {
-                    dialog.msg(result.msg)
+                    app.showMessageBox(result.msg)
                 }
             })
 
