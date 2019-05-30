@@ -2,13 +2,13 @@
 header,footer,section,div,span,p,img,a,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,em,i,b,u,del,menu,nav,fieldset,legend,article,aside,details,figcaption,hgroup,pre,code,from,blockquote,th,td,tr,hr,table,img,figure,button,input,textarea{padding:0;margin:0;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-text-size-adjust:none;-webkit-tap-highlight-color:rgba(0,0,0,0);font-family:Microsoft Yahei,Helvetica,Arial;}
 em,i{font-style:normal;}
 html {
-    font-size: 62.5%;/*10 ÷ 16 × 100% = 62.5%*/
+    /*font-size: 62.5%;!*10 ÷ 16 × 100% = 62.5%*!*/
 }
 
 @media (min-device-width : 375px) and (max-device-width : 667px) and (-webkit-min-device-pixel-ratio : 2){
 
     html {
-        font-size: 73.2%!important;
+        /*font-size: 73.2%!important;*/
     }
 }
 
@@ -142,7 +142,12 @@ a.payBtn{background-color: #FB4741;color: #fff;border-radius: 0;height: 4.5rem;l
 .cart_item .prd_price .orign_price{font-size: 1.3rem;color: #b8b8b8;text-decoration: line-through;}
 .prd_desc .num{font-size: 1.2rem;color: #646464;max-width: 25%}
 .prd_desc .color_size{font-size: 1.2rem;color: #646464;padding-left: 0.5rem;width: 75%; box-sizing:border-box;-moz-box-sizing:border-box; /* Firefox */-webkit-box-sizing:border-box; /* Safari */}
-.prd_desc .prd_info{height: 2rem;width: 80%;margin-top: 1rem;}
+.prd_desc .prd_info{
+    height: 2rem;
+    /*width: 80%;*/
+    /*margin-top: 1rem;*/
+    margin-right: 1rem;
+}
 .giftList{clear: both;background-color: #ffffff;display: block;}
 .promoFitShow,.shopPromoFit{padding: 0 1rem;font-size: 1rem;color: #646464;background-color: #fafafa;line-height: 3.25rem;padding-top: 2px;}
 .promoFitShow div{line-height: 3.25rem;}
@@ -192,7 +197,7 @@ a.payBtn{background-color: #FB4741;color: #fff;border-radius: 0;height: 4.5rem;l
 .invalid_content .shopIcon{margin-top: 1rem;padding-right: 0.5rem;}
 .prd_desc .prd_like{display: block;float: right;margin-top: 1.2rem;padding: 0rem .5rem;border-radius: .25rem;font-size: 1.2rem;color: #5a5a5a;line-height: 2rem; border: 1px solid #a0a0a0;margin-right:.8rem;}
 .prd_desc .delete_item{display: block;float: right;margin-top: 1.2rem;padding: 0rem .5rem;border-radius: .25rem;font-size: 1.2rem;color: #5a5a5a;line-height: 2rem; border: 1px solid #a0a0a0;margin-right:1rem;}
-.cart_item .item_show{position: relative;height: 9rem;margin: 1rem 0 0 0;} 
+.cart_item .item_show{position: relative;height: 9rem;margin: 1rem 0 0 0;}
 .j_cuxiao_list .cart_item .pro_pic{width:6rem;height:6rem;margin:1rem 1rem 1rem 0;text-align:right}
 .j_cuxiao_list .cart_item .detail {font-size:1.2rem;padding:.8rem 0;}
 .cart_item .prd_desc{position: absolute;left: 0;bottom: 0;width: 100%}
@@ -282,7 +287,11 @@ a.payBtn{background-color: #FB4741;color: #fff;border-radius: 0;height: 4.5rem;l
 }
 
 .cart_item.item_no div{margin: 1.3rem 0rem 0 0.5rem;font-size: 1.2rem;}
-.cart_item .pro_pic img{width: 100%}
+.cart_item .pro_pic img {
+    width: 100%;
+    height: auto;
+    min-height: 100%;
+}
 .cart_item .pro_pic, .giftList .pro_pic{
     width:9rem;
     height:9rem;
@@ -381,4 +390,17 @@ a.payBtn{background-color: #FB4741;color: #fff;border-radius: 0;height: 4.5rem;l
 
 .cart_item .gift_area p span:first-child{float:left;width: 80%;}
 .cart_item .gift_area p span:last-child{float:right}
+
+.orderOptArea {
+    border-bottom: 1px solid #ebebeb;
+    /*margin-top: .5rem;*/
+    background: #fff;
+}
+
+.orderOptArea .fitMoney  {
+    height: 4.5rem;
+    line-height: 4.5rem;
+    padding: 0 1rem;
+    font-size: 180%;
+}
 

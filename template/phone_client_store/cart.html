@@ -28,13 +28,13 @@
             <div class="inner">
 
                 <header class="header subPageHeader">
-                    <a href="javascript:;" class="back" title="返回">
+                    <a href="javascript:history.back();" class="back" title="返回">
                         <i class="fa fa-angle-left"></i>
                     </a>
                     <div class="title">购物车</div>
-                    <a href="javascript:;" class="menu">
-                        <i class="fa fa-navicon"></i>
-                    </a>
+                    <!--            <a href="javascript:;" class="menu">-->
+                    <!--                <i class="fa fa-navicon"></i>-->
+                    <!--            </a>-->
                 </header>
 
                 <!-- banner-1 for home page -->
@@ -138,35 +138,19 @@
                 </div>
 
             </div>
-        </div>
 
-        <nav class="mobileBottomMenuContainer mobileBottomMenuLayout">
-            <ul class="menu">
-                <li class="item active">
-                    <a class="button" href="index.html">
-                        <i class="icon fa fa-home"></i><br/>首页
-                    </a>
-                </li>
-                <li class="item">
-                    <a class="button" href="cat.html">
-                        <i class="icon fa fa-navicon"></i><br/>分类
-                    </a>
-                </li>
-                <li class="item">
-                    <a class="button" href="cart.html">
-                        <i class="icon fa fa-shopping-cart"></i><br/>购物车
-                    </a>
-                </li>
-                <li class="item">
-                    <a class="button" href="me.html">
-                        <i class="icon fa fa-user"></i><br/>我的
-                    </a>
-                </li>
-                <!-- <li class="item">
-                    <a class="button">首页</a>
-                </li> -->
-            </ul>
-        </nav>
+            <nav class="mobileBottomMenuContainer">
+                <div class="orderOptArea clearfix">
+                    <div class="fitMoney fl">
+                        合计：<span class="full_Price">￥{{getStorePrice(itemInfo,0)}}</span>
+                    </div>
+                    <div class="fr">
+                        <button class="button payBtn" v-on:click="doOrder">下单</button>
+                    </div>
+                </div>
+            </nav>
+
+        </div>
 
         <script src="../../asset/jquery/jquery-3.4.1.min.js"></script>
         <script src="../../asset/moment-with-locales.min.js"></script>

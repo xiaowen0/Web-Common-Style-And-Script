@@ -2,13 +2,24 @@ moment.locale('zh-cn');
 
 // app.loadKefuIconPanel();
 
-var baseUrl = '../../';
+var baseUrl = './';
+
+var cartPageConfig = {
+    apiConfig : {
+        list : {
+            url : baseUrl + 'data/cart_data.json'
+        },
+        update : {
+            url : baseUrl + 'data/update_cart.json'
+        }
+    }
+};
 
 var cart = new Vue({
     el: '#infoItem',
     data: {
-        url: baseUrl + 'data/cartData.json',
-        trolleysUrl: baseUrl + 'portal/shop/product/updateProductCount',
+        url: cartPageConfig.apiConfig.list.url,
+        trolleysUrl: cartPageConfig.apiConfig.update.url,
         status: '',
         limit: 99999,
         pageCount: 1,
@@ -18,7 +29,8 @@ var cart = new Vue({
     methods: {
         init: function () {
             var me = this;
-            this.loadPage();
+            me.loadPage();
+            me.getAd();
         },
         loadPage: function () {
             var me = this;
@@ -111,22 +123,22 @@ var cart = new Vue({
             var count = 0;
             for (var i = 0; i < me.itemInfo.length; i++) {
                 // if (me.itemInfo[i].id == id) {
-                    for (var b = 0; b < me.itemInfo[i].trolleysList.length; b++) {
-                        if (me.itemInfo[i].trolleysList[b].productId == id) {
-                            if (type==1) {
-                                count = me.itemInfo[i].trolleysList[b].productCount + 1;
-                                me.itemInfo[i].trolleysList[b].productCount=count
-                            } else {
-                                count = me.itemInfo[i].trolleysList[b].productCount - 1 ;
-                                if(count<=0){
-                                    app.showMessageBox("已经最小啦~")
-                                    return
-                                }
-                                me.itemInfo[i].trolleysList[b].productCount=count
+                for (var b = 0; b < me.itemInfo[i].trolleysList.length; b++) {
+                    if (me.itemInfo[i].trolleysList[b].productId == id) {
+                        if (type==1) {
+                            count = me.itemInfo[i].trolleysList[b].productCount + 1;
+                            me.itemInfo[i].trolleysList[b].productCount=count
+                        } else {
+                            count = me.itemInfo[i].trolleysList[b].productCount - 1 ;
+                            if(count<=0){
+                                app.showMessageBox("已经最小啦~")
+                                return
                             }
+                            me.itemInfo[i].trolleysList[b].productCount=count
                         }
-                        ;
                     }
+                    ;
+                }
             }
             $.ajax({
                 url: me.trolleysUrl,
@@ -146,24 +158,6 @@ var cart = new Vue({
             })
         },
         getAd: function () {
-            $.ajax({
-                url: Link.prefix.realmName + "portal/home/list_ad",
-                data: {
-                    typeValue:'7'
-                },
-                success: function (result) {
-                    $("#js-ad-list").html(ejs.render($("#tp-ad-list").html(), result));
-                    var slider = $('.swiper-container');
-                    slider.swiper({
-                        autoplay: 3000,
-                        loop: true,
-                        grabCursor: true,
-                    });
-                },
-                error: function (result) {
-                    app.showMessageBox(result.msg)
-                }
-            })
 
         },
         doOrder:function () {
@@ -176,10 +170,11 @@ var cart = new Vue({
                     }
                 }
             }
-            $.cookie('orderList', id);
-            window.location.href = './order.html'
-        }
-        ,
+            $.cookie('orderList', id, {
+                path : '/'
+            });  // like : 1,2,3
+            window.location.href = '../storeOrder.html'
+        },
         loadNextPage: function () {
             if (this.page >= this.pageCount) {
                 return;
