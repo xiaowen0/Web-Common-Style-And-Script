@@ -16,6 +16,22 @@ a {
     text-decoration: none;
 }
 
+.datetime,
+.phoneNumber {
+    color: #999;
+}
+
+.datetime {
+    font-size: 1.2rem;
+}
+.phoneNumber {
+    font-size: 1.3rem;
+}
+
+.addressText {
+    color: #333;
+}
+
 .c_checkbox {
     width: 2rem;
     height: 2rem;
@@ -271,11 +287,13 @@ a {
 .goods_filters_block ul {
     overflow: hidden;
     background-color: #ffffff;
+    display: flex;
 }
 
 .goods_filters_block li {
-    float: left;
-    width: 20%;
+    /*float: left;*/
+    /*width: 20%;*/
+    flex:1;
 }
 
 .goods_filters_block li a {
@@ -784,9 +802,16 @@ a {
     line-height: 44px;
 }
 
-.shopItem .shopName {
+.shopItem .header .shopName {
     font-size: 13px;
     color: rgb(51, 51, 51);
+    float : left;
+    width: 50%;
+}
+.shopItem .header .status {
+    float: right;
+    width: 20%;
+    color: #FF5000;
 }
 .shopItem .productList {
     padding-bottom: 1rem;

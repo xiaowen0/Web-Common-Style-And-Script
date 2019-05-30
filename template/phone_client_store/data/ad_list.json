@@ -1,0 +1,35 @@
+{
+  "errorCode": 0,
+  "msg": null,
+  "data": [{
+    "id": "23e51b90b725437caa4abfd75f21d0f2",
+    "typeValue": 1,
+    "status": 1,
+    "title": "管好你的嘴",
+    "img": "http://shixun-test-media.oss-cn-shenzhen.aliyuncs.com/vl/img/e2c445d454994374b0ec57ec4a93809c.jpg",
+    "url": "www.baidu.com",
+    "sort": 26,
+    "startTime": 1556504220000,
+    "stopTime": 1748312220000,
+    "createTime": 1558318675000,
+    "updateTime": 1558319060000,
+    "deptCode": "001",
+    "categoryFirstId": "001",
+    "categoryName": ""
+  }, {
+    "id": "d4ccda3f69c9467cac312b4927cff414",
+    "typeValue": 1,
+    "status": 1,
+    "title": "么么哒",
+    "img": "http://shixun-test-media.oss-cn-shenzhen.aliyuncs.com/vl/img/1d92feb018424525aad484737710ddeb.jpg",
+    "url": "www.baidu.com",
+    "sort": 27,
+    "startTime": 1557109080000,
+    "stopTime": 1747707480000,
+    "createTime": 1558318724000,
+    "updateTime": 1558318724000,
+    "deptCode": "001",
+    "categoryFirstId": "001",
+    "categoryName": ""
+  }]
+}
