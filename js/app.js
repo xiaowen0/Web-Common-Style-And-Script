@@ -1,20 +1,35 @@
 /**
  * app config
- * @type Object
- * @require errorMessageList.js  common_function.js
+ * @type	Object
  */
 var appConfig = {
 
-    resourceList : [
-        '../asset/font-awesome-4.7.0/css/font-awesome.min.css'
-    ],
+    resourceList : [],
 
     loadWechatJSSDKConfigUrl : '',
 
     /**
+     * environment config
+     * @type Array  list of environment item
+     */
+    envList : [{
+        id : 'dev',
+        domain : 'localhost',
+        apiBaseUrl : '/'
+    }, {
+        id : 'beta',
+        domain : 'test.xx.com',
+        apiBaseUrl : 'test.xx.com/api/'
+    }, {
+        id : 'dist',
+        domain : 'www.xx.com',
+        apiBaseUrl : 'api.xx.com/api/'
+    }],
+
+    /**
      * api base url, prefix of api url.
      */
-    apiBaseUrl : '/admin/',
+    apiBaseUrl : '/',
 
     /**
      * sub page containner selector expression
@@ -32,7 +47,7 @@ var appConfig = {
 
         var errorMessage = '';
 
-        if (getDebugStatus())
+        if (typeof(getDebugStatus) == 'function' && getDebugStatus())
         {
             errorMessage = 'Status code: ' + status + ' ' + statusText;
             app.showMessageBox(errorMessage, '出错了');
@@ -86,16 +101,28 @@ var appConfig = {
 
 /**
  * web client application object
- * @type Object
- * @requires jQuery
+ * @type    Object
+ * @require jQuery, errorMessageList.js, common_function.js
  */
-var application = {
+var app = {
 
     /**
-     * url base path
-     * @type  String
+     * environment sign
+     * @type    String
      */
-    baseUrl : '',
+    env : 'dev',
+
+    /**
+     * API base url
+     * @type    String
+     */
+    apiBaseUrl : '/',
+
+    /**
+     * resource list
+     * @type    Array
+     */
+    resourceList : [],
 
     /**
      * app config
@@ -104,15 +131,23 @@ var application = {
     config : appConfig,
 
     /**
-     * app config
-     * @type  Array
-     */
-    resourceList : [],
-
-    /**
      * sub page source url, if use div or iframe to load external page (html)
      */
     subPageUrl : '',
+
+    /**
+     * sub page containner selector expression
+     */
+    subPageContainner : '',
+
+    // store current main panel's url
+    current : '',
+
+    /**
+     * panel params
+     * @type Object
+     */
+    panelParams : {},
 
     /**
      * sub page params
@@ -120,7 +155,37 @@ var application = {
      */
     subPageParams : {},
 
+    /**
+     * store api list
+     * @type Object
+     */
+    apiList : apiList,
+
     init : function ()
+    {
+        this.checkEnvironment();
+        this.initResources();
+    },
+
+    /**
+     * check environment
+     */
+    checkEnvironment : function ()
+    {
+        var hostname = location.hostname;
+
+        for (var i=0; i<this.config.envList.length; i++)
+        {
+            if (this.config.envList[i].domain == hostname)
+            {
+                this.env        = this.config.envList[i].id;
+                this.apiBaseUrl = this.config.envList[i].apiBaseUrl;
+                return;
+            }
+        }
+    },
+
+    initResources : function ()
     {
         // clean resource record
         this.resourceList = [];
@@ -238,7 +303,7 @@ var application = {
 
         $.ajax({
             type: "get",
-            url: Link.prefix.realmName + "base/wx/jssdkconfig/jssdk",
+            url: me.apiBaseUrl + "base/wx/jssdkconfig/jssdk",
             dataType: "json",
             data: {
                 url: location.href
@@ -262,6 +327,117 @@ var application = {
             }
         });
     },	// end loadWechatJSSDKConfig function define
+
+    /**
+     * get API by name
+     * @param String  name
+     * @param mixed   defaultValue    default value
+     * @returns mixed
+     */
+    getApi : function(name, defaultValue)
+    {
+        if (name in apiList)
+        {
+            return apiList[name];
+        }
+
+        return defaultValue || null;
+    },
+
+    /**
+     * send a request to a Web API
+     * @param String  apiName  API name
+     * @param Object  options  option in $.ajax()
+     */
+    callApi : function(apiName, options)
+    {
+        var api = this.getApi(apiName);
+
+        if (!api)
+        {
+            alertDebugLog('api name: ' + apiName + ' not find.');
+            return false;
+        }
+
+        options ? null : options = {};
+
+        options.dataType    = options.dataType || 'json';
+        options.type        = api.type || api.method || options.type || 'get';
+        options.error		= options.error || this.ajaxErrorHandle;
+
+        $.ajax(api.url, options);
+    },
+
+    /**
+     * ajax load content into #main_content_container, use in menu.
+     * @param url   String
+     */
+    openPanel: function (url, params)
+    {
+        // check current page.
+        if (this.current === url)
+        {
+            return;
+        }
+        // save new url and load.
+        this.current = url;
+
+        // save params
+        if (params)
+        {
+            this.panelParams = params;
+        }
+        else {
+            this.panelParams = {};
+        }
+
+        // clean old content
+        $('#main_content_container').html('');
+
+        // ajax load content, then append to container
+        $.ajax({
+            url : url,
+            success : function(result){
+                $('#main_content_container').html(result);
+            }
+        });
+    },
+
+    /**
+     * ajax load content into #main_content_container, use in menu.
+     * @param url   String
+     */
+    openPanelAsIframe: function (url, params)
+    {
+        var iframeUrl = createUrl(url, params);
+
+        // check current page.
+        if (this.current === iframeUrl)
+        {
+            return;
+        }
+        // save new url and load.
+        this.current = iframeUrl;
+
+        // save params
+        if (params)
+        {
+            this.panelParams = params;
+        }
+        else {
+            this.panelParams = {};
+        }
+
+        $('#main_content_container').html('<iframe src="' + iframeUrl + '" style="width:100%;border:none;"></iframe>');
+
+        // get screen radio to set iframe height
+        var screenRatio = screen.height / screen.width;
+        var width = $('#main_content_container iframe').width();
+        var height = Math.floor(width * screenRatio);
+        $('#main_content_container iframe').css({
+            height : height + 'px'
+        });
+    },
 
     /**
      * ajax load content into containner of config:subPageContainner.
@@ -337,6 +513,18 @@ var application = {
             height : height + 'px'
         });
     }
+
+    logout : function()
+    {
+        var logoutApi = this.getApi('logout');
+        $.ajax({
+            url : logoutApi.url,
+            complete : function(){
+                location.href = 'login.html';
+            }
+        });
+    }
+
 };
 
 /**
