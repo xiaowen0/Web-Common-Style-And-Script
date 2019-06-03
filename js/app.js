@@ -1,10 +1,13 @@
 /**
  * app config
- * @type	Object
+ * only setting some params and methods.
+ * @type    Object
  */
 var appConfig = {
 
     resourceList : [],
+
+    apiList : {},
 
     loadWechatJSSDKConfigUrl : '',
 
@@ -98,13 +101,17 @@ var appConfig = {
     }
 
 };
+if (typeof(apiList) != 'undefined')
+{
+    appConfig.apiList = apiList;
+}
 
 /**
  * web client application object
  * @type    Object
  * @require jQuery, errorMessageList.js, common_function.js
  */
-var app = {
+var application = {
 
     /**
      * environment sign
@@ -128,7 +135,7 @@ var app = {
      * app config
      * @type  Object
      */
-    config : appConfig,
+    config : {},
 
     /**
      * sub page source url, if use div or iframe to load external page (html)
@@ -159,33 +166,41 @@ var app = {
      * store api list
      * @type Object
      */
-    apiList : apiList,
+    apiList : [],
 
-    init : function ()
+    init : function (config)
     {
-        this.checkEnvironment();
-        this.initResources();
+        this.appConfig = config || {};
+        this.apiList = config.apiList || [];
+
+        this.checkEnvironment(config.envList || []);
+        this.initResources(config.resourceList || []);
     },
 
     /**
      * check environment
+     * @param    Array    envList
      */
-    checkEnvironment : function ()
+    checkEnvironment : function (envList)
     {
         var hostname = location.hostname;
 
-        for (var i=0; i<this.config.envList.length; i++)
+        for (var i=0; i<envList.length; i++)
         {
-            if (this.config.envList[i].domain == hostname)
+            if (envList[i].domain == hostname)
             {
-                this.env        = this.config.envList[i].id;
-                this.apiBaseUrl = this.config.envList[i].apiBaseUrl;
+                this.env        = envList[i].id;
+                this.apiBaseUrl = envList[i].apiBaseUrl;
                 return;
             }
         }
     },
 
-    initResources : function ()
+    /**
+     * init resource list
+     * @param    Array    resourceList
+     */
+    initResources : function (resourceList)
     {
         // clean resource record
         this.resourceList = [];
@@ -205,10 +220,9 @@ var app = {
         }
 
         // load resources from config
-        var resources = this.config.resourceList;
-        for (var i=0; i<resources.length; i++)
+        for (var i=0; i<resourceList.length; i++)
         {
-            this.import(resources[i]);
+            this.import(resourceList[i]);
         }
     },
 
@@ -299,11 +313,17 @@ var app = {
         var onReady = options.onReady || null;
         var onError = options.onError || null;
 
+        var api    = this.getApi('load_wechat_jssdk_config');
+        if (!api)
+        {
+            return;
+        }
+
         var me = this;
 
         $.ajax({
             type: "get",
-            url: me.apiBaseUrl + "base/wx/jssdkconfig/jssdk",
+            url: me.apiBaseUrl + api.url,
             dataType: "json",
             data: {
                 url: location.href
@@ -326,7 +346,7 @@ var app = {
                 }
             }
         });
-    },	// end loadWechatJSSDKConfig function define
+    },    // end loadWechatJSSDKConfig function define
 
     /**
      * get API by name
@@ -363,7 +383,7 @@ var app = {
 
         options.dataType    = options.dataType || 'json';
         options.type        = api.type || api.method || options.type || 'get';
-        options.error		= options.error || this.ajaxErrorHandle;
+        options.error        = options.error || this.ajaxErrorHandle;
 
         $.ajax(api.url, options);
     },
@@ -446,7 +466,7 @@ var app = {
      */
     loadSubPage: function (url, params)
     {
-    	var me = this;
+        var me = this;
 
         // check current page.
         if (this.subPageUrl === url)
@@ -512,7 +532,7 @@ var app = {
         $(this.subPageContainner).find('iframe').css({
             height : height + 'px'
         });
-    }
+    },
 
     logout : function()
     {
