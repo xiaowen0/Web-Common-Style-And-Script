@@ -788,11 +788,11 @@ a {
 }
 
 .shopItem {
-    height: 44px;
+    /*height: 44px;*/
 }
 
 .shopItem .inner {
-    padding: 0 1rem;
+    padding: 0 1rem 1rem;
     background-color: white;
     border-radius: 12px;
 }
@@ -811,6 +811,7 @@ a {
 .shopItem .header .status {
     float: right;
     width: 20%;
+    text-align: right;
     color: #FF5000;
 }
 .shopItem .productList {
