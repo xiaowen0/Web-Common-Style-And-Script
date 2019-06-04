@@ -523,7 +523,14 @@ var application = {
             this.subPageParams = {};
         }
 
-        $(this.subPageContainner).html('<iframe src="' + iframeUrl + '" style="width:100%;border:none;"></iframe>');
+        if ( $(this.subPageContainner).length && $(this.subPageContainner)[0].nodeName === 'iframe' )
+        {
+            $(this.subPageContainner)[0].src = iframeUrl;
+        }
+        else
+        {
+            $(this.subPageContainner).html('<iframe src="' + iframeUrl + '" style="width:100%;border:none;"></iframe>');
+        }
 
         // get screen radio to set iframe height
         var screenRatio = screen.height / screen.width;
