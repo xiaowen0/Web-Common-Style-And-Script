@@ -171,10 +171,10 @@ var application = {
     init : function (config)
     {
         this.appConfig = config || {};
-        this.apiList = config.apiList || [];
+        this.apiList = this.appConfig.apiList || [];
 
-        this.checkEnvironment(config.envList || []);
-        this.initResources(config.resourceList || []);
+        this.checkEnvironment(this.appConfig.envList || []);
+        this.initResources(this.appConfig.resourceList || []);
     },
 
     /**
