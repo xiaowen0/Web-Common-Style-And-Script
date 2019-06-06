@@ -414,6 +414,12 @@
 .alignTop {
     vertical-align: top;
 }
+.alignMiddle {
+    vertical-align: middle;
+}
+.alignBottom {
+    vertical-align: bottom;
+}
 
 /* font */
 .wryh,
@@ -574,7 +580,8 @@
 }
 
 /* mouse cursor */
-.hand {
+.hand,
+.link {
     cursor: pointer
 }
 
@@ -1307,6 +1314,11 @@ p.danger {
 .table td {
     padding: 8px;
     word-break: break-all;
+}
+
+.table.cellVerticalMiddle th,
+.table.cellVerticalMiddle td {
+    vertical-align: middle;
 }
 
 .table.bordered {
