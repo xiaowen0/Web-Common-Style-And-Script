@@ -708,6 +708,26 @@ function removeSpaceInAheadOfLine(string)
 }
 
 /**
+ * get a object in list by key
+ * @param  Array  list
+ * @param  String  key
+ * @param  Mixed  value
+ * @returns  null|Object
+ */
+function getObjectInListByKey(list, key, value)
+{
+    for (var i=0; i<list.length; i++)
+    {
+        var tItem = list[i];
+        if ( typeof(tItem[key]) !== 'undefined' && tItem[key] === value)
+        {
+            return tItem;
+        }
+    }
+    return null;
+}
+
+/**
  * convert a object or array to string
  * @param data  Object|Array
  * @returns mixed
@@ -2159,9 +2179,36 @@ function getUrlParam(name)
     return default_value;
 }
 
-
-
 /* --- Window function group ------------------------------------------- */
+
+/**
+ * go to top of window
+ * if has jQuery, then use animate method for transition effect.
+ */
+function goToTop() {
+
+    if (typeof(jQuery) !== 'undefined')
+    {
+        var scrollTop = getScrollTop();
+        var speed = 'normal';
+        if (scrollTop < 100)
+        {
+            speed = 'slow';
+        }
+        else if (scrollTop >= 1000)
+        {
+            speed = 'fast';
+        }
+        $("html, body").animate({
+            scrollTop: 0
+        }, speed);
+    }
+    else
+    {
+        document.body.scrollTop = 0;    // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    }
+}
 
 /**
  * Get scroll top  获取窗口视图区域到顶部的滚动距离
@@ -4730,6 +4777,212 @@ function initCKEditors(element, callback)
 }
 
 /**
+ * init vue list content
+ * @param  Object  options
+ * @return  Object(Vue)
+ * @requires Vue, jQuery
+ */
+function initVueList(options)
+{
+    var elementSelector = options.el || '';
+    var viewPageUrl     = options.viewPageUrl || '';
+    var apiConfig       = options.apiConfig || {};
+    var customData      = options.data || {};
+    var customMethods   = options.methods || {};
+
+    var autoLoad    = options.autoLoad || false;
+
+    var size        = options.size || 10;
+    var pageParam   = options.pageParam || 'page';
+    var sizeParam   = options.sizeParam || 'size';
+
+    var filterColumns   = options.filterColumns || {};
+
+    var afterLoadData   = options.afterLoadData || null;
+    var onLoadError     = options.onLoadError || null;
+
+    var data = {
+        page : 1,
+        size : size,
+        count : 0,
+        pageCount : 1,
+        keywords : '',
+        filters : filterColumns,
+        list : [],
+        ajaxLock : false,
+        status : ''
+    };
+    for (var key in customData)
+    {
+        data[key] = customData[key];
+    }
+
+    var methods = {
+
+        loadPage : function(page){
+
+            if (this.ajaxLock)
+            {
+                return;
+            }
+            this.ajaxLock = true;
+
+            if (page)
+            {
+                this.page = page;
+            }
+            var me = this;
+
+            var params = {};
+            params[pageParam] = this.page;
+            params[sizeParam] = this.size;
+            for (var key in this.filters)
+            {
+                if (this.filters[key])
+                {
+                    params[key] = this.filters[key];
+                }
+            }
+
+            me.status = 'loading';
+
+            $.ajax({
+                url : apiConfig.list.url,
+                type : apiConfig.list.method || 'get',
+                data : params,
+                success : function(result){
+                    if (afterLoadData)
+                    {
+                        afterLoadData(result);
+                    }
+                    else
+                    {
+                        me.list         = me.list.concat(result.data.rows);
+                        me.pageCount    = result.data.totalPage || 1;
+                        me.count        = result.data.totalCount || me.list.length;
+                    }
+
+                    me.status = 'ready';
+                },
+                complete : function()
+                {
+                    me.status = 'ready';
+                    me.ajaxLock = false;
+                },
+                error : function(XMLHttpRequest, errorText)
+                {
+                    me.status = 'error';
+                    if (onLoadError)
+                    {
+                        onLoadError(XMLHttpRequest, errorText);
+                    }
+                }
+            });
+        },
+        loadFirstPage : function(){
+
+            // clean old data
+            me.list = [];
+
+            this.loadPage(1);
+        },
+        loadPrevPage : function(){
+
+            if (this.page == 1)
+            {
+                return;
+            }
+
+            this.loadPage(this.page-1);
+        },
+        loadNextPage : function(){
+
+            if (this.page + 1 > this.pageCount)
+            {
+                return;
+            }
+
+            this.loadPage(this.page+1);
+        },
+        onPageNumClick : function(event){
+            this.loadPage(event.target.innerHTML);
+        },
+        // use in select element
+        onPageNumChange : function (event){
+            var page = parseInt(this.value) || 0;
+            this.loadPage(page);
+        },
+        onQuery : function (event) {
+            this.loadFirstPage();
+        },
+        // use in view button, need data-id attribute.
+        onView : function(event) {
+
+            var id = event.currentTarget.dataset.id;
+            if (viewPageUrl)
+            {
+                location.href = viewPageUrl + '?id=' + id;
+            }
+        },
+        // use in remove button, need data-id attribute.
+        onRemove : function (event){
+
+            var me = this;
+            var target = event.currentTarget;
+            var id = target.dataset.id || '';
+
+            if (!window.confirm('确认要删除这些数据吗？（该操作不可逆）'))
+            {
+                return;
+            }
+
+            $.ajax({
+                url : apiConfig.delete.url,
+                data : {
+                    id : id
+                },
+                success : function (result){
+
+                }
+            });
+        },
+        init : function()
+        {
+            var me = this;
+            me.loadPage(1);
+
+            if (autoLoad != false)
+            {
+                initLoadMore({
+                    bottomDistance : autoLoad
+                }, function (){
+                    me.loadNextPage();
+                });
+            }
+        },
+        formatDate : function (timestamp) {
+            return moment(timestamp).format('YYYY-MM-DD');
+        },
+        formatDateTime : function (timestamp) {
+            return moment(timestamp).format('YYYY-MM-DD HH:mm:ss');
+        }
+    };
+    for (var key in customMethods)
+    {
+        methods[key] = customMethods[key];
+    }
+
+    var vueController = new Vue({
+        el : elementSelector,
+        data : data,
+        methods : methods
+    });
+    vueController.init();
+
+    return vueController;
+}
+
+/**
  * init vue table list content
  * @param  Object  options
  * @return  Object(Vue)
@@ -4740,6 +4993,7 @@ function initVueTableList(options)
     var elementSelector = options.el || '';
     var editingDialog   = options.editingDialog || '';
     var editingPageUrl  = options.editingPageUrl || '';
+    var viewPageUrl     = options.viewPageUrl || '';
     var apiConfig       = options.apiConfig || {};
     var customData      = options.data || {};
     var customMethods   = options.methods || {};
@@ -4861,6 +5115,14 @@ function initVueTableList(options)
             else if (editingPageUrl)
             {
                 location.href = editingPageUrl + '?id=' + id;
+            }
+        },
+        onView : function(event)
+        {
+            var id = event.target.dataset.id;
+            if (viewPageUrl)
+            {
+                location.href = viewPageUrl + '?id=' + id;
             }
         },
         onSelectRow : function (event){
@@ -5043,7 +5305,6 @@ function initVueTableList(options)
             }
         });
     }
-    vueController.init();
 
     return vueController;
 }
