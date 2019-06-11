@@ -225,6 +225,28 @@
     display: inline-block;
 }
 
+/* return to top's layer*/
+
+.returnToTopLayer {
+    position: fixed;
+    z-index: 1;
+    right : 10%;
+    bottom: 10%;
+
+    border-radius : 50%;
+    background-color: rgba(0,0,0,0.06);
+
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+}
+
+.returnToTopLayer .icon {
+    line-height: 40px;
+    color: #bdbdbd;
+}
+
 /* panel */
 
 .panel {
