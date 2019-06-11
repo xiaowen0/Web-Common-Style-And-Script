@@ -14,7 +14,7 @@
 
 .block {
     display: block;
-    /*width: 100%;*/
+    /* don't set 100% width, its parent maybe has padding, so current element maybe overflow. */
 }
 
 .hidden, .hide {
@@ -943,11 +943,8 @@ p.danger {
     display: block;
 }
 
-/* button style
- * cannot use in IE6
- */
+/* button style */
 .button {
-    display: inline-block;
     height: 30px;
     line-height: 28px;
     white-space: nowrap;
@@ -961,6 +958,12 @@ p.danger {
     -moz-box-sizing: content-box;
     box-sizing: content-box;
     font-size: 100%;
+}
+
+.button.block {
+    display: block;
+    width: 100%;    /* reset width, button's default width is inline-block status's width. */
+    box-sizing: border-box;     /* box sizing no include padding */
 }
 
 .button.large,
