@@ -1,6 +1,6 @@
 {
   "name": "web-common-style-and-script",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "A basic web client library included some style and script.",
   "main": "gulpfile.js",
   "scripts": {
