@@ -14,15 +14,8 @@
         <link rel="stylesheet" href="../style/common_style_classes/common_style_classes.css"/>
         <link rel="stylesheet" href="../style/common_style_classes/common_component.css"/>
 
-        <style>
-            a {
-                color: #333;
-            }
+        <link rel="stylesheet" href="../style/theme/blue.css"/>
 
-            a:hover {
-                color: #007FFF;
-            }
-        </style>
     </head>
     <body>
 
@@ -68,59 +61,51 @@
                             </div>
 
                             <div>
-
-                                <div>
-                                    <div>
-                                        使用 .trans 设置一个元素 20% 透明
-                                    </div>
-                                </div>
-
-                                <div class="w120 blue_bg">
-                                    <p class="padding10">
-                                        <span class="white_bg red">
-                                            20% 透明
-                                        </span>
-                                    </p>
-                                </div>
-
+                                <p>使用 .noOutline 取消轮廓</p>
+                                <input class="" type="text" placeholder="text input 默认有轮廓"/>
+                                <input class="noOutline" type="text" placeholder="取消轮廓"/>
                             </div>
+
                         </div>
                     </div>
                 </div>
 
-                <div class="floor">
+                <div class="floor border">
 
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <h2>背景类</h2>
-                            <div class="clearfix row">
+                    <div class="padding10 clearfix">
+                        <h2>透明设定类</h2>
+                        <p class="mb10">使用 trans 或 transparent 类设置一个元素 80% 透明</p>
 
-                                <div class="col-xs-12 col-md-6 padding10 blue_bg">
-                                    蓝色 .blue_bg<br />
-                                    主要的 .primary_bg
-                                </div>
+                        <div class="w120 fl black_bg mr10">
+                            <p class="padding10">
+                                <span class="white_bg red trans">
+                                    .transparent 80% 透明
+                                </span>
+                            </p>
+                        </div>
 
-                                <div class="col-xs-12 col-md-6 padding10 green_bg">
-                                    绿色 .green_bg<br />
-                                    成功 .success_bg
-                                </div>
+                        <div class="w120 fl black_bg mr10">
+                            <p class="padding10">
+                                <span class="white_bg red transparent70">
+                                    .transparent70 70% 透明
+                                </span>
+                            </p>
+                        </div>
 
-                                <div class="col-xs-12 col-md-6 padding10 info_bg">
-                                    信息(天蓝色) .info_bg
-                                </div>
-                                <div class="col-xs-12 col-md-6 padding10 yellow_bg">
-                                    黄色 .yellow_bg<br />
-                                    警告的 .warning_bg
-                                </div>
-                                <div class="col-xs-12 col-md-6 padding10 red_bg">
-                                    红色 .red_bg<br />
-                                    危险的 .danger_bg
-                                </div>
-                                <div class="col-xs-12 col-md-6 padding10 tablecloth white" style="height: 200px;">
-                                    <p class="padding10 black_bg">桌布 .tablecloth</p>
-                                </div>
+                        <div class="w120 fl black_bg mr10">
+                            <p class="padding10">
+                                <span class="white_bg red transparent50">
+                                    .transparent50 50% 透明
+                                </span>
+                            </p>
+                        </div>
+
+                        <div class="w120 fl mr10">
+                            <div class="padding10">
+                                <p>.hoverNoOpacity 取消鼠标指向时的透明</p>
                             </div>
                         </div>
+
                     </div>
 
                 </div>
@@ -134,37 +119,29 @@
                             <div class="clearfix">
                                 <div class="fl primary_bg w120 padding10 mb10 mr10">.w120 代表 120px 宽度</div>
                                 <div class="fl primary_bg w120 padding10 mb10 mr10">.w120 代表 120px 宽度</div>
-                                <div class="fl primary_bg w120 padding10 mb10 mr10">.w120 代表 120px 宽度</div>
-                            </div>
-
-                            <div class="clearfix">
-                                <div class="fl primary_bg w240 padding10 mb10 mr10">.w240 代表 240px 宽度</div>
-                                <div class="fl primary_bg w240 padding10 mb10 mr10">.w240 代表 240px 宽度</div>
-                            </div>
-
-                            <div class="clearfix">
-                                <div class="fl primary_bg w20p padding10 mb10 mr10">.w20p 代表 20% 宽度</div>
-                                <div class="fl primary_bg w20p padding10 mb10 mr10">.w20p 代表 20% 宽度</div>
-                                <div class="fl primary_bg w20p padding10 mb10 mr10">.w20p 代表 20% 宽度</div>
-                                <div class="fl primary_bg w20p padding10 mb10 mr10">.w20p 代表 20% 宽度</div>
-                            </div>
-
-                            <div class="clearfix">
-                                <div class="fl primary_bg w30p padding10 mb10 mr10">.w30p 代表 30% 宽度</div>
-                                <div class="fl primary_bg w30p padding10 mb10 mr10">.w30p 代表 30% 宽度</div>
-                                <div class="fl primary_bg w30p padding10 mb10 mr10">.w30p 代表 30% 宽度</div>
-                            </div>
-
-                            <div class="clearfix">
-                                <div class="fl primary_bg w40p padding10 mb10 mr10">.w40p 代表 40% 宽度</div>
-                                <div class="fl primary_bg w40p padding10 mb10 mr10">.w40p 代表 40% 宽度</div>
                             </div>
 
                             <div>
+                                <div class="fl primary_bg w240 padding10 mb10 mr10">.w240 代表 240px 宽度</div>
+                                <div class="fl primary_bg w240 padding10 mb10 mr10">.w240 代表 240px 宽度</div>
+                                <div class="fl primary_bg w360 padding10 mb10 mr10">.w360 代表 360px 宽度</div>
+                            </div>
+
+                            <div class="clearfix">
+                                <div class="fl primary_bg w20p padding10 mb10 mr10">.w20p 代表 20% 宽度</div>
+                                <div class="fl primary_bg w30p padding10 mb10 mr10">.w30p 代表 30% 宽度</div>
+                                <div class="fl primary_bg w40p padding10 mb10 mr10">.w40p 代表 40% 宽度</div>
                                 <div class="fl primary_bg w50p padding10 mb10 mr10">.w50p 代表 50% 宽度</div>
                                 <div class="fl primary_bg w70p padding10 mb10 mr10">.w70p 代表 70% 宽度</div>
                                 <div class="fl primary_bg w100p padding10 mb10 mr10">.w100p 代表 100% 宽度</div>
                             </div>
+
+                            <div class="clearfix">
+                                <div class="fl green_bg w30p h120 padding10 mb10 mr10">.h120 代表 120px 高度</div>
+                                <div class="fl green_bg w30p h240 padding10 mb10 mr10">.h240 代表 260px 高度</div>
+                                <div class="fl green_bg w30p h360 padding10 mb10 mr10">.h360 代表 360px 高度</div>
+                            </div>
+
                         </div>
                     </div>
 
@@ -177,13 +154,13 @@
                         <div class="panel-body">
                             <h2>边距设定类</h2>
                             <div class="clearfix">
-                                <div class="primary_bg padding10 mb10">.mb10 代表下边距 10px</div>
-                                <div class="primary_bg padding10 mb20">.mb20 代表下边距 20px</div>
+                                <div class="w240 primary_bg padding10 mb10">.mb10 代表下边距 10px</div>
+                                <div class="w240 primary_bg padding10 mb20">.mb20 代表下边距 20px</div>
                             </div>
                             <div class="clearfix mb10">
-                                <div class="fl primary_bg w30p padding10 mr10">.mr10 代表右边距 10px</div>
-                                <div class="fl primary_bg w30p padding10 mr20">.mr20 代表右边距 20px</div>
-                                <div class="fl primary_bg w20p padding10 mr20">&nbsp;</div>
+                                <div class="fl w120 primary_bg w30p padding10 mr10">.mr10 代表右边距 10px</div>
+                                <div class="fl w120 primary_bg w30p padding10 mr20">.mr20 代表右边距 20px</div>
+                                <div class="fl w120 primary_bg w20p padding10 mr20">.mr20 代表右边距 20px</div>
                             </div>
                             <div class="clearfix">
                                 <h3 class="fl primary_bg w30p padding10 noMargin">.noMargin 取消所有边距</h3>
@@ -200,7 +177,84 @@
                             <div class="clearfix">
                                 <div class="primary_bg padding10 mb20">.padding10 代表内填充 10px</div>
                                 <div class="primary_bg padding20 mb20">.padding20 代表内填充 20px</div>
+                                <div class="primary_bg padding20mm mb20">.padding20mm 代表内填充 20mm</div>
                                 <h3 class="primary_bg noPadding">.noPadding 取消所有内填充</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="floor">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <h2>布局控制类</h2>
+                            <div class="clear green_bg padding10 mb20">.clear 清除浮动</div>
+                            <div class="clear mb20">
+                                <div class="w40p padding10 green_bg fl">.fl 设置左浮动</div>
+                            </div>
+                            <div class="clear padding10 mb20">
+                                <div class="w40p padding10 green_bg fr">.fr 设置右浮动</div>
+                            </div>
+                            <div class="clear padding10 mb20">
+                                <div class="w40p padding10 green_bg center">.center 或 .centered 设置居中</div>
+                            </div>
+                            <div class="clear padding10 green_bg mb20">.clearfix 清除浮动并固实容器</div>
+                            <p>当一个容器所包含的子元素全部为浮动元素时，应设置 .clearfix 类。</p>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="floor">
+
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <h2>背景类</h2>
+                            <div class="clearfix row">
+
+                                <div class="col-xs-12 col-md-3 h240 padding10 no_bg">
+                                    .no_bg 取消背景
+                                </div>
+                                <div class="col-xs-12 col-md-3 h240 padding10 grey_bg">
+                                    灰色 .grey_bg
+                                </div>
+                                <div class="col-xs-12 col-md-3 h240 padding10 black_bg white">
+                                    黑色 .black_bg
+                                </div>
+                                <div class="col-xs-12 col-md-3 h240 padding10 white_bg">
+                                    白色 .white_bg
+                                </div>
+
+                                <div class="col-xs-12 col-md-3 h240 padding10 info_bg">
+                                    信息(天蓝色) .info_bg
+                                </div>
+
+                                <div class="col-xs-12 col-md-3 h240 padding10 blue_bg">
+                                    蓝色 .blue_bg<br />
+                                    主要的 .primary_bg
+                                </div>
+
+                                <div class="col-xs-12 col-md-3 h240 padding10 green_bg">
+                                    绿色 .green_bg<br />
+                                    成功 .success_bg
+                                </div>
+                                <div class="col-xs-12 col-md-3 h240 padding10 yellow_bg">
+                                    黄色 .yellow_bg<br />
+                                    警告的 .warning_bg
+                                </div>
+                                <div class="col-xs-12 col-md-3 h240 padding10 red_bg">
+                                    红色 .red_bg<br />
+                                    危险的 .danger_bg<br />
+                                    错误的 .error_bg
+                                </div>
+                                <div class="col-xs-12 col-md-3 h240 padding10 tablecloth white">
+                                    <p class="padding10 black_bg">桌布 .tablecloth</p>
+                                </div>
+                                <div class="col-xs-12 col-md-3 h240 padding10 starryNightBg white">
+                                    星空背景 .starryNightBg<br />
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -235,29 +289,6 @@
 
                         </div>
                     </div>
-                </div>
-
-                <div class="floor">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <h2>布局控制类</h2>
-                            <div class="clear green_bg padding10 mb20">.clear 清除浮动</div>
-                            <div class="clear mb20">
-                                <div class="w40p padding10 green_bg fl">.fl 设置左浮动</div>
-                            </div>
-                            <div class="clear padding10 mb20">
-                                <div class="w40p padding10 green_bg fr">.fr 设置右浮动</div>
-                            </div>
-                            <div class="clear padding10 mb20">
-                                <div class="w40p padding10 green_bg center">.center 或 .centered 设置居中</div>
-                            </div>
-                            <div class="clear padding10 green_bg mb20">.clearfix 清除浮动并固实容器</div>
-                            <p>当一个容器所包含的子元素全部为浮动元素时，应设置 .clearfix 类。</p>
-                            <div class="clear padding10 green_bg mb20">.floor 多层布局用的层，有白色背景和20px下边距</div>
-
-                        </div>
-                    </div>
-
                 </div>
 
                 <div class="floor">
@@ -303,7 +334,7 @@
                                     <div class="padding10 info_bg mb10 f18">.f18 设置 18px 字体</div>
                                 </div>
                                 <div class="col-xs-12 col-md-4">
-                                    <div class="padding10 info_bg mb10 f80p">.f80p 设置 80% 字体</div>
+                                    <div class="padding10 info_bg mb10 f80p">.f80p 或 .fontSmaller 设置 80% 字体</div>
                                 </div>
                                 <div class="col-xs-12 col-md-4">
                                     <div class="padding10 info_bg mb10 f90p">.f90p 设置 90% 字体</div>
@@ -312,13 +343,22 @@
                                     <div class="padding10 info_bg mb10 f110p">.f110p 设置 110% 字体</div>
                                 </div>
                                 <div class="col-xs-12 col-md-4">
-                                    <div class="padding10 info_bg mb10 f120p">.f120p 设置 120% 字体</div>
+                                    <div class="padding10 info_bg mb10 f120p">.f120p 或 .fontBigger 设置 120% 字体</div>
                                 </div>
                                 <div class="col-xs-12 col-md-4">
                                     <div class="padding10 info_bg mb10 f130p">.f130p 设置 130% 字体</div>
                                 </div>
                                 <div class="col-xs-12 col-md-4">
                                     <div class="padding10 info_bg mb10 bold">.bold 设置字体加粗</div>
+                                </div>
+                                <div class="col-xs-12 col-md-4">
+                                    <div class="padding10 info_bg mb10 lighter">.lighter 设置字体变细</div>
+                                </div>
+                                <div class="col-xs-12 col-md-4">
+                                    <div class="padding10 info_bg mb10 underline">.underline 设置下划线</div>
+                                </div>
+                                <div class="col-xs-12 col-md-4">
+                                    <div class="padding10 info_bg mb10 textDelete">.textDelete 设置删除线</div>
                                 </div>
                             </div>
                         </div>
@@ -369,7 +409,9 @@
                                 </div>
                                 <div class="col-xs-6 col-md-3 padding10 grey">
                                     .grey 灰色<br />
-                                    .more 更多链接
+                                    .more 更多链接<br />
+                                    .datetime 日期时间<br />
+                                    .phoneNumber 手机号码
                                 </div>
                                 <div class="col-xs-6 col-md-3 padding10 darkgrey">
                                     .darkgrey 深灰色<br />
@@ -399,11 +441,34 @@
                                 </div>
                                 <div class="col-xs-12 col-md-6">
                                     <p class="tshadow">.tshadow 文字阴影</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    </div>
+                </div>
 
+                <div class="floor">
+                    <div class="padding10">
+                        <h2>文本分栏类</h2>
+
+                        <p>使用 .textColumn2 把文本分成2栏</p>
+                        <article class="article textColumn2">
+                            <p>层叠样式表(英文全称：Cascading Style Sheets)是一种用来表现HTML（标准通用标记语言的一个应用）或XML（标准通用标记语言的一个子集）等文件样式的计算机语言。CSS不仅可以静态地修饰网页，还可以配合各种脚本语言动态地对网页各元素进行格式化。</p>
+                            <p>CSS 能够对网页中元素位置的排版进行像素级精确控制，支持几乎所有的字体字号样式，拥有对网页对象和模型样式编辑的能力。</p>
+                        </article>
+
+                        <p>使用 .textColumn3 把文本分成3栏</p>
+                        <article class="article textColumn3">
+                            <p>层叠样式表(英文全称：Cascading Style Sheets)是一种用来表现HTML（标准通用标记语言的一个应用）或XML（标准通用标记语言的一个子集）等文件样式的计算机语言。CSS不仅可以静态地修饰网页，还可以配合各种脚本语言动态地对网页各元素进行格式化。</p>
+                            <p>CSS 能够对网页中元素位置的排版进行像素级精确控制，支持几乎所有的字体字号样式，拥有对网页对象和模型样式编辑的能力。</p>
+                        </article>
+
+                        <p>使用 .textColumn4 把文本分成4栏</p>
+                        <article class="article textColumn4">
+                            <p>层叠样式表(英文全称：Cascading Style Sheets)是一种用来表现HTML（标准通用标记语言的一个应用）或XML（标准通用标记语言的一个子集）等文件样式的计算机语言。CSS不仅可以静态地修饰网页，还可以配合各种脚本语言动态地对网页各元素进行格式化。</p>
+                            <p>CSS 能够对网页中元素位置的排版进行像素级精确控制，支持几乎所有的字体字号样式，拥有对网页对象和模型样式编辑的能力。</p>
+                        </article>
+                    </div>
                 </div>
 
                 <div class="floor">

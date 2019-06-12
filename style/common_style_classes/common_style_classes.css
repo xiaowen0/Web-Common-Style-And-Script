@@ -60,7 +60,22 @@
 }
 
 .w360 {
-    width: 240px;
+    width: 360px;
+    box-sizing: border-box;
+}
+
+.h120 {
+    height: 120px;
+    box-sizing: border-box;
+}
+
+.h240 {
+    height: 240px;
+    box-sizing: border-box;
+}
+
+.h360 {
+    height: 360px;
     box-sizing: border-box;
 }
 
@@ -236,7 +251,7 @@
 
 .green_bg,
 .success_bg {
-    background-color: #dff0d8;
+    background-color: #aaff99;
 }
 
 .info_bg {
@@ -245,7 +260,7 @@
 
 .yellow_bg,
 .warning_bg {
-    background-color: #fcf8e3;
+    background-color: #ddff99;
 }
 
 .red_bg,
@@ -402,10 +417,6 @@
 .pink {
     color: #e6aeb9;
 }
-.datetime,
-.phoneNumber {
-    color: #999;
-}
 .addressText {
     color: #333;
 }
@@ -449,8 +460,10 @@
     color: #fff;
 }
 
-.grey, .more {
-    color: #999
+.grey, .more,
+.datetime,
+.phoneNumber {
+    color: #999;
 }
 
 .darkgrey, .date {
@@ -517,9 +530,9 @@
 }
 
 .textColumn4 {
-    -moz-column-count:3; /* Firefox */
-    -webkit-column-count:3; /* Safari 和 Chrome */
-    column-count:3;
+    -moz-column-count:4; /* Firefox */
+    -webkit-column-count:4; /* Safari 和 Chrome */
+    column-count:4;
 }
 
 /* mouse cursor */
@@ -689,7 +702,7 @@ p.error {
     opacity: 0.7;
 }
 
-.transparent70 {
+.transparent50 {
     opacity: 0.5;
 }
 
