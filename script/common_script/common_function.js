@@ -4276,6 +4276,38 @@ function setSessionData(key, value)
 }
 
 /**
+ * get cache data, using locat storage.
+ * @key  String  data key string
+ * @return  String|null
+ */
+function getCacheData(key)
+{
+    if (typeof(localStorage) === "undefined")
+    {
+        return null
+    }
+
+    return localStorage.getItem(key);
+}
+
+/**
+ * set cache data, using locat storage.
+ * @key     String  data key string
+ * @value   String  value
+ * @return  boolean  success or not
+ */
+function setCacheData(key, value)
+{
+    if (typeof(localStorage) === "undefined")
+    {
+        return false
+    }
+
+    localStorage.setItem(key, value);
+    return true;
+}
+
+/**
  * initialize tree view
  * @param Object(HTMLElement)|String  treeview element or CSS selector string
  */
@@ -5024,6 +5056,10 @@ function initVueTableList(options)
 
     var methods = {
 
+        /**
+         * load page's data
+         * @param  Number  page
+         */
         loadPage : function(page){
 
             if (this.ajaxLock)
@@ -5092,6 +5128,13 @@ function initVueTableList(options)
             }
 
             this.loadPage(this.page+1);
+        },
+        reload : function (){
+            if (this.ajaxLock)
+            {
+                return;
+            }
+            this.loadPage();
         },
         onPageNumClick : function(event){
             this.loadPage(event.target.innerHTML);
@@ -5322,7 +5365,8 @@ function initVueForm(options)
     var customData      = options.data || {};
     var customMethods   = options.methods || {};
 
-    var editingColumns = options.editingColumns || {};
+    var parentPage      = options.parentPage || {};
+    var editingColumns  = options.editingColumns || {};
     var onSubmitSuccess = options.onSubmitSuccess || null;
     var onDataLoaded    = options.onDataLoaded || null;
     var onMounted       = options.onMounted || null;
@@ -5425,6 +5469,11 @@ function initVueForm(options)
             if (beforeSubmit)
             {
                 data = beforeSubmit(data);
+                // check data, allow prevent submit.
+                if (!data)
+                {
+                    return false;
+                }
             }
 
             $.ajax({
@@ -5442,7 +5491,35 @@ function initVueForm(options)
 
             return false;
 
-        }   // end save function
+        },  // end save function
+        // use in remove button, need data-id attribute.
+        onRemove : function (event){
+
+            var me = this;
+            var target = event.currentTarget;
+            var id = this.itemData.id;
+
+            if (!window.confirm('确认要删除这些数据吗？（该操作不可逆）'))
+            {
+                return;
+            }
+
+            $.ajax({
+                url : apiConfig.delete.url,
+                data : {
+                    id : id
+                },
+                success : function (result){
+                    location.href = parentPage ? parentPage : 'index.html';
+                }
+            });
+        },
+        formatDate : function (timestamp) {
+            return moment(timestamp).format('YYYY-MM-DD');
+        },
+        formatDateTime : function (timestamp) {
+            return moment(timestamp).format('YYYY-MM-DD HH:mm:ss');
+        }
     };
     for (var key in customMethods)
     {
