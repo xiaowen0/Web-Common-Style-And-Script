@@ -378,6 +378,7 @@
 
 /* button style */
 .button {
+    display: inline-block;
     height: 30px;
     line-height: 28px;
     white-space: nowrap;
