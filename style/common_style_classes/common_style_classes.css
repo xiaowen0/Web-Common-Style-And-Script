@@ -552,9 +552,38 @@
 .darkBorder {
     border: solid 1px darkgrey;
 }
+.greyBorder {
+    border-color: grey;
+}
 .bottomBorder {
     border-bottom: solid 1px #CCCCCC;
 }
+
+.redBorder {
+    border-color: #dd5a43;
+}
+.pinkBorder {
+    border-color: #e6aeb9;
+}
+.orangeBorder {
+    border-color: #e69100;
+}
+.yellowBorder {
+    border-color: #f5ea18;
+}
+.greenBorder {
+    border-color: #69aa46;
+}
+.blueBorder {
+    border-color: #478fca;
+}
+.skyblueBorder {
+    border-color: #82cae7;
+}
+.whiteBorder {
+    border-color: #fff;
+}
+
 .roundBorder,
 .roundCorner,
 .roundBorder8 {
