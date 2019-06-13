@@ -555,8 +555,34 @@
 .bottomBorder {
     border-bottom: solid 1px #CCCCCC;
 }
-.roundedBorder {
+.roundBorder,
+.roundCorner,
+.roundBorder8 {
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
     border-radius: 8px;
+}
+.borderRadius4,
+.roundBorder4 {
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+.borderRadius6,
+.roundBorder6 {
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+}
+.borderRadius10 {
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+.no-radius {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
 }
 
 /* rotate animation
@@ -653,30 +679,6 @@ p.error {
 }
 
 /* shape style */
-.roundBorder,
-.roundBorder4 {
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
-}
-
-.roundBorder6 {
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    border-radius: 6px;
-}
-
-.roundBorder8 {
-    -webkit-border-radius: 8px;
-    -moz-border-radius: 8px;
-    border-radius: 8px;
-}
-
-.no-radius {
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
-}
 
 .circle {
     border: 3px solid #000;

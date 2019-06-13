@@ -7,8 +7,10 @@
         <title>样式类示例 - Common Style And Script 公共样式与脚本</title>
 
         <!-- Bootstrap framework -->
-        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
-        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"/>
+        <link rel="stylesheet" href="../asset/bootstrap-3.3.7/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="../asset/bootstrap-3.3.7/css/bootstrap-theme.min.css"/>
+<!--        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css"/>-->
+<!--        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"/>-->
 
         <!-- common style classes library -->
         <link rel="stylesheet" href="../style/common_style_classes/common_style_classes.css"/>
@@ -249,8 +251,8 @@
                                     危险的 .danger_bg<br />
                                     错误的 .error_bg
                                 </div>
-                                <div class="col-xs-12 col-md-3 h240 padding10 tablecloth white">
-                                    <p class="padding10 black_bg">桌布 .tablecloth</p>
+                                <div class="col-xs-12 col-md-3 h240 padding10 tablecloth">
+                                    <p class="padding10 black_bg transparent70 white">桌布 .tablecloth</p>
                                 </div>
                                 <div class="col-xs-12 col-md-3 h240 padding10 starryNightBg white">
                                     星空背景 .starryNightBg<br />
@@ -269,20 +271,46 @@
 
                             <div>
 
-                                <div class="border mr10 mb10 alignCenter pull-left" style="width: 100px;height: 100px;">
-                                    .border<br/>边框
+                                <div class="border mr10 mb10 alignCenter pull-left w120 h120">
+                                    <p class="padding10">.border<br/>设置边框</p>
                                 </div>
 
-                                <div class="lightBorder mr10 mb10 alignCenter pull-left" style="width: 100px;height: 100px;">
-                                    .lightBorder<br/>浅色边框
+                                <div class="lightBorder mr10 mb10 alignCenter pull-left w120 h120">
+                                    <p class="padding10">.lightBorder<br/>设置浅色边框</p>
                                 </div>
 
-                                <div class="darkBorder mr10 mb10 alignCenter pull-left" style="width: 100px;height: 100px;">
-                                    .darkBorder<br/>深色边框
+                                <div class="darkBorder mr10 mb10 alignCenter pull-left w120 h120">
+                                    <p class="padding10">.darkBorder<br/>设置深色边框</p>
                                 </div>
 
-                                <div class="darkBorder roundedBorder mr10 mb10 alignCenter pull-left" style="width: 100px;height: 100px;">
-                                    .roundedBorder<br/>圆角边框
+                                <div class="clearfix"></div>
+
+                                <div class="darkBorder roundBorder mr10 mb10 alignCenter pull-left w240 h240">
+                                    <p class="padding10">.roundBorder<br/>.roundCorner<br/>.roundBorder8<br/>设置圆角边框(8px)</p>
+                                </div>
+
+                                <div class="darkBorder borderRadius4 mr10 mb10 alignCenter pull-left w240 h240">
+                                    <p class="padding10">.borderRadius4 <br/>.roundBorder4 <br/>设置 4px 圆角边框</p>
+                                </div>
+
+                                <div class="darkBorder borderRadius6 mr10 mb10 alignCenter pull-left w240 h240">
+                                    <p class="padding10">.borderRadius6 <br/>.roundBorder6 <br/>设置 6px 圆角边框</p>
+                                </div>
+
+                                <div class="darkBorder borderRadius10 mr10 mb10 alignCenter pull-left w240 h240">
+                                    <p class="padding10">.borderRadius10 <br/>.roundBorder10 <br/>设置 10px 圆角边框</p>
+                                </div>
+
+                                <div>
+                                    <p>.no-radius 设置元素不使用圆角</p>
+                                    <div>
+                                        <input class="mb10" type="text" placeholder="默认有圆角的输入框"/><br/>
+                                        <input class="mb10 no-radius" type="text" placeholder="设置不使用圆角"/>
+                                    </div>
+                                    <div>
+                                        <button class="mb10">按钮默认是圆角</button><br/>
+                                        <button class="mb10 no-radius">不使用圆角的按钮</button>
+                                    </div>
                                 </div>
 
                             </div>
@@ -369,6 +397,26 @@
                 <div class="floor">
                     <div class="panel panel-default">
                         <div class="panel-body">
+                            <h2>文字修饰类</h2>
+                            <div class="row">
+                                <div class="col-xs-12 col-md-6 col-lg-3">
+                                    <p>.blink 闪烁文字</p>
+                                    <p class="blink">闪烁文字演示</p>
+                                    <p class="blink green">闪烁文字演示</p>
+                                    <p class="blink red grey_bg">闪烁文字演示</p>
+
+                                </div>
+                                <div class="col-xs-12 col-md-6 col-lg-3">
+                                    <p class="tshadow">.tshadow 文字阴影</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="floor">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
                             <h2>文字颜色类</h2>
                             <div class="row">
                                 <div class="col-xs-6 col-md-3 padding10 red">
@@ -427,401 +475,121 @@
 
                 </div>
 
-                <div class="floor">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <h2>修饰类</h2>
-                            <div class="row">
-                                <div class="col-xs-12 col-md-6">
-                                    <p>.blink 闪烁文字</p>
-                                    <p class="blink">闪烁文字演示</p>
-                                    <p class="blink green">闪烁文字演示</p>
-                                    <p class="blink red grey_bg">闪烁文字演示</p>
-
-                                </div>
-                                <div class="col-xs-12 col-md-6">
-                                    <p class="tshadow">.tshadow 文字阴影</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="floor">
+                <div class="floor border">
                     <div class="padding10">
                         <h2>文本分栏类</h2>
 
-                        <p>使用 .textColumn2 把文本分成2栏</p>
-                        <article class="article textColumn2">
-                            <p>层叠样式表(英文全称：Cascading Style Sheets)是一种用来表现HTML（标准通用标记语言的一个应用）或XML（标准通用标记语言的一个子集）等文件样式的计算机语言。CSS不仅可以静态地修饰网页，还可以配合各种脚本语言动态地对网页各元素进行格式化。</p>
-                            <p>CSS 能够对网页中元素位置的排版进行像素级精确控制，支持几乎所有的字体字号样式，拥有对网页对象和模型样式编辑的能力。</p>
-                        </article>
-
-                        <p>使用 .textColumn3 把文本分成3栏</p>
-                        <article class="article textColumn3">
-                            <p>层叠样式表(英文全称：Cascading Style Sheets)是一种用来表现HTML（标准通用标记语言的一个应用）或XML（标准通用标记语言的一个子集）等文件样式的计算机语言。CSS不仅可以静态地修饰网页，还可以配合各种脚本语言动态地对网页各元素进行格式化。</p>
-                            <p>CSS 能够对网页中元素位置的排版进行像素级精确控制，支持几乎所有的字体字号样式，拥有对网页对象和模型样式编辑的能力。</p>
-                        </article>
-
-                        <p>使用 .textColumn4 把文本分成4栏</p>
-                        <article class="article textColumn4">
-                            <p>层叠样式表(英文全称：Cascading Style Sheets)是一种用来表现HTML（标准通用标记语言的一个应用）或XML（标准通用标记语言的一个子集）等文件样式的计算机语言。CSS不仅可以静态地修饰网页，还可以配合各种脚本语言动态地对网页各元素进行格式化。</p>
-                            <p>CSS 能够对网页中元素位置的排版进行像素级精确控制，支持几乎所有的字体字号样式，拥有对网页对象和模型样式编辑的能力。</p>
-                        </article>
-                    </div>
-                </div>
-
-                <div class="floor">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <h2>鼠标指针类</h2>
-                            <div class="hand">
-                                <p>.hand 使用手型鼠标指针</p>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <div class="border padding10 mb10">
+                                    <p>使用 .textColumn2 把文本分成2栏</p>
+                                    <article class="textColumn2 h240">
+                                        <p>层叠样式表(英文全称：Cascading Style Sheets)是一种用来表现HTML（标准通用标记语言的一个应用）或XML（标准通用标记语言的一个子集）等文件样式的计算机语言。CSS不仅可以静态地修饰网页，还可以配合各种脚本语言动态地对网页各元素进行格式化。</p>
+                                        <p>CSS 能够对网页中元素位置的排版进行像素级精确控制，支持几乎所有的字体字号样式，拥有对网页对象和模型样式编辑的能力。</p>
+                                    </article>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <div class="border padding10 mb10">
+                                    <p>使用 .textColumn3 把文本分成3栏</p>
+                                    <article class="textColumn3 h240">
+                                        <p>层叠样式表(英文全称：Cascading Style Sheets)是一种用来表现HTML（标准通用标记语言的一个应用）或XML（标准通用标记语言的一个子集）等文件样式的计算机语言。CSS不仅可以静态地修饰网页，还可以配合各种脚本语言动态地对网页各元素进行格式化。</p>
+                                        <p>CSS 能够对网页中元素位置的排版进行像素级精确控制，支持几乎所有的字体字号样式，拥有对网页对象和模型样式编辑的能力。</p>
+                                    </article>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <div class="border padding10 mb10">
+                                    <p>使用 .textColumn4 把文本分成4栏</p>
+                                    <article class="textColumn4 h120">
+                                        <p>层叠样式表(英文全称：Cascading Style Sheets)是一种用来表现HTML（标准通用标记语言的一个应用）或XML（标准通用标记语言的一个子集）等文件样式的计算机语言。CSS不仅可以静态地修饰网页，还可以配合各种脚本语言动态地对网页各元素进行格式化。</p>
+                                        <p>CSS 能够对网页中元素位置的排版进行像素级精确控制，支持几乎所有的字体字号样式，拥有对网页对象和模型样式编辑的能力。</p>
+                                    </article>
+                                </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
 
-                <div class="floor">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <h2>动画类</h2>
-                            <div>
-                                <p>.rotate2d 用于二维旋转</p>
+                <div class="row">
+
+                    <div class="col-xs-12 col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <h2>图片样式类</h2>
                                 <div>
-                                    <img class="rotate2d circle" src="../image/piano.jpg" alt="" />
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="floor">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <h2>过渡效果</h2>
-                            <div>
-                                <p>样式改变时有渐变过渡效果</p>
-                                <div class="padding20 w240">
-                                    <a class="transition" href="javascript:;">.transition</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="floor">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <h2>图片类</h2>
-                            <div>
-                                <div class="mr20">
-                                    <p>.photoFrame 或 .picture 图片框/相框，设置在包含图片的容器上，另外再设置一个固定宽度，图片根据容器宽度按比例缩放。</p>
-                                    <div class="photoFrame" style="width:100px">
-                                        <img src="../image/girl_picture.jpg" alt="" />
+                                    <div class="fl mr20">
+                                        <p>.circle 圆盘</p>
+                                        <p>常用在音乐唱片、头像等地方。</p>
+                                        <p>
+                                            <img class="circle" src="../image/girl_picture.jpg" style="width:80px" alt="" />
+                                        </p>
                                     </div>
-
-                                    <div class="row">
-                                        <div class="col-xs-12 col-sm-4 col-lg-2">
-                                            <p>.roundedCorner | .rounded 圆角相框</p>
-                                            <div class="photoFrame dark roundedCorner" style="width:100px">
-                                                <img src="../image/girl_picture.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12 col-sm-4 col-lg-2">
-                                            <p>.dark 深色相框</p>
-                                            <div class="photoFrame dark" style="width:100px">
-                                                <img src="../image/girl_picture.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12 col-sm-4 col-lg-2">
-                                            <p>.orange 橙色相框</p>
-                                            <div class="photoFrame orange" style="width:100px">
-                                                <img src="../image/girl_picture.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12 col-sm-4 col-lg-2">
-                                            <p>.green 绿色相框</p>
-                                            <div class="photoFrame green" style="width:100px">
-                                                <img src="../image/girl_picture.jpg" alt="" />
-                                            </div>
-                                        </div>
+                                    <div class="fl mr20">
+                                        <p>.shadow 阴影</p>
+                                        <p>也可以用在其他盒子元素上</p>
+                                        <p>
+                                            <img class="shadow" src="../image/girl_picture.jpg" style="width:80px" alt="" />
+                                        </p>
                                     </div>
-
+                                    <div class="fl mr20">
+                                        <p>.thumbnail 缩略图</p>
+                                        <p>
+                                            <img class="thumbnail" src="../image/girl_picture.jpg" style="width:80px" alt="" />
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="floor">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <h2>图形类</h2>
-                            <div>
-                                <div class="fl mr20">
-                                    <p>.circle 圆盘</p>
-                                    <p>
-                                        <img class="circle" src="../image/girl_picture.jpg" style="width:80px" alt="" />
-                                    </p>
-                                </div>
-                                <div class="fl mr20">
-                                    <p>.shadow 阴影</p>
-                                    <p>
-                                        <img class="shadow" src="../image/girl_picture.jpg" style="width:80px" alt="" />
-                                    </p>
-                                </div>
-                                <div class="fl mr20">
-                                    <p>.thumbnail 缩略图</p>
-                                    <p>
-                                        <img class="thumbnail" src="../image/girl_picture.jpg" style="width:80px" alt="" />
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="floor">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <h2>按钮类</h2>
-                            <div>
-                                <button class="button mr10 mb10" type="button">
-                                    .button 普通按钮
-                                </button>
-                                <button class="button large mr10 mb10" type="button">
-                                    .button.large 大按钮<br />
-                                    .button.lg
-                                </button>
-                                <button class="button small mr10 mb10" type="button">
-                                    .button.small 小按钮<br />
-                                    .button.sm"
-                                </button>
-                                <button class="button extra_small mr10 mb10" type="button">
-                                    .button.extra_small 超小按钮<br />
-                                    .button.xs
-                                </button>
-                                <button class="button red mr10 mb10" type="button">
-                                    .button.red 红色按钮<br />
-                                    .button.danger 有危险的含义
-                                </button>
-                                <button class="button darkred large mr10 mb10" type="button">
-                                    .button.darkred 暗红色按钮
-                                </button>
-                                <button class="button yellow mr10 mb10" type="button">
-                                    .button.yellow 黄色按钮<br />
-                                    .button.warning 有警告的含义
-                                </button>
-                                <button class="button green large mr10 mb10" type="button">
-                                    .button.green 绿色按钮<br />
-                                    .button.success 有成功的含义
-                                </button>
-                                <button class="button darkgreen large mr10 mb10" type="button">
-                                    .button.darkgreen 暗绿色按钮
-                                </button>
-                                <button class="button cyan large mr10 mb10" type="button">
-                                    .button.cyan 青色按钮<br />
-                                    .button.info 有信息意味的
-                                </button>
-                                <button class="button pink large mr10 mb10" type="button">
-                                    .button.pink 粉红色按钮
-                                </button>
-                                <button class="button purple large mr10 mb10" type="button">
-                                    .button.purple 紫色按钮
-                                </button>
-                                <button class="button no-radius mr10 mb10" type="button">
-                                    .button.no-radius 不要圆角
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 表格 demo -->
-                <div class="floor">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <h2>表格</h2>
-                            <div>
-                                <p class="bold">table class="bordered" 带有边框的表格</p>
-                                <table class="table bordered">
-                                    <caption>表格标题</caption>
-                                    <thead>
-                                    <tr>
-                                        <th>姓名</th>
-                                        <th>星座</th>
-                                        <th>电子邮箱</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>周杰伦</td>
-                                        <td>魔蝎座</td>
-                                        <td>zjl@163.com</td>
-                                    </tr>
-                                    <tr>
-                                        <td>容祖儿</td>
-                                        <td>双子座</td>
-                                        <td>rze@qq.com</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                                <p class="bold">table class="striped" 带有条纹的表格</p>
-                                <table class="table striped">
-                                    <caption>表格标题</caption>
-                                    <thead>
-                                    <tr>
-                                        <th>姓名</th>
-                                        <th>星座</th>
-                                        <th>电子邮箱</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>周杰伦</td>
-                                        <td>魔蝎座</td>
-                                        <td>zjl@163.com</td>
-                                    </tr>
-                                    <tr>
-                                        <td>容祖儿</td>
-                                        <td>双子座</td>
-                                        <td>rze@qq.com</td>
-                                    </tr>
-                                    <tr>
-                                        <td>关心妍</td>
-                                        <td>狮子座</td>
-                                        <td>gxy@163.com</td>
-                                    </tr>
-                                    <tr>
-                                        <td>麦家瑜</td>
-                                        <td>射手座</td>
-                                        <td>mjy@gmail.com</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- End 表格 demo -->
-
-                <!-- 表单 Demo -->
-                <div class="floor">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <h2>表单</h2>
-                            <p>使用 .form 添加默认样式</p>
-                            <form class="form" action="javascript:;">
-                                <div class="form-group">使用 .form-group 包含控件组</div>
-                                <div class="form-group">
-                                    <label>这是 label 标签</label>
+                <div class="row">
+                    <div class="col-xs-12 col-md-6 col-lg-3">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <h2>动画类</h2>
+                                <div>
+                                    <p>.rotate2d 用于二维旋转</p>
                                     <div>
-                                        <input class="mb10" type="text" value="这是 text input 标签" />
-                                    </div>
-                                    <div>
-                                        <textarea class="mb10">这是 textarea </textarea>
-                                    </div>
-                                    <div>
-                                        <input type="text" class="mb10" disabled="disabled" value="不可用" />
-                                    </div>
-                                    <div>
-                                        <input type="text" class="mb10" readonly="readonly" value="只读" />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="">
-                                        <input type="checkbox" class="checkbox" value="1" name="checkbox" />
-                                        多选框
-                                    </label>
-                                    <label class="">
-                                        <input type="checkbox" class="checkbox" value="2" name="checkbox" />
-                                        多选框
-                                    </label>
-                                </div>
-                                <div class="form-group">
-                                    <label class="">
-                                        <input type="radio" value="1" name="radio" />
-                                        单选框
-                                    </label>
-                                    <label class="">
-                                        <input type="radio" value="2" name="radio" />
-                                        单选框
-                                    </label>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="error mb10" value="使用 .error 类表示输入错误" />
-                                    <input type="text" class="success mb10" value="使用 .success 类表示输入正确" />
-                                    <input type="text" class="warning mb10" value="使用 .warning 类表示输入不推荐" />
-                                </div>
-                                <div class="form-group">
-                                    <select>
-                                        <option value="">选择框</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                    </select>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div><!-- End 表单 Demo -->
-
-                <div class="floor">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <h2>特殊图标</h2>
-                            <p>
-                                i.spinner-loader
-                            </p>
-                            <p>
-                                <i class="spinner-loader"></i>
-                                加载更多中
-                            </p>
-                            <p>
-                                i.refreshing-loader
-                            </p>
-                            <p>
-                                <i class="refreshing-loader"></i>
-                                刷新中
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="floor">
-
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <h2>卡片式布局，多用于商品列表</h2>
-                            <p>样式包含圆角、盒子阴影、白色背景。</p>
-                            <p>结构：</p>
-                            <p>div.card_layout  卡片块容器，需加上宽度和间距设定，比如 .w240 .mr10</p>
-                            <p>----div.image_row  图片行</p>
-                            <p>--------img  图片</p>
-                            <p>----div.title_row  标题行</p>
-                            <p>示例：</p>
-                            <div class="green_bg padding10 clearfix">
-                                <div class="fl card_layout w240 mr10 mb10">
-                                    <div class="image_row">
-                                        <img src="http://v3.bootcss.com/assets/img/devices.png" alt="baidu logo" />
-                                    </div>
-                                    <div class="title_row">
-                                        这是标题
+                                        <img class="rotate2d circle w120" src="../image/piano.jpg" alt="" />
+                                        </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div><!-- end .panel -->
-
-                </div><!-- end .floor -->
+                    </div>
+                    <div class="col-xs-12 col-md-6 col-lg-3">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <h2>鼠标指针类</h2>
+                                <div class="hand">
+                                    <p>.hand 使用手型鼠标指针</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-6 col-lg-3">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <h2>过渡效果</h2>
+                                <div>
+                                    <p>样式改变时有渐变过渡效果</p>
+                                    <div class="padding20 w240">
+                                        <a class="transition" href="javascript:;">.transition</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </div>
 
-        <script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<!--        <script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>-->
+        <script src="../asset/jquery/jquery-3.4.1.min.js"></script>
+
         <script src="../script/common_script/common_function.js"></script>
         <script src="../script/common_script/common_action.js"></script>
 
