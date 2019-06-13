@@ -7,3 +7,17 @@ a:visited {
     color: #2172ff;
 }
 
+.h1 {
+    font-size: 200%;
+    font-weight: 700;
+}
+
+.h2 {
+    font-size: 150%;
+    font-weight: 700;
+}
+
+.h3 {
+    font-size: 125%;
+    font-weight: 700;
+}
