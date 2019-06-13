@@ -7,12 +7,14 @@
     <title>UI 组件样式示例</title>
 
     <!-- Bootstrap framework -->
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="../asset/bootstrap-3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../asset/bootstrap-3.3.7/css/bootstrap-theme.min.css"/>
+<!--    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css"/>-->
+<!--    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"/>-->
 
     <!-- common style classes library -->
-    <link rel="stylesheet" href="../style/common_style_classes/common_style_classes.css"/>
     <link rel="stylesheet" href="../style/common_style_classes/common_component.css"/>
+    <link rel="stylesheet" href="../style/common_style_classes/common_style_classes.css"/>
 
 </head>
 <body>
@@ -37,6 +39,348 @@
         <div>
             <p>样式表：common_component.css</p>
         </div>
+
+        <div class="floor">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h2>相框</h2>
+                    <div>
+                        <div class="mr20">
+                            <p>.photoFrame 或 .picture 图片框/相框，设置在包含图片的容器上，另外再设置一个固定宽度，图片根据容器宽度按比例缩放。</p>
+                            <div class="photoFrame" style="width:100px">
+                                <img src="../image/girl_picture.jpg" alt="" />
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-4 col-lg-2">
+                                    <p>.roundCorner | .roundBorder 圆角</p>
+                                    <div class="photoFrame dark roundedCorner" style="width:100px">
+                                        <img src="../image/girl_picture.jpg" alt="" />
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-4 col-lg-2">
+                                    <p>.darkBorder 深灰色相框</p>
+                                    <div class="photoFrame darkBorder" style="width:100px">
+                                        <img src="../image/girl_picture.jpg" alt="" />
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-4 col-lg-2">
+                                    <p>.lightBorder 浅灰色相框</p>
+                                    <div class="photoFrame lightBorder" style="width:100px">
+                                        <img src="../image/girl_picture.jpg" alt="" />
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-4 col-lg-2">
+                                    <p>.redBorder 红色相框</p>
+                                    <div class="photoFrame redBorder" style="width:100px">
+                                        <img src="../image/girl_picture.jpg" alt="" />
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-4 col-lg-2">
+                                    <p>.orangeBorder 橙色相框</p>
+                                    <div class="photoFrame orangeBorder" style="width:100px">
+                                        <img src="../image/girl_picture.jpg" alt="" />
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-4 col-lg-2">
+                                    <p>.pinkBorder 粉色相框</p>
+                                    <div class="photoFrame pinkBorder" style="width:100px">
+                                        <img src="../image/girl_picture.jpg" alt="" />
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-4 col-lg-2">
+                                    <p>.blueBorder 蓝色相框</p>
+                                    <div class="photoFrame blueBorder" style="width:100px">
+                                        <img src="../image/girl_picture.jpg" alt="" />
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-4 col-lg-2">
+                                    <p>.greenBorder 绿色相框</p>
+                                    <div class="photoFrame greenBorder" style="width:100px">
+                                        <img src="../image/girl_picture.jpg" alt="" />
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="floor">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h2>按钮类</h2>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6 col-lg-3">
+                            .button
+                            <button class="button mr10 mb10" type="button">普通按钮</button>
+                        </div>
+
+                        <div class="col-xs-12 col-md-6 col-lg-3">
+                            .large / lg 大按钮
+                            <button class="button large mr10 mb10" type="button">大按钮</button>
+                        </div>
+
+                        <div class="col-xs-12 col-md-6 col-lg-3">
+                            .small / .sm 小按钮
+                            <button class="button small mr10 mb10" type="button">小按钮</button>
+                        </div>
+
+                        <div class="col-xs-12 col-md-6 col-lg-3">
+                            .extra_small / .xs 超小按钮
+                            <button class="button extra_small mr10 mb10" type="button">超小按钮</button>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="col-xs-12 col-md-6 col-lg-3">
+                            .red 红色按钮，.danger 有危险的含义
+                            <button class="button red mr10 mb10" type="button">红色按钮</button>
+                        </div>
+
+                        <div class="col-xs-12 col-md-6 col-lg-3">
+                            .darkred 暗红色按钮
+                            <button class="button darkred mr10 mb10" type="button">暗红色按钮</button>
+                        </div>
+
+                        <div class="col-xs-12 col-md-6 col-lg-3">
+                            .yellow 黄色按钮，.warning 有警告的含义
+                            <button class="button yellow mr10 mb10" type="button">黄色按钮</button>
+                        </div>
+
+                        <div class="col-xs-12 col-md-6 col-lg-3">
+                            .green 绿色按钮，.success 有成功的含义
+                            <button class="button green mr10 mb10" type="button">绿色按钮</button>
+                        </div>
+
+                        <div class="col-xs-12 col-md-6 col-lg-3">
+                            .darkgreen 暗绿色按钮
+                            <button class="button darkgreen mr10 mb10" type="button">暗绿色按钮</button>
+                        </div>
+
+                        <div class="col-xs-12 col-md-6 col-lg-3">
+                            .cyan 青色按钮，.info 有信息意味的
+                            <button class="button cyan mr10 mb10" type="button">青色按钮</button>
+                        </div>
+
+                        <div class="col-xs-12 col-md-6 col-lg-3">
+                            .pink 粉红色按钮
+                            <button class="button pink mr10 mb10" type="button">粉红色按钮</button>
+                        </div>
+
+                        <div class="col-xs-12 col-md-6 col-lg-3">
+                            .purple 紫色按钮
+                            <button class="button purple mr10 mb10" type="button">紫色按钮</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 表格 demo -->
+        <div class="floor">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h2>表格</h2>
+                    <p>添加 .table 类，默认样式为：100% 宽度，下边距20px，紧凑边框。</p>
+                    <div>
+                        <table class="table">
+                            <caption>表格标题</caption>
+                            <tr>
+                                <th>姓名</th>
+                                <th>分数</th>
+                            </tr>
+                            <tr>
+                                <td>小明</td>
+                                <td>98</td>
+                            </tr>
+                            <tr>
+                                <td>小红</td>
+                                <td>96</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div>
+                        <p class="bold">table class="bordered" 带有边框的表格</p>
+                        <table class="table bordered">
+                            <caption>表格标题</caption>
+                            <thead>
+                            <tr>
+                                <th>姓名</th>
+                                <th>星座</th>
+                                <th>电子邮箱</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>周杰伦</td>
+                                <td>魔蝎座</td>
+                                <td>zjl@163.com</td>
+                            </tr>
+                            <tr>
+                                <td>容祖儿</td>
+                                <td>双子座</td>
+                                <td>rze@qq.com</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <p class="bold">table class="striped" 带有条纹的表格</p>
+                        <table class="table striped">
+                            <caption>表格标题</caption>
+                            <thead>
+                            <tr>
+                                <th>姓名</th>
+                                <th>星座</th>
+                                <th>电子邮箱</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>周杰伦</td>
+                                <td>魔蝎座</td>
+                                <td>zjl@163.com</td>
+                            </tr>
+                            <tr>
+                                <td>容祖儿</td>
+                                <td>双子座</td>
+                                <td>rze@qq.com</td>
+                            </tr>
+                            <tr>
+                                <td>关心妍</td>
+                                <td>狮子座</td>
+                                <td>gxy@163.com</td>
+                            </tr>
+                            <tr>
+                                <td>麦家瑜</td>
+                                <td>射手座</td>
+                                <td>mjy@gmail.com</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div><!-- End 表格 demo -->
+
+        <!-- 表单 Demo -->
+        <div class="floor">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h2>表单</h2>
+                    <p>使用 .form 添加默认样式</p>
+                    <form class="form" action="javascript:;">
+                        <div class="form-group">使用 .form-group 包含控件组</div>
+                        <div class="form-group">
+                            <label>这是 label 标签</label>
+                            <div>
+                                <input class="mb10" type="text" value="这是 text input 标签" />
+                            </div>
+                            <div>
+                                <textarea class="mb10">这是 textarea </textarea>
+                            </div>
+                            <div>
+                                <input type="text" class="mb10" disabled="disabled" value="不可用" />
+                            </div>
+                            <div>
+                                <input type="text" class="mb10" readonly="readonly" value="只读" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="">
+                                <input type="checkbox" class="checkbox" value="1" name="checkbox" />
+                                多选框
+                            </label>
+                            <label class="">
+                                <input type="checkbox" class="checkbox" value="2" name="checkbox" />
+                                多选框
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="">
+                                <input type="radio" value="1" name="radio" />
+                                单选框
+                            </label>
+                            <label class="">
+                                <input type="radio" value="2" name="radio" />
+                                单选框
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="error mb10" value="使用 .error 类表示输入错误" />
+                            <input type="text" class="success mb10" value="使用 .success 类表示输入正确" />
+                            <input type="text" class="warning mb10" value="使用 .warning 类表示输入不推荐" />
+                        </div>
+                        <div class="form-group">
+                            <select>
+                                <option value="">选择框</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div><!-- End 表单 Demo -->
+
+        <div class="floor">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h2>特殊图标</h2>
+                    <div class="row">
+                        <p class="col-xs-12 col-md-6 col-lg-3">
+                            i.spinner-loader
+                            <i class="spinner-loader"></i>
+                            加载更多中
+                        </p>
+                        <p class="col-xs-12 col-md-6 col-lg-3">
+                            i.refreshing-loader
+                            <i class="refreshing-loader"></i>
+                            刷新中
+                        </p>
+                        <p class="col-xs-12 col-md-6 col-lg-3">
+                            .icon.settingIcon 设置图标
+                            <i class="icon settingIcon"></i>
+                        </p>
+                        <p class="col-xs-12 col-md-6 col-lg-3">
+                            .icon.rightArrowIcon 右箭头图标
+                            <i class="icon rightArrowIcon"></i>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="floor">
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h2>卡片式布局，多用于商品列表</h2>
+                    <p>样式包含圆角、盒子阴影、白色背景。</p>
+                    <p>结构：</p>
+                    <p>div.card_layout  卡片块容器，需加上宽度和间距设定，比如 .w240 .mr10</p>
+                    <p>----div.image_row  图片行</p>
+                    <p>--------img  图片</p>
+                    <p>----div.title_row  标题行</p>
+                    <p>示例：</p>
+                    <div class="green_bg padding10 clearfix">
+                        <div class="fl card_layout w240 mr10 mb10">
+                            <div class="image_row">
+                                <img src="http://v3.bootcss.com/assets/img/devices.png" alt="baidu logo" />
+                            </div>
+                            <div class="title_row">
+                                这是标题
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end .panel -->
+
+        </div><!-- end .floor -->
 
         <div class="floor">
 
@@ -569,10 +913,11 @@
     </div><!-- end .page .inner -->
 </div><!-- end .page -->
 
-<script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+    <!--<script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>-->
+    <script src="../asset/jquery/jquery-3.4.1.min.js"></script>
 
-<script src="../script/common_script/common_function.js"></script>
-<script src="../script/common_script/common_action.js"></script>
+    <script src="../script/common_script/common_function.js"></script>
+    <script src="../script/common_script/common_action.js"></script>
 
 </body>
 </html>
