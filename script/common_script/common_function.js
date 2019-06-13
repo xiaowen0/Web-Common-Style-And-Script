@@ -4032,9 +4032,6 @@ function getMainAudioController()
  */
 function playMusic()
 {
-    // toggle button status
-    $('#mainMusicControlButton').removeClass('stopped');
-
     // get audio element
     var mainAudioController = getElement('mainAudioController');
     if (!mainAudioController) {
@@ -4051,6 +4048,9 @@ function playMusic()
         return false;
     }
 
+    // toggle button status
+    $('#mainMusicControlButton').removeClass('stopped');
+
     return true;
 }
 
@@ -4061,9 +4061,6 @@ function playMusic()
  */
 function pauseMusic()
 {
-    // toggle button status
-    $('#mainMusicControlButton').addClass('stopped');
-
     // get audio element
     var mainAudioController = getElement('mainAudioController');
     if (!mainAudioController) {
@@ -4079,6 +4076,9 @@ function pauseMusic()
         // still playing, pause fail
         return false;
     }
+
+    // toggle button status
+    $('#mainMusicControlButton').addClass('stopped');
 
     return true;
 }
