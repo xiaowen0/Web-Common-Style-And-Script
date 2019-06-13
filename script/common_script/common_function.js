@@ -2705,6 +2705,16 @@ function getIEsVersion()
 }
 
 /**
+ * check if current browser is weixin
+ * @returns Boolean
+ */
+function isWeixin()
+{
+    return navigator.userAgent.indexOf('MicroMessenger') >= 0
+}
+var isWechat = isWeixin;
+
+/**
  * get browser language, return lower case text like "zh-cn".
  * @return String
  */
