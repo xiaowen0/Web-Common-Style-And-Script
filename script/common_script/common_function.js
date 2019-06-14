@@ -2734,6 +2734,69 @@ function getBrowserLanguage()
     return lang;
 }
 
+/**
+ * check browser
+ * @return Object
+ * - cssVersion  String  CSS version
+ * - storageSupported  Boolean
+ * - jsonSupported  Boolean
+ * - fileReaderSupported  Boolean
+ * - evaluate  String  good|normal|bad
+ */
+function checkBrowserFunction()
+{
+    var result = {
+        cssVersion : '0',
+        storageSupported : typeof (localStorage) != 'undefined',
+        jsonSupported : typeof (JSON) != 'undefined',
+        fileReaderSupported : typeof (FileReader) != 'undefined',
+        evaluate : ''
+    };
+
+    if ( typeof(document.body.style) == 'undefined')
+    {
+        result.cssVersion = '0';
+    }
+    else if ( typeof(document.body.style.display) == 'undefined')
+    {
+        result.cssVersion = '1';
+    }
+    else if ( typeof(document.body.style.borderRadius) != 'undefined')
+    {
+        result.cssVersion = '3';
+    }
+    else if ( typeof(document.body.style.fontSize) != 'undefined')
+    {
+        //
+        result.cssVersion = '2.1';
+    }
+    else if ( typeof(document.body.style.backgroundImage) != 'undefined')
+    {
+        result.cssVersion = '2';
+    }
+
+    var score = 0;
+
+    result.storageSupported ? score++ : null;
+    result.jsonSupported ? score++ : null;
+    result.fileReaderSupported ? score++ : null;
+
+    if (score>=3)
+    {
+        result.evaluate = 'good';
+    }
+    else if (result.cssVersion >= '3')
+    {
+        result.evaluate = 'normal';
+    }
+    else
+    {
+        result.evaluate = 'bad';
+    }
+
+    return result;
+}
+
 /* --- file function group ----------------------------------------- */
 
 /**
@@ -5570,5 +5633,63 @@ function initVueForm(options)
         }
     });
     return vueController;
+}
+
+/**
+ * get geography location
+ * @param  Object  options
+ * - type     String     location data type, default wgs84.
+ * - success  Function
+ * - error    Function
+ */
+function getLocation(options)
+{
+    typeof (options) != 'object' ? options = {} : null;
+    var type    = options.type || 'wgs84';
+    var success = options.success || null;
+    var error   = options.error || null;
+
+    if (typeof (wx) != 'undefined') // wechat JSSDK
+    {
+        wx.getLocation({
+            type: type, // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+            success: function (res) {
+                var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+                var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+                var speed = res.speed; // 速度，以米/每秒计
+                var accuracy = res.accuracy; // 位置精度
+                if (success)
+                {
+                    success(res);
+                }
+            },
+            error : function (){
+                if (error)
+                {
+                    error(res);
+                }
+            }
+        });
+    }
+    else if ( typeof(navigator.geolocation) != 'undefined')  // HTML5 BOM
+    {
+        navigator.geolocation.getCurrentPosition(
+            //locationSuccess
+            function(position){
+                if (success)
+                {
+                    success(position);
+                }
+            },
+            //locationError
+            function(result){
+                var errorType = ['您拒绝共享位置信息', '获取不到位置信息', '获取位置信息超时'];
+                if (error)
+                {
+                    error(result);
+                }
+            }
+        );
+    }
 }
 
