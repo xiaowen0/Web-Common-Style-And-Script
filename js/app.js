@@ -304,7 +304,7 @@ var application = {
      * load wechat jssdk config
      * @param Object options
      * - jsApiList Array
-     * - onRead Function
+     * - onReady Function
      * - onError Function
      */
     loadWechatJSSDKConfig : function (options)
