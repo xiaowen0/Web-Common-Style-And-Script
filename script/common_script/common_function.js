@@ -2734,6 +2734,69 @@ function getBrowserLanguage()
     return lang;
 }
 
+/**
+ * check browser
+ * @return Object
+ * - cssVersion  String  CSS version
+ * - storageSupported  Boolean
+ * - jsonSupported  Boolean
+ * - fileReaderSupported  Boolean
+ * - evaluate  String  good|normal|bad
+ */
+function checkBrowserFunction()
+{
+    var result = {
+        cssVersion : '0',
+        storageSupported : typeof (localStorage) != 'undefined',
+        jsonSupported : typeof (JSON) != 'undefined',
+        fileReaderSupported : typeof (FileReader) != 'undefined',
+        evaluate : ''
+    };
+
+    if ( typeof(document.body.style) == 'undefined')
+    {
+        result.cssVersion = '0';
+    }
+    else if ( typeof(document.body.style.display) == 'undefined')
+    {
+        result.cssVersion = '1';
+    }
+    else if ( typeof(document.body.style.borderRadius) != 'undefined')
+    {
+        result.cssVersion = '3';
+    }
+    else if ( typeof(document.body.style.fontSize) != 'undefined')
+    {
+        //
+        result.cssVersion = '2.1';
+    }
+    else if ( typeof(document.body.style.backgroundImage) != 'undefined')
+    {
+        result.cssVersion = '2';
+    }
+
+    var score = 0;
+
+    result.storageSupported ? score++ : null;
+    result.jsonSupported ? score++ : null;
+    result.fileReaderSupported ? score++ : null;
+
+    if (score>=3)
+    {
+        result.evaluate = 'good';
+    }
+    else if (result.cssVersion >= '3')
+    {
+        result.evaluate = 'normal';
+    }
+    else
+    {
+        result.evaluate = 'bad';
+    }
+
+    return result;
+}
+
 /* --- file function group ----------------------------------------- */
 
 /**
