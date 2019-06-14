@@ -4050,7 +4050,15 @@ function playMusic()
     }
 
     // try to play
-    mainAudioController.play();
+    try
+    {
+        mainAudioController.play();
+    }
+    catch (e)
+    {
+        // play fail
+        return false;
+    }
 
     // check play status
     if (mainAudioController.paused) {
