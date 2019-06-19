@@ -436,6 +436,39 @@ function getBrowserFingerPrinting()
     return canvas.toDataURL();
 }
 
+/* page content group */
+
+/**
+ * get page's description from meta tag
+ * @return  String
+ */
+function getPageDescription()
+{
+    var descMetaTag = document.getElementsByName('description');
+    if (!descMetaTag.length)
+    {
+        return '';
+    }
+
+    return descMetaTag[0].content;
+}
+var getPageDesc = getPageDescription;
+
+/**
+ * get page's icon from link tag
+ * @return  String
+ */
+function getPageIcon()
+{
+    var iconLinkTag = document.getElementsByName('icon');
+    if (!iconLinkTag.length)
+    {
+        return '';
+    }
+
+    return iconLinkTag[0].href;
+}
+
 /* --- String function group ---------------------------------------------------------- */
 
 /**
