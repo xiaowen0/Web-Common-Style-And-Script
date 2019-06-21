@@ -46,6 +46,27 @@
     background-size: contain;
 }
 
+.insertPhotoIcon {
+    background-image: url('image/insert_photo_icon_120.png');
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+    width: 120px;
+    height: 120px;
+}
+.insertPhotoIcon.small,
+.insertPhotoIcon.sm {
+    width: 60px;
+    height: 60px;
+}
+
+.insertPhotoIcon.ExtraSmall,
+.insertPhotoIcon.xs {
+    width: 30px;
+    height: 30px;
+}
+
 /* loading icon */
 @-moz-keyframes spinner-loader {
     0% {
