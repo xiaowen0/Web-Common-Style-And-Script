@@ -326,74 +326,6 @@ function existDebuggingContent(name)
 /* browser feature group --------------------------------------------------------- */
 
 /**
- * disable user copy action
- * @returns boolean
- */
-function disableCopy()
-{
-    if (typeof(document.oncopy) === "undefined")
-    {
-        return false;
-    }
-
-    document.oncopy = (function (e)
-    {
-        return false;
-    });
-
-    return true;
-}
-
-/**
- * disable right-click context menu
- * @return boolean
- */
-function disableContextMenu()
-{
-    if (typeof(document.oncontextmenu) === "undefined") {
-        return false;
-    }
-
-    document.oncontextmenu = (function ()
-    {
-        return false;
-    });
-    return true;
-}
-
-/**
- * disable Ctrl+C hotkey
- * @returns boolean
- */
-function disableCtrlC()
-{
-    try {
-        var onkeydown = (function (e)
-        {
-            // keyCode with C key: 67
-            if (e.ctrlKey && (e.keyCode == 67)) {
-                return false;
-            }
-        });
-
-        if (document.addEventListener) {  //所有主流浏览器，除了 IE 8 及更早 IE版本
-            document.addEventListener("keydown", onkeydown);
-            return true;
-        }
-        else if (document.attachEvent) {                  // IE 8 or older
-            document.attachEvent("keydown", onkeydown);
-            return true;
-        }
-
-        return false;
-    }
-    catch (e) {
-        ;
-    }
-    return false;
-}
-
-/**
  * get browser finger printing
  * it use different canvas algorithm of browser to generate different image code
  * use this code can classify browser, then prevent user agent is altered.
@@ -987,47 +919,6 @@ function getAbsoluteBaseUrl()
     }
     url += "/";
     return url;
-}
-
-/**
- * JSON encode
- * @param   object
- * @returns String|false
- */
-function json_encode(object)
-{
-    if (typeof(JSON) !== 'undefined') {
-        var json_string = JSON.stringify(object);
-        return json_string;
-    }
-    else if (typeof(json_parse) !== 'undefined') {
-        return false;
-    }
-
-    return false;
-}
-
-/**
- * JSON decode
- * @param   string  JSON string
- * @returns Object|false
- */
-function json_decode(string)
-{
-    var object = null;
-
-    // use JSON object
-    if (typeof(JSON) !== 'undefined') {
-        object = JSON.parse(string);
-        return object;
-    }
-    // use JSON library from  http://www.JSON.org/
-    else if (typeof(json_parse) !== 'undefined') {
-        object = json_parse(string);
-        return object;
-    }
-
-    return false;
 }
 
 /* --- Array function group ------------------------------------------ */

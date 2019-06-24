@@ -64,18 +64,6 @@ mergeObject(obj1, obj2)
 
 合并2个数组的属性，如果有相同属性，obj2 的覆盖 obj1 的，返回一个新对象。
 
-**禁用复制操作**
-
-disableCopy()
-
-**禁用右键菜单**
-
-disableContextMenu()
-
-**禁用Ctrl+C复制快捷键**
-
-disableCtrlC()
-
 **获取浏览器指纹**
 
 getBrowserFingerPrinting()
