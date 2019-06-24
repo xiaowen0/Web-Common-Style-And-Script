@@ -3602,19 +3602,10 @@ function initFileUpload(element, options)
     var success = options.success || null;
     var error   = options.error || null;
     var complete = options.complete || null;
+    var progress = options.progress || null;
     var method  = options.method || 'POST';
     var url     = options.url || '';
-
-    // $(element).each(function(){
-
-    //     var imageTagSelector = $(this).attr('data-imageTag') || '';
-    //     var formControlSelector = $(this).attr('data-formControl') || '';
-
-    //     var imageTag = $(imageTagSelector);
-    //     var formControl = $(formControlSelector);
-    //     var me = $(this);
-
-    // });
+    var extraData   = options.extraData || {};
 
     $(element).on('change', function (){
 
@@ -3623,6 +3614,10 @@ function initFileUpload(element, options)
         // build form data
         var formData = new FormData();
         formData.append(this.name || 'file',this.files[0]);
+        for (var key in extraData)
+        {
+            formData.append(key, extraData[key]);
+        }
 
         $.ajax({
             url : url,
@@ -3643,6 +3638,23 @@ function initFileUpload(element, options)
             complete : complete
         });
     });
+}
+
+/**
+ * init file upload
+ * init a file input element, can auto upload file when it changed.
+ * @param   element     HTMLElement|String      file input object or jQuery selector
+ * @param   options     Object                  for AjaxFileUpload plugin
+ * -- url (required)    String
+ * -- additionalData    Object
+ * -- autoUpload        Boolean     default true
+ * -- dataType          String      default "json"
+ * -- method            String      default "post"
+ * @require  AjaxFileUpload (https://github.com/jchild3rs/AjaxFileUpload)
+ */
+function initAdvancedFileUpload(element, options)
+{
+    $(element).ajaxFileUpload(options);
 }
 
 /**
