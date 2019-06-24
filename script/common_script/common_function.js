@@ -590,10 +590,9 @@ function firstLetterUpperCase(string)
 
 /**
  * get random chinese name
- * @param options  Object
  * @return String
  */
-function getRandomChineseName(options)
+function getRandomChineseName()
 {
     var surnameList = [
         '赵','钱','孙','李','周','吴','郑','王',
@@ -1181,7 +1180,7 @@ function getNowTime(format)
 {
     if (!format)
     {
-        format = 'YYYY-MM-DD H:mm:ss';
+        format = 'YYYY-MM-DD HH:mm:ss';
     }
 
     return moment().format(format);
