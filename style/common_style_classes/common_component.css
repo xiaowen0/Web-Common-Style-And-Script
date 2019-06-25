@@ -248,6 +248,45 @@
     height: auto;
 }
 
+/* search bar */
+
+.searchBar {
+    position: relative;
+    background-color: white;
+    height: 30px;
+    line-height: 30px;
+
+    border: solid 1px #e0e0e0;
+    overflow: hidden;
+}
+
+.searchBar .inner {
+    padding-right: 50px;
+}
+
+.searchBar .inputbox {
+    border: 0 none;
+    float: left;
+    box-sizing: border-box;
+}
+
+.searchBar .icon {
+    position: absolute;
+    z-index: 1;
+    font-size: 16px;
+    line-height: 20px;
+    height: 20px;
+    top: 5px;
+}
+
+.searchBar .deleteIcon {
+    right: 35px;
+}
+
+.searchBar .searchIcon {
+    right : 10px;
+}
+
 /* photo frame */
 
 .photoFrame {
