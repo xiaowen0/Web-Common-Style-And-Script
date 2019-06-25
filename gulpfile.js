@@ -64,13 +64,17 @@ gulp.task('minifyjs',function(){
        .pipe(gulp.dest('script/common_script/'))        //输出 
        .pipe(notify({message:"minify js task ok"}));    //提示*/
 	   
-	gulp.src('script/**/*.js')       //选择合并的JS
+	gulp.src('script/**/*.js')       // script folder's js file
        //.pipe(concat('order_query.js'))  //合并js
        //.pipe(gulp.dest('dist/js'))      //输出
        .pipe(rename({suffix:'.min'}))     //重命名
        .pipe(uglify())                    //压缩
        .pipe(gulp.dest(targetFolder + 'script/'))        //输出 
-       .pipe(notify({message:"minify js task ok", onLast : true}));    //提示
+       .pipe(notify({message:"copy and minify js file finished.", onLast : true}));    //提示
+	   
+	gulp.src('script/**/*.md')		// script folder's markdown file
+		.pipe(gulp.dest(targetFolder + 'script/'))        //输出 
+       .pipe(notify({message:"copy markdown file finished.", onLast : true}));    //提示
 	   
 	return true;
 });
