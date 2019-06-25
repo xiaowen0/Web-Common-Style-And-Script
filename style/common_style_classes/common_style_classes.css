@@ -710,6 +710,12 @@ p.error {
 /* shape style */
 
 .circle {
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+}
+
+.disk {
     border: 3px solid #000;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
