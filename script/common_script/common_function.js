@@ -721,6 +721,16 @@ function data2String(data)
 }
 
 /**
+ * set current page's address url
+ * @param String  url  relative path or absolute path
+ * note: url must same source
+ */
+function setCurrentUrl(url)
+{
+    window.history.pushState({},'',url);
+}
+
+/**
  * create url with params
  * @param String url
  * @param Object params
@@ -4098,7 +4108,7 @@ function setSessionData(key, value)
 }
 
 /**
- * get cache data, using locat storage.
+ * get cache data, using local storage.
  * @key  String  data key string
  * @return  String|null
  */
@@ -4113,7 +4123,7 @@ function getCacheData(key)
 }
 
 /**
- * set cache data, using locat storage.
+ * set cache data, using local storage.
  * @key     String  data key string
  * @value   String  value
  * @return  boolean  success or not
@@ -4126,6 +4136,22 @@ function setCacheData(key, value)
     }
 
     localStorage.setItem(key, value);
+    return true;
+}
+
+/**
+ * remove cache data, using local storage.
+ * @key     String  data key string
+ * @return  boolean  success or not
+ */
+function removeCacheData(key)
+{
+    if (typeof(localStorage) === "undefined")
+    {
+        return false;
+    }
+
+    localStorage.removeItem(key);
     return true;
 }
 
