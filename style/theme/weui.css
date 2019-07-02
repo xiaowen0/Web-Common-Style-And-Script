@@ -24,7 +24,7 @@ body.weui {
 
 .weui .button {
     position: relative;
-    display: block;
+    display: inline-block;
     width: 184px;
     margin-left: auto;
     margin-right: auto;
@@ -78,6 +78,11 @@ body.weui {
 .weui .button:disabled {
     color: rgba(0, 0, 0, 0.18);
     background-color: #fafafa;
+}
+
+.weui .button_block {
+    display: block;
+    width: auto;
 }
 
 .weui .button_mini {
