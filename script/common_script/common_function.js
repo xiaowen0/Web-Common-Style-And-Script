@@ -4649,11 +4649,32 @@ function initCKEditors(element, callback)
         });
 
     });
+}
 
-    // CKEDITOR.on( 'loaded', function(event)
-    // {
-    //
-    // } );
+/**
+ * init CKEditor component by ID
+ * @param  String  id  element id attribute
+ * @param  Function  callback(HTMLElement, editor)
+ * @requires jQuery, CKEditor
+ * @return Object (ckeditor)
+ */
+function initCKEditorById(id, callback)
+{
+    return CKEDITOR.replace(id, {
+        on: {
+            /**
+             * @type  Function
+             * @param  Object  event
+             * - editor : Object
+             */
+            instanceReady : function( event ) {
+                if (callback)
+                {
+                    callback(control, event.editor);
+                }
+            }
+        }
+    });
 }
 
 /**
@@ -5067,6 +5088,27 @@ function initVueTableList(options)
                 });
             }
         },
+        // click event for delete button, need data-id param.
+        onRemoveRow : function (event){
+            var target = event.currentTarget;
+            var id = target.dataset.id;
+            var me = this;
+
+            if (!window.confirm('确认要删除这条数据吗？（该操作不可逆）'))
+            {
+                return;
+            }
+
+            $.ajax({
+                url : apiConfig.delete.url,
+                data : {
+                    id : id
+                },
+                success : function (result){
+                    me.reload();
+                }
+            });
+        },
         init : function()
         {
             var me = this;
@@ -5347,7 +5389,7 @@ function initVueForm(options)
             var target = event.currentTarget;
             var id = this.itemData.id;
 
-            if (!window.confirm('确认要删除这些数据吗？（该操作不可逆）'))
+            if (!window.confirm('确认要删除数据吗？（该操作不可逆）'))
             {
                 return;
             }
