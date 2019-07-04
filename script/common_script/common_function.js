@@ -721,6 +721,28 @@ function data2String(data)
 }
 
 /**
+ * parse a BBCode (Bulletin Board Code) string, return a structural data.
+ * @param  String  bbcode
+ * @return  Object
+ * - String  htmlCode  html code string
+ * - String  plainText  no any html tag
+ * - String  imageList  image url list from source code
+ */
+function BBCodeToStructuralData(bbcode)
+{
+    if (typeof(sceditor) == 'undefined')
+    {
+        addConsoleLog('BBCodeToStructuralData require sceditor library.');
+        return;
+    }
+    var result = {};
+    result.htmlCode     = new sceditor.BBCodeParser().toHTML(bbcode);
+    result.plainText    = removeHtmlTag(result.htmlCode);
+    result.imageList    = filterImageUrlList(result.htmlCode);
+    return result;
+}
+
+/**
  * set current page's address url
  * @param String  url  relative path or absolute path
  * note: url must same source
