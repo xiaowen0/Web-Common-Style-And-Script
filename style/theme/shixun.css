@@ -1,0 +1,109 @@
+
+
+.h1 {
+    font-size: 21px;
+}
+
+.h2 {
+    font-size: 17px;
+}
+
+.h3 {
+    font-size: 17px;
+}
+
+.shixun .primaryTextColor {
+    color: black;
+}
+
+.shixun .secondaryTextColor {
+    color: #9d9d9d
+}
+
+.shixun .primaryLinkColor {
+    color: #43bde9;
+}
+
+.shixun .secondaryLinkColor {
+    color: black;
+}
+
+.shixun .priceColor {
+    color: red;
+}
+
+.shixun .button {
+    /* width: 4.6rem; */
+    /* height: 2rem; */
+    display: inline-block;
+    width: auto;
+    height: auto;
+    font-size: 15px;
+    line-height: 40px;
+    color: black;
+    background: white;
+    border-radius: 8px;
+    outline: none;
+    border: solid 1px lightgrey;
+    padding: 0 15px;
+}
+
+.shixun .button_default.button_loading,
+.shixun .button_default.button_disabled,
+.shixun .button_default:disabled {
+    background: #efefef;
+    color: #393939;
+}
+
+.shixun .button_blue,
+.shixun .button_primary {
+    color: #fff;
+    background-color: #43bde8;
+    border: solid 1px #43bde8;
+}
+
+.shixun .button_primary.button_loading,
+.shixun .button_primary.button_disabled,
+.shixun .button_primary:disabled {
+    background-color: #74C9E7;
+}
+
+.shixun .button_green,
+.shixun .button_success {
+    color: #fff;
+    background-color: #4cd964;
+    border: 1px solid #4cd964;
+}
+
+.shixun .button_success.button_loading,
+.shixun .button_success.button_disabled,
+.shixun .button_success:disabled {
+    background-color: #7ddd90;
+}
+
+.shixun .button_yellow,
+.shixun .button_warning {
+    color: black;
+    background-color: #FFEB3B;
+    border: solid 1px #FFEB3B;
+}
+
+.shixun .button_warning.button_loading,
+.shixun .button_warning.button_disabled,
+.shixun .button_warning:disabled {
+    background-color: #fff486;
+}
+
+.shixun .button_red,
+.shixun .button_danger {
+    color: #fff;
+    background-color: #dd524d;
+    border: 1px solid #dd524d;
+}
+
+.shixun .button_danger.button_loading,
+.shixun .button_danger.button_disabled,
+.shixun .button_danger:disabled {
+    background-color: #dd8382;
+}
+

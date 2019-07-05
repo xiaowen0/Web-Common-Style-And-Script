@@ -5,6 +5,22 @@ body.weui {
     font-family: -apple-system-font, "Helvetica Neue", sans-serif;
 }
 
+.shixun .primaryTextColor {
+    color: black;
+}
+
+.shixun .secondaryTextColor {
+    color: #8e8e8e;
+}
+
+.shixun .primaryLinkColor {
+    color: black;
+}
+
+.shixun .secondaryLinkColor {
+    color: #8e8e8e;
+}
+
 .weui input,
 .weui textarea {
     caret-color: #07C160;
@@ -26,6 +42,7 @@ body.weui {
     position: relative;
     display: inline-block;
     width: 184px;
+    height: auto;
     margin-left: auto;
     margin-right: auto;
     padding: 8px 24px;
@@ -57,9 +74,9 @@ body.weui {
     background-color: #07C160;
 }
 
-.weui .button + .button {
-    margin-top: 16px;
-}
+/*.weui .button + .button {*/
+/*    margin-top: 16px;*/
+/*}*/
 
 .weui .button_primary.button_loading,
 .weui .button_success.button_loading {
