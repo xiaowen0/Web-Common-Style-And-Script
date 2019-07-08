@@ -1,0 +1,52 @@
+.bottom_menu {
+
+    position: fixed;
+    z-index: 2;
+    bottom:0;
+    left:0;
+    padding: 12px 0 0;
+    margin: 0;
+
+    width: 100%;
+
+    font-size : 75%;
+
+    ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        display: flex;
+
+        -webkit-box-shadow: 0 1px 7px rgba(0,0,0,0.11);
+        -moz-box-shadow: 0 1px 7px rgba(0,0,0,0.11);
+        box-shadow: 0 1px 7px rgba(0,0,0,0.11);
+
+        .menuItem {
+            display: inline-block;
+            flex: 1;
+
+            text-align: center;
+
+            a {
+                display: inline-block;
+                padding: 3px 10px 7px;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+            .writeLink {
+                padding-top: 31px;
+            }
+        }
+    }
+
+    .writeIcon {
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 50%;
+        margin-top : 2px;
+        margin-left: -19px;
+    }
+}
+
