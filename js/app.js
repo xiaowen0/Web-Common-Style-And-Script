@@ -166,15 +166,15 @@ var application = {
      * store api list
      * @type Object
      */
-    apiList : [],
+    apiList : {},
 
     init : function (config)
     {
-        this.appConfig = config || {};
-        this.apiList = this.appConfig.apiList || [];
+        this.config = appConfig || {};
+        this.apiList = this.config.apiList || {};
 
-        this.checkEnvironment(this.appConfig.envList || []);
-        this.initResources(this.appConfig.resourceList || []);
+        this.checkEnvironment(this.config.envList || []);
+        this.initResources(this.config.resourceList || []);
     },
 
     /**
