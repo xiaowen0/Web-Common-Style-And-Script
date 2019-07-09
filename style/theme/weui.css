@@ -5,19 +5,19 @@ body.weui {
     font-family: -apple-system-font, "Helvetica Neue", sans-serif;
 }
 
-.shixun .primaryTextColor {
+.weui .primaryTextColor {
     color: black;
 }
 
-.shixun .secondaryTextColor {
+.weui .secondaryTextColor {
     color: #8e8e8e;
 }
 
-.shixun .primaryLinkColor {
+.weui .primaryLinkColor {
     color: black;
 }
 
-.shixun .secondaryLinkColor {
+.weui .secondaryLinkColor {
     color: #8e8e8e;
 }
 
