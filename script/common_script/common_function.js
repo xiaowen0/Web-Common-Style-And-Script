@@ -4062,6 +4062,33 @@ function includeDependencies()
 }
 
 /**
+ * load a file content
+ * @param url       String
+ * @param options   Object
+ * - dataType  String  file type, default 'text'
+ * - error      Function
+ * - afterLoad  Function
+ * --- result param  String|Object
+ */
+function loadFile(url, options)
+{
+    typeof (options) === 'undefined' ? options = {} : null;
+    var dataType    = options.dataType || 'text';
+    var error       = options.error || null;
+    var afterLoad   = options.afterLoad || null;
+    $.ajax(url, {
+        dataType : dataType,
+        success : function (result){
+            if (afterLoad)
+            {
+                afterLoad(result);
+            }
+        },
+        error : error,
+    });
+}
+
+/**
  * load a html file content
  * @param url       String
  * @param element   HTMLElement
