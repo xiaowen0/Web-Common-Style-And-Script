@@ -18,6 +18,10 @@
     /* don't set 100% width, its parent maybe has padding, so current element maybe overflow. */
 }
 
+.inlineBlock {
+    display: inline-block;
+}
+
 .hidden, .hide {
     display: none;
 }
@@ -167,6 +171,10 @@
 .max320 {
     max-width: 320px;
     box-sizing: border-box;
+}
+.max375,
+.maxW375 {
+    max-width: 375px;
 }
 .max_w640,
 .max640 {
