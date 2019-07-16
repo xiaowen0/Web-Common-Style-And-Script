@@ -214,7 +214,8 @@ $(document).ready(function ()
         // font relative size
         (function()
         {
-            var baseWidth = parseInt($('body').data('base-width'));
+            var baseWidth       = parseInt($('body').data('base-width'));
+            var baseFontSize    = parseInt($('body').data('base-font-size')) || 10;
             if (!baseWidth)
             {
                 return;
@@ -227,11 +228,12 @@ $(document).ready(function ()
                 return;
             }
 
-            var fontSize = windowWidth / baseWidth * 10;
+            var fontSize = windowWidth / baseWidth * baseFontSize;
             $('html').css('font-size', fontSize + 'px');
         })();
 
         // response class element
+        // html tag attr: data-size-ratio  Float  ratio (height:width)
         $('.response').each(function ()
         {
             // reset height
