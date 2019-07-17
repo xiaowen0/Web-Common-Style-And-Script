@@ -723,6 +723,16 @@ p.error {
     color: #a94442;
 }
 
+/* object fit type */
+
+.fitTypeContain {
+    object-fit: contain;
+}
+.fitTypeCover {
+    object-fit: cover;
+}
+
+
 /* shape style */
 
 .circle {
