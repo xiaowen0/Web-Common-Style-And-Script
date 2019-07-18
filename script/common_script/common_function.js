@@ -2439,6 +2439,38 @@ function isOverflowHeight(selector)
     }
 }
 
+/* mask method */
+
+/**
+ * show mask
+ * the mask layer is fixed position, 100% size in window, and 70% black background color.
+ * @requires  common_component.css  jQuery
+ */
+function showMask()
+{
+    var mask = getElement('pageMask');
+    if (!mask)
+    {
+        mask = createElement('div', {
+            id : 'pageMask',
+            'class' : "maskLayer layer"
+        });
+        document.body.append(mask);
+    }
+
+    $(mask).show();
+}
+
+/**
+ * hidden mask layer
+ */
+function hideMask()
+{
+    $('#pageMask').hide();
+}
+
+/* dialog method */
+
 function createDialog(options)
 {
 
@@ -5288,6 +5320,153 @@ function initVueTableList(options)
         });
     }
 
+    return vueController;
+}
+
+/**
+ * init vue item detail
+ * @param  Object  options
+ * @return  Object(Vue)
+ * @requires Vue, jQuery
+ */
+function initVueItemDetail(options)
+{
+    var elementSelector = options.el || '';
+    var apiConfig       = options.apiConfig || {};
+    var customData      = options.data || {};
+    var customMethods   = options.methods || {};
+
+    var dataColumn      = options.dataColumn || [];
+    var columnMapping   = options.columnMapping || {};
+    var idParam         = options.idParam || 'id';
+
+    var parentPage      = options.parentPage || {};
+    var onSubmitSuccess = options.onSubmitSuccess || null;
+    /**
+     * call before submit data
+     * @type null|Function
+     * @param  Object  data
+     */
+    var beforeSubmit = options.beforeSubmit || null;
+    var onDataLoaded    = options.onDataLoaded || null;
+    var onLoadingError  = options.onLoadingError || null;
+    var onMounted       = options.onMounted || null;
+
+    var dataAttr = {};
+    for (var i=0; i<dataColumn.length; i++)
+    {
+        dataAttr[dataColumn[i]] = null;
+    }
+
+    var data = {
+        /* loading: ajax loading, ready: data loaded,  */
+        status : '',
+        itemData : dataAttr
+    };
+    for (var key in customData)
+    {
+        data[key] = customData[key];
+    }
+
+    var methods = {
+        loadData : function (id, callback)
+        {
+            var me = this;
+            this.status = 'loading';
+            $.ajax({
+                url : apiConfig.get.url,
+                type : apiConfig.get.method || 'get',
+                data : {
+                    id : id
+                },
+                success : function(result){
+
+                    me.status = 'ready';
+
+                    var data = result.data;
+                    // data process if need
+                    if (onDataLoaded)
+                    {
+                        data = onDataLoaded(data);
+                    }
+
+                    // column convert
+                    data = dataColumnConvert(data, columnMapping);
+
+                    for (var key in data)
+                    {
+                        me.itemData[key] = data[key];
+                    }
+
+                    // do other something
+                    if (callback)
+                    {
+                        callback(data);
+                    }
+                },
+                error : function (XMLHttpRequest, errorText) {
+                    me.status = 'error';
+                    if (onLoadingError)
+                    {
+                        onLoadingError(XMLHttpRequest, errorText);
+                    }
+                }
+            });
+        },
+        // use in remove button, need data-id attribute.
+        onRemove : function (event){
+
+            var me = this;
+            var target = event.currentTarget;
+            var id = this.itemData.id;
+
+            if (!window.confirm('确认要删除数据吗？（该操作不可逆）'))
+            {
+                return;
+            }
+
+            $.ajax({
+                url : apiConfig.delete.url,
+                data : {
+                    id : id
+                },
+                success : function (result){
+                    location.href = parentPage ? parentPage : 'index.html';
+                }
+            });
+        },
+        formatDate : function (timestamp) {
+            return moment(timestamp).format('YYYY-MM-DD');
+        },
+        formatDateTime : function (timestamp) {
+            return moment(timestamp).format('YYYY-MM-DD HH:mm:ss');
+        },
+        fromNowExpress : function(timestamp){
+            return moment(timestamp).fromNow();
+        }
+    };
+    for (var key in customMethods)
+    {
+        methods[key] = customMethods[key];
+    }
+
+    var vueController = new Vue({
+        el : elementSelector,
+        data : data,
+        methods : methods,
+        mounted : function (){
+
+            this.status = 'mounted';
+
+            var id = getUrlParam(idParam);
+            if (!id)
+            {
+                location.href = parentPage ? parentPage : 'index.html';
+            }
+
+            this.loadData(id);
+        }
+    });
     return vueController;
 }
 
