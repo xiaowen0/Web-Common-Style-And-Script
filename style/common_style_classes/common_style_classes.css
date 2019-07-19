@@ -416,6 +416,10 @@
     font-weight: lighter;
 }
 
+.noDecoration {
+    text-decoration: none;
+}
+
 .underline {
     text-decoration: underline;
 }
