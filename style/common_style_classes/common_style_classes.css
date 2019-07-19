@@ -95,6 +95,11 @@
     box-sizing: border-box;
 }
 
+.h100p {
+    height: 100%;
+    box-sizing: border-box;
+}
+
 .w80p {
     width: 80%;
     box-sizing: border-box;
@@ -408,6 +413,27 @@
     font-size: 130%
 }
 
+.f10r16 {
+    font-size: 62.5%;
+}
+.f12r16 {
+    font-size: 75%;
+}
+.f14r16 {
+    font-size: 87.5%;
+}
+.f16r16 {
+    font-size: 100%;
+}
+.f18r16 {
+    font-size: 112.5%;
+}
+.f20r16 {
+    font-size: 125%;
+}
+
+
+
 .bold {
     font-weight: 700
 }
@@ -565,6 +591,9 @@
 
 .border {
     border: solid 1px #efefef;
+}
+.noBorder {
+    border: 0 none;
 }
 .lightBorder {
     border: solid 1px lightgrey;
