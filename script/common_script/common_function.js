@@ -972,6 +972,25 @@ function inArray(value, array)
 }
 
 /**
+ * get array index by element in a array
+ * @param  Array  array
+ * @param  Mixed  element
+ * @return Number  if not found, then return -1
+ */
+function getIndexInArray(array, element)
+{
+    for (var i = 0; i<array.length; i++)
+    {
+        if (array[i] === element)
+        {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
+/**
  * remove an element from a array
  * @param  Array  array
  * @param  Mixed  element
@@ -4802,6 +4821,12 @@ function initVueList(options)
     var methods = {
 
         loadPage : function(page){
+
+            if ( typeof(apiConfig.list) != 'object')
+            {
+                addConsoleLog('[error] list api not defined.');
+                return;
+            }
 
             if (this.ajaxLock)
             {
