@@ -225,6 +225,10 @@
     max-width: 100%;
 }
 
+.hiddenOverflow {
+    overflow: hidden;
+}
+
 .hiddenXoverflow {
     overflow-x: hidden;
 }
