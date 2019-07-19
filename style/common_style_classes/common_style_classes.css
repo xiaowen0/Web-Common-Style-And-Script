@@ -7,6 +7,35 @@
  * url: https://github.com/xiaowen0/Web-Common-Style-And-Script
  */
 
+/* reset child element */
+
+.resetChildElement div,
+.resetChildElement p,
+.resetChildElement h1,
+.resetChildElement h2,
+.resetChildElement h3,
+.resetChildElement h4,
+.resetChildElement h5,
+.resetChildElement h6,
+.resetChildElement ul,
+.resetChildElement ol,
+.resetChildElement dl {
+    margin: 0;
+    padding: 0;
+}
+
+.resetChildElement a {
+    text-decoration: none;
+}
+
+.resetChildElement img {
+    border-style: none;
+}
+
+.resetChildElement ul {
+    list-style: none none;
+}
+
 /* display type */
 .inline {
     display: inline;
