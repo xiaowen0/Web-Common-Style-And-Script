@@ -225,6 +225,25 @@
     max-width: 100%;
 }
 
+.lineHeight20r12f {
+    line-height: 1.6666%;
+}
+.lineHeight20r14f {
+    line-height: 1.4285%;
+}
+.lineHeight20r16f {
+    line-height: 1.25%;
+}
+.lineHeight30r14f {
+    line-height: 2.1428%;
+}
+.lineHeight30r16f {
+    line-height: 1.875%;
+}
+.lineHeight30r18f {
+    line-height: 1.6666%;
+}
+
 .hiddenOverflow {
     overflow: hidden;
 }
@@ -446,6 +465,7 @@
     font-size: 130%
 }
 
+/* font size relative to 16px */
 .f10r16 {
     font-size: 62.5%;
 }
