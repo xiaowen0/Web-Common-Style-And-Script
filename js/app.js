@@ -5,6 +5,8 @@
  */
 var appConfig = {
 
+    title : '师讯管理平台',
+
     resourceList : [],
 
     apiList : {},
@@ -114,6 +116,12 @@ if (typeof(apiList) != 'undefined')
 var application = {
 
     /**
+     * app title
+     * @type  String
+     */
+    title : '',
+
+    /**
      * environment sign
      * @type    String
      */
@@ -124,6 +132,11 @@ var application = {
      * @type    String
      */
     apiBaseUrl : '/',
+
+    /**
+     * init status
+     */
+    status : '',
 
     /**
      * resource list
@@ -170,11 +183,19 @@ var application = {
 
     init : function (config)
     {
+        if (this.status == 'ready')
+        {
+            return true;
+        }
+
+        this.title = appConfig.title || '';
         this.config = appConfig || {};
         this.apiList = this.config.apiList || {};
 
         this.checkEnvironment(this.config.envList || []);
         this.initResources(this.config.resourceList || []);
+
+        this.status = 'ready';
     },
 
     /**
