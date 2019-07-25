@@ -1088,14 +1088,16 @@ function getAMPM(time, format)
 /**
  * format time lenth
  * @example  90 -> 1:30
+ * @Param  Float  seconds
+ * @Param  Object  options
+ * -- Boolean  integer
+ * @return  String
  */
-function formatTimeLength(millisecond, options)
+function formatTimeLength(seconds, options)
 {
     // options
     options ? null : options = {};
     var integer = options.integer || false;
-
-    var seconds = millisecond / 1000;
 
     if (integer)
     {
@@ -1110,13 +1112,13 @@ function formatTimeLength(millisecond, options)
 
     // combine expression
     var text = '';
-    text = (secondPart > 10 ? secondPart : '0' + secondPart) + text;
+    text = (secondPart >= 10 ? secondPart : '0' + secondPart) + text;
     text = ':' + text;
-    text = (minutePart > 10 ? minutePart : '0' + minutePart) + text;
+    text = (minutePart >= 10 ? minutePart : '0' + minutePart) + text;
     if ( hourPart>0 )
     {
         text = ':' + text;
-        text = (hourPart > 10 ? hourPart : '0' + hourPart) + text;
+        text = (hourPart >= 10 ? hourPart : '0' + hourPart) + text;
     }
 
     return text;
@@ -1875,6 +1877,192 @@ function isVideo(name)
     }
 
     return false;
+}
+
+/**
+ * create a audio player
+ * @return Object
+ * -- Object(AudioHTMLElement)  el
+ * -- Function  init
+ * -- Function  setController   set a new audio element
+ * -- Function  setAudio        set a new audio file url
+ * -- Function  play            play audio
+ * -- Function  pause           pause audio
+ * -- Function  getStatus       get playing status
+ * -- Function  toggle          toggle playing status
+ * -- Function  getCurrentTime  get current time (second)
+ * -- Function  setCurrentTime  set a new current time (second)
+ */
+function createAudioPlayer()
+{
+    var audioPlayer = {
+        el : createElement('audio', {
+            autoplay : true,
+            preload : true,
+            muted : false
+        }),
+        networkStateMap : {
+            0 : '音频/视频尚未初始化',                           // NETWORK_EMPTY
+            1 : '音频/视频是活动的且已选取资源，但并未使用网络',  // NETWORK_IDLE
+            2 : '浏览器正在下载数据',                            // NETWORK_LOADING
+            3 : '未找到音频/视频来源'                            // NETWORK_NO_SOURCE
+        },
+        init : function (options){
+
+            var me = this;
+            var loadedmetadata  = options.loadedmetadata || null;
+            var timeupdate      = options.timeupdate || null;
+            var ended      = options.ended || null;
+            var error      = options.error || null;
+            var canplaythrough  = options.canplaythrough || null;
+            if (loadedmetadata)
+            {
+                $(this.el).on("loadedmetadata", loadedmetadata);
+            }
+            if (timeupdate)
+            {
+                $(this.el).on("timeupdate", timeupdate);
+            }
+            if (ended)
+            {
+                $(this.el).on("ended", ended);
+            }
+            if (canplaythrough)
+            {
+                $(this.el).on("canplaythrough", canplaythrough);
+            }
+            else {
+                if (this.el.autoplay)
+                {
+                    $(this.el).on("canplaythrough", function (){
+                        me.play();
+                    });
+                }
+            }
+            if (error)
+            {
+                $(this.el).on("error", error);
+            }
+            else
+            {
+                $(this.el).on("error", function(errorEvent){
+                    addConsoleLog('An error occurred: ');
+                    addConsoleLog('  current source url: ' + this.currentSrc);
+                    addConsoleLog('  current time: ' + this.currentTime);
+                    var networkStatus = this.networkState;
+                    if (typeof(me.networkStateMap[networkStatus]) != 'undefined')
+                    {
+                        addConsoleLog('  network status: ' + me.networkStateMap[networkStatus]);
+                    }
+                });
+            }
+        },
+        /**
+         * set a new controller
+         * @param  Object(AudioHTMLElement)  audioElement
+         */
+        setController : function (audioElement){
+            this.el = audioElement;
+        },
+        /**
+         * set audio file
+         * @param  String  url
+         */
+        setAudio : function (url){
+            this.pause();
+            this.el.src = url;
+            this.play();
+        },
+        /**
+         * play audio
+         * @return  {boolean}
+         */
+        play : function (){
+
+            if (!this.el.paused)
+            {
+                return true;
+            }
+
+            // try to play
+            try
+            {
+                this.el.play();
+            }
+            catch (e)
+            {
+                // play fail
+                return false;
+            }
+
+            // check play status, some browser not allow auto play.
+            if (this.el.paused) {
+                // play fail
+                return false;
+            }
+
+            return true;
+        },
+
+        /**
+         * pause audio
+         * @return  {boolean}
+         */
+        pause : function()
+        {
+            if (this.paused)
+            {
+                return true;
+            }
+
+            // try to pause
+            this.el.pause();
+
+            // check play status
+            if (!this.el.paused) {
+                // still playing, pause fail
+                return false;
+            }
+
+            return true;
+        },
+
+        /**
+         * get music play status
+         * @return  boolean
+         */
+        getStatus : function()
+        {
+            // return status
+            return !this.el.paused;
+        },
+
+        /**
+         * toggle play status
+         * @return  boolean
+         */
+        toggle : function()
+        {
+            // check status
+            if (this.getStatus()) {
+                // playing then pause
+                return this.pause();
+            }
+            else {
+                // pausing then play
+                return this.play();
+            }
+        },
+
+        getCurrentTime : function (){
+            return this.el.currentTime;
+        },
+        setCurrentTime : function (second) {
+            this.el.currentTime = second;
+        }
+    };  // end audioPlayer object define
+
+    return audioPlayer;
 }
 
 /**
