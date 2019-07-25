@@ -1085,6 +1085,43 @@ function getAMPM(time, format)
     return '';
 }
 
+/**
+ * format time lenth
+ * @example  90 -> 1:30
+ */
+function formatTimeLength(millisecond, options)
+{
+    // options
+    options ? null : options = {};
+    var integer = options.integer || false;
+
+    var seconds = millisecond / 1000;
+
+    if (integer)
+    {
+        seconds = Math.floor(seconds);
+    }
+
+    // calculate hour, minute, second
+    // hourPart * 60^2 + minutePart * 60 + secondPart = seconds
+    var secondPart  = seconds % 60;
+    var minutePart  = Math.floor(seconds / 60) % 60;
+    var hourPart    = Math.floor(seconds / 60 / 60);
+
+    // combine expression
+    var text = '';
+    text = (secondPart > 10 ? secondPart : '0' + secondPart) + text;
+    text = ':' + text;
+    text = (minutePart > 10 ? minutePart : '0' + minutePart) + text;
+    if ( hourPart>0 )
+    {
+        text = ':' + text;
+        text = (hourPart > 10 ? hourPart : '0' + hourPart) + text;
+    }
+
+    return text;
+}
+
 /* timer function group -------------------------------------------- */
 
 /**
