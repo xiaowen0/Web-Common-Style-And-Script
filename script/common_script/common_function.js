@@ -749,7 +749,8 @@ function BBCodeToStructuralData(bbcode)
  */
 function setCurrentUrl(url)
 {
-    window.history.pushState({},'',url);
+    log('use history replaceState alter current url.');
+    window.history.replaceState({},'',url);
 }
 
 /**
@@ -2944,6 +2945,15 @@ function isWeixin()
     return navigator.userAgent.indexOf('MicroMessenger') >= 0
 }
 var isWechat = isWeixin;
+
+/**
+ * check if current browser is windows wechat
+ * @returns Boolean
+ */
+function isWindowsWechat()
+{
+    return navigator.userAgent.toLocaleLowerCase().indexOf('windowswechat') >= 0;
+}
 
 /**
  * get browser language, return lower case text like "zh-cn".

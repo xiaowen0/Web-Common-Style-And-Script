@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>控制台</title>
+        <link rel="stylesheet" href="../style/common_style_classes/common_component.css"/>
+        <link rel="stylesheet" href="../style/common_style_classes/common_style_classes.css"/>
+    </head>
+    <body>
+        <form class="form" id="consoleForm" v-on:submit="run">
+            <div class="form_row">
+                <label class="block">命令：</label>
+                <textarea class="w100p" v-model="command"></textarea>
+            </div>
+            <div class="form_row alignRight">
+                <button type="submit" class="button success">运行</button>
+            </div>
+        </form>
+        <script src="../asset/vue.2.6.10.min.js"></script>
+        <script src="../script/common_script/common_function.js"></script>
+        <script>
+            var consoleForm = new Vue({
+                el : '#consoleForm',
+                data : {
+                    command : ''
+                },
+                methods : {
+                    run : function (){
+                        try {
+                            eval(this.command);
+                        }
+                        catch (e)
+                        {
+
+                        }
+
+                        this.command = '';
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
