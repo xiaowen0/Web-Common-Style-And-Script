@@ -749,8 +749,7 @@ function BBCodeToStructuralData(bbcode)
  */
 function setCurrentUrl(url)
 {
-    log('use history replaceState alter current url.');
-    window.history.replaceState({},'',url);
+    window.history.pushState({},'',url);
 }
 
 /**
@@ -1882,7 +1881,7 @@ function isVideo(name)
 
 /**
  * create a audio player
- * @return Object
+ * @return  Object
  * -- Object(AudioHTMLElement)  el
  * -- Function  init
  * -- Function  setController   set a new audio element
@@ -1913,8 +1912,8 @@ function createAudioPlayer()
             var me = this;
             var loadedmetadata  = options.loadedmetadata || null;
             var timeupdate      = options.timeupdate || null;
-            var ended      = options.ended || null;
-            var error      = options.error || null;
+            var ended           = options.ended || null;
+            var error           = options.error || null;
             var canplaythrough  = options.canplaythrough || null;
             if (loadedmetadata)
             {
@@ -5028,6 +5027,9 @@ function initVueList(options)
 
     var autoLoad    = options.autoLoad || false;
 
+    var mounted    = options.mounted || false;
+    var updated    = options.updated || false;
+
     var size        = options.size || 10;
     var pageParam   = options.pageParam || 'page';
     var sizeParam   = options.sizeParam || 'size';
@@ -5055,6 +5057,22 @@ function initVueList(options)
 
     var methods = {
 
+        /**
+         * get item object in list by id
+         * @param  String  id
+         * @return {null|Object}
+         */
+        getItemById : function (id) {
+            for (var i=0; i<this.list.length; i++)
+            {
+                if (this.list[i].id === id)
+                {
+                    return this.list[i];
+                }
+            }
+
+            return null;
+        },
         loadPage : function(page){
 
             if ( typeof(apiConfig.list) != 'object')
@@ -5217,7 +5235,9 @@ function initVueList(options)
     var vueController = new Vue({
         el : elementSelector,
         data : data,
-        methods : methods
+        methods : methods,
+        mounted : mounted,
+        updated : updated
     });
     vueController.init();
 
