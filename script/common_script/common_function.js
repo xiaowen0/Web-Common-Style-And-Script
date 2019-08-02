@@ -1013,6 +1013,24 @@ function removeArrayElement(array, element)
     return newArray;
 }
 
+/**
+ * get item in a list by id
+ * @param  Array  list
+ * @param  String  id
+ * @return {null|*}
+ */
+function getItemInListById(list, id) {
+    for (var i=0; i<list.length; i++)
+    {
+        if (list[i].id === id)
+        {
+            return list[i];
+        }
+    }
+
+    return null;
+}
+
 /* --- Time function group ------------------------------------------ */
 
 /**
@@ -2447,14 +2465,16 @@ function getScrollHeight()
  * init load more action
  * @param  Object  options
  * - Number  bottomDistance  distance of approach bottom, default 40.
+ * - Object|String  element  element node or CSS selector string
  * @param  Function  callback
  */
 function initLoadMore(options, callback)
 {
     options ? null : options = {};
     var bottomDistance = options.bottomDistance || 40;
+    var element = options.element || window;
 
-    $(window).on("scroll", function ()
+    $(element).on("scroll", function ()
     {
         var scrollTop = $(this).scrollTop();
         var scrollHeight = $(document).height();
@@ -5025,6 +5045,8 @@ function initVueList(options)
     var customData      = options.data || {};
     var customMethods   = options.methods || {};
 
+    var loadFirstPage   = (typeof(options.loadFirstPage) !== 'undefined') ?
+        options.loadFirstPage : true;
     var autoLoad    = options.autoLoad || false;
 
     var mounted    = options.mounted || false;
@@ -5040,6 +5062,7 @@ function initVueList(options)
     var onLoadError     = options.onLoadError || null;
 
     var data = {
+        initOptions : options,
         page : 1,
         size : size,
         count : 0,
@@ -5072,6 +5095,9 @@ function initVueList(options)
             }
 
             return null;
+        },
+        cleanList : function (){
+            this.list = [];
         },
         loadPage : function(page){
 
@@ -5209,7 +5235,10 @@ function initVueList(options)
         init : function()
         {
             var me = this;
-            me.loadPage(1);
+            if (loadFirstPage)
+            {
+                me.loadPage(1);
+            }
 
             if (autoLoad != false)
             {
