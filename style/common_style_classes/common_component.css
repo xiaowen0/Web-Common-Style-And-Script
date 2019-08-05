@@ -223,6 +223,13 @@
     flex-grow: 0;
 }
 
+.flex_1 {
+    flex : 1;
+}
+.flex_2 {
+    flex : 2;
+}
+
 .mask {
     background-color: #000;
     filter: alpha(opacity=50);
