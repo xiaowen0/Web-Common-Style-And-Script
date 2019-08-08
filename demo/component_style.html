@@ -364,10 +364,30 @@
                             <i class="icon settingIcon"></i>
                         </p>
                         <p class="col-xs-12 col-md-6 col-lg-3">
+                            .icon.bellIcon 铃铛图标
+                            <i class="icon bellIcon"></i>
+                        </p>
+                        <p class="col-xs-12 col-md-6 col-lg-3">
+                            .icon.gearIcon 齿轮图标
+                            <i class="icon gearIcon"></i>
+                            <i class="icon gearIcon small"></i>
+                        </p>
+                        <p class="col-xs-12 col-md-6 col-lg-3">
+                            .icon.gearIcon 时钟图标
+                            <i class="icon clockIcon"></i>
+                        </p>
+
+                        <p class="col-xs-12 col-md-6 col-lg-3">
+                            .icon.gearIcon 喜欢图标 .active 激活状态
+                            <i class="icon likeIcon"></i>
+                            <i class="icon likeIcon active"></i>
+                        </p>
+
+                        <p class="col-xs-12 col-md-6 col-lg-3">
                             .icon.rightArrowIcon 右箭头图标
                             <i class="icon rightArrowIcon"></i>
                         </p>
-						<p class="col-xs-12 col-md-6 col-lg-3">
+                        <p class="col-xs-12 col-md-6 col-lg-3">
                             .icon.insertPhotoIcon 插入照片的图标
                             <i class="icon insertPhotoIcon sm"></i>
                         </p>
@@ -487,7 +507,7 @@
                     <div class="searchBar">
                         <div class="inner">
                             <input type="search" class="inputbox" placeholder="按标题搜索" name="title"
-                                v-model="title" v-on:click="inputKeywords"/>
+                                   v-model="title" v-on:click="inputKeywords"/>
                             <span class="deleteIcon icon fa fa-remove" v-if="title.length >= 3"></span>
                             <span class="searchIcon icon fa fa-search"></span>
                         </div>
@@ -952,11 +972,10 @@
     </div><!-- end .page .inner -->
 </div><!-- end .page -->
 
-    <!--<script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>-->
-    <script src="../asset/jquery/jquery-3.4.1.min.js"></script>
+<script src="../asset/jquery/jquery-3.4.1.min.js"></script>
 
-    <script src="../script/common_script/common_function.js"></script>
-    <script src="../script/common_script/common_action.js"></script>
+<script src="../script/common_script/common_function.js"></script>
+<script src="../script/common_script/common_action.js"></script>
 
 </body>
 </html>
