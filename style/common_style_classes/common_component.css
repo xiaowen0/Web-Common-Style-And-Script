@@ -1091,6 +1091,32 @@ select.inline {
     top:0;
 }
 
+/* text label */
+
+.textLabel {
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 4px;
+    border-radius: 5px;
+    background: #eaeaea;
+    color: grey;
+    font-size: 12px;
+}
+
+.textLabel.small {
+    padding: 2px;
+}
+
+.textLabel.big {
+    padding: 6px;
+    font-size: 14px;
+}
+
+.textLabel.huge {
+    padding: 8px;
+    font-size: 16px;
+}
+
 /* pagination */
 
 .pagination {

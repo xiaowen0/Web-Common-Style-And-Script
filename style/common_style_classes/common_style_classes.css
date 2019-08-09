@@ -7,7 +7,7 @@
  * url: https://github.com/xiaowen0/Web-Common-Style-And-Script
  */
 
-/* reset child element */
+/* reset child element, body tag add resetChildElement class, then its children are reset default style. */
 
 .resetChildElement div,
 .resetChildElement p,
@@ -327,13 +327,26 @@
     background-color: #aaff99;
 }
 
+.yellowgreen_bg {
+    background-color: yellowgreen;
+}
+
 .info_bg {
     background-color: #d9edf7;
+}
+
+.deepskyblue_bg {
+    color: #fff;
+    background-color: deepskyblue;
 }
 
 .yellow_bg,
 .warning_bg {
     background-color: #ddff99;
+}
+
+.pink_bg {
+    background-color: pink;
 }
 
 .red_bg,
@@ -351,6 +364,13 @@
             radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 30px);
     background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
     background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+}
+
+.rainbow_bg {
+    background: -webkit-linear-gradient(left, #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(right, #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(right, #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to right, #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000); /* 标准的语法 */
 }
 
 .heartsBg {
@@ -567,6 +587,16 @@
 
 .darkgrey, .date {
     color: #666
+}
+
+.rainbowColor {
+    background: -webkit-linear-gradient(left, red, orangered, orange, gold, yellowgreen, green, deepskyblue, blue, purple, deeppink); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(right, red, orangered, orange, gold, yellowgreen, green, deepskyblue, blue, purple, deeppink); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(right, red, orangered, orange, gold, yellowgreen, green, deepskyblue, blue, purple, deeppink); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to right, red, orangered, orange, gold, yellowgreen, green, deepskyblue, blue, purple, deeppink); /* 标准的语法 */
+    background-clip: unset;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 /* blink */
