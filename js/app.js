@@ -351,7 +351,7 @@ var application = {
             },
             success: function (data) {
                 wx.config({
-                    debug: false,
+                    debug: getDebugStatus(),
                     appId: data.data.appId,
                     timestamp: data.data.timestamp,
                     nonceStr: data.data.nonceStr,
