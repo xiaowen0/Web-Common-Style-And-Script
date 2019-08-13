@@ -19,6 +19,7 @@ function setWechatTimelineShare(options)
 {
     if (typeof(wx) === 'undefined')
     {
+        addConsoleLog('Require wechat jssdk: wx not defined.');
         return false;
     }
 
@@ -48,6 +49,7 @@ function setWechatMessageShare(options)
 {
     if (typeof(wx) === 'undefined')
     {
+        addConsoleLog('Require wechat jssdk: wx not defined.');
         return false;
     }
 
@@ -56,13 +58,16 @@ function setWechatMessageShare(options)
         // wechat client 6.7.2+ & JSSDK 1.4.0+
         if (typeof(wx.updateAppMessageShareData) !== 'undefined')
         {
+            log('wx.updateAppMessageShareData:');
             wx.updateAppMessageShareData(options);
         }
         else
         {
+            log('wx.onMenuShareAppMessage:');
             wx.onMenuShareAppMessage(options);
         }
 
+        log(options);
     });
 
     return true;
@@ -77,6 +82,7 @@ function setQQShare(options)
 {
     if (typeof(wx) === 'undefined')
     {
+        addConsoleLog('Require wechat jssdk: wx not defined.');
         return false;
     }
 
@@ -85,13 +91,16 @@ function setQQShare(options)
         // wechat client 6.7.2+ & JSSDK 1.4.0+
         if (typeof(wx.updateAppMessageShareData) !== 'undefined')
         {
+            log('wx.updateAppMessageShareData():');
             wx.updateAppMessageShareData(options);
         }
         else
         {
+            log('wx.onMenuShareQQ():');
             wx.onMenuShareQQ(options);
         }
 
+        log(options);
     });
 
     return true;
@@ -106,6 +115,7 @@ function setQZoneShare(options)
 {
     if (typeof(wx) === 'undefined')
     {
+        addConsoleLog('Require wechat jssdk: wx not defined.');
         return false;
     }
 
@@ -114,13 +124,16 @@ function setQZoneShare(options)
         // wechat client 6.7.2+ & JSSDK 1.4.0+
         if (typeof(wx.updateTimelineShareData) !== 'undefined')
         {
+            log('wx.updateTimelineShareData():');
             wx.updateTimelineShareData(options);
         }
         else
         {
+            log('wx.onMenuShareQZone():');
             wx.onMenuShareQZone(options);
         }
 
+        log(options);
     });
 
     return true;
@@ -135,12 +148,15 @@ function setWeiboShare(options)
 {
     if (typeof(wx) === 'undefined')
     {
+        addConsoleLog('Require wechat jssdk: wx not defined.');
         return false;
     }
 
     wx.ready(function ()
     {
+        log('wx.onMenuShareWeibo():');
         wx.onMenuShareWeibo(options);
+        log(options);
     });
 
     return true;
