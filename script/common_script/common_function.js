@@ -49,6 +49,16 @@ function fixFloatingPointNumber(number, bit) {
     return a1.join('.');
 }
 
+/**
+ * random generate a integer number
+ * @param  Number  length
+ * @return Number
+ */
+function getRandomInteger(length)
+{
+    return (Math.floor(Math.random() * length));
+}
+
 /* --- debug function group ------------------------------------------ */
 
 /**
@@ -1856,6 +1866,54 @@ function setImageCenteredFill(image)
         image.style.width = '100%';
         image.style.marginTop = (container_height - image.offsetHeight) / 2 + 'px';
     }
+
+}
+
+/**
+ * set a element random color border
+ * @param  Object (HTMLElement)  element
+ * @param  Object  options
+ */
+function setRandomBorder(element, options)
+{
+    typeof (options) === 'object' ? null : options = {};
+    var width = options.width || 1;
+    var lightness = options.lightness || 255;
+    var saturation = options.saturation || 255;
+
+    var thirdPrimaryColor = ['r', 'g', 'b'];
+    var randomColor = {
+        r : 0,
+        g : 0,
+        b : 0
+    };
+    var randomIndex = getRandomInteger(3);
+    randomColor[thirdPrimaryColor[randomIndex]] = lightness;
+
+    switch (randomIndex) {
+        case 0 :
+            var twoColor = ['g', 'b'];
+            break;
+        case 1 :
+            var twoColor = ['r', 'b'];
+            break;
+        case 2 :
+            var twoColor = ['r', 'g'];
+            break;
+    }
+
+    var randomSecondIndex = getRandomInteger(2);
+    randomColor[twoColor[randomSecondIndex]] = getRandomInteger(saturation + 1);
+
+    $(element).css({
+        'border-style' : 'solid',
+        'border-width' : width + 'px',
+        'border-color' : replaceData('rgb(R,G,B)', {
+            R : randomColor.r,
+            G : randomColor.g,
+            B : randomColor.b
+        })
+    });
 
 }
 
