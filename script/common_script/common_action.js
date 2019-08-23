@@ -10,11 +10,17 @@ $(document).ready(function ()
         setBodyMinHeight();
     }
 
+    // check debug param
     var debugParam = getUrlParam('debug');
     if (debugParam)
     {
         enableDebug();
-        $('<div id="debugModeTag">调试模式</div>').appendTo(document.body);
+    }
+
+    // check debug status
+    if (getDebugStatus())
+    {
+        $('<div id="debugModeTag" class="f14r16">调试模式</div>').appendTo(document.body);
         $('.debugButtonLayer').removeClass('hide').show();
     }
 
