@@ -1041,6 +1041,25 @@ function getItemInListById(list, id) {
     return null;
 }
 
+/**
+ * get item in a list by column
+ * @param  Array  list
+ * @param  String  columnName
+ * @param  String  value
+ * @return {null|Object}
+ */
+function getItemInListByColumn(list, columnName, value) {
+    for (var i=0; i<list.length; i++)
+    {
+        if (list[i][columnName] === value)
+        {
+            return list[i];
+        }
+    }
+
+    return null;
+}
+
 /* --- Time function group ------------------------------------------ */
 
 /**
