@@ -920,3 +920,25 @@ select.noShadow {
     -o-transition: all .1s ease-in-out 0.2s;
     -moz-transition: all .1s ease-in-out 0.2s;
 }
+
+.transition1 {
+    transition: all 1s linear 0s;
+    -webkit-transition: all 1s linear 0s;
+    -o-transition: all 1s linear 0s;
+    -moz-transition: all 1s linear 0s;
+}
+
+.transition2 {
+    transition: all 2s linear 0s;
+    -webkit-transition: all 2s linear 0s;
+    -o-transition: all 2s linear 0s;
+    -moz-transition: all 2s linear 0s;
+}
+
+.transition5 {
+    transition: all 5s linear 0s;
+    -webkit-transition: all 5s linear 0s;
+    -o-transition: all 5s linear 0s;
+    -moz-transition: all 5s linear 0s;
+}
+

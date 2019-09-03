@@ -15,6 +15,14 @@ $(document).ready(function ()
     if (debugParam)
     {
         enableDebug();
+        if (typeof(VConsole) === 'undefined')
+        {
+            loadScript('https://cdn.bootcss.com/vConsole/3.3.4/vconsole.min.js', {
+                onload : function (){
+                    window.vConsole = new VConsole();
+                }
+            });
+        }
     }
 
     // check debug status
@@ -179,6 +187,70 @@ $(document).ready(function ()
     if ($('#UISettingForm').length)
     {
         initUISettingForm($('#UISettingForm')[0]);
+    }
+
+    // alice animation lib
+    if (typeof (alice) === 'object')
+    {
+        var alicejs = alice.init(); //Is built right into alice!
+    }
+
+    // element slow swing, it rotate round-trip in x (default:5) deg range.
+    var slowSwingElements = $('.slowSwing');
+    if (typeof (alice) === 'object' && slowSwingElements.length)
+    {
+        slowSwingElements.each(function(){
+
+            var rotate      = parseInt(this.dataset.rotate || '5');
+            var duration    = this.dataset.duration || '2000ms';
+            var timing      = this.dataset.timing || 'linear';
+            var delay       = this.dataset.delay || '0ms';
+            var iteration   = this.dataset.iteration || 'infinite';
+            var direction   = this.dataset.direction || 'alternate';
+            var playstate   = this.dataset.playstate || 'running';
+
+            alicejs.dance({
+                elems   : this,
+                rotate  : rotate,
+                duration: duration,
+                timing  : timing,
+                delay   : delay,
+                iteration   : iteration,
+                direction   : direction,
+                playstate   : playstate
+            });
+        });
+    }
+
+    // element slow twinkle, it set opacity from n to 1 range transitional.
+    var slowTwinkleElements = $('.slowTwinkle');
+    if (typeof (alice) === 'object' && slowTwinkleElements.length)
+    {
+        slowTwinkleElements.each(function(){
+
+            var element = this;
+
+            var opacity = element.dataset.opacity || '.75';
+            var speed   = parseInt(this.dataset.speed || '700');
+            var delay   = parseInt(this.dataset.delay || '200');
+
+            window.setInterval(function(){
+
+                var type    = element.dataset.type || '1';
+                if (type === "1")
+                {
+                    $(element).animate({
+                        'opacity' : opacity
+                    },  speed, 'swing').attr('data-type', '0');
+                }
+                else
+                {
+                    $(element).animate({
+                        'opacity' : '1'
+                    }, speed, 'swing').attr('data-type', '1');
+                }
+            }, speed + delay);
+        });
     }
 
     // type Array
