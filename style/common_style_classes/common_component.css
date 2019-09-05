@@ -292,7 +292,8 @@
 .imageArea img,
 .imageBox img {
     max-width: 100%;
-    height: auto;
+    /*height: auto;*/
+    object-fit: cover;
 }
 
 /* search bar */

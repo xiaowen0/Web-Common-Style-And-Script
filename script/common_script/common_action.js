@@ -15,6 +15,19 @@ $(document).ready(function ()
     if (debugParam)
     {
         enableDebug();
+    }
+
+    // check debug status
+    if (getDebugStatus())
+    {
+        $('<div id="debugModeTag" class="f14r16">调试模式</div>').appendTo(document.body);
+        $('.debugButtonLayer').removeClass('hide').show();
+    }
+
+    // VConsole
+    if (getUrlParam('vconsole'))
+    {
+        // VConsole
         if (typeof(VConsole) === 'undefined')
         {
             loadScript('https://cdn.bootcss.com/vConsole/3.3.4/vconsole.min.js', {
@@ -23,13 +36,10 @@ $(document).ready(function ()
                 }
             });
         }
-    }
-
-    // check debug status
-    if (getDebugStatus())
-    {
-        $('<div id="debugModeTag" class="f14r16">调试模式</div>').appendTo(document.body);
-        $('.debugButtonLayer').removeClass('hide').show();
+        else
+        {
+            window.vConsole = new VConsole();
+        }
     }
 
     // init auto increase textarea
