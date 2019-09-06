@@ -5134,8 +5134,10 @@ function initVueList(options)
     var sizeParam   = options.sizeParam || 'size';
 
     var filterColumns   = options.filterColumns || {};
+    var checkingColumns = options.checkingColumns || null;
 
     var afterLoadData   = options.afterLoadData || null;
+    var afterUpdateList = options.afterUpdateList || null;
     var onLoadError     = options.onLoadError || null;
 
     var data = {
@@ -5148,7 +5150,8 @@ function initVueList(options)
         filters : filterColumns,
         list : [],
         ajaxLock : false,
-        status : ''
+        status : '',
+        checkingColumns : checkingColumns
     };
     for (var key in customData)
     {
@@ -5175,6 +5178,23 @@ function initVueList(options)
         },
         cleanList : function (){
             this.list = [];
+        },
+        checkColumns : function(list, columns){
+            for (var i=0; i<list.length; i++)
+            {
+                for (var key in columns)
+                {
+                    var dataType = typeof(list[i][key]);
+                    if ( dataType != columns[key] )
+                    {
+                        log('data type not match "' + columns[key] + '" with key:' + key);
+                        if (getDebugStatus())
+                        {
+                            addConsoleLog(list[i]);
+                        }
+                    }
+                }
+            }
         },
         loadPage : function(page){
 
@@ -5220,9 +5240,19 @@ function initVueList(options)
                     }
                     else
                     {
+                        if (me.checkingColumns)
+                        {
+                            me.checkColumns(result.data.rows, checkingColumns);
+                        }
+
                         me.list         = me.list.concat(result.data.rows);
                         me.pageCount    = result.data.totalPage || 1;
                         me.count        = result.data.totalCount || me.list.length;
+
+                        if (afterUpdateList)
+                        {
+                            afterUpdateList();
+                        }
                     }
 
                     me.status = 'ready';
@@ -5327,10 +5357,25 @@ function initVueList(options)
             }
         },
         formatDate : function (timestamp) {
+            if (!timestamp)
+            {
+                return '';
+            }
             return moment(timestamp).format('YYYY-MM-DD');
         },
         formatDateTime : function (timestamp) {
+            if (!timestamp)
+            {
+                return '';
+            }
             return moment(timestamp).format('YYYY-MM-DD HH:mm:ss');
+        },
+        fromNowExpress : function(timestamp){
+            if (!timestamp)
+            {
+                return '';
+            }
+            return moment(timestamp).fromNow();
         }
     };
     for (var key in customMethods)
@@ -5612,10 +5657,25 @@ function initVueTableList(options)
             });
         },
         formatDate : function (timestamp) {
+            if (!timestamp)
+            {
+                return '';
+            }
             return moment(timestamp).format('YYYY-MM-DD');
         },
         formatDateTime : function (timestamp) {
+            if (!timestamp)
+            {
+                return '';
+            }
             return moment(timestamp).format('YYYY-MM-DD HH:mm:ss');
+        },
+        fromNowExpress : function(timestamp){
+            if (!timestamp)
+            {
+                return '';
+            }
+            return moment(timestamp).fromNow();
         }
     };
     for (var key in customMethods)
@@ -5822,12 +5882,24 @@ function initVueItemDetail(options)
             });
         },
         formatDate : function (timestamp) {
+            if (!timestamp)
+            {
+                return '';
+            }
             return moment(timestamp).format('YYYY-MM-DD');
         },
         formatDateTime : function (timestamp) {
+            if (!timestamp)
+            {
+                return '';
+            }
             return moment(timestamp).format('YYYY-MM-DD HH:mm:ss');
         },
         fromNowExpress : function(timestamp){
+            if (!timestamp)
+            {
+                return '';
+            }
             return moment(timestamp).fromNow();
         }
     };
@@ -5851,6 +5923,8 @@ function initVueItemDetail(options)
             }
 
             this.loadData(id);
+
+            if (onMounted) { onMounted(this); }
         }
     });
     return vueController;
@@ -6019,10 +6093,25 @@ function initVueForm(options)
             });
         },
         formatDate : function (timestamp) {
+            if (!timestamp)
+            {
+                return '';
+            }
             return moment(timestamp).format('YYYY-MM-DD');
         },
         formatDateTime : function (timestamp) {
+            if (!timestamp)
+            {
+                return '';
+            }
             return moment(timestamp).format('YYYY-MM-DD HH:mm:ss');
+        },
+        fromNowExpress : function(timestamp){
+            if (!timestamp)
+            {
+                return '';
+            }
+            return moment(timestamp).fromNow();
         }
     };
     for (var key in customMethods)
