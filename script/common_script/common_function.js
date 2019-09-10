@@ -5138,6 +5138,7 @@ function initVueList(options)
 
     var afterLoadData   = options.afterLoadData || null;
     var afterUpdateList = options.afterUpdateList || null;
+    var afterRemove     = options.afterRemove || null;
     var onLoadError     = options.onLoadError || null;
 
     var data = {
@@ -5216,7 +5217,7 @@ function initVueList(options)
             }
             var me = this;
 
-            var params = {};
+            var params = apiConfig.list.params || {};
             params[pageParam] = this.page;
             params[sizeParam] = this.size;
             for (var key in this.filters)
@@ -5335,7 +5336,13 @@ function initVueList(options)
                     id : id
                 },
                 success : function (result){
+                    var item = me.getItemById(id);
+                    me.list = removeArrayElement(me.list, item);
 
+                    if (afterRemove)
+                    {
+                        afterRemove(result);
+                    }
                 }
             });
         },
@@ -5455,7 +5462,7 @@ function initVueTableList(options)
             }
             var me = this;
 
-            var params = {};
+            var params = apiConfig.list.params || {};
             params[pageParam] = this.page;
             params[sizeParam] = this.size;
             for (var key in this.filters)
