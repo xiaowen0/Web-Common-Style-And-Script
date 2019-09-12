@@ -5951,14 +5951,44 @@ function initVueForm(options)
     var customMethods   = options.methods || {};
 
     var parentPage      = options.parentPage || {};
+    var loadCategoryList    = options.loadCategoryList || false;
+
     var editingColumns  = options.editingColumns || {};
+    var columnsMapping  = options.columnsMapping || {};
     var onSubmitSuccess = options.onSubmitSuccess || null;
     var onDataLoaded    = options.onDataLoaded || null;
     var onMounted       = options.onMounted || null;
 
+    /**
+     * trigger before upload file
+     * @type {Function|null}
+     * @param  Object (FormData)    formData
+     * @param  Object (HTMLElement) control
+     * @param  Object (Vue controller)
+     * @return Boolean  false to prevent upload
+     */
+    var onBeforeUpload  = options.onBeforeUpload || null;
+
+    /**
+     * trigger after upload file
+     * @type    {Function|null}
+     * @param   *       result      response data
+     * @param   String  textStatus  response status text
+     * @param   Object  jqXHR       jQuery XHR object
+     * @param   Object  vueControl  Vue controller object
+     */
+    var onAfterUpload   = options.onAfterUpload || null;
+
+    /**
+     * trigger when upload file fail
+     * @type {Function|null}
+     */
+    var onUploadError   = options.onUploadError || null;
+
     var data = {
         title : '编辑',
         editors : [],
+        status : '',
         itemData : cloneObject(editingColumns)
     };
     for (var key in customData)
@@ -5976,6 +6006,24 @@ function initVueForm(options)
     var methods = {
         init : function (){
 
+            if (loadCategoryList)
+            {
+                this.loadCategoryList();
+            }
+        },
+        loadCategoryList : function (){
+            var me = this;
+            $.ajax({
+                url : apiConfig.categoryList.url,
+                type : apiConfig.categoryList.method || 'get',
+                data : apiConfig.categoryList.params || {},
+                success : function (result){
+                    me.categoryList = result.data;
+                },
+                error : function (){
+
+                }
+            });
         },
         initEditors : function (callback){
             initCKEditors('.editor', callback);
@@ -6021,6 +6069,62 @@ function initVueForm(options)
                 this.editors[i].setData(text);
             }
         },
+        onChangeForUpload : function (event){
+
+            var me = this;
+            var control = event.currentTarget;
+
+            if (this.status === 'loading')
+            {
+                return;
+            }
+
+            // build form data
+            var formData = new FormData();
+
+            var params = apiConfig.upload.params || {};
+            for (var key in params)
+            {
+                formData.append(key, params[key]);
+            }
+
+            for (var i=0; i<control.files.length; i++)
+            {
+                formData.append(control.name || 'file', control.files[i]);
+            }
+
+            if (onBeforeUpload)
+            {
+                var check = onBeforeUpload(formData, control, me);
+                if (!check)
+                {
+                    return;
+                }
+            }
+
+            this.status = 'loading';
+
+            $.ajax({
+                url : apiConfig.upload.url,
+                type : 'post',
+                dataType : 'json',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success : function (result, textStatus, jqXHR) {
+
+                    if (onAfterUpload)
+                    {
+                        onAfterUpload(result, textStatus, jqXHR, me);
+                    }
+
+                },
+                error : onUploadError,
+                complete : function (){
+                    me.status = 'ready';
+                }
+            });
+        },
         save : function (){
 
             var me = this;
@@ -6050,7 +6154,14 @@ function initVueForm(options)
             var apiUrl      = this.itemData.id ? apiConfig.update.url : apiConfig.add.url;
             var apiMethod   = this.itemData.id ? apiConfig.update.method : apiConfig.add.method;
 
-            var data = me.itemData;
+            var data = cloneObject(me.itemData);
+            for (var key in columnsMapping)
+            {
+                apiKey = columnsMapping[key];
+                data[apiKey] = data[key];
+                delete data[key];
+            }
+
             if (beforeSubmit)
             {
                 data = beforeSubmit(data);
@@ -6130,7 +6241,11 @@ function initVueForm(options)
         el : elementSelector,
         data : data,
         methods : methods,
-        mounted : function (){
+        created : function (){
+
+            log('vue created.');
+            this.status = 'ready';
+            this.init();
 
             var me = this;
 
