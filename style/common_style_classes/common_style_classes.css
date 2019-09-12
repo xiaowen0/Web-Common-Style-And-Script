@@ -269,7 +269,11 @@
 .mb20 {
     margin-bottom: 20px;
 }
-.ml10 {
+.leftMarginShort {
+    margin-left: 4px;
+}
+.ml10,
+.leftMargin {
     margin-left: 10px;
 }
 .mr10 {
