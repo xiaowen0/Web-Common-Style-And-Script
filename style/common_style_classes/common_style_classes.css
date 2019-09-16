@@ -509,7 +509,25 @@
     font-size: 125%;
 }
 
-
+/* font size relative to 10px */
+.f10r10 {
+    font-size: 100%;
+}
+.f12r10 {
+    font-size: 120%;
+}
+.f14r10 {
+    font-size: 140%;
+}
+.f16r10 {
+    font-size: 160%;
+}
+.f18r10 {
+    font-size: 180%;
+}
+.f20r10 {
+    font-size: 200%;
+}
 
 .bold {
     font-weight: 700
