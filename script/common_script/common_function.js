@@ -5137,7 +5137,15 @@ function initVueList(options)
     var checkingColumns = options.checkingColumns || null;
 
     var afterLoadData   = options.afterLoadData || null;
-    var afterUpdateList = options.afterUpdateList || null;
+    /**
+     * trigger before update list, prevent update if return false
+     * @type {Function|null}
+     * @param   Array   list
+     * @param   Object  data    response data from server side api
+     * @return  null|Boolean
+     */
+    var beforeUpdateList    = options.beforeUpdateList || null;
+    var afterUpdateList     = options.afterUpdateList || null;
     var afterRemove     = options.afterRemove || null;
     var onLoadError     = options.onLoadError || null;
 
@@ -5244,6 +5252,15 @@ function initVueList(options)
                         if (me.checkingColumns)
                         {
                             me.checkColumns(result.data.rows, checkingColumns);
+                        }
+
+                        if (beforeUpdateList)
+                        {
+                            var checking = beforeUpdateList(me.list, result.data);
+                            if (checking === false)
+                            {
+                                return;
+                            }
                         }
 
                         me.list         = me.list.concat(result.data.rows);
