@@ -88,6 +88,19 @@ var appConfig = {
 
     }),
 
+    /**
+     * ajax error handle, only log to console.
+     */
+    ajaxErrorLogHandle : (function(XMLHttpRequest, errorText)
+    {
+        var status      = XMLHttpRequest.status;
+        var statusText  = XMLHttpRequest.statusText;
+        var responseText = XMLHttpRequest.responseText;
+
+        var errorMessage = 'Status code: ' + status + ' ' + statusText;
+        addConsoleLog(errorMessage, '出错了');
+    }),
+
     fancyboxOptions : {
         iframe : {
             css : {
