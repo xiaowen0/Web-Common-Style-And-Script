@@ -3852,6 +3852,41 @@ function setTextareaAutoIncreaseHeight(textarea)
 }
 
 /**
+ * upload file
+ * @param   Object  options
+ * - data   Object  extra form data
+ * - files  Array   file object list
+ */
+function uploadFiles(options)
+{
+    typeof (options) === 'object' ? null : options = {};
+
+    options.type    = options.method || options.type || 'POST';
+    options.dataType    = options.dataType || 'json';
+    options.contentType = options.contentType || false;
+    options.processData = options.processData || false;
+    var name        = options.name || 'file';
+    var data        = options.data || {};
+    var files       = options.files || [];
+
+    var me = this;
+
+    // build form data
+    var formData = new FormData();
+    for (var i=0; i<files.length; i++)
+    {
+        formData.append(name || 'file', files[i]);
+    }
+    for (var key in data)
+    {
+        formData.append(key, data[key]);
+    }
+
+    options.data = formData;
+    $.ajax(options);
+}
+
+/**
  * init importing file button
  * @param element   String|HTMLElement  css selector for element or element quoto
  * @param options   Object
