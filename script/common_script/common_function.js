@@ -5857,6 +5857,7 @@ function initVueItemDetail(options)
     var onLoadingError  = options.onLoadingError || null;
     var onMounted       = options.onMounted || null;
     var onCreated       = options.onCreated || null;
+    var onUpdated       = options.onUpdated || null;
 
     var dataAttr = {};
     for (var i=0; i<dataColumn.length; i++)
@@ -5988,7 +5989,11 @@ function initVueItemDetail(options)
         },
         created : function (){
             if (onCreated) { onCreated(this); }
+        },
+        updated : function (){
+            if (onUpdated) { onUpdated(this); }
         }
+
     });
     return vueController;
 }
