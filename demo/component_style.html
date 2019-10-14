@@ -636,19 +636,19 @@
 
                     <div>
                         <p>结构：</p>
-                        <p>div.articleContent</p>
-                        <p>--article.article itemscope="" itemtype="http://schema.org/Blog"</p>
-                        <p>----h1.article_title itemprop="name"</p>
-                        <p>----div.article_info</p>
+                        <p>*.articleContent</p>
+                        <p>-*.article.conciseDesign itemscope="" itemtype="http://schema.org/Blog"</p>
+                        <p>----*.article_title itemprop="name"</p>
+                        <p>----*.article_info</p>
                         <p>------span.publishedTime itemprop="dateCreated"</p><span>|</span>
                         <p>------span.clickNumber</p>
-                        <p>----div.article_text itemprop="text"</p>
+                        <p>----*.article_text itemprop="text"</p>
                     </div>
 
                     <div>示例：</div>
 
                     <div class="articleContent">
-                        <article class="article" itemscope="" itemtype="http://schema.org/Blog">
+                        <article class="article conciseDesign" itemscope="" itemtype="http://schema.org/Blog">
 
                             <h1 class="article_title" itemprop="name">
                                 孩子初学写字，写歪写丑不要纠正，原因你最好知道
