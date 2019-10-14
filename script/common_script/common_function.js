@@ -6050,7 +6050,8 @@ function initVueForm(options)
         title : '编辑',
         editors : [],
         status : '',
-        itemData : cloneObject(editingColumns)
+        itemData : cloneObject(editingColumns),
+        categoryList : []
     };
     for (var key in customData)
     {
