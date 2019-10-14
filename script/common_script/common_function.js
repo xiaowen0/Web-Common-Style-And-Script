@@ -3868,6 +3868,7 @@ function uploadFiles(options)
     var name        = options.name || 'file';
     var data        = options.data || {};
     var files       = options.files || [];
+    var onProgress  = options.onProgress || null;
 
     var me = this;
 
@@ -3883,6 +3884,13 @@ function uploadFiles(options)
     }
 
     options.data = formData;
+    options.xhr = (function (){
+        var xhr = $.ajaxSettings.xhr();
+        if (xhr.upload && onProgress) {
+            xhr.upload.addEventListener('progress', onProgress, false);
+        }
+        return xhr;
+    });
     $.ajax(options);
 }
 
