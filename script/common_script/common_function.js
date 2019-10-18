@@ -210,6 +210,19 @@ function addDebugInfo(text, type)
 }
 
 /**
+ * update object's properties
+ * @param   Object  object
+ * @param   Object  data    new properties
+ */
+function updateObject(object, data)
+{
+    for (var key in data)
+    {
+        object[key] = data[key];
+    }
+}
+
+/**
  * print object info to page.
  * @param object  Object
  */
@@ -284,6 +297,80 @@ function mergeObject(obj1, obj2)
     }
 
     return newObject;
+}
+
+/**
+ * get object property by key path, it can visit deep property.
+ * @example getObjectPropertyByKeyPath(product, 'category.name')
+ * @param   Object          object
+ * @param   String|Array    path
+ */
+function getObjectPropertyByKeyPath(object, path)
+{
+    if (path === '')
+    {
+        addConsoleLog('path can not be a empty string.');
+        return null;
+    }
+    var pathQueue = typeof(path) === 'string' ? path.split('.') : path;
+    if (typeof(object[pathQueue[0]]) === 'undefined')
+    {
+        return null;
+    }
+
+    var property = object[pathQueue[0]];
+    pathQueue.shift();
+
+    if (pathQueue.length)
+    {
+        return getObjectPropertyByKeyPath(property, pathQueue);
+    }
+
+    return property;
+}
+
+/**
+ * set object property by key path, it can set deep property.
+ * @example setObjectPropertyByKeyPath(product, 'category.name', 'cat')
+ * @param   Object  object
+ * @param   String  path
+ * @param   *       value
+ */
+function setObjectPropertyByKeyPath(object, path, value)
+{
+    if (path === '')
+    {
+        addConsoleLog('path can not be a empty string.');
+        return null;
+    }
+
+    var pathQueue = path.split('.');
+
+    var t = null;
+    var tNode = object;
+
+    // loop into next level
+    for (var i=0; i<pathQueue.length; i++)
+    {
+        var tKey = pathQueue[i];
+
+        // not leaf node, it must a object
+        if (i+1 < pathQueue.length)
+        {
+            // not a object, then create one.
+            if ( typeof (tNode[tKey]) === 'undefined' )
+            {
+                tNode[tKey] = {};
+            }
+
+            // point to next level
+            tNode = tNode[tKey];
+        }
+        else    // leaf node, set value
+        {
+            tNode[tKey] = value;
+        }
+    }
 }
 
 /**
@@ -1621,6 +1708,46 @@ function loadContent(options)
     }
 
     return true;
+}
+
+/**
+ * load some data from api
+ * example: api return value: {data: {name:'name', 'score':100}}, it can set data to object's property: name and score .
+ * @param   Object  options         api options
+ * @param   Object  object          api options
+ * @param   Array   targetKeyList   key path for property by object, like: ['data.name', data.score]
+ * @param   Array   sourceKeyList   api result key path list, like: ['data.name', 'data.score']
+ * @param   Function    callback
+ */
+function loadDataFromApiToObject(options, object, targetKeyList, sourceKeyList, callback)
+{
+    if (typeof (options.type) === 'undefined')
+    {
+        options.type = options.method || 'get';
+    }
+
+    typeof (targetKeyList) === 'undefined' ? targetKeyList = [] : null;
+
+    options.success = (function(result){
+
+        if (targetKeyList.length === 0)
+        {
+            updateObject(object, result);
+        }
+        else
+        {
+            for (var i=0; i<targetKeyList.length; i++)
+            {
+                var tValue = getObjectPropertyByKeyPath(result, sourceKeyList[i]);
+                setObjectPropertyByKeyPath(object, targetKeyList[i], tValue);
+            }
+        }
+
+        callback ? callback() : null;
+
+    });
+
+    $.ajax(options);
 }
 
 /**
