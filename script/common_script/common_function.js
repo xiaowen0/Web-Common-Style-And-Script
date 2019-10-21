@@ -1475,6 +1475,23 @@ function createElement(name, options, content)
 }
 
 /**
+ * get target data-* value in a event handler
+ * @param   Object  event
+ * @param   String  name
+ * @return  String
+ */
+function getTargetDataByEvent(event, name)
+{
+    var target = event.currentTarget;
+    if (typeof(target.dataset[name]) != 'undefined')
+    {
+        return target.dataset[name];
+    }
+
+    return '';
+}
+
+/**
  * print tag  输出一个 HTML 标记
  * @param name     String  element name
  * @param options  Object  element attributes
@@ -5519,6 +5536,7 @@ function initVueList(options)
 
             $.ajax({
                 url : apiConfig.delete.url,
+                type : apiConfig.delete.method || 'get',
                 data : {
                     id : id
                 },
@@ -5781,6 +5799,7 @@ function initVueTableList(options)
             {
                 $.ajax({
                     url : apiConfig.delete.url,
+                    type : apiConfig.delete.method || 'get',
                     data : {
                         id : ids[i]
                     },
@@ -5807,6 +5826,7 @@ function initVueTableList(options)
 
             $.ajax({
                 url : apiConfig.delete.url,
+                type : apiConfig.delete.method || 'get',
                 data : {
                     id : id
                 },

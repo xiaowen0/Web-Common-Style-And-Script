@@ -51,8 +51,12 @@
     display: inline-block;
 }
 
-.hidden, .hide {
+.hidden, .hide, .testingData {
     display: none;
+}
+
+.testMode .testingData {
+    display: block;
 }
 
 /* container layout */
@@ -300,8 +304,21 @@
     margin-right: 20px;
 }
 
-.padding10 {
+.padding10,
+.pd10 {
     padding: 10px;
+}
+
+.horizontalPadding10,
+.hpd10 {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.verticalPadding10,
+.vpd10 {
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .padding20 {
@@ -807,6 +824,7 @@
     }
 }
 
+.rotate,
 .rotate2d {
 
     /* for old version of google chrome, safari, opera */
@@ -823,6 +841,26 @@
 
     animation-name: rotate2d;
     animation-duration: 20s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.rotateFast {
+
+    /* for old version of google chrome, safari, opera */
+    -webkit-animation-name: rotate2d;
+    -webkit-animation-duration: 3s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+
+    /* for old version of firefox */
+    -moz-animation-name: rotate2d;
+    -moz-animation-duration: 3s;
+    -moz-animation-timing-function: linear;
+    -moz-animation-iteration-count: infinite;
+
+    animation-name: rotate2d;
+    animation-duration: 3s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
 }

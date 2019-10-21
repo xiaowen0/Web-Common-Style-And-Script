@@ -42,6 +42,13 @@ $(document).ready(function ()
         }
     }
 
+    // test mode
+    var testParam = getUrlParam('test');
+    if (testParam)
+    {
+        $(document.body).addClass('testMode');
+    }
+
     // init auto increase textarea
     $('textarea.autoIncreaseHeight').each(function()
     {
