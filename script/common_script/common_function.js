@@ -1475,6 +1475,34 @@ function createElement(name, options, content)
 }
 
 /**
+ * generate a unique id for a element, the result is like "element_n" (n is a natural number) format.
+ * @param   String  name        element type name, default: "element"
+ * @param   String  delimiter   default: "_"
+ * @return  String
+ */
+function generateIdForElement(name, delimiter)
+{
+    // param default value
+    name        ? null : name = 'element';
+    delimiter   ? null : delimiter = '_';
+
+    var exist   = true;
+    var number  = 1;
+    var maxNumber   = 999;
+    var id = '';
+
+    while (exist && number <= maxNumber)
+    {
+        id = name + delimiter + number;
+        exist = getElement(id) != null;
+
+        number++;
+    }
+
+    return id;
+}
+
+/**
  * get target data-* value in a event handler
  * @param   Object  event
  * @param   String  name

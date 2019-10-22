@@ -306,7 +306,7 @@ $(document).ready(function ()
             );
         })();
 
-        // font relative size
+        // dynamic base font size for different screen size
         (function()
         {
             var baseWidth       = parseInt($('body').data('base-width'));
@@ -326,6 +326,18 @@ $(document).ready(function ()
             var fontSize = windowWidth / baseWidth * baseFontSize;
             $('html').css('font-size', fontSize + 'px');
         })();
+
+        // convert standard font size to percentage for some elements
+        $('[data-standard-font-size]').each(function() {
+            // @param   Number
+            var fontSize = parseInt($(this).attr('data-standard-font-size'));
+            if (!fontSize) { return; }
+
+            // default font size or base font size
+            var baseFontSize = parseInt($(document.body).css('font-size'));
+
+            $(this).css('font-size', fontSize / baseFontSize * 100 + '%');
+        });
 
         // response class element
         // html tag attr: data-size-ratio  Float  ratio (height:width)

@@ -524,11 +524,20 @@
 .f10r16 {
     font-size: 62.5%;
 }
+.f11r16 {
+    font-size: 68.75%;
+}
 .f12r16 {
     font-size: 75%;
 }
+.f13r16 {
+    font-size: 81.25%;
+}
 .f14r16 {
     font-size: 87.5%;
+}
+.f15r16 {
+    font-size: 93.75%;
 }
 .f16r16 {
     font-size: 100%;
@@ -539,8 +548,6 @@
 .f20r16 {
     font-size: 125%;
 }
-
-
 
 .bold {
     font-weight: 700
