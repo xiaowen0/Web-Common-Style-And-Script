@@ -444,6 +444,56 @@
                     </div>
                 </div><!-- end .panel-body -->
             </div><!-- end .panel -->
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h2>边框布局：四边固定高度或宽度，中心区域弹性尺寸。</h2>
+                    <p>结构：</p>
+                    <p>.borderLayout  应用边框布局</p>
+                    <p>-- .northRegion  北方区域</p>
+                    <p>-- .middleRegion (required)  中间层区域</p>
+                    <p>----- .westRegion  西方区域</p>
+                    <p>----- .centerRegion (required)  中心区域，正文区域</p>
+                    <p>----- .eastRegion  东方区域</p>
+                    <p>-- .southRegion  南方区域</p>
+                    <p>.middleRegion > .centerRegion 是必须有的,其他是可选。</p>
+                    <p>示例：</p>
+                    <div class="borderLayout grey_bg" v-if="item.isAd">
+                        <div class="northRegion" style="background-color: #D5D5D5;">
+                            <div class="inner padding10">
+                                <p class="alignCenter">
+                                    <strong>northRegion</strong>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="middleRegion">
+                            <div class="westRegion w120" style="background-color: #B0B0B0;">
+                                <div class="inner padding10">
+                                    <p>
+                                        <strong>westRegion</strong>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="centerRegion">
+                                <div class="inner padding10">
+                                    <p>centerRegion</p>
+                                </div>
+                            </div>
+                            <div class="eastRegion w120" style="background-color: #B0B0B0;">
+                                <div class="inner padding10">
+                                    <p>eastRegion</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="southRegion" style="background-color: #E7E7E7;">
+                            <div class="inner padding10">
+                                <p>southRegion</p>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- end .panel-body -->
+            </div><!-- end .panel -->
+
         </div><!-- end .floor -->
 
         <div class="floor">

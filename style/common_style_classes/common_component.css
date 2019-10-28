@@ -277,6 +277,14 @@
     opacity: 0.5;
 }
 
+/* horizontal layout
+ * structure:
+ * .horizontalLayout
+ * -- .leftColumn
+ * -- .centerColumn
+ * -- .rightColumn
+ */
+
 .horizontalLayout {
     display: flex;
 }
@@ -287,6 +295,36 @@
     flex-shrink: 0;
     flex-grow: 0;
     place-self: center;
+}
+
+/* border layout
+ * structure:
+ * .borderLayout
+ * -- .northRegion
+ * -- .middleRegion
+ * ----- .westRegion
+ * ----- .centerRegion
+ * ----- .eastRegion
+ * -- .southRegion
+ */
+
+.borderLayout {
+    clear: both;
+}
+.borderLayout .northRegion,
+.borderLayout .southRegion {
+    clear: both;
+    overflow: hidden;
+}
+.borderLayout .middleRegion {
+    display: flex;
+}
+.borderLayout .westRegion,
+.borderLayout .eastRegion {
+    /*float: left;*/
+}
+.borderLayout .centerRegion {
+    flex : 1;
 }
 
 .imageArea img,
@@ -1377,14 +1415,14 @@ select.inline {
 /* article */
 /* Article (article content default style) ----------------------*/
 
-.article.conciseDesign {
-    background-color: white;
+.article {
+    background-color: #fff;
     padding: 30px 10px;
     margin-bottom: 20px;
 }
 
 @media screen and (min-width: 768px) {
-    .article.conciseDesign {
+    .article {
         margin-bottom: 20px;
         padding-left: 15px;
         padding-right: 15px;
@@ -1392,95 +1430,100 @@ select.inline {
 }
 
 @media (min-width: 1600px)    /* Big Screen */ {
-    .article.conciseDesign {
+    .article {
         padding-left: 20px;
         padding-right: 20px;
     }
 }
 
 /* tag in article element */
-.article.conciseDesign h1,
-.article.conciseDesign h2,
-.article.conciseDesign h3,
-.article.conciseDesign h4,
-.article.conciseDesign h5,
-.article.conciseDesign h6 {
-    margin: 0;
-    padding: 0;
-    font-size: inherit;
+.article h1 {
+    margin-bottom: 30px;
 }
-.article.conciseDesign h2 {
-    font-size: 112.5%;  /* 18px/16px */
-    font-weight: bold;
-}
-.article.conciseDesign p,
-.article.conciseDesign ul,
-.article.conciseDesign ol {
-    margin-bottom: 10px;
-    line-height: 1.733333em;   /* 26px/15px */
-    font-size: 93.75%;      /* 15px/16px */
-}
-.article.conciseDesign table,
-.article.conciseDesign ul,
-.article.conciseDesign ol {
-    padding-left: 20px;
-}
-.article.conciseDesign audio,
-.article.conciseDesign video {
-    max-width: 100%;
-    background-color: #333;
-}
-.article.conciseDesign .articleNav {
-    overflow: visible;
-}
-.article.conciseDesign .article_title,
-.article.conciseDesign .articleTitle,
-.article.conciseDesign .title {
-    padding-bottom: 10px;
-    /*margin-bottom: 20px;*/
-    margin-bottom: 1.875em; /* 30px/16px */
-    font-size: 175%;        /* 28px/16px */
-    line-height: 1.785714em;   /* 50px/28px */
-    color: #2A5E8E;
-}
-
-.article.conciseDesign .subTitleBox {
+.article h2,
+.article h3,
+.article h4,
+.article table {
     margin-bottom: 20px;
 }
 
-.article.conciseDesign .article_info {
+.article h5,
+.article h6,
+.article p,
+.article ul,
+.article ol {
+    margin-bottom: 10px;
+}
+
+.article ul,
+.article ol {
+    padding-left: 20px;
+}
+
+.article audio,
+.article video {
+    max-width: 100%;
+}
+
+.article video {
+    background-color: #333;
+}
+
+.article .articleNav {
+    overflow: visible;
+}
+
+.article_title,
+.articleTitle,
+.article .title{
+    font-size: 28px;
+    padding-bottom: 10px;
+    line-height: normal;
+}
+
+.article_info {
     margin-bottom: 20px;
     color: #9a9a9a;
 }
-.article.conciseDesign .article_text,
-.article.conciseDesign .articleContent{
+
+.article_text,
+.articleContent{
     color: #666;
     word-wrap: break-word;
     word-break: break-all;
     margin-bottom: 20px;
     padding-bottom: 20px;
-    line-height: 1.875em;  /* 30px/16px */
+    line-height: 30px;
 }
 
-.article.conciseDesign img {
+.article img {
     max-width: 100%;
     height: auto;
 }
 
-.article.conciseDesign .article_visitor {
+.article_image {
+    overflow: hidden;
+    padding-bottom: 20px;
+}
+
+.article_image img {
+    max-width: 100%;
+}
+
+.article_visitor {
     color: #9a9a9a;
 }
 
-.article.conciseDesign .article_visitor dt {
+.article_visitor dt {
     color: #666;
     margin-bottom: 7px;
 }
 
-.article.conciseDesign .article_visitor dd {
+.article_visitor dd {
     margin-bottom: 5px;
 }
 
-.article.conciseDesign .articleNav ul {
+.article .articleNav ul {
     border-radius: 6px;
     background: #F4F8FB;
     list-style: none none;
@@ -1488,27 +1531,56 @@ select.inline {
     padding: 12px 0;
 }
 
-.article.conciseDesign .articleNav li a {
+.article .articleNav li a {
     display: block;
     padding: 6px 25px;
     font-weight: normal;
 }
 
-.article.conciseDesign .articleNav li a:hover {
+.article .articleNav li a:hover {
     background: #EAF1F7;
     text-decoration: none;
 }
-.article.conciseDesign .timeBox {
+
+.article .titleBox {
+    font-size: 32px;
+}
+
+.article .subTitleBox {
+    margin-bottom: 20px;
+}
+
+.article .title {
+    line-height: 50px;
+    font-size: 35px;
+    color: #2A5E8E;
+}
+
+.article h2 {
+    color: #000;
+    font-size: 22px;
+    line-height: 50px;
+    margin-bottom: 20px;
+}
+
+.article p,
+.article ol,
+.article ul {
+    line-height: 26px;
+    font-size: 15px;
+}
+
+.article .timeBox {
     text-align: center;
     color: #999;
 }
 
-.article.conciseDesign .hitsBox {
+.article .hitsBox {
     text-align: center;
     color: #999;
 }
 
-.article.conciseDesign .textBox {
+.article .textBox {
     padding: 2ex 0;
     line-height: 170%;
 }
