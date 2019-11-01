@@ -1221,7 +1221,7 @@ function getAMPM(time, format)
 
 /**
  * format time lenth
- * @example  90 -> 1:30
+ * @example  90 -> 01:30,  9000 -> 02:30:00,  1500000 -> 416:40:00
  * @Param  Float  seconds
  * @Param  Object  options
  * -- Boolean  integer
@@ -1256,6 +1256,43 @@ function formatTimeLength(seconds, options)
     }
 
     return text;
+}
+
+/**
+ * parse time structure from a timestamp
+ * @param   Number  seconds     millsecond timestamp
+ * @return  Object
+ */
+function parseTimeStructure(millsecond)
+{
+    var time = millsecond;
+    var result = {};
+
+    var t = 0;  // each data from millsecond, second, minute, hour
+
+    t = time % 1000;
+    result.SS   = t < 10 ? '0' + t : t + '';
+    result.S    = t + '';
+    time -= t;
+    time = Math.floor(time / 1000);
+
+    t = time % 60;
+    result.ss   = t < 10 ? '0' + t : t + '';
+    result.s    = t + '';
+    time -= t;
+    time = Math.floor(time / 60);
+
+    t = time % 60;
+    result.mm   = t < 10 ? '0' + t : t + '';
+    result.m    = t + '';
+    time -= t;
+    time = Math.floor(time / 60);
+
+    t = time;
+    result.HH   = t < 10 ? '0' + t : t + '';
+    result.H    = t + '';
+
+    return result;
 }
 
 /* timer function group -------------------------------------------- */
@@ -1327,12 +1364,66 @@ function countBackwards(element, options)
                 clearInterval(timer);
                 callback ? callback(element) : null;
             }
-
         }
         catch (e) {
             log(e);
         }
     }, 1000);
+}
+
+/**
+ * set time drop as a element's content
+ * @param Object(HTMLElement)|String    element node or CSS selector string
+ * @param Number|String|Object(Date)    endTime     Unix Millisecond Timestamp, or time expression, or Date object.
+ * @param Object                        options
+ * -- format    String      display format like: 'HH:mm:ss'
+ * -- callback  Function
+ * @requires moment.js
+ */
+function timeDrop(element, endTime, options)
+{
+    typeof (options) === 'object' ? null : options = {};
+    if (typeof(element) === 'string')
+    {
+        element = $(element).length ? $(element)[0] : null;
+    }
+    if (!element)
+    {
+        return;
+    }
+
+    var format      = options.format || 'HH:mm:ss';
+    var callback    = options.callback || null;
+
+    if (typeof(endTime) === 'string')
+    {
+        endTime = parseInt(moment(endTime, format).format('x'));
+    }
+    else if (endTime instanceof Date)
+    {
+        endTime = endTime.getTime();
+    }
+
+    var time = 0-(moment().diff(new Date(endTime), 'millisecond'));
+    var timeStructure = parseTimeStructure(time);
+    var text = replaceData(format,timeStructure);
+    element.innerHTML = text;
+
+    // set timer to count
+    var timer = null;
+    timer = window.setInterval(function ()
+    {
+        time = 0-(moment().diff(new Date(endTime), 'millisecond'));
+        var timeStructure = parseTimeStructure(time);
+        var text = replaceData(format,timeStructure);
+        element.innerHTML = text;
+
+        if (time <= 0) {
+            window.clearInterval(timer);
+            callback ? callback(element, time, options) : null;
+        }
+
+    }, 1);
 }
 
 /**
