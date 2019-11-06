@@ -1980,6 +1980,7 @@ function reloadImage(image)
 /**
  * set image fill
  * @param   image   Object(HTMLImageElement)    image element
+ * @deprecated      it can use CCS3 object-fit: cover
  */
 function setImageFill(image)
 {
@@ -2024,7 +2025,6 @@ function isImage(name)
             return true;
         }
     }
-
     return false;
 }
 
