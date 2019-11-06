@@ -142,18 +142,25 @@ function addConsoleLog(text)
 
 /**
  * add debug log
- * @param   text    String
+ * @param   content    Mixed
  * @returns boolean
  */
-function addDebugLog(text)
+function addDebugLog(content)
 {
-    if (getDebugStatus()) {
-        addConsoleLog('[debug] ' + text);
-        return true;
-    }
-    else {
+    if (!getDebugStatus())
+    {
         return false;
     }
+
+    if (typeof (content) === 'string')
+    {
+        addConsoleLog('[debug] ' + content);
+    }
+    else
+    {
+        addConsoleLog(content);
+    }
+    return true;
 }
 var log = addDebugLog;
 
