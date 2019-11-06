@@ -18,7 +18,7 @@ var gulp=require('gulp'),  //gulp基础库
 
 var packageInfo = JSON.parse(fs.readFileSync('./package.json'));
 var version = packageInfo.version;
-var targetFolder = 'dist/Web-Common-Style-And-Script.' + version + '/';
+var targetFolder = 'dist/' + version + '/';
 
 function errrHandler(e)
 {
