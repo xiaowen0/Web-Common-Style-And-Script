@@ -142,7 +142,7 @@ function addConsoleLog(text)
 
 /**
  * add debug log
- * @param   content    Mixed
+ * @param   text    String
  * @returns boolean
  */
 function addDebugLog(content)
@@ -1654,6 +1654,43 @@ function loadStylesheet(url)
 }
 
 /**
+ * set a element middle position in his parent
+ * @param  String|Array  element CSS selector path or array
+ * @returns boolean
+ */
+function setElementMiddlePosition(element)
+{
+    // check param type
+    if (typeof(element) === 'string')
+    {
+        var elementQuery = $(element);
+        if (elementQuery.length)
+        {
+            element = elementQuery[0];
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    // get parent
+    var parent = element.parentNode;
+
+    // set
+    $(parent).css('overflow', 'hidden');
+    $(element).css('overflow', 'hidden');
+    var parentHeight = parent.offsetHeight;
+    var elementHeight = element.offsetHeight;
+
+    // set top margin
+    var topMargin = (parentHeight - elementHeight) / 2;
+    $(element).css('margin-top', topMargin + 'px');
+
+    return true;
+}
+
+/**
  * check a url if is CSS file
  * @param  String  url
  * @return Boolean
@@ -1686,27 +1723,6 @@ function loadScript(url, options)
 
     document.body.appendChild(scriptLink);
     return scriptLink.src;
-}
-
-/**
- * check a url if is script type file
- * @param  String  url
- * @return Boolean
- */
-function isScriptFile(url)
-{
-    var scriptTypeList = ['js'];
-
-    for (var i=0; i<scriptTypeList.length; i++)
-    {
-        // each ext name in scriptTypeList
-        var tExtStr = '.' + scriptTypeList[i];
-        if (url.substr(0 - tExtStr.length) == tExtStr)
-        {
-            return true;
-        }
-    }
-    return false;
 }
 
 /**
@@ -1980,7 +1996,6 @@ function reloadImage(image)
 /**
  * set image fill
  * @param   image   Object(HTMLImageElement)    image element
- * @deprecated      it can use CCS3 object-fit: cover
  */
 function setImageFill(image)
 {
@@ -2011,6 +2026,37 @@ function setImageFill(image)
 }
 
 /**
+ * check a url if is CSS file
+ * @param  String  url
+ * @return Boolean
+ */
+function isCSSFile(url)
+{
+    return url.substr(-4) == '.css';
+}
+
+/**
+ * check a url if is script type file
+ * @param  String  url
+ * @return Boolean
+ */
+function isScriptFile(url)
+{
+    var scriptTypeList = ['js'];
+
+    for (var i=0; i<scriptTypeList.length; i++)
+    {
+        // each ext name in scriptTypeList
+        var tExtStr = '.' + scriptTypeList[i];
+        if (url.substr(0 - tExtStr.length) == tExtStr)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+/**
  * check a file name is image format
  * @param   String  file name
  * @return  boolean
@@ -2025,44 +2071,27 @@ function isImage(name)
             return true;
         }
     }
+
     return false;
 }
 
 /**
- * set a element middle position in his parent
- * @param  String|Array  element CSS selector path or array
- * @returns boolean
+ * check a file name is video format
+ * @param   String  file name
+ * @return  boolean
  */
-function setElementMiddlePosition(element)
+function isVideo(name)
 {
-    // check param type
-    if (typeof(element) === 'string')
+    formatList = ["webm","mp4"];
+    for (var i=0; i<formatList.length; i++)
     {
-        var elementQuery = $(element);
-        if (elementQuery.length)
+        if (name.substr(0-formatList[i].length) === formatList[i])
         {
-            element = elementQuery[0];
-        }
-        else
-        {
-            return false;
+            return true;
         }
     }
 
-    // get parent
-    var parent = element.parentNode;
-
-    // set
-    $(parent).css('overflow', 'hidden');
-    $(element).css('overflow', 'hidden');
-    var parentHeight = parent.offsetHeight;
-    var elementHeight = element.offsetHeight;
-
-    // set top margin
-    var topMargin = (parentHeight - elementHeight) / 2;
-    $(element).css('margin-top', topMargin + 'px');
-
-    return true;
+    return false;
 }
 
 /**
@@ -2222,25 +2251,6 @@ function checkAudio(coding)
     if (audio.canPlayType("audio/" + coding)) {
         return true;
     }
-    return false;
-}
-
-/**
- * check a file name is video format
- * @param   String  file name
- * @return  boolean
- */
-function isVideo(name)
-{
-    formatList = ["webm","mp4"];
-    for (var i=0; i<formatList.length; i++)
-    {
-        if (name.substr(0-formatList[i].length) === formatList[i])
-        {
-            return true;
-        }
-    }
-
     return false;
 }
 
