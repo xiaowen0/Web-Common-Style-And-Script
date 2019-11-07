@@ -336,7 +336,7 @@
 
 /* search bar */
 
-.searchBar {
+.searchBar[data-theme="concise"] {
     position: relative;
     background-color: white;
     height: 30px;
@@ -346,17 +346,17 @@
     overflow: hidden;
 }
 
-.searchBar .inner {
+.searchBar[data-theme="concise"] .inner {
     padding-right: 50px;
 }
 
-.searchBar .inputbox {
+.searchBar[data-theme="concise"] .inputbox {
     border: 0 none;
     float: left;
     box-sizing: border-box;
 }
 
-.searchBar .icon {
+.searchBar[data-theme="concise"] .icon {
     position: absolute;
     z-index: 1;
     font-size: 16px;
@@ -365,11 +365,11 @@
     top: 5px;
 }
 
-.searchBar .deleteIcon {
+.searchBar[data-theme="concise"] .deleteIcon {
     right: 35px;
 }
 
-.searchBar .searchIcon {
+.searchBar[data-theme="concise"] .searchIcon {
     right : 10px;
 }
 
