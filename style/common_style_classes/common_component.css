@@ -1082,19 +1082,19 @@ select.inline {
 
 }
 
-.pageHeader {
+.pageHeader[data-theme="simple"] {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     padding: 10px;
 }
 
-.pageHeader .inner {
+.pageHeader[data-theme="simple"] .inner {
     position: relative;
     height: 30px;
 }
 
-.pageHeader.mobileStyle .title {
+.pageHeader[data-theme="simple"] .title {
     padding-left: 70px;
     padding-right: 70px;
     text-align: center;
@@ -1102,22 +1102,22 @@ select.inline {
     font-weight: 700;
 }
 
-.pageHeader.mobileStyle .leftBox,
-.pageHeader.mobileStyle .rightBox{
+.pageHeader[data-theme="simple"] .leftBox,
+.pageHeader[data-theme="simple"] .rightBox{
     position: absolute;
     z-index: 1;
     top: 0;
 }
 
-.pageHeader.mobileStyle .leftBox {
+.pageHeader[data-theme="simple"] .leftBox {
     left: 0;
 }
 
-.pageHeader.mobileStyle .rightBox {
+.pageHeader[data-theme="simple"] .rightBox {
     right: 0;
 }
 
-.pageHeader.mobileStyle .button {
+.pageHeader[data-theme="simple"] .button {
     /*height: 30px;*/
     /*line-height: 28px;*/
 }
