@@ -27,7 +27,10 @@ var helper = {
 
         typeof (options) != 'object' ? options = {} : null;
         var el = options.el || '';
-        var apiConfig = options.apiConfig || {};
+        var apiConfig   = options.apiConfig || {};
+        var onCreated   = options.onCreated || null;
+        var onMounted   = options.onMounted || null;
+        var onUpdated   = options.onUpdated || null;
 
         var control = new Vue({
             el : el,
@@ -87,6 +90,13 @@ var helper = {
             },
             created : function (){
                 this.init();
+                if (onCreated) { onCreated(this); }
+            },
+            mounted : function (){
+                if (onMounted) { onMounted(this); }
+            },
+            updated : function (){
+                if (onUpdated) { onUpdated(this); }
             }
         });
 
