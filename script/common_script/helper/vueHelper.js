@@ -1,4 +1,5 @@
 import Vue from 'vue/dist/vue.min'
+import consoleHelper from './consoleHelper'
 /**
  * helper for init some vue component
  */
@@ -227,10 +228,12 @@ var helper = {
             onView : function(event) {
 
                 var id = event.currentTarget.dataset.id;
-                if (viewPageUrl)
+                if (!viewPageUrl)
                 {
-                    location.href = viewPageUrl + '?id=' + id;
+                    consoleHelper.log('Missing viewPageUrl param.');
+                    return;
                 }
+                location.href = viewPageUrl + '?id=' + id;
             },
             // use in remove button, need data-id attribute.
             onRemove : function (event){
@@ -1084,7 +1087,7 @@ var helper = {
                 var data = cloneObject(me.itemData);
                 for (var key in columnsMapping)
                 {
-                    apiKey = columnsMapping[key];
+                    var apiKey = columnsMapping[key];
                     data[apiKey] = data[key];
                     delete data[key];
                 }
