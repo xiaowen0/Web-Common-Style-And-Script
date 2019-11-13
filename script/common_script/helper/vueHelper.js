@@ -67,6 +67,11 @@ var helper = {
 
         var methods = {
 
+            clearAndReload : function() {
+                this.list = [];
+                this.loadFirstPage();
+            },
+
             /**
              * get item object in list by id
              * @param  String  id
@@ -191,8 +196,7 @@ var helper = {
             loadFirstPage : function(){
 
                 // clean old data
-                me.list = [];
-
+                this.list = [];
                 this.loadPage(1);
             },
             loadPrevPage : function(){
@@ -362,6 +366,10 @@ var helper = {
 
         var methods = {
 
+            clearAndReload : function() {
+                this.list = [];
+                this.loadFirstPage();
+            },
             /**
              * load page's data
              * @param  Number  page
