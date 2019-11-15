@@ -132,6 +132,11 @@
     height: 100%;
     box-sizing: border-box;
 }
+.fullSpace {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
 
 .w80p {
     width: 80%;
@@ -902,15 +907,30 @@ p.error {
     color: #a94442;
 }
 
+/* position */
+
+.fixedPosition {
+    position: fixed;
+}
+
+.topPosition {
+    top: 0;
+}
+
+.bottomPosition {
+    bottom: 0;
+}
+
 /* object fit type */
 
-.fitTypeContain {
+.fitTypeContain,
+img.contain {
     object-fit: contain;
 }
-.fitTypeCover {
+.fitTypeCover,
+img.cover {
     object-fit: cover;
 }
-
 
 /* shape style */
 
