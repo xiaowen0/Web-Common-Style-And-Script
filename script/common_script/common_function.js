@@ -608,6 +608,26 @@ function listDataColumnConvert(list, mapping)
 }
 
 /**
+ * filter items from list according to object's property.
+ * @param   Array   list
+ * @param   String  name    property name
+ * @param   Mixed   value   property value
+ * @return Array
+ */
+function listDataFilter(list, name, value)
+{
+    var newList = [];
+    for (var i=0; i<list.length; i++)
+    {
+        if (list[i][name] === value)
+        {
+            newList.push(list[i]);
+        }
+    }
+    return newList;
+}
+
+/**
  * first letter upper case
  * @param string  String
  * @returns String
