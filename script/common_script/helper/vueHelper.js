@@ -735,6 +735,8 @@ var helper = {
         var onCreated       = options.onCreated || null;
         var onUpdated       = options.onUpdated || null;
 
+        var components       = options.components || {};
+
         var dataAttr = {};
         for (var i=0; i<dataColumn.length; i++)
         {
@@ -868,7 +870,8 @@ var helper = {
             },
             updated : function (){
                 if (onUpdated) { onUpdated(this); }
-            }
+            },
+            components : components
 
         });
         return vueController;
@@ -883,7 +886,43 @@ var helper = {
     initForm : function(options)
     {
         var elementSelector = options.el || '';
+
+        // style group
+        var className       = options.className || '';
+        var style           = options.style || '';
+
+        // text group
+        var title           = options.title || '';
+        var submitButtonText    = options.submitButtonText || '提交';
+        var cancelButtonText    = options.cancelButtonText || '取消';
+        var deleteButtonText    = options.deleteButtonText || '删除';
+
+        // visible group
+        var visible         = true;
+        if (typeof (options.visible) !== 'undefined')
+        {
+            visible = options.visible;
+        }
+        var showReturnButton    = true;
+        if (typeof (options.showReturnButton) != 'undefined')
+        {
+            showReturnButton = options.showReturnButton;
+        }
+
+        // enable group
+        var updatable       = true;
+        if (typeof (options.updatable) != 'undefined')
+        {
+            updatable = options.updatable;
+        }
+        var deletable       = true;
+        if (typeof (options.deletable) != 'undefined')
+        {
+            deletable = options.deletable;
+        }
+
         var apiConfig       = options.apiConfig || {};
+
         var customData      = options.data || {};
         var customMethods   = options.methods || {};
 
@@ -892,6 +931,8 @@ var helper = {
 
         var editingColumns  = options.editingColumns || {};
         var columnsMapping  = options.columnsMapping || {};
+
+        // event group
         var onSubmitSuccess = options.onSubmitSuccess || null;
         var onDataLoaded    = options.onDataLoaded || null;
         var onMounted       = options.onMounted || null;
@@ -923,7 +964,25 @@ var helper = {
         var onUploadError   = options.onUploadError || null;
 
         var data = {
+
+            // style group\
+            className : className,
+            style : style,
+
+            // text group
             title : '编辑',
+            submitButtonText : submitButtonText,
+            cancelButtonText : cancelButtonText,
+            deleteButtonText : deleteButtonText,
+
+            // visible group
+            visible : visible,
+            showReturnButton : showReturnButton,
+
+            // enable group
+            updatable : updatable,
+            deletable : deletable,
+
             editors : [],
             status : '',
             itemData : cloneObject(editingColumns),
