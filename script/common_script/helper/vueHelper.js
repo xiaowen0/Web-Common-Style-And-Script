@@ -34,6 +34,8 @@ var helper = {
         var filterColumns   = options.filterColumns || {};
         var checkingColumns = options.checkingColumns || null;
 
+        var components       = options.components || {};
+
         var afterLoadData   = options.afterLoadData || null;
         /**
          * trigger before update list, prevent update if return false
@@ -317,7 +319,8 @@ var helper = {
             data : data,
             methods : methods,
             mounted : mounted,
-            updated : updated
+            updated : updated,
+            components : components
         });
         vueController.init();
 
@@ -346,6 +349,8 @@ var helper = {
 
         var editingColumns  = options.editingColumns || {};
         var filterColumns   = options.filterColumns || {};
+
+        var components       = options.components || {};
 
         var afterLoadData   = options.afterLoadData || null;
 
@@ -621,7 +626,8 @@ var helper = {
         var vueController = new Vue({
             el : elementSelector,
             data : data,
-            methods : methods
+            methods : methods,
+            components : components
         });
         vueController.init();
 
@@ -931,6 +937,8 @@ var helper = {
 
         var editingColumns  = options.editingColumns || {};
         var columnsMapping  = options.columnsMapping || {};
+
+        var components       = options.components || {};
 
         // event group
         var onSubmitSuccess = options.onSubmitSuccess || null;
@@ -1261,7 +1269,8 @@ var helper = {
                 {
                     me.initEditors();
                 }
-            }
+            },
+            components : components
         });
         return vueController;
     }
