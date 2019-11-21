@@ -148,7 +148,7 @@ var helper = {
                     success : function(result){
                         if (afterLoadData)
                         {
-                            afterLoadData(result);
+                            afterLoadData(result, me);
                         }
                         else
                         {
