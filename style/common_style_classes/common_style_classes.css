@@ -557,6 +557,33 @@ img.fullSpace {
     font-size: 125%;
 }
 
+/* font size relative to 10px */
+
+.f11r10 {
+    font-size: 110%;
+}
+.f12r10 {
+    font-size: 120%;
+}
+.f13r10 {
+    font-size: 130%;
+}
+.f14r10 {
+    font-size: 140%;
+}
+.f15r10 {
+    font-size: 150%;
+}
+.f16r10 {
+    font-size: 160%;
+}
+.f18r10 {
+    font-size: 180%;
+}
+.f20r10 {
+    font-size: 200%;
+}
+
 .bold {
     font-weight: 700
 }
