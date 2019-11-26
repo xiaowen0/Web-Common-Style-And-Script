@@ -487,6 +487,10 @@ img.fullSpace {
     font-family: "微软雅黑", "黑体";
 }
 
+.arrowTextFont {
+    font-family: monospace, serif;
+}
+
 .f12 {
     font-size: 12px;
 }
