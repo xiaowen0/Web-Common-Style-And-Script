@@ -310,6 +310,7 @@
 
 .borderLayout {
     clear: both;
+    display: flex;
 }
 .borderLayout .northRegion,
 .borderLayout .southRegion {
@@ -318,6 +319,7 @@
 }
 .borderLayout .middleRegion {
     display: flex;
+    flex: 1;
 }
 .borderLayout .westRegion,
 .borderLayout .eastRegion {
@@ -1292,6 +1294,18 @@ select.inline {
 
 .form .horizontalLayout > * {
     display: inline-block;
+}
+
+.horizontalLayoutForm .formItem {
+    display: flex;
+}
+.horizontalLayoutForm .formItem .labelColumn {
+    display: block;
+    width: 5em;
+}
+.horizontalLayoutForm .formItem .controlColumn {
+    display: block;
+    flex: 1;
 }
 
 /* return to top's layer*/
