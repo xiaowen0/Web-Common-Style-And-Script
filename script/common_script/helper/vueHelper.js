@@ -1,9 +1,9 @@
 import Vue from 'vue/dist/vue.min'
 import consoleHelper from './consoleHelper'
+
 /**
  * helper for init some vue component
  */
-
 var helper = {
 
     /**
@@ -60,7 +60,11 @@ var helper = {
             list : [],
             ajaxLock : false,
             status : '',
-            checkingColumns : checkingColumns
+            checkingColumns : checkingColumns,
+            /**
+             * map to external controller, it can output some signals.
+             */
+            outputMap : {}
         };
         for (var key in customData)
         {
@@ -102,9 +106,9 @@ var helper = {
                         if ( dataType != columns[key] )
                         {
                             log('data type not match "' + columns[key] + '" with key:' + key);
-                            if (getDebugStatus())
+                            if (consoleHelper.getDebugStatus())
                             {
-                                addConsoleLog(list[i]);
+                                consoleHelper.log(list[i]);
                             }
                         }
                     }
@@ -114,7 +118,7 @@ var helper = {
 
                 if ( typeof(apiConfig.list) != 'object')
                 {
-                    addConsoleLog('[error] list api not defined.');
+                    consoleHelper.log('[error] list api not defined.');
                     return;
                 }
 
@@ -218,6 +222,29 @@ var helper = {
                 }
 
                 this.loadPage(this.page+1);
+            },
+            /**
+             * add a output channel
+             * @param  String  id
+             * @param  Object  control
+             */
+            addOutput : function (id, control){
+                this.outputMap[id] = control;
+            },
+            /**
+             * output signal
+             * @param  Object  signal information
+             */
+            outputSignal : function (signal){
+                for (var key in this.outputMap)
+                {
+                    if (typeof(this.outputMap[key].inputSignal) === 'undefined')
+                    {
+                        consoleHelper.log('[warning] inputSignal method not exist in ' + key + ' output control.');
+                        continue;
+                    }
+                    this.outputMap[key].inputSignal(signal);
+                }
             },
             onPageNumClick : function(event){
                 this.loadPage(event.target.innerHTML);
@@ -362,7 +389,11 @@ var helper = {
             keywords : '',
             filters : filterColumns,
             list : [],
-            ajaxLock : false
+            ajaxLock : false,
+            /**
+             * map to external controller, it can output some signals.
+             */
+            outputMap : {}
         };
         for (var key in customData)
         {
@@ -454,6 +485,29 @@ var helper = {
                     return;
                 }
                 this.loadPage();
+            },
+            /**
+             * add a output channel
+             * @param  String  id
+             * @param  Object  control
+             */
+            addOutput : function (id, control){
+                this.outputMap[id] = control;
+            },
+            /**
+             * output signal
+             * @param  Object  signal information
+             */
+            outputSignal : function (signal){
+                for (var key in this.outputMap)
+                {
+                    if (typeof(this.outputMap[key].inputSignal) === 'undefined')
+                    {
+                        consoleHelper.log('[warning] inputSignal method not exist in ' + key + ' output control.');
+                        continue;
+                    }
+                    this.outputMap[key].inputSignal(signal);
+                }
             },
             onPageNumClick : function(event){
                 this.loadPage(event.target.innerHTML);
@@ -752,7 +806,11 @@ var helper = {
         var data = {
             /* loading: ajax loading, ready: data loaded,  */
             status : '',
-            itemData : dataAttr
+            itemData : dataAttr,
+            /**
+             * map to external controller, it can output some signals.
+             */
+            outputMap : {}
         };
         for (var key in customData)
         {
@@ -803,6 +861,29 @@ var helper = {
                         }
                     }
                 });
+            },
+            /**
+             * add a output channel
+             * @param  String  id
+             * @param  Object  control
+             */
+            addOutput : function (id, control){
+                this.outputMap[id] = control;
+            },
+            /**
+             * output signal
+             * @param  Object  signal information
+             */
+            outputSignal : function (signal){
+                for (var key in this.outputMap)
+                {
+                    if (typeof(this.outputMap[key].inputSignal) === 'undefined')
+                    {
+                        consoleHelper.log('[warning] inputSignal method not exist in ' + key + ' output control.');
+                        continue;
+                    }
+                    this.outputMap[key].inputSignal(signal);
+                }
             },
             // use in remove button, need data-id attribute.
             onRemove : function (event){
@@ -888,6 +969,12 @@ var helper = {
      * @param  Object  options
      * @return  Object(Vue)
      * @requires Vue, jQuery
+     * signal type:
+     * editData     load data with id param
+     * createData   reset form data for editing new data
+     * updateData   submit data with id
+     * addData      submit a new data with null id
+     * deleteData   delete a exist data with id
      */
     initForm : function(options)
     {
@@ -994,7 +1081,12 @@ var helper = {
             editors : [],
             status : '',
             itemData : cloneObject(editingColumns),
-            categoryList : []
+            categoryList : [],
+
+            /**
+             * map to external controller, it can output some signals.
+             */
+            outputMap : {}
         };
         for (var key in customData)
         {
@@ -1186,6 +1278,13 @@ var helper = {
                         {
                             onSubmitSuccess(result);
                         }
+
+                        // output signal
+                        var signalMessage = {
+                            type : me.itemData.id ? 'updateData' : 'addData',
+                            data : me.itemData
+                        };
+                        me.outputSignal(signalMessage);
                     },
                     error : appConfig.ajaxErrorHandle
                 });
@@ -1193,6 +1292,56 @@ var helper = {
                 return false;
 
             },  // end save function
+            /**
+             * add a output channel
+             * @param  String  id
+             * @param  Object  control
+             */
+            addOutput : function (id, control){
+                this.outputMap[id] = control;
+            },
+            /**
+             * output signal
+             * @param  Object  signal information
+             */
+            outputSignal : function (signal){
+                for (var key in this.outputMap)
+                {
+                    if (typeof(this.outputMap[key].inputSignal) === 'undefined')
+                    {
+                        consoleHelper.log('[warning] inputSignal method not exist in ' + key + ' output control.');
+                        continue;
+                    }
+                    this.outputMap[key].inputSignal(signal);
+                }
+            },
+            /**
+             * receive editing or creating order.
+             * @param   Object  signalMessage
+             * example : {
+             *    type : '(required) filterFile',
+             *    fileType : '',
+             *    feeType '':
+             * }
+             */
+            inputSignal: function (signalMessage) {
+
+                if (signalMessage.type == 'editData') {
+
+                    consoleHelper.logDebug('edia data.');
+
+                    var id = signalMessage.id;
+
+                    // load data
+                    this.loadData(id);
+                }
+                else if (signalMessage.type == 'createData') {
+
+                    consoleHelper.logDebug('create data.');
+
+                    this.itemData = cloneObject(editingColumns);
+                }
+            },
             // use in remove button, need data-id attribute.
             onRemove : function (event){
 
@@ -1212,6 +1361,12 @@ var helper = {
                     },
                     success : function (result){
                         location.href = parentPage ? parentPage : 'index.html';
+
+                        var signalMessage = {
+                            type : 'deleteData',
+                            id : id
+                        };
+                        me.outputSignal(signalMessage);
                     }
                 });
             },
