@@ -20,6 +20,13 @@ var helper = {
         var customData      = options.data || {};
         var customMethods   = options.methods || {};
 
+        // visible group
+        var visible         = true;
+        if (typeof (options.visible) !== 'undefined')
+        {
+            visible = options.visible;
+        }
+
         var loadFirstPage   = (typeof(options.loadFirstPage) !== 'undefined') ?
             options.loadFirstPage : true;
         var autoLoad    = options.autoLoad || false;
@@ -50,6 +57,8 @@ var helper = {
         var onLoadError     = options.onLoadError || null;
 
         var data = {
+            // visible group
+            visible : visible,
             initOptions : options,
             page : 1,
             size : size,
@@ -73,6 +82,14 @@ var helper = {
         }
 
         var methods = {
+
+            /*************************************
+            * display methods
+            *************************************/
+
+            show : function () { this.visible = true; },
+
+            hide : function () { this.visible = false; },
 
             clearAndReload : function() {
                 this.list = [];
@@ -375,6 +392,13 @@ var helper = {
         var customData      = options.data || {};
         var customMethods   = options.methods || {};
 
+        // visible group
+        var visible         = true;
+        if (typeof (options.visible) !== 'undefined')
+        {
+            visible = options.visible;
+        }
+
         var size        = options.size || 10;
         var pageParam   = options.pageParam || 'page';
         var sizeParam   = options.sizeParam || 'size';
@@ -387,6 +411,8 @@ var helper = {
         var afterLoadData   = options.afterLoadData || null;
 
         var data = {
+            // visible group
+            visible : visible,
             page : 1,
             size : size,
             count : 0,
@@ -406,6 +432,14 @@ var helper = {
         }
 
         var methods = {
+
+            /*************************************
+             * display methods
+             *************************************/
+
+            show : function () { this.visible = true; },
+
+            hide : function () { this.visible = false; },
 
             clearAndReload : function() {
                 this.list = [];
@@ -807,6 +841,13 @@ var helper = {
         var columnMapping   = options.columnMapping || {};
         var idParam         = options.idParam || 'id';
 
+        // visible group
+        var visible         = true;
+        if (typeof (options.visible) !== 'undefined')
+        {
+            visible = options.visible;
+        }
+
         var parentPage      = options.parentPage || {};
         var onSubmitSuccess = options.onSubmitSuccess || null;
         /**
@@ -830,6 +871,8 @@ var helper = {
         }
 
         var data = {
+            // visible group
+            visible : visible,
             /* loading: ajax loading, ready: data loaded,  */
             status : '',
             itemData : dataAttr,
@@ -844,6 +887,15 @@ var helper = {
         }
 
         var methods = {
+
+            /*************************************
+             * display methods
+             *************************************/
+
+            show : function () { this.visible = true; },
+
+            hide : function () { this.visible = false; },
+
             loadData : function (id, callback)
             {
                 var me = this;
@@ -1127,6 +1179,15 @@ var helper = {
         var beforeSubmit = options.beforeSubmit || null;
 
         var methods = {
+
+            /*************************************
+             * display methods
+             *************************************/
+
+            show : function () { this.visible = true; },
+
+            hide : function () { this.visible = false; },
+
             init : function (){
 
                 if (loadCategoryList)
@@ -1134,6 +1195,7 @@ var helper = {
                     this.loadCategoryList();
                 }
             },
+
             loadCategoryList : function (){
                 var me = this;
                 $.ajax({
