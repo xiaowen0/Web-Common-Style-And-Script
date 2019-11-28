@@ -223,6 +223,10 @@ var helper = {
 
                 this.loadPage(this.page+1);
             },
+            reload : function (){
+                this.cleanList();
+                this.loadFirstPage();
+            },
             /**
              * add a output channel
              * @param  String  id
