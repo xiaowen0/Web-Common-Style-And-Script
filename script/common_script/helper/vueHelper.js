@@ -319,6 +319,29 @@ var helper = {
                     }
                 });
             },
+            // click event for batch delete button
+            onRemoveRows : function (event){
+
+                var me = this;
+
+                if (!window.confirm('确认要删除这些数据吗？（该操作不可逆）'))
+                {
+                    return;
+                }
+
+                var idName = apiConfig.batchDelete.idName || 'id';
+                var data = {};
+                data[idName] = me.selectedList.join(',');
+
+                $.ajax({
+                    url : apiConfig.batchDelete.url,
+                    type : apiConfig.batchDelete.method || 'get',
+                    data : data,
+                    success : function (result){
+                        me.reload();
+                    }
+                });
+            },
             init : function()
             {
                 var me = this;
@@ -664,12 +687,14 @@ var helper = {
                     return;
                 }
 
+                var idName = apiConfig.batchDelete.idName || 'id';
+                var data = {};
+                data[idName] = me.selectedList.join(',');
+
                 $.ajax({
                     url : apiConfig.batchDelete.url,
                     type : apiConfig.batchDelete.method || 'get',
-                    data : {
-                        ids : me.selectedList.join(',')
-                    },
+                    data : data,
                     success : function (result){
                         me.reload();
                     }
