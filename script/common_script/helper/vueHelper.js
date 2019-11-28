@@ -58,6 +58,7 @@ var helper = {
             keywords : '',
             filters : filterColumns,
             list : [],
+            selectedList : [],
             ajaxLock : false,
             status : '',
             checkingColumns : checkingColumns,
@@ -613,6 +614,27 @@ var helper = {
                     type : apiConfig.delete.method || 'get',
                     data : {
                         id : id
+                    },
+                    success : function (result){
+                        me.reload();
+                    }
+                });
+            },
+            // click event for batch delete button
+            onRemoveRows : function (event){
+
+                var me = this;
+
+                if (!window.confirm('确认要删除这些数据吗？（该操作不可逆）'))
+                {
+                    return;
+                }
+
+                $.ajax({
+                    url : apiConfig.batchDelete.url,
+                    type : apiConfig.batchDelete.method || 'get',
+                    data : {
+                        ids : me.selectedList.join(',')
                     },
                     success : function (result){
                         me.reload();
@@ -1280,7 +1302,7 @@ var helper = {
                     success : function (result){
                         if (onSubmitSuccess)
                         {
-                            onSubmitSuccess(result);
+                            onSubmitSuccess(result, me);
                         }
 
                         // output signal
