@@ -183,7 +183,7 @@ var helper = {
 
                             if (beforeUpdateList)
                             {
-                                var checking = beforeUpdateList(me.list, result.data);
+                                var checking = beforeUpdateList(me.list, result.data, me);
                                 if (checking === false)
                                 {
                                     return;
@@ -196,7 +196,7 @@ var helper = {
 
                             if (afterUpdateList)
                             {
-                                afterUpdateList();
+                                afterUpdateList(me);
                             }
                         }
 
@@ -504,7 +504,7 @@ var helper = {
                     success : function(result){
                         if (afterLoadData)
                         {
-                            afterLoadData(result);
+                            afterLoadData(result, me);
                         }
                         else
                         {
@@ -939,7 +939,7 @@ var helper = {
                         // data process if need
                         if (onDataLoaded)
                         {
-                            data = onDataLoaded(data);
+                            data = onDataLoaded(data, me);
                         }
 
                         // column convert
@@ -1254,7 +1254,7 @@ var helper = {
                         // data process if need
                         if (onDataLoaded)
                         {
-                            data = onDataLoaded(result.data);
+                            data = onDataLoaded(result.data, me);
                         }
                         me.itemData = data;
 
