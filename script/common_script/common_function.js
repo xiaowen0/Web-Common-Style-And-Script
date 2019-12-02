@@ -5994,6 +5994,11 @@ function initVueItemDetail(options)
                     me.status = 'ready';
 
                     var data = result.data;
+                    // if (!data)
+                    // {
+                    //     return;
+                    // }
+
                     // data process if need
                     if (onDataLoaded)
                     {
@@ -6001,7 +6006,8 @@ function initVueItemDetail(options)
                     }
 
                     // column convert
-                    data = dataColumnConvert(data, columnMapping);
+                    data = dataColumnConvert(data, columnMapping);  // data convert
+                    data = mergeObject(dataAttr, data);             // merge required columns and data
 
                     for (var key in data)
                     {

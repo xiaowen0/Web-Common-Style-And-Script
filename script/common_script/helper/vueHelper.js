@@ -1,5 +1,9 @@
 import Vue from 'vue/dist/vue.min'
+import VuejsDialog from "vuejs-dialog"
+import "vuejs-dialog/dist/vuejs-dialog.min.css"
 import consoleHelper from './consoleHelper'
+
+Vue.use(VuejsDialog);
 
 /**
  * helper for init some vue component
