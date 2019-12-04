@@ -2,6 +2,7 @@ import Vue from 'vue/dist/vue.min'
 import VuejsDialog from "vuejs-dialog"
 import "vuejs-dialog/dist/vuejs-dialog.min.css"
 import consoleHelper from './consoleHelper'
+import objectHelper from './object'
 
 Vue.use(VuejsDialog);
 
@@ -929,12 +930,13 @@ var helper = {
             {
                 var me = this;
                 this.status = 'loading';
+                var data = objectHelper.merge(apiConfig.get.params || {}, {
+                    id : id
+                });
                 $.ajax({
                     url : apiConfig.get.url,
                     type : apiConfig.get.method || 'get',
-                    data : {
-                        id : id
-                    },
+                    data : data,
                     success : function(result){
 
                         me.status = 'ready';
