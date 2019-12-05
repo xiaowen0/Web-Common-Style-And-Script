@@ -930,9 +930,10 @@ var helper = {
             {
                 var me = this;
                 this.status = 'loading';
-                var data = objectHelper.merge(apiConfig.get.params || {}, {
-                    id : id
-                });
+                var data = objectHelper.clone(apiConfig.get.params || {});
+
+                data[apiConfig.get.idParam || 'id'] = id;
+
                 $.ajax({
                     url : apiConfig.get.url,
                     type : apiConfig.get.method || 'get',
