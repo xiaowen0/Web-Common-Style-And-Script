@@ -101,6 +101,23 @@
     height: 30px;
 }
 
+.copyIcon {
+    width: 12px;
+    height: 12px;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAA/ElEQVRIie3VIVIDQRCF4U8gV0TgQXCAiBxjD5EDIJGIVBGHQCIQkSsQHAEZgUAiIlZwBEREBIieVEUwm51kQaWrWs3U+6er33STjwoN1vguzA/UHdrgBV94wKwwl9hgnBMfpZfM9r0iE5Wo/C534TIBpgcCoMXiXwEjXIjyBgVUoqFbB0yHBjTCLbMkeDU0YC2suBuDAn6z4wlwAvQGPOUAZ+JvPB8oPkm6NzkA3KazFq8F+Sb+VivGT+dYrkWZi8Kc43wrcszc7xXHAhrc/yVgqWOxEAv6XWpIYUxEQ+ddl2qxoDei833zU1S/stPQXIyFLUuc8ohreyr/AZWEj/NR3/pQAAAAAElFTkSuQmCC');
+    background-repeat: no-repeat;
+}
+
+.copyIcon.medium {
+    width: 18px;
+    height: 18px;
+}
+
+.copyIcon.big {
+    width: 24px;
+    height: 24px;
+}
+
 /* loading icon */
 @-moz-keyframes spinner-loader {
     0% {
