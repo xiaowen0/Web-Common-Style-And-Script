@@ -118,6 +118,22 @@
     height: 24px;
 }
 
+.evaluateStarIcon {
+    width: 18px;
+    height: 18px;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAACXUlEQVRYhc3XPWsUURSH8UElRsVCjBhQQURI4VshaQO+FIIErC2MlYWIhQTyBcRCrBQF7QQLSWEhgmLhGHYZx9nzf25WGNawYkQRjaigYgpNGAuzkOhudsY4s7lwuplzf3PuzLl3PG8JI0mSFZLOA5+BKeDcUvIteUi6DSTzwzl3sSMYMzv9J6YRkgYLxcRx3CvpaysQ8Lpara4rDARcXgSTAImZDReCMbMeSdPtQM659/V6fXXuIGCkHWZelYZyB0l6lRYERLligIEMmARIwjDcmxtI0tWsIEk3wjDcbGZrM08Yx3EXcBgYkXQLGJNUBz4AbV/kFPEDeAmMAVfMbKhWq238CxKG4VZJ14Ev/2HSrBWckfQgiqIBz/M8L4qifuBT0ZAm8dPMjnqSbBlgGtV65qVpcgWCpj3n3NNOQ+ZF2TOz48sAkgCJmR1r9JdHncZIurfgswfedhA0CWxa0IvMbA+/j6JFY6aq1Wpfq61hv6SPBWN2L7p9VCqVPkkvCsBMVCqVHan2NDPrAZ7kiPFLpdKGVJjGCIJgTR5NU9JMuVxenwnTWLq8KiTpYGaQpFM5LtmFzCDgZo6gx/9Soec5Ltl33/dXpcb4vt8NzOZYoUTSztSg8fHxXXli5kBHUoOAQwWATqYGSRrMOEFNUpgRdCY1yMwOpEw8C1zyfb97dHR0pXNuOG0zzfRXGwTBlhRJJ5o1OOfcdkl3U9y/LzVoLnHTQ5ukd2Z2No7jrnZVllRqkSPIhPE8z4uiaBvwEPgGvJF0HzjRDtLkwfqBa5JqwKRz7k4URb2trv8FLwDfI9NsSAoAAAAASUVORK5CYII=');
+    background-repeat: no-repeat;
+}
+
+.evaluateStarIcon.active {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAACK0lEQVRYhc3Xu2tUQRTH8S8qMSoWYsSACiJCCl+FpA34KAQJWFsYKwsRCwnkHxALsVIUtBMsgoWFCIqFqxh8EdC9d84ma8SIwceKBlRMoQk/C3MjSXazM25mrwOnu5z5cObcM/dCA0tiiYzTcozLUZFxqpF8DS+l9MvQnDibD8ZxvArmTzi6m4sx2mV8qwky3qrIqmaCzi+AyaK3OZgybTImPEAfNcLy+CBHnwcm66We+CDjTQDoWVxMiS5vTBYpO+OBHBeDQY4rSlmv96wM39BoUcJ+OfqUck3GAxkjMj55NnI93E8Zr6fzXpCjR0OsnQ8pslGOyzK+NrxpeEzKuKOEruwYOmV8yQEyt3q/lHIQGYO5Y/5GwqL0xuLFBDKe/geQ7NgGkHE4d0gWCYeyxr6XO8a4Nfu1N97liBnVCOtmz6KEHTLGc8BUNExH9UmdsFvG56ZhHBWV2L7w9VGkQ45XTQCV9ZItfnfaIG0yHkesTEEJa7wwM6gxVijO0JzUAKuDMDNHF++49oaDjGPRQClnwkGOqxErdP9fKjQcsal/qMAyf0yBVhlTESskGVtDqrMtMkYyDoSA9jUBdNQf5OgO7IkhGU8CQSdCQHs8k04p5ZwKtOo6S2X0yneYhvzV6gUb6iYsUVaVAafnbJbjpgdolzcIQFbzo+2DUk7KaPGo8sMaOR4FYQCUsknGXRnfZYzJcVuOI/Ug8/KU6ZRxabrPRlXihoz2Ws//BiWD9hmIRr65AAAAAElFTkSuQmCC');
+}
+
+.evaluateStarIcon.big {
+    width: 36px;
+    height: 36px;
+}
+
 /* loading icon */
 @-moz-keyframes spinner-loader {
     0% {
@@ -1096,6 +1112,11 @@ select.inline {
     padding: 0;
     border: solid 1px #eee;
     vertical-align: middle;
+}
+
+/* star selector */
+.starSelector .evaluateStarIcon:nth-child(n+2) {
+    margin-left: 5px;
 }
 
 /* page base layout */
