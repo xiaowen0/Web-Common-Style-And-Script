@@ -6,6 +6,59 @@ import objectHelper from './object'
 
 Vue.use(VuejsDialog);
 
+var vueCommonOptions = {
+    data : {
+        initOptions : {}
+    },
+    methods : {
+        getOption : function (name) {
+            if ( typeof (this.initOptions[name]) != 'undefined' )
+            {
+                return this.initOptions[name];
+            }
+            return null;
+        },
+        uploadImage : function (options){
+            consoleHelper.logDebug('upload images.');
+
+            typeof (options) === 'object' ? null : options = {};
+
+            options.url     = options.url || this.initOptions.apiConfig.uploadImage.url;
+            options.type    = options.method || options.type || this.initOptions.apiConfig.uploadImage.method || 'POST';
+            options.dataType    = options.dataType || this.initOptions.apiConfig.uploadImage.dataType || 'json';
+            options.contentType = options.contentType || this.initOptions.apiConfig.uploadImage.contentType || false;
+            options.processData = options.processData || this.initOptions.apiConfig.uploadImage.processData || false;
+            var name        = options.name || this.initOptions.apiConfig.uploadImage.name || 'file';
+            var data        = options.data || this.initOptions.apiConfig.uploadImage.data || {};
+            var files       = options.files || [];
+            var onProgress  = options.onProgress || null;
+
+            var me = this;
+
+            // build form data
+            var formData = new FormData();
+            for (var i=0; i<files.length; i++)
+            {
+                formData.append(name || 'file', files[i]);
+            }
+            for (var key in data)
+            {
+                formData.append(key, data[key]);
+            }
+
+            options.data = formData;
+            options.xhr = (function (){
+                var xhr = $.ajaxSettings.xhr();
+                if (xhr.upload && onProgress) {
+                    xhr.upload.addEventListener('progress', onProgress, false);
+                }
+                return xhr;
+            });
+            $.ajax(options);
+        }
+    }
+};
+
 /**
  * helper for init some vue component
  */
@@ -394,6 +447,7 @@ var helper = {
 
         var vueController = new Vue({
             el : elementSelector,
+            extends : vueCommonOptions,
             data : data,
             methods : methods,
             mounted : mounted,
@@ -440,6 +494,7 @@ var helper = {
         var afterLoadData   = options.afterLoadData || null;
 
         var data = {
+            initOptions : options,
             // visible group
             visible : visible,
             page : 1,
@@ -770,6 +825,7 @@ var helper = {
 
         var vueController = new Vue({
             el : elementSelector,
+            extends : vueCommonOptions,
             data : data,
             methods : methods,
             components : components
@@ -879,7 +935,7 @@ var helper = {
             visible = options.visible;
         }
 
-        var parentPage      = options.parentPage || {};
+        var parentPage      = options.parentPage || 'index.html';
         var onSubmitSuccess = options.onSubmitSuccess || null;
         /**
          * call before submit data
@@ -904,6 +960,8 @@ var helper = {
         var data = {
             // visible group
             visible : visible,
+            // options
+            initOptions : options,
             /* loading: ajax loading, ready: data loaded,  */
             status : '',
             itemData : dataAttr,
@@ -1047,6 +1105,7 @@ var helper = {
 
         var vueController = new Vue({
             el : elementSelector,
+            extends : vueCommonOptions,
             data : data,
             methods : methods,
             mounted : function (){
@@ -1174,6 +1233,9 @@ var helper = {
             // style group\
             className : className,
             style : style,
+
+            // options
+            initOptions : options,
 
             // text group
             title : '编辑',
@@ -1520,6 +1582,7 @@ var helper = {
 
         var vueController = new Vue({
             el : elementSelector,
+            extends : vueCommonOptions,
             data : data,
             methods : methods,
             created : function (){
