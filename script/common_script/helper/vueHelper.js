@@ -79,6 +79,7 @@ var helper = {
             /**
              * map to external controller, it can output some signals.
              */
+            viewPageUrl : viewPageUrl || '',
             outputMap : {}
         };
         for (var key in customData)
