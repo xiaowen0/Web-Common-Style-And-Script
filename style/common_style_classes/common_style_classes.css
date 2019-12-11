@@ -562,7 +562,6 @@ img.fullSpace {
 }
 
 /* font size relative to 10px */
-
 .f11r10 {
     font-size: 110%;
 }
@@ -586,6 +585,32 @@ img.fullSpace {
 }
 .f20r10 {
     font-size: 200%;
+}
+
+/* font size relative to 14px */
+.f10r14 {
+    font-size: 71.43%;
+}
+.f11r14 {
+    font-size: 78.57%;
+}
+.f12r14 {
+    font-size: 85.714%;
+}
+.f13r14 {
+    font-size: 92.857%;
+}
+.f15r14 {
+    font-size: 114.286%;
+}
+.f16r14 {
+    font-size: 114.286%;
+}
+.f18r14 {
+    font-size: 128.57%;
+}
+.f20r14 {
+    font-size: 142.857%;
 }
 
 .bold {
