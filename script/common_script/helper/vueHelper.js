@@ -29,7 +29,7 @@ var vueCommonOptions = {
             options.contentType = options.contentType || this.initOptions.apiConfig.uploadImage.contentType || false;
             options.processData = options.processData || this.initOptions.apiConfig.uploadImage.processData || false;
             var name        = options.name || this.initOptions.apiConfig.uploadImage.name || 'file';
-            var data        = options.data || this.initOptions.apiConfig.uploadImage.data || {};
+            var data        = options.data || this.initOptions.apiConfig.uploadImage.params || {};
             var files       = options.files || [];
             var onProgress  = options.onProgress || null;
 
@@ -37,13 +37,13 @@ var vueCommonOptions = {
 
             // build form data
             var formData = new FormData();
-            for (var i=0; i<files.length; i++)
-            {
-                formData.append(name || 'file', files[i]);
-            }
-            for (var key in data)
+            for (var key in data)   // extra params
             {
                 formData.append(key, data[key]);
+            }
+            for (var i=0; i<files.length; i++)  // file data
+            {
+                formData.append(name || 'file', files[i]);
             }
 
             options.data = formData;
