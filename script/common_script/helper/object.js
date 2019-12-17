@@ -155,6 +155,72 @@ var helper = {
                 tNode[tKey] = value;
             }
         }
+    },
+
+    /**
+     * convert different columns name of object
+     * example: {created_date : 123, user_name : 'abc'} => {createdDate : 123, userName : 'abc'}
+     * @param  Object  data
+     * @param  Object  mapping of columns: newProperty => oldProperty
+     * @return Object
+     */
+    dataColumnConvert : function(data, mapping)
+    {
+        var newData = {};
+
+        // clone all properties
+        for (var key in data)
+        {
+            newData[key] = data[key];
+        }
+
+        // change property in mapping
+        for (var mapKey in mapping)
+        {
+            newData[mapKey] = newData[mapping[mapKey]];
+            delete newData[mapping[mapKey]];
+        }
+
+        return newData;
+    },
+
+    /**
+     * convert a list of object's different columns name
+     * example: [{created_date : 123, user_name : 'abc'}] => [{createdDate : 123, userName : 'abc'}]
+     * @param  Array   list
+     * @param  Object  mapping of columns: newProperty => oldProperty
+     * @return Object
+     */
+    listDataColumnConvert : function(list, mapping)
+    {
+        var newList = [];
+        for (var i=0; i<list.length; i++)
+        {
+            var newItem = this.dataColumnConvert(list[i], mapping);
+            newList.push(newItem);
+        }
+
+        return newList;
+    },
+
+    /**
+     * filter items from list according to object's property.
+     * @param   Array   list
+     * @param   String  name    property name
+     * @param   Mixed   value   property value
+     * @return Array
+     */
+    listDataFilter : function(list, name, value)
+    {
+        var newList = [];
+        for (var i=0; i<list.length; i++)
+        {
+            if (list[i][name] === value)
+            {
+                newList.push(list[i]);
+            }
+        }
+        return newList;
     }
 };
 
