@@ -134,6 +134,11 @@ export default {
             });
         },
 
+        reloadData : function (){
+            this.dataList = [];
+            this.loadData();
+        },
+
         /*
          * methods for pagination
          */
