@@ -34,7 +34,10 @@ export default {
                 current : 1,
                 pageSize : 10,
                 total : 0,
-                totalPage : 1
+                totalPage : 1,
+                showSizeChanger : true,
+                showSizeChange : null,
+                change : null
             },
             apiConfig : {
                 /*
@@ -96,6 +99,8 @@ export default {
 
             var url = this.apiConfig.list.url || '';
             var method = this.apiConfig.list.method || 'get';
+            var params = this.apiConfig.list.params || {};
+            params = objectHelper.merge(params, data);
 
             if (!url)
             {
@@ -109,11 +114,11 @@ export default {
             };
             if (method == 'get')
             {
-                options.params = data;
+                options.params = params;
             }
             else
             {
-                options.data = data;
+                options.data = params;
             }
 
             this.status = 'loading';
@@ -158,6 +163,19 @@ export default {
         },
 
         /*
+         * methods for table
+         */
+
+        // pagination, filters, sorter, { currentDataSource })
+        onTableChange : function (pagination){
+            consoleHelper.logDebug(pagination);
+            this.pagination.current = pagination.current;
+            this.pagination.pageSize = pagination.pageSize;
+            this.dataList = [];
+            this.loadData();
+        },
+
+        /*
          * methods for time format
          */
 
@@ -193,6 +211,11 @@ export default {
         }
     },
     mounted() {
+
+        // bind event
+        this.pagination.showSizeChange  = this.onChangeSize;
+        this.pagination.change          = this.onChangePage;
+
         if (this.autoLoadData)
         {
             this.loadData();

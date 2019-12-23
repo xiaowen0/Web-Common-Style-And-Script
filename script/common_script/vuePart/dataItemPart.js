@@ -27,6 +27,7 @@ export default {
                     url : ''
                 }
             },
+            onLoad : null,
             beforeSubmit : null,
             onSubmitSuccess : null
         }
@@ -67,6 +68,10 @@ export default {
                 this.dataItem = data;
 
                 this.status = 'ready';
+                if (this.onLoad)
+                {
+                    this.onLoad(this);
+                }
             }).catch(res => {
                 this.status = 'error';
                 this.$message.error(res.data.msg);
