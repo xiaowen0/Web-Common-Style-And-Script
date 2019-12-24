@@ -81,7 +81,14 @@ export default {
             var data = objectHelper.clone(this.apiConfig.list.params || {});
 
             // add filter's params
-            data = objectHelper.merge(data, this.filters);
+            // data = objectHelper.merge(data, this.filters);
+            for (var key in this.filters)
+            {
+                if (this.filters[key])
+                {
+                    data[key] = this.filters[key];
+                }
+            }
 
             var pageName        = this.apiConfig.list.pageName || 'page';
             var pageSizeName    = this.apiConfig.list.pageSizeName || 'limit';
