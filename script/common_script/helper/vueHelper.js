@@ -126,6 +126,7 @@ var helper = {
             filters : filterColumns,
             list : [],
             selectedList : [],
+            apiConfig : apiConfig,
             ajaxLock : false,
             status : '',
             checkingColumns : checkingColumns,
@@ -205,15 +206,13 @@ var helper = {
                 }
                 this.ajaxLock = true;
 
-                if (page)
-                {
-                    this.page = page;
-                }
                 var me = this;
 
-                var params = apiConfig.list.params || {};
-                params[pageParam] = this.page;
-                params[sizeParam] = this.size;
+                // clone api extra params
+                var data = objectHelper.clone(this.apiConfig.list.params || {});
+
+                // add filter's params
+                // data = objectHelper.merge(data, this.filters);
                 for (var key in this.filters)
                 {
                     if (this.filters[key])
@@ -222,48 +221,66 @@ var helper = {
                     }
                 }
 
+                var pageName        = this.apiConfig.list.pageName || 'page';
+                var pageSizeName    = this.apiConfig.list.pageSizeName || 'limit';
+
+                var dataPath        = this.apiConfig.list.dataPath || 'data.rows';
+                var totalPath       = this.apiConfig.list.totalPath || 'data.total';
+                var totalPagePath   = this.apiConfig.list.totalPage || 'data.totalPage';
+
+                // add page params
+                data[pageName]      = this.page;
+                data[pageSizeName]  = this.size;
+
+                consoleHelper.logDebug('data:');
+                consoleHelper.logDebug(data);
+
                 me.status = 'loading';
 
                 $.ajax({
                     url : apiConfig.list.url,
                     type : apiConfig.list.method || 'get',
-                    data : params,
+                    data : data,
                     success : function(result){
-                        if (afterLoadData)
-                        {
-                            afterLoadData(result, me);
-                        }
-                        else
-                        {
-                            if (me.checkingColumns)
-                            {
-                                me.checkColumns(result.data.rows, checkingColumns);
-                            }
-
-                            if (beforeUpdateList)
-                            {
-                                var checking = beforeUpdateList(me.list, result.data, me);
-                                if (checking === false)
-                                {
-                                    return;
-                                }
-                            }
-
-                            me.list         = me.list.concat(result.data.rows);
-                            me.pageCount    = result.data.totalPage || 1;
-                            me.count        = result.data.totalCount || me.list.length;
-
-                            if (afterUpdateList)
-                            {
-                                afterUpdateList(me);
-                            }
-                        }
 
                         me.status = 'ready';
+
+                        if (afterLoadData)  // use custom handler
+                        {
+                            afterLoadData(result, me);
+                            return;
+                        }
+
+                        var data        = objectHelper.getDataByKeyPath(result, dataPath);
+                        var total       = objectHelper.getDataByKeyPath(result, totalPath);
+                        var totalPage   = objectHelper.getDataByKeyPath(result, totalPagePath);
+
+                        if (me.checkingColumns)
+                        {
+                            me.checkColumns(me.list, checkingColumns);
+                        }
+
+                        if (beforeUpdateList)
+                        {
+                            var checking = beforeUpdateList(me.list, data, me);
+                            if (checking === false)
+                            {
+                                return;
+                            }
+                        }
+
+                        me.list         = me.list.concat(data);
+                        me.pageCount    = total || 1;
+                        me.count        = totalPage || me.list.length;
+
+                        if (afterUpdateList)
+                        {
+                            afterUpdateList(me);
+                        }
+
                     },
                     complete : function()
                     {
-                        me.status = 'ready';
                         me.ajaxLock = false;
                     },
                     error : function(XMLHttpRequest, errorText)
