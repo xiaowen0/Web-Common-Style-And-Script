@@ -206,6 +206,11 @@ var helper = {
                 }
                 this.ajaxLock = true;
 
+                if (page)
+                {
+                    this.page = page;
+                }
+
                 var me = this;
 
                 // clone api extra params
@@ -226,7 +231,7 @@ var helper = {
 
                 var dataPath        = this.apiConfig.list.dataPath || 'data.rows';
                 var totalPath       = this.apiConfig.list.totalPath || 'data.total';
-                var totalPagePath   = this.apiConfig.list.totalPage || 'data.totalPage';
+                var totalPagePath   = this.apiConfig.list.pageCountPath || 'data.pageCount';
 
                 // add page params
                 data[pageName]      = this.page;
@@ -270,8 +275,8 @@ var helper = {
                         }
 
                         me.list         = me.list.concat(data);
-                        me.pageCount    = total || 1;
-                        me.count        = totalPage || me.list.length;
+                        me.pageCount    = totalPage || 1;
+                        me.count        = total || me.list.length;
 
                         if (afterUpdateList)
                         {
