@@ -222,7 +222,7 @@ var helper = {
                 {
                     if (this.filters[key])
                     {
-                        params[key] = this.filters[key];
+                        data[key] = this.filters[key];
                     }
                 }
 
