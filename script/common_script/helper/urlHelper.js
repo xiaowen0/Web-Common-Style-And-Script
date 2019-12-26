@@ -61,6 +61,39 @@ export default {
     },
 
     /**
+     * create url with params
+     * @param String url
+     * @param Object params
+     * @return String
+     */
+    createUrl : function(url, params)
+    {
+        if (typeof(params) !== 'object')
+        {
+            return url;
+        }
+
+        var param_string = '';
+
+        for (var name in params) {
+            param_string.length ? param_string += '&' : null;
+
+            param_string += name + '=' + params[name];
+        }
+
+        if (url.indexOf('?') >= 0)
+        {
+            url += '&';
+        }
+        else {
+            url += '?';
+        }
+        url += param_string;
+
+        return url;
+    },
+
+    /**
      * check if a url is CSS file
      * @param  String  url
      * @return Boolean
