@@ -13,6 +13,7 @@ export default {
                 message : ''
             },
             dataItem : {},
+            categoryList : [],
             apiConfig : {
                 get : {
                     url : '',
@@ -75,6 +76,29 @@ export default {
             }).catch(res => {
                 this.status = 'error';
                 this.$message.error(res.data.msg);
+            });
+        },
+        loadCategoryList : function (callback){
+
+            // API params
+            var apiUrl = this.apiConfig.categoryList.url;
+            var apiMethod = this.apiConfig.categoryList.method || 'get';
+            var dataPath = this.apiConfig.categoryList.dataPath || 'data.rows';
+            var params = this.apiConfig.categoryList.params || {};
+
+            // request options
+            var options = {
+                url : apiUrl,
+                method : apiMethod,
+                params : params
+            };
+
+            axios(options).then(res => {
+                let data            = objectHelper.getDataByKeyPath(res.data, dataPath);
+                this.categoryList   = data;
+                if (callback) { callback(res, data) }
+            }).catch(res => {
+                if (callback) { callback(res, null) }
             });
         },
 
