@@ -5,7 +5,7 @@
  */
 var appConfig = {
 
-    title : '师讯管理平台',
+    title : 'Kevin App Framework',
 
     resourceList : [],
 
@@ -19,17 +19,25 @@ var appConfig = {
      */
     envList : [{
         id : 'dev',
-        domain : 'localhost',
+        domain : 'localhost',,
+        apiDomain : 'localhost',
         apiBaseUrl : '/'
     }, {
         id : 'beta',
-        domain : 'test.xx.com',
+        domain : 'test.xx.com',,
+        apiDomain : 'test.xx.com',
         apiBaseUrl : 'test.xx.com/api/'
     }, {
         id : 'dist',
-        domain : 'www.xx.com',
+        domain : 'www.xx.com',,
+        apiDomain : 'api.xx.com',
         apiBaseUrl : 'api.xx.com/api/'
     }],
+
+    /**
+     * api domain.
+     */
+    apiDomain : '',
 
     /**
      * api base url, prefix of api url.
@@ -40,6 +48,13 @@ var appConfig = {
      * sub page containner selector expression
      */
     subPageContainner : '#main_content_container',
+
+    sound : {
+        message : 'media/message.mp3',
+            'delete' : 'media/delete.mp3',
+            logon : 'media/logon.mp3',
+            navigation : 'media/navigation.mp3',
+    },
 
     /**
      * ajax error handle
@@ -141,6 +156,12 @@ var application = {
     env : 'dev',
 
     /**
+     * App base url
+     * @type    String
+     */
+    baseUrl : '/',
+
+    /**
      * API base url
      * @type    String
      */
@@ -194,6 +215,13 @@ var application = {
      */
     apiList : {},
 
+    soundPlayer : document.createElement('audio'),
+
+    /**
+     * @var object
+     */
+    user : null,
+
     init : function (config)
     {
         if (this.status == 'ready')
@@ -207,6 +235,15 @@ var application = {
 
         this.checkEnvironment(this.config.envList || []);
         this.initResources(this.config.resourceList || []);
+
+        // reset sound player
+        this.soundPlayer.volume = 1;
+        this.soundPlayer.autoplay = false;
+        this.soundPlayer.defaultMuted = false;
+        this.soundPlayer.error = (function(mediaError){
+            addConsoleLog('sound player has a error:');
+            addConsoleLog(mediaError);
+        });
 
         this.status = 'ready';
     },
@@ -224,6 +261,8 @@ var application = {
             if (envList[i].domain == hostname)
             {
                 this.env        = envList[i].id;
+                this.baseUrl    = envList[i].baseUrl;
+                this.apiDomain  = envList[i].apiDomain;
                 this.apiBaseUrl = envList[i].apiBaseUrl;
                 return;
             }
@@ -294,8 +333,9 @@ var application = {
      * show message use messagebox
      * @param  String  content
      * @param  String  title
+     * @param  Object  options
      */
-    showMessageBox : function (content, title){
+    showMessageBox : function (content, title, options){
         if (typeof(dialog) !== 'undefined')
         {
             dialog.msg(content);
@@ -584,6 +624,129 @@ var application = {
                 location.href = 'login.html';
             }
         });
+    },
+
+    /**
+     * @param   Object  wechatShareOptions
+     */
+    setWechatShare : function (wechatShareOptions)
+    {
+        if ( typeof(wx) === 'undefined' )
+        {
+            addConsoleLog('[error] wx object not defined.');
+            return false;
+        }
+
+        if (typeof(wx.updateTimelineShareData) !== 'undefined')
+        {
+            wechatShareOptions = mergeObject(wechatShareOptions, {
+                success: function (){
+                    log('set wechat share success.');
+                },
+                fail : function (){
+                    log('set wechat share failed.');
+                }
+            });
+            wx.updateTimelineShareData(wechatShareOptions);
+            wx.updateAppMessageShareData(wechatShareOptions);
+        }
+        else
+        {
+            wechatShareOptions = mergeObject(wechatShareOptions, {
+                success: function (){
+                    log('wechat share success callback.');
+                },
+                fail : function (){
+                    log('wechat share fail callback.');
+                },
+                cancel : function (){
+                    log('wechat share cancel callback');
+                }
+            });
+            wx.onMenuShareTimeline(wechatShareOptions);
+            wx.onMenuShareAppMessage(wechatShareOptions);
+            wx.onMenuShareQQ(wechatShareOptions);
+            wx.onMenuShareQZone(wechatShareOptions);
+            wx.onMenuShareWeibo(wechatShareOptions);
+        }
+
+        return true;
+    },
+
+    /**
+     * @param   String  type  type name in sound property
+     * @return  Boolean
+     */
+    playSound : function (type){
+        if (typeof (this.config.sound[type]) === 'undefined')
+        {
+            addConsoleLog('[error] not found sound file with type: ' + type);
+            return false;
+        }
+        var file = this.baseUrl + this.config.sound[type];
+        if (!this.soundPlayer.paused)
+        {
+            this.soundPlayer.pause();
+        }
+        this.soundPlayer.src = file;
+
+        log('play sound, type: ' + type + '.');
+        try {
+            this.soundPlayer.play();
+        }
+        catch (e)
+        {
+            log('play sound failed.');
+            addConsoleLog(e);
+            return false;
+        }
+
+        log('play sound success.');
+        return true;
+    },
+
+    /**
+     * check promotion code in url, and save to storage and cookie.
+     * call it twice before check login and after check login.
+     * @requires    common_function, jquery.cookie
+     */
+    checkPromotion : function ()
+    {
+        // the promotionCode maybe is myself or others.
+        var promotionCode = getUrlParam('promotionCode') || '';
+        if (promotionCode)
+        {
+            log('url have promotionCode: ' + promotionCode);
+            // save to session storage or cookie.
+            if (!setSessionData('promotionCode', promotionCode))
+            {
+                $.cookie('promotionCode', promotionCode, {
+                    path: '/'
+                });
+            }
+        }
+
+        if (this.user)
+        {
+            // get promotionCode from session storage or cookie
+            log('logined, check promotionCode:');
+            var promotionCode = getSessionData('promotionCode') || $.cookie('promotionCode');
+            log('promotionCode= ' + promotionCode);
+
+            if (promotionCode && this.user.introduceCode != promotionCode)
+            {
+                log('promotionCode is not mine, save promotion_from=' + promotion_from + '.');
+                // not my promotionCode means it is other's promotionCode
+                setCacheData('promotion_from', promotionCode);
+            }
+
+            // remove old promotionCode
+            log('remove old promotionCode');
+            if ( !removeSessionData('promotionCode') )
+            {
+                $.removeCookie('promotionCode');
+            }
+        }
     }
 
 };

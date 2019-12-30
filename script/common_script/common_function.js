@@ -4674,6 +4674,22 @@ function setSessionData(key, value)
 }
 
 /**
+ * remove session storage
+ * @key     String      data key string
+ * @return  boolean     success or not
+ */
+function removeSessionData(key)
+{
+    if (typeof(sessionStorage) === "undefined")
+    {
+        return false
+    }
+
+    sessionStorage.removeItem(key);
+    return true;
+}
+
+/**
  * get cache data, using local storage.
  * @key  String  data key string
  * @return  String|null
