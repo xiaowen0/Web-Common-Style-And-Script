@@ -4,7 +4,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-    <title>边框布局代码生成</title>
+    <title>布局代码生成</title>
 
     <!-- Bootstrap framework -->
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
@@ -35,9 +35,11 @@
 <div class="page container-fluid">
     <div class="inner padding10">
 
-        <h1>边框布局代码生成</h1>
+        <h1>布局代码生成</h1>
 
-        <div id="codeGenerator">
+        <h2>边框布局（border layout）代码生成</h2>
+
+        <div id="borderLayoutCodeGenerator">
 
             <div class="row">
 
@@ -126,6 +128,19 @@
 
         </div><!-- #codeGenerator -->
 
+        <h2>左右布局</h2>
+
+        <div>
+            &lt;div class="clearfix"&gt;<br/>
+            <span class="tabText"></span>&lt;div class="fl"&gt;<br/>
+            <span class="tabText"></span><span class="tabText"></span>Left<br/>
+            <span class="tabText"></span>&lt;/div&gt;<br/>
+            <span class="tabText"></span>&lt;div class="fr"&gt;<br/>
+            <span class="tabText"></span><span class="tabText"></span>Right<br/>
+            <span class="tabText"></span>&lt;/div&gt;<br/>
+            &lt;/div&gt;<br/>
+        </div>
+
     </div>
 </div>
 
@@ -135,15 +150,13 @@
 <script src="../script/common_script/common_action.js"></script>
 
 <script>
-var codeGenerator = new Vue({
-    el : '#codeGenerator',
+var borderLayoutCodeGenerator = new Vue({
+    el : '#borderLayoutCodeGenerator',
     data : {
         hasNorth : false,
         hasSouth : false,
         westWidth : '',
         eastWidth : '',
-    },
-    methods : {
     }
 });
 </script>
