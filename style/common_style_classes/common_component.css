@@ -12,6 +12,13 @@
     display: none;
 }
 
+/* special text */
+
+.tabText {
+    display: inline-block;
+    width: 4ex;
+}
+
 /* icon */
 
 .icon {
@@ -366,7 +373,7 @@
 
 .borderLayout {
     clear: both;
-    display: flex;
+    /*display: flex;*/
 }
 .borderLayout .northRegion,
 .borderLayout .southRegion {

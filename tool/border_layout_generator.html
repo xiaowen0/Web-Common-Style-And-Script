@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <title>边框布局代码生成</title>
+
+    <!-- Bootstrap framework -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"/>
+
+    <!-- common style classes library -->
+    <link rel="stylesheet" href="../style/common_style_classes/common_component.css"/>
+    <link rel="stylesheet" href="../style/common_style_classes/common_style_classes.css"/>
+
+    <style>
+        .codeContainer {
+            color: green;
+        }
+        h2 {
+            background-color: #f2f2f2;
+            padding: 8px;
+            border-radius: 6px;
+        }
+        .tabText {
+            display: inline-block;
+            width: 4ex;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="page container-fluid">
+    <div class="inner padding10">
+
+        <h1>边框布局代码生成</h1>
+
+        <div id="codeGenerator">
+
+            <div class="row">
+
+                <div class="col-xs-12 col-md-6">
+
+                    <div class="borderLayout" style="border: solid 1px #bfbfbf;">
+                        <div class="northRegion alignCenter" style="border-bottom: solid 1px #bfbfbf;">
+                            <div class="padding10">
+                                <label class="checkbox">
+                                    <input type="checkbox" v-model="hasNorth"/> 北边有
+                                </label>
+                            </div>
+                        </div>
+                        <div class="middleRegion">
+                            <div class="westRegion w25p" style="border-right: solid 1px #bfbfbf;">
+                                <div class="padding10 alignLeft">
+                                    <label>
+                                        西边宽度<br/>（空代表没有）：<br/>
+                                        <input class="form-control" type="text" v-model="westWidth"/>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="centerRegion"></div>
+                            <div class="eastRegion w25p" style="border-left: solid 1px #bfbfbf;">
+                                <div class="padding10">
+                                    <label>
+                                        东边宽度<br/>（空代表没有）：<br/>
+                                        <input class="form-control" type="text" v-model="eastWidth"/>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="southRegion alignCenter" style="border-top: solid 1px #bfbfbf;">
+                            <div class="padding10">
+                                <label class="checkbox">
+                                    <input type="checkbox" v-model="hasSouth"/> 南边有
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-md-6">
+
+                    <p>代码</p>
+                    <div class="codeContainer">
+
+                        &lt;div class="borderLayout"&gt;<br/>
+
+                            <template v-if="hasNorth">
+                            <span class="tabText"></span>&lt;div class="northRegion"&gt;<br/>
+                            <span class="tabText"></span>&lt;/div&gt;<br/>
+                            </template>
+
+                                <span class="tabText"></span>&lt;div class="middleRegion"&gt;<br/>
+
+                                <template v-if="westWidth">
+                                <span class="tabText"></span><span class="tabText"></span>
+                                    &lt;div class="westRegion" style="width: {{westWidth}}px"&gt;<br/>
+                                <span class="tabText"></span><span class="tabText"></span>&lt;/div&gt;<br/>
+                                </template>
+
+                                <span class="tabText"></span><span class="tabText"></span>&lt;div class="centerRegion"&gt;<br/>
+                                <span class="tabText"></span><span class="tabText"></span>&lt;/div&gt;<br/>
+
+                                <template v-if="eastWidth">
+                                <span class="tabText"></span><span class="tabText"></span>
+                                    &lt;div class="eastRegion" style="width: {{eastWidth}}px"&gt;<br/>
+                                <span class="tabText"></span><span class="tabText"></span>&lt;/div&gt;<br/>
+                                </template>
+
+                                <span class="tabText"></span>&lt;/div&gt;<br/>
+
+                            <template v-if="hasSouth">
+                            <span class="tabText"></span>&lt;div class="southRegion"&gt;<br/>
+                            <span class="tabText"></span>&lt;/div&gt;<br/>
+                            </template>
+
+                        &lt;/div&gt;<br/>
+
+                    </div>
+
+                </div>
+
+            </div><!-- end .row -->
+
+        </div><!-- #codeGenerator -->
+
+    </div>
+</div>
+
+<script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script src="../asset/vue.2.5.16.js"></script>
+<script src="../script/common_script/common_function.js"></script>
+<script src="../script/common_script/common_action.js"></script>
+
+<script>
+var codeGenerator = new Vue({
+    el : '#codeGenerator',
+    data : {
+        hasNorth : false,
+        hasSouth : false,
+        westWidth : '',
+        eastWidth : '',
+    },
+    methods : {
+    }
+});
+</script>
+
+</body>
+</html>
