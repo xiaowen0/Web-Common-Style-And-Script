@@ -420,30 +420,80 @@
             </div><!-- end .panel -->
         </div><!-- end .floor -->
 
-        <div class="floor">
-
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h2>卡片式布局，多用于商品列表</h2>
-                    <p>样式包含圆角、盒子阴影、白色背景。</p>
-                    <p>结构：</p>
-                    <p>div.card_layout  卡片块容器，需加上宽度和间距设定，比如 .w240 .mr10</p>
-                    <p>----div.image_row  图片行</p>
-                    <p>--------img  图片</p>
-                    <p>----div.title_row  标题行</p>
-                    <p>示例：</p>
-                    <div class="green_bg padding10 clearfix">
-                        <div class="fl card_layout w240 mr10 mb10">
-                            <div class="image_row">
-                                <img src="http://v3.bootcss.com/assets/img/devices.png" alt="baidu logo" />
-                            </div>
-                            <div class="title_row">
-                                这是标题
+        <div class="row">
+            <div class="col-xs-12 col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h2>卡片式布局，多用于商品列表</h2>
+                        <p>样式包含圆角、盒子阴影、白色背景。</p>
+                        <p>结构：</p>
+                        <p>div.card_layout  卡片块容器，需加上宽度和间距设定，比如 .w240 .mr10</p>
+                        <p>----div.image_row  图片行</p>
+                        <p>--------img  图片</p>
+                        <p>----div.title_row  标题行</p>
+                        <p>示例：</p>
+                        <div class="green_bg padding10 clearfix">
+                            <div class="fl card_layout w240 mr10 mb10">
+                                <div class="image_row">
+                                    <img src="http://v3.bootcss.com/assets/img/devices.png" alt="baidu logo" />
+                                </div>
+                                <div class="title_row">
+                                    这是标题
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div><!-- end .panel-body -->
-            </div><!-- end .panel -->
+                    </div><!-- end .panel-body -->
+                </div><!-- end .panel -->
+            </div>
+            <div class="col-xs-12 col-md-8">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h2>边框布局，弹性内容使用边框布局</h2>
+
+                        <p>情景：</p>
+                        <div>
+                            <img class="darkBorder" src="../image/layout/flexible_layout_1.jpg" alt="弹性布局示例1"/>
+                        </div>
+                        <div>
+                            <img class="darkBorder" src="../image/layout/flexible_layout_2.jpg" alt="弹性布局示例1"/>
+                        </div>
+
+                        <p>结构：</p>
+                        <p>.borderLayout  布局容器</p>
+                        <p>----.northRegion   北边区域</p>
+                        <p>----.middleRegion  中间层区域</p>
+                        <p>--------.westRegion  西边区域（需加上宽度）</p>
+                        <p>--------.centerRegion   正中间区域（主要内容）</p>
+                        <p>--------.eastRegion  东边区域（需加上宽度）</p>
+                        <p>----.southRegion  南边区域</p>
+
+                        <p>示例：</p>
+
+                        <div class="borderLayout darkBorder">
+                            <div class="northRegion" style="border-bottom: solid 1px darkgrey;">
+                                <div class="padding10">北边（可选）</div>
+                            </div>
+                            <div class="middleRegion">
+                                <div class="westRegion" style="width: 120px; border-right: solid 1px darkgrey;">
+                                    <div class="padding10">西边内容（可选）</div>
+                                </div>
+                                <div class="centerRegion">
+                                    <div class="padding10">主要内容</div>
+                                </div>
+                                <div class="eastRegion" style="width: 120px; border-left: solid 1px darkgrey;">
+                                    <div class="padding10">东边内容（可选）</div>
+                                </div>
+                            </div>
+                            <div class="southRegion" style="border-top: solid 1px darkgrey;">
+                                <div class="padding10">南边（可选）</div>
+                            </div>
+                        </div>
+                    </div><!-- end .panel-body -->
+                </div><!-- end .panel -->
+            </div>
+        </div>
+
+        <div class="floor">
 
             <div class="panel panel-default">
                 <div class="panel-body">
