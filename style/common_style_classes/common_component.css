@@ -1420,14 +1420,20 @@ select.inline {
 
 /* module frame */
 
-.module,
-.mod {
-    background-color: #fff;
+.module {
     clear: both;
-    font-size: 13px;
-    line-height: 23px;
-    padding: 25px 20px;
     overflow: hidden;
+}
+.module.defaultLayout {
+    line-height: 1.5em;
+    background-color: #fff;
+    font-size: 13px;
+}
+
+.module.defaultLayout .header,
+.module.defaultLayout .body,
+.module.defaultLayout .footer {
+    clear: both;
 }
 
 .module_header,
@@ -1504,14 +1510,14 @@ select.inline {
 /* article */
 /* Article (article content default style) ----------------------*/
 
-.article {
+.article.defaultLayout {
     background-color: #fff;
     padding: 30px 10px;
     margin-bottom: 20px;
 }
 
 @media screen and (min-width: 768px) {
-    .article {
+    .article.defaultLayout {
         margin-bottom: 20px;
         padding-left: 15px;
         padding-right: 15px;
@@ -1519,33 +1525,33 @@ select.inline {
 }
 
 @media (min-width: 1600px)    /* Big Screen */ {
-    .article {
+    .article.defaultLayout {
         padding-left: 20px;
         padding-right: 20px;
     }
 }
 
 /* tag in article element */
-.article h1 {
+.article.defaultLayout h1 {
     margin-bottom: 30px;
 }
-.article h2,
-.article h3,
-.article h4,
-.article table {
+.article.defaultLayout h2,
+.article.defaultLayout h3,
+.article.defaultLayout h4,
+.article.defaultLayout table {
     margin-bottom: 20px;
 }
 
-.article h5,
-.article h6,
-.article p,
-.article ul,
-.article ol {
+.article.defaultLayout h5,
+.article.defaultLayout h6,
+.article.defaultLayout p,
+.article.defaultLayout ul,
+.article.defaultLayout ol {
     margin-bottom: 10px;
 }
 
-.article ul,
-.article ol {
+.article.defaultLayout ul,
+.article.defaultLayout ol {
     padding-left: 20px;
 }
 
