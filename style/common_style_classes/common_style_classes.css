@@ -254,7 +254,9 @@ img.fullSpace {
 .limit_max_width {
     max-width: 100%;
 }
-
+.lineHeight1p {
+    line-height: 1em;
+}
 .lineHeight20r12f {
     line-height: 166.66%;
 }
@@ -312,6 +314,11 @@ img.fullSpace {
     margin-right: 20px;
 }
 
+.verticalPadding8 {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
 .padding10,
 .pd10 {
     padding: 10px;
@@ -328,9 +335,19 @@ img.fullSpace {
     padding-top: 10px;
     padding-bottom: 10px;
 }
-
+.padding16 {
+    padding: 16px;
+}
+.horizontalPadding16 {
+    padding-left: 16px;
+    padding-right: 16px;
+}
 .padding20 {
     padding: 20px;
+}
+.verticalPadding20 {
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .padding20mm {
@@ -652,6 +669,12 @@ img.fullSpace {
 .orange {
     color: #e69100;
 }
+.orangeText {
+    color: #F5AD34;
+}
+.highlightTextColor {
+    color: #FFB200; /* orange */
+}
 
 .yellow {
     color: #f5ea18;
@@ -795,6 +818,9 @@ img.fullSpace {
 }
 .bottomBorder {
     border-bottom: solid 1px #CCCCCC;
+}
+.lightGreyBottomBorder {
+    border-bottom: solid 1px #EEEEEE;
 }
 
 .redBorder {

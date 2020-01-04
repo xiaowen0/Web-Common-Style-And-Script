@@ -23,10 +23,20 @@
 
 .icon {
     display: inline-block;
+
+    width: 24px;
+    height: 24px;
+
     text-align: center;
+
     background-repeat: no-repeat;
     -webkit-background-size: 100% 100%;
     background-size: 100% 100%;
+}
+
+.smallIconSize {
+    width: 16px;
+    height: 16px;
 }
 
 .settingIcon {
@@ -454,6 +464,19 @@
 .pictureFrame img {
     width: 100%;
     height: auto;
+}
+
+/* image */
+.headImage {
+    background-color: #EEE;
+    object-fit: cover;  /* 等比例放大覆盖 */
+
+    width:32px;
+    height:32px;
+}
+.smallHeadImageSize {
+    width:24px;
+    height:24px;
 }
 
 /* thumbnail image container */
@@ -1230,6 +1253,15 @@ select.inline {
 .textLabel.huge {
     padding: 8px;
     font-size: 16px;
+}
+
+.yellowTextLabel {
+    color: #FFC44C;
+    border:1px solid rgba(255,196,76,1);
+}
+.redTextLabel {
+    color: #F55050;
+    border:1px solid rgba(245,80,80,1);
 }
 
 /* pagination */
