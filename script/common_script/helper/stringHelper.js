@@ -128,6 +128,22 @@ export default {
             '温致如猫'
         ];
         return arrayHelper.getRandomItem(list);
+    },
+
+    /**
+     * @example:  #逗逼# 啦啦啦 #二逼#  =>  <span class="highlightTextColor">#逗逼#</span> 啦啦啦 <span class="highlightTextColor">#二逼#</span>
+     * return String
+     */
+    highlightTopicWords : function (text, classList)
+    {
+        var classStr = typeof(classList) === 'object' ? classList.join(' ') : classList;
+
+        var reg = /(#[^#]*#)/g;
+        var replaceStr = '<span class="' + classStr + '">$&</span>';
+
+        text = text.replace(reg, replaceStr);
+
+        return text;
     }
 
 }
