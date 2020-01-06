@@ -1006,6 +1006,14 @@ p.error {
     bottom: 0;
 }
 
+/* position */
+.pageCenter {
+    position: fixed;
+    z-index: 2;
+    left: 50%;
+    top: 50%;
+}
+
 /* object fit type */
 
 .fitTypeContain,

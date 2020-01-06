@@ -780,6 +780,12 @@
     border-radius: 0;
 }
 
+.iconButton {
+    border: none;
+    padding: 0;
+    background-color: transparent;
+}
+
 .button .icon {
     margin-bottom: 4px;
     padding: 0;
