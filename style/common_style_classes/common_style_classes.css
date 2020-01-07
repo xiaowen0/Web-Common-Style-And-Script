@@ -773,20 +773,23 @@ img.fullSpace {
     animation: blink_keyframes .75s linear infinite;
 }
 
-/* text column */
+/* column layout */
 
+.columnLayout,
 .textColumn2 {
     -moz-column-count:2; /* Firefox */
     -webkit-column-count:2; /* Safari 和 Chrome */
     column-count:2;
 }
 
+.columnLayout3,
 .textColumn3 {
     -moz-column-count:3; /* Firefox */
     -webkit-column-count:3; /* Safari 和 Chrome */
     column-count:3;
 }
 
+.columnLayout4,
 .textColumn4 {
     -moz-column-count:4; /* Firefox */
     -webkit-column-count:4; /* Safari 和 Chrome */
