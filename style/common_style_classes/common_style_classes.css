@@ -115,6 +115,11 @@
     height: 360px;
     box-sizing: border-box;
 }
+.size48 {
+    width: 48px;
+    height: 48px;
+    box-sizing: border-box;
+}
 
 .A4_paper {
     width: 210mm;
