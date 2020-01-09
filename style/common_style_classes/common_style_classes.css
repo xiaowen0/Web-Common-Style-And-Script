@@ -343,18 +343,44 @@ img.fullSpace {
 .padding16 {
     padding: 16px;
 }
+.padding12 {
+    padding: 12px;
+}
+.padding20 {
+    padding: 20px;
+}
+.horizontalPadding8 {
+    padding-left: 8px;
+    padding-right: 8px;
+}
+.horizontalPadding12 {
+    padding-left: 12px;
+    padding-right: 12px;
+}
 .horizontalPadding16 {
     padding-left: 16px;
     padding-right: 16px;
 }
-.padding20 {
-    padding: 20px;
+.verticalPadding8 {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+.verticalPadding10 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.verticalPadding12 {
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+.verticalPadding16 {
+    padding-top: 16px;
+    padding-bottom: 16px;
 }
 .verticalPadding20 {
     padding-top: 20px;
     padding-bottom: 20px;
 }
-
 .padding20mm {
     padding: 20mm;
 }
@@ -824,11 +850,18 @@ img.fullSpace {
 .greyBorder {
     border-color: grey;
 }
+.lightGreyLine {
+    height: 1px;
+    background-color: #EEE;
+}
 .bottomBorder {
     border-bottom: solid 1px #CCCCCC;
 }
 .lightGreyBottomBorder {
     border-bottom: solid 1px #EEEEEE;
+}
+.lightGreyTopBorder {
+    border-top: solid 1px #EEEEEE;
 }
 
 .redBorder {
