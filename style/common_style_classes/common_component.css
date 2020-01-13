@@ -1477,12 +1477,6 @@ select.inline {
 
 .module_header,
 .modhead {
-    border-bottom: 1px solid #f1f4f9;
-    font-size: 15px;
-    margin-bottom: 10px;
-    padding-bottom: 5px;
-    text-transform: capitalize;
-    line-height: 30px;
     clear: both;
     overflow: hidden;
 }
