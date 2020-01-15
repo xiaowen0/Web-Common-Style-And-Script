@@ -330,6 +330,30 @@ var application = {
     },
 
     /**
+     * show hint, and fade out after 2s
+     * @param text
+     */
+    showHint : function (text, options) {
+
+        typeof (options) == 'undefined' ? options = {} : null;
+        var delay = options.delay || 2;
+
+        var e = createElement('div', {
+            'class' : 'hintBox'
+        }, text);
+        document.body.appendChild(e);
+        var width   = e.offsetWidth;
+        var height  = e.offsetHeight;
+        e.style.marginLeft  = '-' + (width / 2) + 'px';
+        e.style.marginTop   = '-' + (height / 2) + 'px';
+        e.style.opacity = 1;
+
+        window.setTimeout(function(){
+            e.parentNode.removeChild(e);
+        }, delay * 1000);
+    },
+
+    /**
      * show message use messagebox
      * @param  String  content
      * @param  String  title
