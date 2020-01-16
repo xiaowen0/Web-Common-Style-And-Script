@@ -6,9 +6,6 @@ import objectHelper from '@util/objectHelper';
 export default {
     data () {
         return {
-            // declare message with an empty value
-            // refer: https://vuejs.org/v2/guide/reactivity.html#Declaring-Reactive-Properties
-            // message: '',
 
             /**
              * @var String
@@ -96,6 +93,7 @@ export default {
             var dataPath        = this.apiConfig.list.dataPath || 'data.rows';
             var totalPath       = this.apiConfig.list.totalPath || 'data.total';
             var totalPagePath   = this.apiConfig.list.totalPage || 'data.totalPage';
+            var dataColumnMapping   = this.apiConfig.list.dataColumnMapping || {};
 
             // add page params
             data[pageName]      = this.pagination.current;
@@ -131,10 +129,16 @@ export default {
             this.status = 'loading';
 
             axios(options).then(res => {
-                let data        = objectHelper.getDataByKeyPath(res.data, dataPath);
-                let total       = objectHelper.getDataByKeyPath(res.data, totalPath);
-                let totalPage   = objectHelper.getDataByKeyPath(res.data, totalPagePath);
-                me.dataList = me.dataList.concat(data);
+                var data        = objectHelper.getDataByKeyPath(res.data, dataPath);
+                var total       = objectHelper.getDataByKeyPath(res.data, totalPath);
+                var totalPage   = objectHelper.getDataByKeyPath(res.data, totalPagePath);
+                if (typeof(data) == 'undefined' || data == null)
+                {
+                    consoleHelper.logError('data is empty.');
+                    return;
+                }
+                data = objectHelper.listDataColumnConvert(data, dataColumnMapping);
+                me.dataList             = me.dataList.concat(data);
                 me.pagination.total     = total;
                 me.pagination.totalPage = totalPage;
 
