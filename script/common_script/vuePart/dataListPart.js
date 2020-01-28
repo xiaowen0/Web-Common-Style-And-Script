@@ -6,9 +6,6 @@ import objectHelper from '@util/objectHelper';
 export default {
     data () {
         return {
-            // declare message with an empty value
-            // refer: https://vuejs.org/v2/guide/reactivity.html#Declaring-Reactive-Properties
-            // message: '',
 
             /**
              * @var String
@@ -62,7 +59,15 @@ export default {
             searchInputbox : {
                 column : ''
             },
-            autoLoadData : true // set false to disable auto load data
+            autoLoadData : true, // set false to disable auto load data
+
+            scrollToLoadNextPage : 40,
+            loadNextPageDelay : 500,
+
+            /**
+             * map to external controller, it can output some signals.
+             */
+            outputMap : {}
 
         }
     },
@@ -96,6 +101,7 @@ export default {
             var dataPath        = this.apiConfig.list.dataPath || 'data.rows';
             var totalPath       = this.apiConfig.list.totalPath || 'data.total';
             var totalPagePath   = this.apiConfig.list.totalPage || 'data.totalPage';
+            var dataColumnMapping   = this.apiConfig.list.dataColumnMapping || {};
 
             // add page params
             data[pageName]      = this.pagination.current;
@@ -115,6 +121,8 @@ export default {
                 return;
             }
 
+            this.status = 'loading';
+
             var options = {
                 url: url,
                 method: method
@@ -128,27 +136,60 @@ export default {
                 options.data = params;
             }
 
-            this.status = 'loading';
-
             axios(options).then(res => {
-                let data        = objectHelper.getDataByKeyPath(res.data, dataPath);
-                let total       = objectHelper.getDataByKeyPath(res.data, totalPath);
-                let totalPage   = objectHelper.getDataByKeyPath(res.data, totalPagePath);
-                me.dataList = me.dataList.concat(data);
-                me.pagination.total     = total;
-                me.pagination.totalPage = totalPage;
 
                 this.status = 'ready';
-            }).catch(res => {
+                var data        = objectHelper.getDataByKeyPath(res.data, dataPath);
+                var total       = objectHelper.getDataByKeyPath(res.data, totalPath);
+                var totalPage   = objectHelper.getDataByKeyPath(res.data, totalPagePath);
+                if (typeof(data) == 'undefined' || data == null)
+                {
+                    consoleHelper.logError('data is empty.');
+                    return;
+                }
+                data = objectHelper.listDataColumnConvert(data, dataColumnMapping);
+                me.dataList             = me.dataList.concat(data);
+                me.pagination.total     = total;
+                me.pagination.totalPage = totalPage;
+            }).catch(error => {
                 this.status = 'error';
-                this.errorInfo.status = res.status;
-                this.errorInfo.message = res.data.msg;
+                if (error.response)
+                {
+                    this.errorInfo.status = error.response.status;
+                    var data = error.response.data;
+                    this.errorInfo.message = data.message || '';
+                }
+                else
+                {
+                    // no response, It means time out or be deny by browser
+                    this.errorInfo.status = -1;
+                    this.errorInfo.message = '网络出错';
+                }
             });
         },
 
         reloadData : function (){
             this.dataList = [];
+            this.pagination.current = 1;
             this.loadData();
+        },
+
+        loadNextPage : function () {
+            if (this.status === 'loading')
+            {
+                return;
+            }
+
+            if (this.pagination.current == this.pagination.totalPage)
+            {
+                return;
+            }
+
+            window.setTimeout(() => {
+                this.pagination.current++;
+                this.loadData();
+            }, this.loadNextPageDelay);
+
         },
 
         /*
@@ -167,6 +208,36 @@ export default {
             this.pagination.pageSize = size;
             this.dataList = [];
             this.loadData();
+        },
+
+        /**
+         * add a output channel
+         * @param  String  id
+         * @param  Object  control
+         */
+        addOutput : function (id, control){
+            if ( typeof(control) != 'object' )
+            {
+                consoleHelper.logError('add output error: ' + id + ' is not a object.');
+                return;
+            }
+            this.outputMap[id] = control;
+        },
+
+        /**
+         * output signal
+         * @param  Object  signal information
+         */
+        outputSignal : function (signal){
+            for (var key in this.outputMap)
+            {
+                if (typeof(this.outputMap[key].inputSignal) === 'undefined')
+                {
+                    consoleHelper.log('[warning] inputSignal method not exist in ' + key + ' output control.');
+                    continue;
+                }
+                this.outputMap[key].inputSignal(signal);
+            }
         },
 
         /*
@@ -201,6 +272,14 @@ export default {
             return moment(timestamp).format('YYYY-MM-DD HH:mm:ss');
         },
 
+        formatDelayTime : function (timestamp) {
+            if (!timestamp)
+            {
+                return '';
+            }
+            return moment(timestamp).fromNow();
+        },
+
         /*
          * methods for search inputbox
          */
@@ -227,6 +306,24 @@ export default {
         {
             this.loadData();
         }
+
+        window.addEventListener('scroll', () => {
+
+            if (this.scrollToLoadNextPage == false)
+            {
+                return;
+            }
+
+            var bottomDistance = this.scrollToLoadNextPage;
+            var windowHeight = window.innerHeight;
+            var documentHeight = document.documentElement.offsetHeight;
+            var scrollTop = document.documentElement.scrollTop;
+            consoleHelper.logDebug('bottom distance: ' + documentHeight - scrollTop - windowHeight);
+            if (documentHeight - scrollTop - windowHeight <= bottomDistance) {
+                this.loadNextPage();
+            }
+
+        });
 
     }
 
