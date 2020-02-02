@@ -47,8 +47,11 @@ export default {
             var dataPath = this.apiConfig.get.dataPath || 'data';
             var idParam = this.apiConfig.get.idParam || 'id';
 
-            var data = {};
-            data[idParam] = pk;
+            var data = this.apiConfig.get.params || {};
+            if (pk)     // my data not need id param
+            {
+                data[idParam] = pk;
+            }
 
             var options = {
                 url : apiUrl,
@@ -65,7 +68,8 @@ export default {
 
             this.status = 'loading';
             axios(options).then(res => {
-                let data        = objectHelper.getDataByKeyPath(res.data, dataPath);
+                var data        = objectHelper.getDataByKeyPath(res.data, dataPath);
+                data = objectHelper.dataColumnConvert(data, this.apiConfig.get.dataColumnMapping || {});
                 this.dataItem = data;
 
                 this.status = 'ready';
