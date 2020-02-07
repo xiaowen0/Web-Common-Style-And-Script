@@ -138,6 +138,19 @@ export default {
 
             axios(options).then(res => {
 
+                var data        = objectHelper.getDataByKeyPath(res.data, dataPath);
+                var total       = objectHelper.getDataByKeyPath(res.data, totalPath);
+                var totalPage   = objectHelper.getDataByKeyPath(res.data, totalPagePath);
+                if (typeof(data) == 'undefined' || data == null)
+                {
+                    consoleHelper.logError('data is empty.');
+                    return;
+                }
+                data = objectHelper.listDataColumnConvert(data, dataColumnMapping);
+                me.dataList             = me.dataList.concat(data);
+                me.pagination.total     = total;
+                me.pagination.totalPage = totalPage;
+
                 this.status = 'ready';
                 var data        = objectHelper.getDataByKeyPath(res.data, dataPath);
                 var total       = objectHelper.getDataByKeyPath(res.data, totalPath);

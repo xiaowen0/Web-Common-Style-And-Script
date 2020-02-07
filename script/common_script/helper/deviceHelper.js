@@ -10,6 +10,7 @@ var helper = {
     os : '',
 
     deviceType : '',
+    deviceName : '',
 
     init : function () {
 
@@ -51,6 +52,11 @@ var helper = {
         {
             this.os = 'iOS';
         }
+
+        var userAgent  = navigator.userAgent;
+        this.isAndroid     = userAgent.indexOf("Android") > -1;
+        this.isIphone  = userAgent.indexOf("iPhone") > -1;
+        this.isIpad  = userAgent.indexOf("iPad") > -1;
     }
 };
 helper.init();
