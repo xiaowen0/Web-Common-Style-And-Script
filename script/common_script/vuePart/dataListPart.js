@@ -100,7 +100,7 @@ export default {
 
             var dataPath        = this.apiConfig.list.dataPath || 'data.rows';
             var totalPath       = this.apiConfig.list.totalPath || 'data.total';
-            var totalPagePath   = this.apiConfig.list.totalPage || 'data.totalPage';
+            var totalPagePath   = this.apiConfig.list.totalPagePath || 'data.totalPage';
             var dataColumnMapping   = this.apiConfig.list.dataColumnMapping || {};
 
             // add page params
@@ -175,20 +175,29 @@ export default {
         },
 
         loadNextPage : function () {
+
+            consoleHelper.logDebug('load next page.');
             if (this.status === 'loading')
             {
+                consoleHelper.logDebug('current status is loading, return.');
                 return;
             }
 
             if (this.pagination.current == this.pagination.totalPage)
             {
+                consoleHelper.logDebug("It's already last page.");
                 return;
             }
 
-            window.setTimeout(() => {
-                this.pagination.current++;
-                this.loadData();
-            }, this.loadNextPageDelay);
+            this.pagination.current++;
+            this.loadData();
+
+            // this.status = 'loading';
+            //
+            // window.setTimeout(() => {
+            //     this.pagination.current++;
+            //     this.loadData();
+            // }, this.loadNextPageDelay);
 
         },
 
