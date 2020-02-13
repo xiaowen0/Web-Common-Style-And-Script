@@ -17,6 +17,16 @@ export default {
             apiConfig : {
                 get : {
                     url : '',
+                    // method : 'get',              // default: get
+                    params : {},                 // extra data
+                    // pageName : 'page',           // default: page
+                    // pageSizeName : 'limit',      // default: limit
+                    // dataPath : 'data.records',      // default: data.rows
+                    // dataColumnMapping : {
+                    //     downloadCount : 'downCount'
+                    // },
+                    // totalPath : 'data.total',    // default: data.total
+                    // totalPagePath : 'data.pages'    // default: data.totalPage
                 },
                 add : {
                     url : ''
@@ -27,10 +37,7 @@ export default {
                 remove : {
                     url : ''
                 }
-            },
-            onLoad : null,
-            beforeSubmit : null,
-            onSubmitSuccess : null
+            }
         }
     },
     methods : {
@@ -46,6 +53,12 @@ export default {
             var apiMethod = this.apiConfig.get.method || 'get';
             var dataPath = this.apiConfig.get.dataPath || 'data';
             var idParam = this.apiConfig.get.idParam || 'id';
+
+            if (!apiUrl)
+            {
+                consoleHelper.logWarn('Missing get data api url.');
+                return;
+            }
 
             var data = this.apiConfig.get.params || {};
             if (pk)     // my data not need id param
@@ -68,18 +81,22 @@ export default {
 
             this.status = 'loading';
             axios(options).then(res => {
+
+                this.status = 'ready';
+
                 var data        = objectHelper.getDataByKeyPath(res.data, dataPath);
                 data = objectHelper.dataColumnConvert(data, this.apiConfig.get.dataColumnMapping || {});
                 this.dataItem = data;
 
-                this.status = 'ready';
-                if (this.onLoad)
+                if (this.onLoadData)
                 {
-                    this.onLoad(this);
+                    this.onLoadData(this);
                 }
-            }).catch(res => {
+            }).catch(error => {
                 this.status = 'error';
-                this.$message.error(res.data.msg);
+                var data = error && error.response ? error.response.data : '';
+                var message = data.message || '未知错误';
+                window.app.showMessage('出错了', message);
             });
         },
         loadCategoryList : function (callback){
@@ -124,6 +141,13 @@ export default {
             }
             return moment(timestamp).format('YYYY-MM-DD HH:mm:ss');
         },
+        formatDelayTime : function (timestamp) {
+            if (!timestamp)
+            {
+                return '';
+            }
+            return moment(timestamp).fromNow();
+        },
 
         save : function (){
 
@@ -132,14 +156,13 @@ export default {
                 this.apiConfig.update.method || '' : this.apiConfig.add.method || '';
             var dataPath    = this.dataItem.id ?
                 this.apiConfig.update.dataPath || 'data' : this.apiConfig.add.dataPath || 'data';
+            var dataColumnsMapping = this.dataItem.id ?
+                this.apiConfig.update.dataColumnMapping || {} :
+                this.apiConfig.add.dataColumnMapping;
 
             var data = objectHelper.clone(this.dataItem);
-            // for (var key in columnsMapping)
-            // {
-            //     var apiKey = columnsMapping[key];
-            //     data[apiKey] = data[key];
-            //     delete data[key];
-            // }
+            // column convert
+            data = objectHelper.dataColumnConvertReverse(data, dataColumnsMapping);
 
             if (this.beforeSubmit)
             {
@@ -147,6 +170,7 @@ export default {
                 // check data, allow prevent submit.
                 if (!data)
                 {
+                    consoleHelper.logError('It must return data in beforeSubmit handler.');
                     return false;
                 }
             }
@@ -161,10 +185,6 @@ export default {
                 {
                     this.onSubmitSuccess(res.data);
                 }
-
-                this.$success({
-                    content : '保存成功'
-                });
 
                 var data = objectHelper.getDataByKeyPath(res.data, dataPath);
 
@@ -184,7 +204,7 @@ export default {
                     this.hide();
                 }
 
-                if (this.$parent)
+                if (this.$parent && typeof(this.$parent.reloadData) == 'function')
                 {
                     this.$parent.reloadData();
                 }
@@ -197,9 +217,20 @@ export default {
                 // me.outputSignal(signalMessage);
 
             }).catch(error => {
-
+                this.onSubmitError ? this.onSubmitError(error) : null;
             });
         },
+
+        beforeSubmit : function (data) {
+            return data;
+        },
+
+        /**
+         * var null|funciton(responseData)
+         */
+        onSubmitSuccess : function () {},
+        onSubmitError : function () {},
+        onLoadData : function () {},
 
         remove : function (){
 
