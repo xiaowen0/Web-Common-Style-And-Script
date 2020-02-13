@@ -52,7 +52,14 @@ var helper = {
 
         for (var name in object)
         {
-            newObject[name] = object[name];
+            if (typeof (object[name]) === 'object')
+            {
+                newObject[name] = this.clone(object[name]);
+            }
+            else
+            {
+                newObject[name] = object[name];
+            }
         }
 
         return newObject;
@@ -179,6 +186,26 @@ var helper = {
         {
             newData[mapKey] = newData[mapping[mapKey]];
             delete newData[mapping[mapKey]];
+        }
+
+        return newData;
+    },
+
+    dataColumnConvertReverse : function(data, mapping)
+    {
+        var newData = {};
+
+        // clone all properties
+        for (var key in data)
+        {
+            newData[key] = data[key];
+        }
+
+        // change property in mapping
+        for (var mapKey in mapping)
+        {
+            newData[mapping[mapKey]] = newData[mapKey];
+            delete newData[mapKey];
         }
 
         return newData;
