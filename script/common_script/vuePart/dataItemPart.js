@@ -99,6 +99,9 @@ export default {
                 window.app.showMessage('出错了', message);
             });
         },
+        reloadData : function (){
+            this.loadData(this.dataItem.id);
+        },
         loadCategoryList : function (callback){
 
             // API params
@@ -183,7 +186,7 @@ export default {
 
                 if (this.onSubmitSuccess)
                 {
-                    this.onSubmitSuccess(res.data);
+                    this.onSubmitSuccess(objectHelper.clone(res.data));
                 }
 
                 var data = objectHelper.getDataByKeyPath(res.data, dataPath);
