@@ -173,19 +173,20 @@ var helper = {
      */
     dataColumnConvert : function(data, mapping)
     {
-        var newData = {};
-
-        // clone all properties
-        for (var key in data)
-        {
-            newData[key] = data[key];
-        }
+        var newData = this.clone(data);
 
         // change property in mapping
         for (var mapKey in mapping)
         {
-            newData[mapKey] = newData[mapping[mapKey]];
-            delete newData[mapping[mapKey]];
+            if (mapping[mapKey].indexOf('.') < 0)
+            {
+                newData[mapKey] = newData[mapping[mapKey]];
+                delete newData[mapping[mapKey]];
+            }
+            else
+            {
+                newData[mapKey] = this.getDataByKeyPath(newData, mapping[mapKey]);
+            }
         }
 
         return newData;
