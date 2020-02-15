@@ -63,11 +63,11 @@ var helper = {
     getDebugStatus : function()
     {
         try {
-            if (typeof(sessionStorage) != 'object') {
+            if (typeof(localStorage) != 'object') {
                 return false;
             }
             // some browser may deny read storage
-            return sessionStorage.getItem('debug') === 'on';
+            return localStorage.getItem('debug') === 'on';
         }
         catch (e)
         {
