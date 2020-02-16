@@ -1,5 +1,6 @@
 import domHelper from './domHelper'
 import consoleHelper from './consoleHelper'
+import arrayHelper from './arrayHelper'
 
 /**
  * some special handle for object
@@ -52,9 +53,16 @@ var helper = {
 
         for (var name in object)
         {
-            if (typeof (object[name]) === 'object')
+            if (typeof (object[name]) === 'object')     // 对象和数组的 typeof 都返回 object，但是克隆方式不同。
             {
-                newObject[name] = this.clone(object[name]);
+                if (typeof (object[name].length) != 'undefined')
+                {
+                    newObject[name] = arrayHelper.clone(object[name]);
+                }
+                else
+                {
+                    newObject[name] = this.clone(object[name]);
+                }
             }
             else
             {
