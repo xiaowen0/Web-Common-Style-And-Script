@@ -138,19 +138,6 @@ export default {
 
             axios(options).then(res => {
 
-                var data        = objectHelper.getDataByKeyPath(res.data, dataPath);
-                var total       = objectHelper.getDataByKeyPath(res.data, totalPath);
-                var totalPage   = objectHelper.getDataByKeyPath(res.data, totalPagePath);
-                if (typeof(data) == 'undefined' || data == null)
-                {
-                    consoleHelper.logError('data is empty.');
-                    return;
-                }
-                data = objectHelper.listDataColumnConvert(data, dataColumnMapping);
-                me.dataList             = me.dataList.concat(data);
-                me.pagination.total     = total;
-                me.pagination.totalPage = totalPage;
-
                 this.status = 'ready';
                 var data        = objectHelper.getDataByKeyPath(res.data, dataPath);
                 var total       = objectHelper.getDataByKeyPath(res.data, totalPath);
@@ -160,10 +147,18 @@ export default {
                     consoleHelper.logError('data is empty.');
                     return;
                 }
+                // debugger;
                 data = objectHelper.listDataColumnConvert(data, dataColumnMapping);
+
                 me.dataList             = me.dataList.concat(data);
                 me.pagination.total     = total;
                 me.pagination.totalPage = totalPage;
+
+                if (this.onLoadData)
+                {
+                    this.onLoadData(data);
+                }
+
             }).catch(error => {
                 this.status = 'error';
                 if (error.response)
@@ -231,6 +226,8 @@ export default {
             this.dataList = [];
             this.loadData();
         },
+
+        onLoadData : function () {},
 
         /**
          * add a output channel
@@ -320,6 +317,8 @@ export default {
     },
     mounted() {
 
+        this.pagination.pageSize = this.pageSize;
+        
         // bind event
         this.pagination.showSizeChange  = this.onChangeSize;
         this.pagination.change          = this.onChangePage;
@@ -329,20 +328,29 @@ export default {
             this.loadData();
         }
 
+        var me = this;
+
         window.addEventListener('scroll', () => {
 
-            if (this.scrollToLoadNextPage == false)
+            if (me.scrollToLoadNextPage == false)
             {
                 return;
             }
 
-            var bottomDistance = this.scrollToLoadNextPage;
+            // check current element is display
+            var eleHeight = me.$el.offsetHeight;
+            if (!eleHeight)
+            {
+                return;
+            }
+
+            var bottomDistance = me.scrollToLoadNextPage;
             var windowHeight = window.innerHeight;
             var documentHeight = document.documentElement.offsetHeight;
             var scrollTop = document.documentElement.scrollTop;
             consoleHelper.logDebug('bottom distance: ' + documentHeight - scrollTop - windowHeight);
             if (documentHeight - scrollTop - windowHeight <= bottomDistance) {
-                this.loadNextPage();
+                me.loadNextPage();
             }
 
         });
