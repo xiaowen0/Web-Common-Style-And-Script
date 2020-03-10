@@ -1,0 +1,123 @@
+/* goods content */
+
+.goodsBlock {
+
+}
+
+.goodsBlock .title {
+    margin: 0;
+    padding: 20px 10px;
+    font-size: 150%;
+    color: #565656;
+}
+
+.goodsBlock ul {
+    list-style: none none;
+    padding: 0 0 0 .4rem;
+    margin: 0;
+}
+
+.goodsBlock .goodsItem {
+    padding-right: 0.25rem;
+    padding-left: 0;
+    margin-bottom: .5rem;
+    float: left;
+    width: 50%;
+    height: 24rem;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.goodsBlock .goodsItem a {
+    display: block;
+    background-color: white;
+    overflow: hidden;
+    /*padding-bottom: 1rem;*/
+    height: 100%;
+    color: #333;
+}
+
+.goodsBlock .goodsItem .imageBox {
+    display: block;
+    position: relative;
+
+    height: 12rem;
+    overflow: hidden;
+
+    /*background-color: #a0a0a0;*/
+    border: solid 1px #e4e4e4;
+
+    margin-bottom: .5rem;
+}
+
+.goodsBlock .goodsItem .imageBox img {
+    min-height: 100%;
+}
+
+.goodsBlock .goodsItem .name {
+    color: #232323;
+    padding: 0 .5rem 0 .5rem;
+
+    margin-bottom: 0;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+
+    font-size: 1.5rem;
+    line-height: 1.6rem;
+    height: 3.2rem;
+}
+
+.goodsBlock .goodsItem .labels {
+    height: 2.2rem;
+    overflow: hidden;
+    font-size: 0;
+    padding: .5rem .5rem 0 .5rem;
+    /*margin-bottom: .5rem;*/
+}
+
+.goodsBlock .goodsItem .label {
+    float: left;
+    border: 1px solid #f2303c;
+    padding: 2px 4px;
+    padding-top: 1px;
+    box-sizing: border-box;
+    margin-right: 0.125rem;
+    font-size: 1.3rem;
+    color: #f2303c;
+    border-radius: 2px;
+    line-height: 1.2rem;
+}
+
+.goodsBlock .goodsItem .money {
+    /*color: #e53e30;*/
+    font-size: 1.3rem;
+    margin-left: .1rem;
+    /*float: left;*/
+    margin-right: .35rem;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: .5rem .5rem 0 .5rem;
+}
+
+.goodsNumberControl {
+    display: inline-block;
+    /*height: 30px;*/
+    height: 3rem;
+    line-height: 3rem;
+}
+
+.goodsNumberControl button {
+    height : 100%;
+    line-height: 100%;
+    padding: 0 1rem;
+}
+
+.goodsNumberControl .count {
+    height : 100%;
+    line-height: 100%;
+    padding: 0 1rem;
+}

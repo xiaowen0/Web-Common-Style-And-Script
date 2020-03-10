@@ -256,6 +256,49 @@ img.fullSpace {
     box-sizing: border-box;
 }
 
+/* square size */
+
+.size12 {
+    width: 12px;
+    height: 12px;
+}
+.size16 {
+    width: 16px;
+    height: 16px;
+}
+.size20 {
+    width: 20px;
+    height: 20px;
+}
+.size24 {
+    width: 24px;
+    height: 24px;
+}
+.size28 {
+    width: 28px;
+    height: 28px;
+}
+.size32 {
+    width: 32px;
+    height: 32px;
+}
+.size36 {
+    width: 36px;
+    height: 36px;
+}
+.size40 {
+    width: 40px;
+    height: 40px;
+}
+.size44 {
+    width: 44px;
+    height: 44px;
+}
+.size48 {
+    width: 48px;
+    height: 48px;
+}
+
 .limit_max_width {
     max-width: 100%;
 }
@@ -281,6 +324,21 @@ img.fullSpace {
     line-height: 166.66%;
 }
 
+.lineHeight1p {
+    line-height: 1em;
+}
+.lineHeightOneAndAHalfTimes {
+    line-height: 1.5em;
+}
+.lineHeightOneAndAHalfTimes.maxHeightOneLine {
+    height: 1.5em;
+    overflow: hidden;
+}
+.lineHeightOneAndAHalfTimes.maxHeightTwoLine {
+    height: 3em;
+    overflow: hidden;
+}
+
 .hiddenOverflow {
     overflow: hidden;
 }
@@ -289,105 +347,159 @@ img.fullSpace {
     overflow-x: hidden;
 }
 
-/* margin & padding */
-.no-margin,
+/* margin, value: 4, 8, 10, 12, 14, 16, 20 */
+
 .noMargin {
     margin: 0;
 }
-.mt10 {
+
+.marginT4 {
+    margin-top: 4px;
+}
+.marginT8 {
+    margin-top: 8px;
+}
+.marginT10 {
     margin-top: 10px;
 }
-.mb10 {
-    margin-bottom: 10px;
+.marginT12 {
+    margin-top: 12px;
 }
-.mt20 {
+.marginT14 {
+    margin-top: 14px;
+}
+.marginT16 {
+    margin-top: 16px;
+}
+.marginT20 {
     margin-top: 20px;
 }
-.mb20 {
-    margin-bottom: 20px;
+
+.marginL4 {
+    margin-left: 4px;
 }
-.ml10 {
+.marginL8 {
+    margin-left: 8px;
+}
+.marginL10 {
     margin-left: 10px;
 }
-.mr10 {
-    margin-right: 10px;
+.marginL12 {
+    margin-left: 12px;
 }
-.ml20 {
+.marginL14 {
+    margin-left: 12px;
+}
+.marginL16 {
+    margin-left: 16px;
+}
+.marginL20 {
     margin-left: 20px;
 }
-.mr20 {
+
+.marginR4 {
+    margin-right: 4px;
+}
+.marginR8 {
+    margin-right: 8px;
+}
+.marginR10 {
+    margin-right: 10px;
+}
+.marginR12 {
+    margin-right: 12px;
+}
+.marginR14 {
+    margin-right: 14px;
+}
+.marginR16 {
+    margin-right: 16px;
+}
+.marginR20 {
     margin-right: 20px;
 }
 
-.verticalPadding8 {
-    padding-top: 8px;
-    padding-bottom: 8px;
+.marginB4 {
+    margin-bottom: 4px;
+}
+.marginB8 {
+    margin-bottom: 8px;
+}
+.marginB10 {
+    margin-bottom: 10px;
+}
+.marginB12 {
+    margin-bottom: 12px;
+}
+.marginB14 {
+    margin-bottom: 14px;
+}
+.marginB16 {
+    margin-bottom: 16px;
+}
+.marginB20 {
+    margin-bottom: 20px;
 }
 
-.padding10,
-.pd10 {
+/* padding, value: 8, 10, 12, 16, 20 */
+
+.noPadding {
+    padding: 0;
+}
+
+.padding8 {
+    padding: 8px;
+}
+.padding10 {
     padding: 10px;
-}
-
-.horizontalPadding10,
-.hpd10 {
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-.verticalPadding10,
-.vpd10 {
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-.padding16 {
-    padding: 16px;
 }
 .padding12 {
     padding: 12px;
 }
+.padding16 {
+    padding: 16px;
+}
 .padding20 {
     padding: 20px;
-}
-.horizontalPadding8 {
-    padding-left: 8px;
-    padding-right: 8px;
-}
-.horizontalPadding12 {
-    padding-left: 12px;
-    padding-right: 12px;
-}
-.horizontalPadding16 {
-    padding-left: 16px;
-    padding-right: 16px;
-}
-.verticalPadding8 {
-    padding-top: 8px;
-    padding-bottom: 8px;
-}
-.verticalPadding10 {
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-.verticalPadding12 {
-    padding-top: 12px;
-    padding-bottom: 12px;
-}
-.verticalPadding16 {
-    padding-top: 16px;
-    padding-bottom: 16px;
-}
-.verticalPadding20 {
-    padding-top: 20px;
-    padding-bottom: 20px;
 }
 .padding20mm {
     padding: 20mm;
 }
 
-.no-padding,
-.noPadding {
-    padding: 0;
+.paddingH8 {
+    padding-left: 8px;
+    padding-right: 8px;
+}
+.paddingH10 {
+    padding-left: 10px;
+    padding-right: 0px;
+}
+.paddingH12 {
+    padding-left: 12px;
+    padding-right: 12px;
+}
+.paddingH16 {
+    padding-left: 16px;
+    padding-right: 16px;
+}
+.paddingH20 {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.paddingL8 {
+    margin-left: 8px;
+}
+.paddingL10 {
+    margin-left: 10px;
+}
+.paddingL12 {
+    margin-left: 12px;
+}
+.paddingL16 {
+    margin-left: 16px;
+}
+.paddingL20 {
+    margin-left: 20px;
 }
 
 /* background */
@@ -395,11 +507,14 @@ img.fullSpace {
     background: none;
 }
 
-.white_bg {
+.white_bg,
+.bgWhite,
+.bgFFF {
     background-color: white;
 }
 
-.grey_bg {
+.grey_bg,
+.bgEEE {
     background-color: #EEE;
 }
 
@@ -427,7 +542,6 @@ img.fullSpace {
 }
 
 .deepskyblue_bg {
-    color: #fff;
     background-color: deepskyblue;
 }
 
@@ -444,6 +558,13 @@ img.fullSpace {
 .error_bg,
 .danger_bg {
     background-color: #f2dede;
+}
+
+.bgFAFAFA {
+    background-color: #FAFAFA;
+}
+.bgF5F5F5 {
+    background-color: #F5F5F5;
 }
 
 .starryNightBg {
@@ -608,6 +729,9 @@ img.fullSpace {
 .f20r16 {
     font-size: 125%;
 }
+.f24r16 {
+    font-size: 150%;
+}
 
 /* font size relative to 10px */
 .f11r10 {
@@ -682,6 +806,7 @@ img.fullSpace {
 }
 
 /* text color */
+
 .red,
 .error,
 .price {
@@ -854,13 +979,19 @@ img.fullSpace {
     height: 1px;
     background-color: #EEE;
 }
-.bottomBorder {
+.bottomBorderCCC {
     border-bottom: solid 1px #CCCCCC;
 }
-.lightGreyBottomBorder {
+.bottomBorderEEE {
     border-bottom: solid 1px #EEEEEE;
 }
-.lightGreyTopBorder {
+.bottomBorderFAFAFA {
+    border-bottom: solid 1px #FAFAFA
+}
+.bottomBorderF5F5F5 {
+    border-bottom: solid 1px #F5F5F5;
+}
+.topBorderEEE {
     border-top: solid 1px #EEEEEE;
 }
 
@@ -889,34 +1020,44 @@ img.fullSpace {
     border-color: #fff;
 }
 
+.noRadius,
+.noRoundBorder,
+.angleBorder {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+
 .roundBorder,
-.roundCorner,
 .roundBorder8 {
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     border-radius: 8px;
 }
-.borderRadius4,
+
 .roundBorder4 {
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
 }
-.borderRadius6,
-.roundBorder6 {
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    border-radius: 6px;
-}
-.borderRadius10 {
+
+.roundBorder10 {
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
 }
-.no-radius {
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
+
+.circle {
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+}
+
+.disk {
+    border: 3px solid #000;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
 }
 
 /* rotate animation
@@ -1039,15 +1180,23 @@ p.error {
     position: fixed;
 }
 
-.topPosition {
+.topPosition,
+.fixedTop {
     top: 0;
 }
 
-.bottomPosition {
+.bottomPosition,
+.fixedBottom {
     bottom: 0;
 }
 
-/* position */
+.fixedTop, .fixedBottom {
+    position: fixed;
+    z-index: 2;
+    width: 100%;
+    left: 0;
+}
+
 .pageCenter {
     position: fixed;
     z-index: 2;
@@ -1055,7 +1204,7 @@ p.error {
     top: 50%;
 }
 
-/* object fit type */
+/* image style */
 
 .fitTypeContain,
 img.contain {
@@ -1065,20 +1214,14 @@ img.contain {
 img.cover {
     object-fit: cover;
 }
-
-/* shape style */
-
-.circle {
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    border-radius: 50%;
+.headImage {
+    background-color: #EEE;
+    object-fit: cover;  /* 等比例放大覆盖 */
 }
-
-.disk {
-    border: 3px solid #000;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    border-radius: 50%;
+.headImage.border,
+.headImage.whiteBorder {
+    box-sizing: border-box;
+    border: solid 2px white;
 }
 
 /* outline */
@@ -1157,5 +1300,19 @@ select.noShadow {
     -webkit-transition: all 5s linear 0s;
     -o-transition: all 5s linear 0s;
     -moz-transition: all 5s linear 0s;
+}
+
+/* scrollbar */
+
+.hiddenScrollbar {
+    scrollbar-width: none;  /* Firefox v64+ */
+    scrollbar-color: transparent transparent;
+}
+.hiddenScrollbar::-webkit-scrollbar {
+    /* Supported: Edge 79+, Chrome 4+, Safari 4+, Opera 15+, iOS Safari 3.2+
+     * Android Browser 80+, Opera Mobile 46+
+     * refer: https://caniuse.com/#feat=mdn-css_selectors_-webkit-scrollbar
+     */
+    display: none;
 }
 
