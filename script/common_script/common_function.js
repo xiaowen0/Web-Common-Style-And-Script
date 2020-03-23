@@ -6451,6 +6451,9 @@ function initVueForm(options)
             {
                 me.initEditors();
             }
+        },
+        mounted : function () {
+            onMounted ? onMounted(this) : null;
         }
     });
     return vueController;
