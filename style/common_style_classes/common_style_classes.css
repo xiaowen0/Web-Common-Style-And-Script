@@ -327,7 +327,10 @@ img.fullSpace {
 .lineHeight1p {
     line-height: 1em;
 }
-.lineHeightOneAndAHalfTimes {
+.lineHeightOneAndAHalfTimes,
+.lineHeight30r20,
+.lineHeight21r14,
+.lineHeight24r16 {
     line-height: 1.5em;
 }
 .lineHeightOneAndAHalfTimes.maxHeightOneLine {
