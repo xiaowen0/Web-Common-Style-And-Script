@@ -36,12 +36,10 @@ gulp.task('build', function() {
 
 // copy image in style folder
 gulp.task('copy_style_image', function (){
-    return gulp.src([
-        'style/**/*.jpg',
-        'style/**/*.png',
-        'style/**/*.gif'
-    ]).pipe(gulp.dest(targetFolder + 'style/'))            //输出文件目录
-      .pipe(notify({message:'copy style image task ok', onLast : true})); //提示成功
+
+    return gulp.src('style/**/image/*.*')
+        .pipe(gulp.dest(targetFolder + 'style/'))            //输出文件目录
+        .pipe(notify({message:'copy style image task ok', onLast : true})); //提示成功
 });
 
 // minify css file
@@ -61,21 +59,24 @@ gulp.task('minifyjs',function(){
        //.pipe(gulp.dest('dist/js'))      //输出
        .pipe(rename({suffix:'.min'}))     //重命名
        .pipe(uglify())                    //压缩
-       .pipe(gulp.dest('script/common_script/'))        //输出 
+       .pipe(gulp.dest('script/common_script/'))        //输出
        .pipe(notify({message:"minify js task ok"}));    //提示*/
-	   
+
 	gulp.src('script/**/*.js')       // script folder's js file
        //.pipe(concat('order_query.js'))  //合并js
        //.pipe(gulp.dest('dist/js'))      //输出
-       .pipe(rename({suffix:'.min'}))     //重命名
-       .pipe(uglify())                    //压缩
-       .pipe(gulp.dest(targetFolder + 'script/'))        //输出 
+       .pipe(rename({suffix:'.min'}))       //重命名
+       // .pipe(uglify().on('error', function(error){   //压缩
+       //     gutil.log(error);
+       //     this.emit('end');
+       // }))
+       .pipe(gulp.dest(targetFolder + 'script/'))        //输出
        .pipe(notify({message:"copy and minify js file finished.", onLast : true}));    //提示
-	   
+
 	gulp.src('script/**/*.md')		// script folder's markdown file
-		.pipe(gulp.dest(targetFolder + 'script/'))        //输出 
+		.pipe(gulp.dest(targetFolder + 'script/'))        //输出
        .pipe(notify({message:"copy markdown file finished.", onLast : true}));    //提示
-	   
+
 	return true;
 });
 
