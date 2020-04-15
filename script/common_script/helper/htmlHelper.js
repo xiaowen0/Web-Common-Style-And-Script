@@ -40,6 +40,18 @@ var helper = {
         return s;
     },
 
+    nlToBr : function () {
+        var reg = new RegExp("\n", "g");
+        str = str.replace(reg, "<br/>");
+        return str;
+    },
+
+    brToNl : function () {
+        var reg = new RegExp("<br/>", "g");
+        str = str.replace(reg, "\n");
+        return str;
+    },
+
     /**
      * remove all html tag in html code
      * @param   String  html  HTML code
