@@ -61,6 +61,23 @@ export default {
     },
 
     /**
+     * query params (type object) convert to query string (example: a=1&b=2)
+     * @param   Object  params
+     * @return  String
+     */
+    paramsToQueryString : function (params) {
+
+        var queryList = [];
+        for (var key in params)
+        {
+            queryList.push(key + '=' + params[key]);
+        }
+
+        var queryStr = queryList.join('&');
+        return queryStr;
+    },
+
+    /**
      * create url with params
      * @param String url
      * @param Object params
