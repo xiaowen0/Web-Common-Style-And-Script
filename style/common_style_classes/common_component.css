@@ -516,9 +516,6 @@
     -o-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
 }
-.thumbnail.block {
-    display: block;
-}
 
 .card_content_container {
     overflow: hidden;
@@ -639,24 +636,18 @@
 /* button style */
 .button {
     display: inline-block;
-    height: 30px;
-    line-height: 28px;
     white-space: nowrap;
     vertical-align: middle;
     cursor: pointer;
-    background-color: #FFF;
-    border: solid 1px #DDD;
-    color: #666;
-    padding: 0 1.6ex;
     -webkit-box-sizing: content-box;
     -moz-box-sizing: content-box;
     box-sizing: content-box;
+    text-align: center;
     font-size: 100%;
     text-decoration: none;
 }
 
 .button.block {
-    display: block;
     width: 100%;    /* reset width, button's default width is inline-block status's width. */
     box-sizing: border-box;     /* box sizing no include padding */
 }
