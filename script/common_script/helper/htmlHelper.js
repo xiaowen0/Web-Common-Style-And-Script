@@ -40,13 +40,13 @@ var helper = {
         return s;
     },
 
-    nlToBr : function () {
+    nlToBr : function (str) {
         var reg = new RegExp("\n", "g");
         str = str.replace(reg, "<br/>");
         return str;
     },
 
-    brToNl : function () {
+    brToNl : function (str) {
         var reg = new RegExp("<br/>", "g");
         str = str.replace(reg, "\n");
         return str;
