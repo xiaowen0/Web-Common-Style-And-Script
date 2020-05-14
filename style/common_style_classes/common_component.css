@@ -608,10 +608,10 @@
     height: auto;
 }
 
-.layer > div {
+/*.layer > div {
     position: absolute;
     z-index: 2;
-}
+}*/
 
 /* divider */
 
