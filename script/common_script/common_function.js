@@ -2773,6 +2773,21 @@ function getUrlParam(name)
     return default_value;
 }
 
+/**
+ * @param   Array   paramsList
+ */
+function getParamsFromUrl(paramsList)
+{
+    var params = {};
+    for (var i=0; i<paramsList.length; i++)
+    {
+        var tName = paramsList[i];
+        var tValue = getUrlParam(paramsList[i]) || '';
+        tValue ? params[tName] = decodeURIComponent(tValue) : null;
+    }
+    return params;
+},
+
 /* --- Window function group ------------------------------------------- */
 
 /**

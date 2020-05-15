@@ -61,6 +61,21 @@ export default {
     },
 
     /**
+     * @param   Array   paramsList
+     */
+    getParamsFromUrl : function(paramsList)
+    {
+        var params = {};
+        for (var i=0; i<paramsList.length; i++)
+        {
+            var tName = paramsList[i];
+            var tValue = getUrlParam(paramsList[i]) || '';
+            tValue ? params[tName] = decodeURIComponent(tValue) : null;
+        }
+        return params;
+    },
+
+    /**
      * query params (type object) convert to query string (example: a=1&b=2)
      * @param   Object  params
      * @return  String
