@@ -2031,6 +2031,27 @@ form.horizontalLayout .formItem .controlColumn {
     border-color: black;
 }
 
+/* indicator */
+
+.indicator {
+    display: inline-block;
+}
+.indicator.roundDotStyle .roundDot {
+    display: inline-block;
+    width:6px;
+    height:6px;
+    border-radius:3px;
+    margin: 0 3px;
+}
+.indicator.roundDotStyle .roundDot.defaultColorCCC {
+    background: #CCC;
+}
+.indicator.roundDotStyle .roundDot.activeFA585C {
+    background: #FA585C;
+}
+
+/* mobile bottom menu */
+
 .mobileBottomMenuContainer {
     position: fixed;
     z-index: 2;
