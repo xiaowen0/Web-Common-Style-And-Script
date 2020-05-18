@@ -565,6 +565,11 @@ export default {
             this.loadDataList();
         },
 
+        getPlainText : function(html) {
+            var text = htmlHelper.removeTag(htmlHelper.decode(html));
+            return text;
+        },
+
         // methods for external modules
 
         showSearchDialog : function () {
