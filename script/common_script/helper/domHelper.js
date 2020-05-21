@@ -339,6 +339,32 @@ export default {
         var pointXrate = pointX / targetWidth;
 
         return pointXrate;
+    },
+
+    /**
+     * get relative length by touch in a wrapper
+     * @param   Object(Event)   clickEvent
+     * @return  Number
+     */
+    getProgressTouchPosition : function(touchEvent) {
+
+        var target = touchEvent.currentTarget;
+
+        var targetWidth = target.offsetWidth;
+
+        var targetX = target.offsetLeft;
+
+        var touches = touchEvent.changedTouches;
+        if (touches.length > 1)
+        {
+            return false;
+        }
+        var touch = touches[0];
+
+        var pointX = touch.clientX - targetX;
+        var pointXrate = pointX / targetWidth;
+
+        return pointXrate;
     }
 };
 
