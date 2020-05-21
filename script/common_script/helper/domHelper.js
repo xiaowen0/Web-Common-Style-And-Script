@@ -320,6 +320,25 @@ export default {
         $(element).css('margin-top', topMargin + 'px');
 
         return true;
+    },
+
+    /**
+     * get relative length by click in a wrapper
+     * @param   Object(Event)   clickEvent
+     * @return  Number
+     */
+    getProgressClickPosition : function(clickEvent) {
+
+        var target = clickEvent.currentTarget;
+
+        var targetWidth = target.offsetWidth;
+
+        var targetX = target.offsetLeft;
+
+        var pointX = clickEvent.clientX - targetX;
+        var pointXrate = pointX / targetWidth;
+
+        return pointXrate;
     }
 };
 
