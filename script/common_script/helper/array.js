@@ -125,6 +125,50 @@ export default {
         }
 
         return null;
+    },
+
+    /**
+     * get random item in array
+     * @param   Array   list
+     * @return  Mixed
+     */
+    getRandomItem : function (list) {
+        var i = Math.floor( Math.random() * list.length );
+        return list[i];
+    },
+
+    /**
+     * move a element in a array
+     * @param   Array   list
+     * @param   Number  fromIndex
+     * @param   Number  toIndex
+     * @return  Array
+     */
+    moveItem : function (list, fromIndex, toIndex) {
+
+        var moveingItem = list[fromIndex];
+
+        var i = 0;
+        // move from head to back
+        if(toIndex > fromIndex)
+        {
+            for (i=fromIndex; i<toIndex; i++)   // start from head, each element move a place to head.
+            {
+                list[i] = list[i+1];
+            }
+        }
+        // move from back to head
+        else if (toIndex < fromIndex)
+        {
+            for (i=fromIndex; i>toIndex; i--)   // start from back, each element move a place to back
+            {
+                list[i] = list[i-1];
+            }
+        }
+
+        list[toIndex] = moveingItem;
+
+        return list;
     }
 
 };
