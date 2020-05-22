@@ -148,6 +148,11 @@ export default {
 
         var moveingItem = list[fromIndex];
 
+        if (toIndex >= list.length)  // out of array range
+        {
+            toIndex = list.length - 1;
+        }
+
         var i = 0;
         // move from head to back
         if(toIndex > fromIndex)
