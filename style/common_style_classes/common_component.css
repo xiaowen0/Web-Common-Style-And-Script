@@ -432,6 +432,13 @@
     object-fit: cover;
 }
 
+.disk {
+    border: 3px solid #000;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+}
+
 /* search bar */
 
 .searchBar[data-theme="concise"] {
