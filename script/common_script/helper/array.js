@@ -1,3 +1,5 @@
+import objectHelper from './objectHelper';
+
 export default {
 
     /**
@@ -9,9 +11,29 @@ export default {
     {
         var newArray = new Array();
 
-        for (var index in array)
+        for (var i=0; i<array.length; i++)
         {
-            newArray[index] = typeof(array[index]) == "object" ? this.clone(array[index]) : array[index];
+            var tVal = array[i];
+
+            if (typeof (tVal) != 'object')
+            {
+                newArray[i] = tVal;
+            }
+            else    // 对象、数组、null的 typeof 都返回 object，但是克隆方式不同。
+            {
+                if (tVal === null)
+                {
+                    newArray[i] = tVal;
+                }
+                else if (typeof (tVal.length) != 'undefined')
+                {
+                    newArray[i] = this.clone(tVal);
+                }
+                else
+                {
+                    newArray[i] = objectHelper.clone(tVal);
+                }
+            }
         }
 
         return newArray;
