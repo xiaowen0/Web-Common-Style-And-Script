@@ -2,6 +2,7 @@ import axios from '@util/axios'
 import moment from 'moment';
 import consoleHelper from '@util/consoleHelper';
 import objectHelper from '@util/objectHelper';
+
 import arrayHelper from "../../util/arrayHelper";
 
 export default {
@@ -133,6 +134,7 @@ export default {
             }
 
             this.status = 'loading';
+			this.onLoading ? this.onLoading() : null;
 
             var options = {
                 url: url,
@@ -167,6 +169,7 @@ export default {
 
             }).catch(error => {
                 this.status = 'error';
+				this.onError ? this.onError(error) : null;
                 if (error.response) {
                     this.errorInfo.status = error.response.status;
                     var data = error.response.data;
@@ -229,6 +232,15 @@ export default {
         },
 
         onLoadData: function () {},
+		
+		/* before load data, status: loading */
+		onLoading : function () {},
+		
+		/* after load data fail, status: error
+		 * @param	Object	error
+		 */
+		onError : function (error) {},
+		
         afterRemove : function () {},
         onRemoveError : function () {},
 
@@ -342,6 +354,10 @@ export default {
             this.loadData();
         },
 
+        showSearchDialog: function () {
+            var app = this.app;
+            app ? app.searchDialog.show() : null;
+        },
 
         getScrollContainer: function () {
             if (typeof (this.scrollControl.scrollContainer) == 'string') {

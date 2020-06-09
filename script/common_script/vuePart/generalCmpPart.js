@@ -168,6 +168,7 @@ export default {
             }
 
             this.status = 'loading';
+			this.onLoading ? this.onLoading() : null;
 
             var options = {
                 url: url,
@@ -582,6 +583,9 @@ export default {
 
         // event for data list
         onLoadDataList : function () {},
+		
+		/* before load data, status: loading */
+		onLoading : function () {},
 
         // event for data item
         beforeSubmit : function (data) {
