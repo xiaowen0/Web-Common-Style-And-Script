@@ -182,6 +182,66 @@ export default {
 
         consoleHelper.logDebug('text: ' + text);
         return text;
+    },
+
+    /**
+     * add link for remind words
+     * @param   String  text        text include '@xxx ' string
+     * @param   Object  options     a tag attributies, the keys must standard A tag's DOM attribute name.
+     * href value can be a function, recieve a remind name param, and return a special url.
+     * @return  String
+     */
+    linkRemindWords : function (text, options) {
+        consoleHelper.logDebug('linkRemindWords:');
+
+        // remind word regexp
+        var reg = /@[^ ]* /g;
+
+        var remindNameList = [];
+        var match;
+        while ((match = reg.exec(text)) !== null) {
+            // console.log(`Found ${match[0]} start=${match.index} end=${reg.lastIndex}.`);
+            // expected output: "Found football start=6 end=14."
+            // expected output: "Found foosball start=16 end=24."
+            remindNameList.push(`${match[0]}`);
+        }
+        remindNameList = arrayHelper.unique(remindNameList);
+        consoleHelper.logDebug('remind name list: ' + remindNameList.join(','));
+
+        // for each remind name
+        for (var i=0; i<remindNameList.length; i++)
+        {
+            var remindName = remindNameList[i];
+            var userName = this.replace(remindName, '@', '');
+
+            // create a tag, and set some properties
+            var linkEle = document.createElement('a');
+            linkEle.innerHTML = remindName;
+            for (var attrItem in options)
+            {
+                if (attrItem === 'class')
+                {
+                    linkEle.className = options[attrItem];
+                }
+                else if (attrItem === 'href' && typeof(options[attrItem]) === 'function')
+                {
+                    linkEle[attrItem] = options[attrItem](userName);
+                }
+                else
+                {
+                    linkEle[attrItem] = options[attrItem];
+                }
+            }
+
+            // replacement string include finding string, then use a middle variable.
+            // example: @Tom hello -> REPLACEMENT hello -> <a href="">@Tom</a> hello
+            var key = 'REPLACEMENT';
+            text = this.replace(text, remindName, key);
+            text = this.replace(text, key, linkEle.outerHTML);
+        }
+
+        consoleHelper.logDebug('text: ' + text);
+        return text;
     }
 
 }
