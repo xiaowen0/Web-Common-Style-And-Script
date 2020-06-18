@@ -38,6 +38,7 @@ export default {
         if (replace.indexOf(find) >=0 )
         {
             consoleHelper.logError('Replace string fail: replace string include find string.');
+            consoleHelper.logError('finding string: ' + find + ' replacement: ' + replace);
             return string;
         }
 
@@ -158,9 +159,13 @@ export default {
             linkEle.innerHTML = topicName;
             for (var attrItem in options)
             {
-                if (attrItem === 'href' && typeof(options[attrItem]) === 'function')
+                if (attrItem === 'class')
                 {
-                    linkEle[attrItem] = options[attrItem](topicName);
+                    linkEle.className = options[attrItem];
+                }
+                else if (attrItem === 'href' && typeof(options[attrItem]) === 'function')
+                {
+                    linkEle[attrItem] = options[attrItem](this.replace(topicName, '#', ''));
                 }
                 else
                 {
@@ -169,8 +174,8 @@ export default {
             }
 
             // replacement string include finding string, then use a middle variable.
-            // example: #hello# -> REPLACEMENT_HELLO -> <a href="">#hello#</a>
-            var key = 'REPLACEMENT_' + topicName.toUpperCase();
+            // example: #hello# -> REPLACEMENT -> <a href="">#hello#</a>
+            var key = 'REPLACEMENT';
             text = this.replace(text, topicName, key);
             text = this.replace(text, key, linkEle.outerHTML);
         }
