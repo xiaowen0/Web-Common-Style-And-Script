@@ -196,6 +196,12 @@ export default {
         list[toIndex] = moveingItem;
 
         return list;
+    },
+
+    unique : function(arr) {
+        return arr.filter(function(e,i){
+            return arr.indexOf(e)===i;
+        });
     }
 
 };
