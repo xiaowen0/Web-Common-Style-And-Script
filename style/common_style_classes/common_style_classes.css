@@ -1179,6 +1179,15 @@ img.cover {
     opacity: 1;
 }
 
+/* blur */
+
+.blur {
+    filter: blur(2px);
+}
+.blur4 {
+    filter: blur(4px);
+}
+
 /* shadow */
 
 .shadow {
