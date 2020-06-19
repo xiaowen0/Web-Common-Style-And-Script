@@ -324,7 +324,7 @@ export default {
                 data = objectHelper.dataColumnConvert(data, this.apiConfig.get.dataColumnMapping || {});
                 this.dataItem = data;
 
-                this.onLoadData(this);
+                this.onLoadDataItem(this);
 
             }).catch(this.onHttpError);
         },
@@ -566,11 +566,6 @@ export default {
             this.loadDataList();
         },
 
-        getPlainText : function(html) {
-            var text = htmlHelper.removeTag(htmlHelper.decode(html));
-            return text;
-        },
-
         // methods for external modules
 
         showSearchDialog : function () {
@@ -583,7 +578,7 @@ export default {
 
         // event for data list
         onLoadDataList : function () {},
-		
+
 		/* before load data, status: loading */
 		onLoading : function () {},
 
