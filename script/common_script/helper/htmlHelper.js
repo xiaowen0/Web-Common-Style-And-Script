@@ -41,12 +41,20 @@ var helper = {
     },
 
     nlToBr : function (str) {
+        if (!str)
+        {
+            return str;
+        }
         var reg = new RegExp("\n", "g");
         str = str.replace(reg, "<br/>");
         return str;
     },
 
     brToNl : function (str) {
+        if (!str)
+        {
+            return str;
+        }
         var reg = new RegExp("<br/>", "g");
         str = str.replace(reg, "\n");
         return str;
@@ -59,6 +67,10 @@ var helper = {
      */
     removeTag : function (html)
     {
+        if (!html)
+        {
+            return html;
+        }
         return html.replace(/<[^<>]+?>/g, '');//删除所有HTML标签
     },
 
@@ -69,6 +81,10 @@ var helper = {
      */
     filterImg : function (html)
     {
+        if (!html)
+        {
+            return html;
+        }
         return new RegExp("<img[^>]*>").exec(html);
     },
 
@@ -79,6 +95,10 @@ var helper = {
      */
     filterImageUrlList : function (html)
     {
+        if (!html)
+        {
+            return [];
+        }
         var tempEle = $(html);
         var imageList = tempEle.find('img');
         var urlList = [];
