@@ -2,6 +2,8 @@ import axios from '@util/axios'
 import moment from 'moment';
 import consoleHelper from '@util/consoleHelper';
 import objectHelper from '@util/objectHelper';
+import htmlHelper from '@util/htmlHelper';
+import windowHelper from "../../util/windowHelper";
 
 /**
  * 通用组件零件
@@ -87,6 +89,11 @@ export default {
             autoLoadDataItem : false,
 
             enableLottie : false,
+
+            scrollControl: {
+                viewContainer: window,
+                scrollContainer: document.documentElement
+            },
 
             scrollToLoadNextPage : 40,
             loadNextPageDelay : 500,
@@ -566,11 +573,33 @@ export default {
             this.loadDataList();
         },
 
+
+        getPlainText : function(html) {
+            var text = htmlHelper.removeTag(htmlHelper.decode(html));
+            return text;
+        },
+
         // methods for external modules
 
         showSearchDialog : function () {
             var app = this.app;
             app ? app.searchDialog.show() : null;
+        },
+
+        getScrollContainer: function () {
+            if (typeof (this.scrollControl.scrollContainer) == 'string') {
+                return document.querySelector(this.scrollControl.scrollContainer);
+            }
+
+            return this.scrollControl.scrollContainer;
+        },
+
+        getViewContainer: function () {
+            if (typeof (this.scrollControl.viewContainer) == 'string') {
+                return document.querySelector(this.scrollControl.viewContainer);
+            }
+
+            return this.scrollControl.viewContainer;
         },
 
         // event for http request
@@ -592,6 +621,62 @@ export default {
          */
         onSubmitSuccess : function () {},
         onLoadDataItem : function () {},
+
+        onScroll : function(event) {
+
+            var me = this;
+
+            if (me.scrollToLoadNextPage == false) {
+                consoleHelper.logDebug('scrollToLoadNextPage disabled.');
+                return;
+            }
+
+            var bottomDistance = me.scrollToLoadNextPage;
+
+            var viewContainer = this.getViewContainer();
+            var scrollContainer = this.getScrollContainer();
+
+            if (viewContainer == window)
+            {
+                var viewContainerHeight = viewContainer.innerHeight || viewContainer.offsetHeight;
+                var scrollContainerHeight = scrollContainer.offsetHeight;
+                var scrollContainerTop = windowHelper.getScrollTop() || scrollContainer.scrollTop;
+                // consoleHelper.logDebug('viewContainerHeight: ' + viewContainerHeight +
+                //     ' scrollContainerHeight: ' + scrollContainerHeight +
+                //     ' scrollContainerTop: ' + scrollContainerTop);
+
+                // check current element is display
+                if (!scrollContainerHeight) {
+                    consoleHelper.logDebug('scroll container height: ' + scrollContainerHeight);
+                    return;
+                }
+
+                // consoleHelper.logDebug('bottom distance: ' + (scrollContainerHeight - scrollContainerTop - viewContainerHeight));
+                if (scrollContainerHeight - scrollContainerTop - viewContainerHeight <= bottomDistance) {
+                    me.loadNextPage();
+                }
+            }
+            else
+            {
+                var viewContainerHeight     = viewContainer.offsetHeight;
+                var scrollContainerHeight   = scrollContainer.scrollHeight || scrollContainer.offsetHeight;
+                var scrollContainerTop      = viewContainer.scrollTop;
+                // consoleHelper.logDebug('viewContainerHeight: ' + viewContainerHeight +
+                //     ' scrollContainerHeight: ' + scrollContainerHeight +
+                //     ' scrollContainerTop: ' + scrollContainerTop);
+
+                // check current element is display
+                if (!scrollContainerHeight) {
+                    consoleHelper.logDebug('scroll container height: ' + scrollContainerHeight);
+                    return;
+                }
+
+                // consoleHelper.logDebug('bottom distance: ' + (scrollContainerHeight - scrollContainerTop - viewContainerHeight));
+                if (scrollContainerHeight - scrollContainerTop - viewContainerHeight <= bottomDistance) {
+                    me.loadNextPage();
+                }
+            }
+        },
 
         /**
          * add a output channel
@@ -644,28 +729,11 @@ export default {
                 this.loadDataList();
             }
 
-            var me = this;
             if (this.scrollToLoadNextPage != false)
             {
-                window.addEventListener('scroll', () => {
+                var viewContainer = this.getViewContainer();
 
-                    // check current element is display
-                    var eleHeight = me.$el.offsetHeight;
-                    if (!eleHeight)
-                    {
-                        return;
-                    }
-
-                    var bottomDistance = me.scrollToLoadNextPage;
-                    var windowHeight = window.innerHeight;
-                    var documentHeight = document.documentElement.offsetHeight;
-                    var scrollTop = document.documentElement.scrollTop;
-                    consoleHelper.logDebug('bottom distance: ' + documentHeight - scrollTop - windowHeight);
-                    if (documentHeight - scrollTop - windowHeight <= bottomDistance) {
-                        me.loadNextPage();
-                    }
-
-                });
+                viewContainer ? viewContainer.addEventListener('scroll', this.onScroll) : null;
             }
 
         }
