@@ -3,7 +3,7 @@ import moment from 'moment';
 import consoleHelper from '@util/consoleHelper';
 import objectHelper from '@util/objectHelper';
 import htmlHelper from '@util/htmlHelper';
-import windowHelper from "../../util/windowHelper";
+import windowHelper from "@util/windowHelper";
 
 /**
  * 通用组件零件
@@ -13,6 +13,11 @@ import windowHelper from "../../util/windowHelper";
 export default {
     data() {
         return {
+
+            app : (() => {
+                var app = typeof (window.app) != 'undefined' ? window.app : null;
+                return app;
+            })(),
 
             visible : false,
 
@@ -106,12 +111,6 @@ export default {
 
         }
     },
-    computed : {
-        app() {
-            var app = typeof (window.app) != 'undefined' ? window.app : null;
-            return app;
-        }
-    },
     methods : {
 
         // visible control methods
@@ -190,12 +189,24 @@ export default {
                 options.data = params;
             }
 
-            axios(options).then(res => {
+            var app = this.app;
+            if (!app)
+            {
+                consoleHelper.error('missing app quote.');
+                return;
+            }
+
+            app.requestApi(options, (error, result) => {
+                if (error) {
+                    this.status = 'error';
+                    this.onHttpError(error);
+                    return;
+                }
 
                 this.status = 'ready';
-                var data        = objectHelper.getDataByKeyPath(res.data, dataPath);
-                var total       = objectHelper.getDataByKeyPath(res.data, totalPath);
-                var totalPage   = objectHelper.getDataByKeyPath(res.data, totalPagePath);
+                var data        = objectHelper.getDataByKeyPath(result, dataPath);
+                var total       = objectHelper.getDataByKeyPath(result, totalPath);
+                var totalPage   = objectHelper.getDataByKeyPath(result, totalPagePath);
                 if (typeof(data) == 'undefined' || data == null)
                 {
                     consoleHelper.logError('data is empty.');
@@ -209,8 +220,7 @@ export default {
                 me.pagination.totalPage = totalPage;
 
                 this.onLoadDataList(data);
-
-            }).catch(this.onHttpError);
+            });
         },
 
         reloadDataList : function (){
@@ -322,18 +332,32 @@ export default {
                 options.data = data;
             }
 
+            var app = this.app;
+            if (!app)
+            {
+                consoleHelper.error('missing app quote.');
+                return;
+            }
+
             this.status = 'loading';
-            axios(options).then(res => {
+            app.requestApi(options, (error, result) => {
+
+                if (error)
+                {
+                    this.status = 'error';
+                    this.onHttpError(error);
+                    return;
+                }
 
                 this.status = 'ready';
 
-                var data        = objectHelper.getDataByKeyPath(res.data, dataPath);
+                var data        = objectHelper.getDataByKeyPath(result, dataPath);
                 data = objectHelper.dataColumnConvert(data, this.apiConfig.get.dataColumnMapping || {});
                 this.dataItem = data;
 
                 this.onLoadDataItem(this);
+            });
 
-            }).catch(this.onHttpError);
         },
 
         reloadDataItem : function (){
