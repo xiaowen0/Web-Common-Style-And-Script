@@ -3,8 +3,104 @@
  */
 export default {
 
-    imageTypeList : ["jpg","jpeg","png","gif","svg"],
-    videoTypeList : ["webm","mp4"],
+    imageTypeList: ["jpg", "jpeg", "png", "gif", "svg"],
+    videoTypeList: ["webm", "mp4"],
+
+    /**
+     * @param   String  url
+     * @return  Object
+     * - String origin
+     * - String urlNoParam
+     * - String protocol
+     * - String hostname
+     * - String port
+     * - String path
+     * - Object params
+     * - String hash
+     */
+    getParts : function (url) {
+
+        var urlParts = {
+            origin : url,
+            urlNoParam : '',
+            protocol : '',
+            hostname : '',
+            port : '',
+            path : '',
+            params : {},
+            hash : ''
+        };
+
+        // get hash
+        var tParts = url.split('#');
+        url = tParts[0];
+        tParts.shift();
+
+        if (tParts.length)
+        {
+            urlParts.hash = tParts.join('');
+        }
+
+        // get url params
+        tParts = url.split('?');
+        url = urlParts.urlNoParam = tParts[0];
+        tParts.shift();
+
+        if (tParts.length)
+        {
+            var paramsStr = tParts.join('');
+            var paramsParts = paramsStr.split('&');
+            for (var i=0; i<paramsParts.length; i++)
+            {
+                var paramItemParts = paramsParts[i].split('=');
+                var tParamName = paramItemParts[0];
+                if (tParamName === '')
+                {
+                    continue;
+                }
+                paramItemParts.shift();
+
+                var tParamValue = '';
+                if (paramItemParts.length)
+                {
+                    tParamValue = paramItemParts.join('');
+                }
+
+                urlParts.params[tParamName] = tParamValue;
+            }
+        }
+
+        // get protocol
+        tParts = url.split('://');
+        if (tParts.length >= 2)
+        {
+            urlParts.protocol = tParts[0];
+            tParts.shift();
+        }
+        url = tParts.join('');
+        if (url.substr(0, 2) === '//')   // remove "//"
+        {
+            url = url.substr(2);
+        }
+        // console.log('url after get protocol: ' + url);
+
+        // get hostname
+        tParts = url.split('/');
+        urlParts.hostname = tParts[0];
+        tParts.shift();
+        if (tParts.length)
+        {
+            url = tParts.join('/');
+        }
+        else
+        {
+            url = '';
+        }
+        // console.log('url after get hostname: ' + url);
+        urlParts.path = url;
+
+        return urlParts;
+    },
 
     /**
      * add url param  添加网址参数
@@ -12,16 +108,34 @@ export default {
      * @param name String  param name  参数名
      * @param value String  param alue  参数的值
      */
-    addUrlParam : function(url, name, value)
-    {
-        var new_url = url;
+    updateUrlParam: function (url, name, value) {
+        var reg = /#/g;
+        if (url) {
+            url = url.replace(reg, "?" + name + "=" + value + "#");
+        }
+        return url
+    },
+
+    /**
+     * add url param  添加网址参数
+     * @param url String  网址
+     * @param name String  param name  参数名
+     * @param value String  param alue  参数的值
+     */
+    addUrlParam: function (url, name, value) {
+
+        var urlParts = url.split('#');
+        var new_url = urlParts[0];
+        var hash = urlParts.length >= 2 ? urlParts[1] : '';
+
+        // var new_url = url;
         if (url.indexOf("?") < 0) {
             new_url += "?";
-        }
-        else {
+        } else {
             new_url += "&";
         }
         new_url += name + "=" + value;
+        hash ? new_url += '#' + hash : null;
         return new_url;
     },
 
@@ -30,8 +144,7 @@ export default {
      * @param name String  param name  参数名
      * @returns fixed  param value  参数的值
      */
-    getUrlParam : function(name)
-    {
+    getUrlParam: function (name) {
 
         var default_value = arguments[1] ? arguments[1] : null;
 
@@ -61,30 +174,14 @@ export default {
     },
 
     /**
-     * @param   Array   paramsList
-     */
-    getParamsFromUrl : function(paramsList)
-    {
-        var params = {};
-        for (var i=0; i<paramsList.length; i++)
-        {
-            var tName = paramsList[i];
-            var tValue = getUrlParam(paramsList[i]) || '';
-            tValue ? params[tName] = decodeURIComponent(tValue) : null;
-        }
-        return params;
-    },
-
-    /**
      * query params (type object) convert to query string (example: a=1&b=2)
      * @param   Object  params
      * @return  String
      */
-    paramsToQueryString : function (params) {
+    paramsToQueryString: function (params) {
 
         var queryList = [];
-        for (var key in params)
-        {
+        for (var key in params) {
             queryList.push(key + '=' + params[key]);
         }
 
@@ -98,10 +195,8 @@ export default {
      * @param Object params
      * @return String
      */
-    createUrl : function(url, params)
-    {
-        if (typeof(params) !== 'object')
-        {
+    createUrl: function (url, params) {
+        if (typeof (params) !== 'object') {
             return url;
         }
 
@@ -113,11 +208,9 @@ export default {
             param_string += name + '=' + params[name];
         }
 
-        if (url.indexOf('?') >= 0)
-        {
+        if (url.indexOf('?') >= 0) {
             url += '&';
-        }
-        else {
+        } else {
             url += '?';
         }
         url += param_string;
@@ -130,12 +223,10 @@ export default {
      * @param  String  url
      * @return Boolean
      */
-    isCSS : function(url)
-    {
+    isCSS: function (url) {
         return url.substr(-4) == '.css';
     },
-    isStyleSheet : function (url)
-    {
+    isStyleSheet: function (url) {
         return this.isCSS(url);
     },
 
@@ -144,12 +235,10 @@ export default {
      * @param  String  url
      * @return Boolean
      */
-    isScript : function(url)
-    {
+    isScript: function (url) {
         return this.isJs(url);
     },
-    isJs : function(url)
-    {
+    isJs: function (url) {
         return url.substr(-3) == '.js';
     },
 
@@ -158,13 +247,10 @@ export default {
      * @param   String  url
      * @return  boolean
      */
-    isImage : function(url)
-    {
+    isImage: function (url) {
         var formatList = this.imageTypeList;
-        for (var i=0; i<formatList.length; i++)
-        {
-            if (name.substr(0-formatList[i].length) === formatList[i])
-            {
+        for (var i = 0; i < formatList.length; i++) {
+            if (url.substr(0 - formatList[i].length) === formatList[i]) {
                 return true;
             }
         }
@@ -177,17 +263,22 @@ export default {
      * @param   String  url
      * @return  boolean
      */
-    isVideo : function(url)
-    {
+    isVideo: function (url) {
         var formatList = this.videoTypeList;
-        for (var i=0; i<formatList.length; i++)
-        {
-            if (name.substr(0-formatList[i].length) === formatList[i])
-            {
+        for (var i = 0; i < formatList.length; i++) {
+            if (url.substr(0 - formatList[i].length) === formatList[i]) {
                 return true;
             }
         }
-
         return false;
+    },
+
+    test : function () {
+        console.log(this.getParts('http://localhost/?a=1&b=2#/ppp'));
+        console.log(this.getParts('https://localhost/?=1&b=#/ppp'));
+        console.log(this.getParts('http://www.example.com/path/to/file'));
+        console.log(this.getParts('//localhost/?=1&b=#/ppp'));
+        console.log(this.getParts('//localhost/path/to/file?=1&b=#/ppp'));
+        console.log(this.getParts('https://192.168.1.1/path/to/file?a=1&b=2#/ppp'));
     }
 }
