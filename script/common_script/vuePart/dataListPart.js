@@ -1,9 +1,11 @@
 import axios from '@util/axios'
 import moment from 'moment';
+
+// utils
 import consoleHelper from '@util/consoleHelper';
 import objectHelper from '@util/objectHelper';
-
 import arrayHelper from "../../util/arrayHelper";
+import windowHelper from "../../util/windowHelper";
 
 export default {
     data() {
@@ -231,18 +233,22 @@ export default {
             this.loadData();
         },
 
-        onLoadData: function () {},
-		
+        /**
+         * @param   Array   data
+         */
+        onLoadData: function (data) {},
+
 		/* before load data, status: loading */
 		onLoading : function () {},
-		
-		/* after load data fail, status: error
+
+		/*
+		 * after load data fail, status: error
 		 * @param	Object	error
 		 */
 		onError : function (error) {},
-		
+
         afterRemove : function () {},
-        onRemoveError : function () {},
+        onRemoveError : function (error) {},
 
         /**
          * add a output channel
@@ -354,7 +360,11 @@ export default {
             this.loadData();
         },
 
+        /**
+         * @deprecated
+         */
         showSearchDialog: function () {
+            consoleHelper.warn('showSearchDialog method in dataListPart is deprecated.');
             var app = this.app;
             app ? app.searchDialog.show() : null;
         },
@@ -415,12 +425,7 @@ export default {
             var me = this;
 
             if (me.scrollToLoadNextPage == false) {
-                return;
-            }
-
-            // check current element is display
-            var eleHeight = me.$el.offsetHeight;
-            if (!eleHeight) {
+                consoleHelper.logDebug('scrollToLoadNextPage disabled.');
                 return;
             }
 
@@ -433,8 +438,18 @@ export default {
             {
                 var viewContainerHeight = viewContainer.innerHeight || viewContainer.offsetHeight;
                 var scrollContainerHeight = scrollContainer.offsetHeight;
-                var scrollContainerTop = scrollContainer.scrollTop;
-                consoleHelper.logDebug('bottom distance: ' + scrollContainerHeight - scrollContainerTop - viewContainerHeight);
+                var scrollContainerTop = windowHelper.getScrollTop() || scrollContainer.scrollTop;
+                consoleHelper.logDebug('viewContainerHeight: ' + viewContainerHeight +
+                    ' scrollContainerHeight: ' + scrollContainerHeight +
+                    ' scrollContainerTop: ' + scrollContainerTop);
+
+                // check current element is display
+                if (!scrollContainerHeight) {
+                    consoleHelper.logDebug('scroll container height: ' + scrollContainerHeight);
+                    return;
+                }
+
+                consoleHelper.logDebug('bottom distance: ' + (scrollContainerHeight - scrollContainerTop - viewContainerHeight));
                 if (scrollContainerHeight - scrollContainerTop - viewContainerHeight <= bottomDistance) {
                     me.loadNextPage();
                 }
@@ -444,7 +459,17 @@ export default {
                 var viewContainerHeight     = viewContainer.offsetHeight;
                 var scrollContainerHeight   = scrollContainer.scrollHeight || scrollContainer.offsetHeight;
                 var scrollContainerTop      = viewContainer.scrollTop;
-                consoleHelper.logDebug('bottom distance: ' + scrollContainerHeight - scrollContainerTop - viewContainerHeight);
+                consoleHelper.logDebug('viewContainerHeight: ' + viewContainerHeight +
+                    ' scrollContainerHeight: ' + scrollContainerHeight +
+                    ' scrollContainerTop: ' + scrollContainerTop);
+
+                // check current element is display
+                if (!scrollContainerHeight) {
+                    consoleHelper.logDebug('scroll container height: ' + scrollContainerHeight);
+                    return;
+                }
+
+                consoleHelper.logDebug('bottom distance: ' + (scrollContainerHeight - scrollContainerTop - viewContainerHeight));
                 if (scrollContainerHeight - scrollContainerTop - viewContainerHeight <= bottomDistance) {
                     me.loadNextPage();
                 }
