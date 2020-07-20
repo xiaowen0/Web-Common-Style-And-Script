@@ -86,8 +86,12 @@ export default {
                 createTime : ''
                  */
             },
+
+            /**
+             * search inputbox setting
+             */
             searchInputbox : {
-                column : ''
+                column : ''     // column name
             },
 
             autoLoadDataList : false,
@@ -106,20 +110,31 @@ export default {
             /**
              * map to external controller, it can output some signals.
              */
-            outputMap : {}
+            outputMap : {},
 
-
+            suitableWidthRatio : 0.8
         }
     },
     methods : {
 
         // visible control methods
 
+        show : function () {
+            this.visible = true;
+        },
+        hide : function () {
+            this.visible = false;
+        },
         open : function () {
             this.visible = true;
         },
         close : function () {
             this.visible = false;
+        },
+
+        getSuitableWidth : function () {
+            var w = windowHelper.getWidth();
+            return w * this.suitableWidthRatio;
         },
 
         // data list operation methods
@@ -645,6 +660,7 @@ export default {
          */
         onSubmitSuccess : function () {},
         onLoadDataItem : function () {},
+        onRemoveDataItem : function () {},
 
         onScroll : function(event) {
 
