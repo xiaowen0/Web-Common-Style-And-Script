@@ -1,4 +1,4 @@
-
+import consoleHelper from './consoleHelper';
 
 var helper = {
 
@@ -121,13 +121,13 @@ var helper = {
         try {
             var splitResult = html.split(/\<body[^\>]*\>/);
             if (splitResult.length < 2) {
-                log('can not found string: /\<body[^\>]*\>/');
+                consoleHelper.info('can not found string: /\<body[^\>]*\>/');
                 return false;
             }
             html = splitResult[1].replace('</body>', '');
         }
         catch (e) {
-            log(e);
+            consoleHelper.logError(e);
             return false;
         }
 
