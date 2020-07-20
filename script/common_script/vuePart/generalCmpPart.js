@@ -14,15 +14,15 @@ export default {
     data() {
         return {
 
-            app : (() => {
-                var app = typeof (window.app) != 'undefined' ? window.app : null;
-                return app;
-            })(),
+            /**
+             * @type    Object|null
+             */
+            app : window.app || null,
 
             visible : false,
 
             apiConfig : {
-                list : {
+                list : {    // api for get data list
                     url : '',
                     // method : 'get',
                     // params : {},
@@ -34,7 +34,7 @@ export default {
                 categoryList : {
                     url : '',
                 },
-                get : {
+                get : {     // api for get data detail
                     url : '',
                 },
                 update : {
@@ -49,6 +49,10 @@ export default {
             },
 
             dataList : [],
+
+            /**
+             * @type    Object|null
+             */
             dataItem : null,
             categoryList : [],
 
@@ -137,6 +141,11 @@ export default {
             return w * this.suitableWidthRatio;
         },
 
+        getApp : function() {
+            var app = typeof (window.app) !== 'undefined' ? window.app : null;
+            return app;
+        },
+
         // data list operation methods
 
         loadDataList: function () {
@@ -189,7 +198,7 @@ export default {
             }
 
             this.status = 'loading';
-			this.onLoading ? this.onLoading() : null;
+            this.onLoading ? this.onLoading() : null;
 
             var options = {
                 url: url,
@@ -204,7 +213,7 @@ export default {
                 options.data = params;
             }
 
-            var app = this.app;
+            var app = this.getApp();
             if (!app)
             {
                 consoleHelper.error('missing app quote.');
@@ -347,7 +356,7 @@ export default {
                 options.data = data;
             }
 
-            var app = this.app;
+            var app = this.getApp();
             if (!app)
             {
                 consoleHelper.error('missing app quote.');
@@ -473,68 +482,50 @@ export default {
             });
         },
 
-        remove : function (){
+        /**
+         * @param   Object  dataItem
+         */
+        removeDataItem : function (dataItem){
 
-            var me = this;
+            var url      = this.apiConfig.remove.url;
+            var method   = this.apiConfig.remove.method;
+            var header   = this.apiConfig.remove.header || {};
+            var dataType   = this.apiConfig.remove.dataType || '';
 
-            this.$confirm({
-                title : '确认',
-                content : '确认要删除该项数据吗？',
-                okText : '确认',
-                okType : 'danger',
-                cancelText : '取消',
-                onOk() {
-                    var apiUrl      = me.apiConfig.remove.url;
-                    var apiMethod   = me.apiConfig.remove.method;
+            var data = {
+                id : dataItem ? dataItem.id : this.dataItem.id
+            };
 
-                    var data = {
-                        id : me.dataItem.id
-                    };
+            var options = {
+                url : url,
+                method : method,
+                header : header,
+                headers : header
+            };
+            if (method === 'get' || dataType === 'url')
+            {
+                options.params = data;
+            }
+            else
+            {
+                options.data = data;
+            }
 
-                    var options = {
-                        url : apiUrl,
-                        method : apiMethod
-                    };
-                    if (apiMethod === 'get')
-                    {
-                        options.params = data;
-                    }
-                    else
-                    {
-                        options.data = data;
-                    }
+            window.app.requestApi(options, (error, result) => {
 
-                    axios(options).then(res => {
-                        me.$success({
-                            content : '删除成功'
-                        });
-                        me.reset();
-                        if (me.close || null)
-                        {
-                            me.close();
-                        }
-                        else if (me.hide || null)
-                        {
-                            me.hide();
-                        }
-
-                        if (me.$parent)
-                        {
-                            me.$parent.reloadData();
-                        }
-                    }).catch(error => {
-
-                        consoleHelper.logError('remove failed: ' + error.status + ' ' +error.statusText);
-
-                        me.$error({
-                            content : '删除失败'
-                        });
-
+                if (error)
+                {
+                    consoleHelper.logError('remove failed: ' + error.status + ' ' +error.statusText);
+                    window.app.showHint('删除失败', {
+                        type : 'error'
                     });
-                },
-                onCancel() {
-
+                    return;
                 }
+                window.app.showHint('删除成功', {
+                    type : 'success'
+                });
+
+                this.onRemoveDataItem();
             });
         },
 
@@ -621,8 +612,8 @@ export default {
         // methods for external modules
 
         showSearchDialog : function () {
-            var app = this.app;
-            app ? app.searchDialog.show() : null;
+            var app = this.getApp();
+            app ? app.showSearchDialog() : null;
         },
 
         getScrollContainer: function () {
@@ -647,8 +638,8 @@ export default {
         // event for data list
         onLoadDataList : function () {},
 
-		/* before load data, status: loading */
-		onLoading : function () {},
+        /* before load data, status: loading */
+        onLoading : function () {},
 
         // event for data item
         beforeSubmit : function (data) {
