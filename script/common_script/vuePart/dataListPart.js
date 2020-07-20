@@ -4,8 +4,8 @@ import moment from 'moment';
 // utils
 import consoleHelper from '@util/consoleHelper';
 import objectHelper from '@util/objectHelper';
-import arrayHelper from "../../util/arrayHelper";
-import windowHelper from "../../util/windowHelper";
+import arrayHelper from "@util/arrayHelper";
+import windowHelper from "@util/windowHelper";
 
 export default {
     data() {

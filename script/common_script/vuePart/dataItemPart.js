@@ -5,50 +5,56 @@ import consoleHelper from '@util/consoleHelper';
 
 export default {
 
-    data () {
+    data() {
         return {
-            status : '',
-            errorInfo : {
-                status : 0,
-                message : ''
+            status: '',
+            errorInfo: {
+                status: 0,
+                message: ''
             },
-            dataItem : {},
+            dataItem: {},
             categoryList : [],
-            apiConfig : {
+            apiConfig: {
                 get : {
                     url : '',
                     // method : 'get',              // default: get
                     params : {},                 // extra data
-                    // pageName : 'page',           // default: page
-                    // pageSizeName : 'limit',      // default: limit
                     // dataPath : 'data.records',      // default: data.rows
                     // dataColumnMapping : {
                     //     downloadCount : 'downCount'
-                    // },
-                    // totalPath : 'data.total',    // default: data.total
-                    // totalPagePath : 'data.pages'    // default: data.totalPage
+                    // }
                 },
-                add : {
-                    url : ''
+                add: {
+                    url: ''
                 },
-                update : {
-                    url : ''
+                update: {
+                    url: ''
                 },
-                remove : {
-                    url : ''
+                remove: {
+                    url: ''
                 }
-            }
+            },
+            /**
+             * map to external controller, it can output some signals.
+             */
+            outputMap : {}
+        }
+    },
+    computed : {
+        app() {
+            var app = window.app || this.$parent || null;
+            return app;
         }
     },
     methods : {
 
-        reset : function () {
+        reset: function () {
             for (var key in this.dataItem)
             {
                 this.dataItem[key] = '';
             }
         },
-        loadData : function (pk){
+        loadData: function (pk) {
             var apiUrl = this.apiConfig.get.url;
             var apiMethod = this.apiConfig.get.method || 'get';
             var dataPath = this.apiConfig.get.dataPath || 'data';
@@ -67,8 +73,8 @@ export default {
             }
 
             var options = {
-                url : apiUrl,
-                method : apiMethod
+                url: apiUrl,
+                method: apiMethod
             };
             if (apiMethod === 'get')
             {
@@ -81,7 +87,6 @@ export default {
 
             this.status = 'loading';
             axios(options).then(res => {
-
                 this.status = 'ready';
 
                 var data        = objectHelper.getDataByKeyPath(res.data, dataPath);
@@ -130,7 +135,7 @@ export default {
          * methods for time format
          */
 
-        formatDate : function (timestamp) {
+        formatDate: function (timestamp) {
             if (!timestamp)
             {
                 return '';
@@ -152,7 +157,7 @@ export default {
             return moment(timestamp).fromNow();
         },
 
-        save : function (){
+        save: function () {
 
             var apiUrl      = this.dataItem.id ? this.apiConfig.update.url : this.apiConfig.add.url;
             var apiMethod   = this.dataItem.id ?
@@ -179,9 +184,9 @@ export default {
             }
 
             axios({
-                url : apiUrl,
-                method : apiMethod,
-                data : data
+                url: apiUrl,
+                method: apiMethod,
+                data: data
             }).then(res => {
 
                 if (this.onSubmitSuccess)
@@ -189,10 +194,13 @@ export default {
                     this.onSubmitSuccess(objectHelper.clone(res.data));
                 }
 
+                this.$success({
+                    content: '保存成功'
+                });
+
                 var data = objectHelper.getDataByKeyPath(res.data, dataPath);
 
-                if (!data)
-                {
+                if (!data) {
                     return;
                 }
                 this.dataItem = data;
@@ -235,27 +243,27 @@ export default {
         onSubmitError : function () {},
         onLoadData : function () {},
 
-        remove : function (){
+        remove: function () {
 
             var me = this;
 
             this.$confirm({
-                title : '确认',
-                content : '确认要删除该项数据吗？',
-                okText : '确认',
-                okType : 'danger',
-                cancelText : '取消',
+                title: '确认',
+                content: '确认要删除该项数据吗？',
+                okText: '确认',
+                okType: 'danger',
+                cancelText: '取消',
                 onOk() {
-                    var apiUrl      = me.apiConfig.remove.url;
-                    var apiMethod   = me.apiConfig.remove.method;
+                    var apiUrl = me.apiConfig.remove.url;
+                    var apiMethod = me.apiConfig.remove.method;
 
                     var data = {
-                        id : me.dataItem.id
+                        id: me.dataItem.id
                     };
 
                     var options = {
-                        url : apiUrl,
-                        method : apiMethod
+                        url: apiUrl,
+                        method: apiMethod
                     };
                     if (apiMethod === 'get')
                     {
@@ -268,7 +276,7 @@ export default {
 
                     axios(options).then(res => {
                         me.$success({
-                            content : '删除成功'
+                            content: '删除成功'
                         });
                         me.reset();
                         if (me.close || null)
@@ -286,18 +294,50 @@ export default {
                         }
                     }).catch(error => {
 
-                        consoleHelper.logError('remove failed: ' + error.status + ' ' +error.statusText);
+                        consoleHelper.logError('remove failed: ' + error.status + ' ' + error.statusText);
 
                         me.$error({
-                            content : '删除失败'
+                            content: '删除失败'
                         });
 
                     });
-                },
-                onCancel() {
-
                 }
             });
+        },
+
+        /**
+         * add a output channel
+         * @param  String  id
+         * @param  Object  control
+         */
+        addOutput : function(id, control) {
+            if ( typeof(control) != 'object' )
+            {
+                consoleHelper.logError('add output error: ' + id + ' is not a object.');
+                return;
+            }
+            this.outputMap[id] = control;
+        },
+
+        /**
+         * output signal
+         * @param  Object  signal information
+         */
+        outputSignal : function (signal){
+            for (var key in this.outputMap)
+            {
+                if (typeof(this.outputMap[key].inputSignal) === 'undefined')
+                {
+                    consoleHelper.log('[warning] inputSignal method not exist in ' + key + ' output control.');
+                    continue;
+                }
+                this.outputMap[key].inputSignal(signal);
+            }
+        },
+
+        showSearchDialog : function () {
+            var app = this.app;
+            app ? app.searchDialog.show() : null;
         }
     }
 }
