@@ -5977,7 +5977,6 @@ function initVueItemDetail(options)
 
     var dataColumn      = options.dataColumn || [];
     var columnMapping   = options.columnMapping || {};
-    var idParam         = options.idParam || 'id';
 
     var parentPage      = options.parentPage || {};
     var onSubmitSuccess = options.onSubmitSuccess || null;
@@ -6014,12 +6013,15 @@ function initVueItemDetail(options)
         {
             var me = this;
             this.status = 'loading';
+
+            var idParam         = apiConfig.get.idParam || 'id';
+            var data = {};
+            data[idParam] = id;
+
             $.ajax({
                 url : apiConfig.get.url,
                 type : apiConfig.get.method || 'get',
-                data : {
-                    id : id
-                },
+                data : data,
                 success : function(result){
 
                     me.status = 'ready';
@@ -6117,7 +6119,7 @@ function initVueItemDetail(options)
 
             this.status = 'mounted';
 
-            var id = getUrlParam(idParam);
+            var id = getUrlParam('id');
             if (!id)
             {
                 location.href = parentPage ? parentPage : 'index.html';
