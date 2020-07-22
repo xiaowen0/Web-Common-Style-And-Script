@@ -1,9 +1,9 @@
 import axios from '@util/axios'
 import moment from 'moment';
-import consoleHelper from '@util/consoleHelper';
-import objectHelper from '@util/objectHelper';
-import htmlHelper from '@util/htmlHelper';
-import windowHelper from "@util/windowHelper";
+import consoleHelper    from '@util/consoleHelper';
+import objectHelper     from '@util/objectHelper';
+import htmlHelper       from '@util/htmlHelper';
+import windowHelper     from "@util/windowHelper";
 
 /**
  * 通用组件零件
@@ -603,7 +603,10 @@ export default {
             this.loadDataList();
         },
 
-
+        /**
+         * @param   String  html
+         * @return  String
+         */
         getPlainText : function(html) {
             var text = htmlHelper.removeTag(htmlHelper.decode(html));
             return text;
@@ -616,6 +619,9 @@ export default {
             app ? app.showSearchDialog() : null;
         },
 
+        /**
+         * @return {documentElement|HTMLElement}
+         */
         getScrollContainer: function () {
             if (typeof (this.scrollControl.scrollContainer) == 'string') {
                 return document.querySelector(this.scrollControl.scrollContainer);
@@ -624,6 +630,9 @@ export default {
             return this.scrollControl.scrollContainer;
         },
 
+        /**
+         * @return {window|HTMLElement}
+         */
         getViewContainer: function () {
             if (typeof (this.scrollControl.viewContainer) == 'string') {
                 return document.querySelector(this.scrollControl.viewContainer);
@@ -635,13 +644,19 @@ export default {
         // event for http request
         onHttpError : function () {},
 
-        // event for data list
-        onLoadDataList : function () {},
+        /**
+         * event for data list
+         * @param   Array   data
+         */
+        onLoadDataList : function (data) {},
 
         /* before load data, status: loading */
         onLoading : function () {},
 
-        // event for data item
+        /**
+         * event for data item
+         * @param   Object  data
+         */
         beforeSubmit : function (data) {
             return data;
         },
@@ -653,6 +668,10 @@ export default {
         onLoadDataItem : function () {},
         onRemoveDataItem : function () {},
 
+        /**
+         * on scroll event
+         * @param   ScrollEvent     event
+         */
         onScroll : function(event) {
 
             var me = this;
