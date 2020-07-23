@@ -6035,12 +6035,12 @@ function initVueItemDetail(options)
                     // data process if need
                     if (onDataLoaded)
                     {
-                        data = onDataLoaded(data);
+                        data = onDataLoaded(data, me);
                     }
 
                     // column convert
                     data = dataColumnConvert(data, columnMapping);  // data convert
-                    data = mergeObject(dataAttr, data);             // merge required columns and data
+                    // data = mergeObject(dataAttr, data);             // merge required columns and data
 
                     for (var key in data)
                     {
@@ -6243,12 +6243,12 @@ function initVueForm(options)
                 },
                 success : function(result){
 
-                    var data = result.data;
+                    var data = result;
 
                     // data process if need
                     if (onDataLoaded)
                     {
-                        data = onDataLoaded(result.data);
+                        data = onDataLoaded(data, me);
                     }
                     me.itemData = data;
 
