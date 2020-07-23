@@ -2786,7 +2786,7 @@ function getParamsFromUrl(paramsList)
         tValue ? params[tName] = decodeURIComponent(tValue) : null;
     }
     return params;
-},
+}
 
 /* --- Window function group ------------------------------------------- */
 
