@@ -236,7 +236,6 @@ export default {
                     consoleHelper.logError('data is empty.');
                     return;
                 }
-                // debugger;
                 data = objectHelper.listDataColumnConvert(data, dataColumnMapping);
 
                 me.dataList             = me.dataList.concat(data);
@@ -490,11 +489,11 @@ export default {
             var url      = this.apiConfig.remove.url;
             var method   = this.apiConfig.remove.method;
             var header   = this.apiConfig.remove.header || {};
-            var dataType   = this.apiConfig.remove.dataType || '';
+            var dataType    = this.apiConfig.remove.dataType || '';
+            var idParam     = this.apiConfig.remove.idParam || 'id';
 
-            var data = {
-                id : dataItem ? dataItem.id : this.dataItem.id
-            };
+            var data = {};
+            data[idParam] = dataItem ? dataItem[idParam] : this.dataItem[idParam];
 
             var options = {
                 url : url,
@@ -521,9 +520,6 @@ export default {
                     });
                     return;
                 }
-                window.app.showHint('删除成功', {
-                    type : 'success'
-                });
 
                 this.onRemoveDataItem();
             });
