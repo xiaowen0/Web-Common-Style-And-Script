@@ -583,8 +583,13 @@
 }
 
 /* absolute layer as content in a container */
+.layer.absolute,
 .layer.contentLayer {
     position: absolute;
+}
+
+.layer.relative {
+    position: relative;
 }
 
 /* transparent black background as mask layer */
