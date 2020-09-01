@@ -324,11 +324,12 @@ export default {
             }
         },
 
-        loadDataItem : function (pk){
+        loadDataItem : function (pk = null){
             var apiUrl = this.apiConfig.get.url;
             var apiMethod = this.apiConfig.get.method || 'get';
             var dataPath = this.apiConfig.get.dataPath || 'data';
             var idParam = this.apiConfig.get.idParam || 'id';
+            var header = this.apiConfig.get.header || null;
 
             if (!apiUrl)
             {
@@ -354,6 +355,7 @@ export default {
             {
                 options.data = data;
             }
+			header ? options.header = header : null;
 
             var app = this.getApp();
             if (!app)
@@ -383,8 +385,8 @@ export default {
 
         },
 
-        reloadDataItem : function (){
-            this.loadDataItem(this.dataItem.id);
+        reloadDataItem : function (pk = null){
+            this.loadDataItem(pk || this.dataItem.id);
         },
 
         loadCategoryList : function (callback){
@@ -416,13 +418,13 @@ export default {
                 this.apiConfig.update.method || '' : this.apiConfig.add.method || '';
             var dataPath    = this.dataItem.id ?
                 this.apiConfig.update.dataPath || 'data' : this.apiConfig.add.dataPath || 'data';
-            var dataColumnsMapping = this.dataItem.id ?
+            var dataColumnMapping = this.dataItem.id ?
                 this.apiConfig.update.dataColumnMapping || {} :
                 this.apiConfig.add.dataColumnMapping;
 
             var data = objectHelper.clone(this.dataItem);
             // column convert
-            data = objectHelper.dataColumnConvertReverse(data, dataColumnsMapping);
+            data = objectHelper.dataColumnConvertReverse(data, dataColumnMapping);
 
             if (this.beforeSubmit)
             {
