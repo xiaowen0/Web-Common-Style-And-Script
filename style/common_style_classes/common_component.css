@@ -885,10 +885,6 @@ ul.reset {
     list-style: none;
 }
 
-.noListStyle {
-    list-style : none none;
-}
-
 .list > li:last-child,
 .list .last {
     border-bottom: none 0;

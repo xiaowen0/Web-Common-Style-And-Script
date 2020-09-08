@@ -1162,6 +1162,12 @@ img.cover {
     border: solid 2px white;
 }
 
+/* list */
+
+.noListStyle {
+    list-style : none none;
+}
+
 /* outline */
 
 .noOutline {
