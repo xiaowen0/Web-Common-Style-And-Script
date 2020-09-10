@@ -588,6 +588,12 @@ img.fullSpace {
 .arrowTextFont {
     font-family: monospace, serif;
 }
+
+.angleBracketsFont {
+    font-family: serif;
+    font-weight: bold;
+}
+
 .f10 {
     font-size: 10px;
 }
@@ -633,37 +639,37 @@ img.fullSpace {
 }
 
 /* font size relative to 16px */
-.f10r16, .fontR10 {
+.f10r16, .fontR10, .font10r {
     font-size: 62.5%;
 }
-.f11r16, .fontR11 {
+.f11r16, .fontR11, .font11r {
     font-size: 68.75%;
 }
-.f12r16, .fontR12 {
+.f12r16, .fontR12, .font12r {
     font-size: 75%;
 }
-.f13r16, .fontR13 {
+.f13r16, .fontR13, .font13r {
     font-size: 81.25%;
 }
-.f14r16, .fontR14 {
+.f14r16, .fontR14, .font14r {
     font-size: 87.5%;
 }
-.f15r16, .fontR15 {
+.f15r16, .fontR15, .font15r {
     font-size: 93.75%;
 }
-.f16r16, .fontR16 {
+.f16r16, .fontR16, .font16r {
     font-size: 100%;
 }
-.f18r16, .fontR18 {
+.f18r16, .fontR18, .font18r {
     font-size: 112.5%;
 }
-.f20r16, .fontR20 {
+.f20r16, .fontR20, .font20r {
     font-size: 125%;
 }
-.f24r16, .fontR24 {
+.f24r16, .fontR24, .font24r {
     font-size: 150%;
 }
-.f28r16, .fontR28 {
+.f28r16, .fontR28, .font28r {
     font-size: 175%;
 }
 
