@@ -94,12 +94,11 @@ gulp.task('minifyjs',function(){
 
 	gulp.src('public/script/**/*.js')       // script folder's js file
        //.pipe(concat('order_query.js'))  //合并js
-       //.pipe(gulp.dest('dist/js'))      //输出
        .pipe(rename({suffix:'.min'}))       //重命名
-       // .pipe(uglify().on('error', function(error){   //压缩
-       //     gutil.log(error);
-       //     this.emit('end');
-       // }))
+       .pipe(uglify().on('error', function(error){   //压缩
+           gutil.log(error);
+           this.emit('end');
+       }))
        .pipe(gulp.dest(targetFolder + 'script/'))        //输出
        .pipe(notify({message:"copy and minify js file finished.", onLast : true}));    //提示
 
