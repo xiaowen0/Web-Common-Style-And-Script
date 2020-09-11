@@ -19,17 +19,17 @@ var appConfig = {
      */
     envList : [{
         id : 'dev',
-        domain : 'localhost',,
+        domain : 'localhost',
         apiDomain : 'localhost',
         apiBaseUrl : '/'
     }, {
         id : 'beta',
-        domain : 'test.xx.com',,
+        domain : 'test.xx.com',
         apiDomain : 'test.xx.com',
         apiBaseUrl : 'test.xx.com/api/'
     }, {
         id : 'dist',
-        domain : 'www.xx.com',,
+        domain : 'www.xx.com',
         apiDomain : 'api.xx.com',
         apiBaseUrl : 'api.xx.com/api/'
     }],
@@ -131,7 +131,7 @@ var appConfig = {
     }
 
 };
-if (typeof(apiList) != 'undefined')
+if (typeof(apiList) !== 'undefined')
 {
     appConfig.apiList = apiList;
 }
