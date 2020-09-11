@@ -1,13 +1,13 @@
 
 .icon.weather {
-	
+
 	position:relative;
-	
+
 	height:30px;
 	width:23px;
-	
+
 	background-image:url(http://i.tq121.com.cn/i/weather2015/png/blue22.png);
-	
+
 	top: 0;
 }
 .icon.weather.ic {
@@ -39,12 +39,12 @@
 	width:50px;
 }
 .icon.weather.jpg80 {
-	background-image:url(image/weather_icons_blue_80.png);
+	background-image:url(../../style/common_style_classes/image/weather_icons_blue_80.png);
 	height:80px;
 	width:80px;
 }
 .icon.weather.white80 {
-	background-image:url(image/weather_icons_white_80.png);
+	background-image:url(../../style/common_style_classes/image/weather_icons_white_80.png);
 	height:80px;
 	width:80px
 }
@@ -407,7 +407,7 @@
 }
 
 .icon.sunrise {
-	background-image: url("image/weather_icons_miscellaneous.png");
+	background-image: url("../../style/common_style_classes/image/weather_icons_miscellaneous.png");
 	background-repeat: no-repeat;
 	background-position: -33px -269px;
 	width: 22px;
@@ -415,7 +415,7 @@
 }
 
 .icon.sunset {
-	background-image: url("image/weather_icons_miscellaneous.png");
+	background-image: url("../../style/common_style_classes/image/weather_icons_miscellaneous.png");
 	background-repeat: no-repeat;
 	background-position: -2px -269px;
 	width: 22px;
@@ -423,7 +423,7 @@
 }
 
 .icon.humidity {
-	background-image: url("image/weather_icons_miscellaneous.png");
+	background-image: url("../../style/common_style_classes/image/weather_icons_miscellaneous.png");
 	background-repeat: no-repeat;
 	background-position: -2px -289px;
 	width: 24px;
@@ -431,7 +431,7 @@
 }
 
 .icon.windDirection {
-	background-image: url("image/weather_icons_miscellaneous.png");
+	background-image: url("../../style/common_style_classes/image/weather_icons_miscellaneous.png");
 	background-repeat: no-repeat;
 	background-position: -36px -291px;
 	width: 24px;
@@ -439,7 +439,7 @@
 }
 
 .icon.leaf {
-	background-image: url("image/weather_icons_miscellaneous.png");
+	background-image: url("../../style/common_style_classes/image/weather_icons_miscellaneous.png");
 	background-repeat: no-repeat;
 	background-position: -2px -314px;
 	width: 24px;
