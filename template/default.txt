@@ -36,10 +36,6 @@
         <!--BOOTSTRAP_3_SCRIPT-->
         <!--ANGULARJS_LIB-->
 
-        <!-- app config -->
-        <script src="js/appConfig.js"></script>
-        <script src="js/errorMessageList.js"></script>
-
         <!-- common action (it must after jQuery) -->
         <script src="script/common_script/common_action.js"></script>
 
