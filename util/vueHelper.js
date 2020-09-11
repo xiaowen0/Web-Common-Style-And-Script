@@ -2,7 +2,7 @@ import Vue from 'vue/dist/vue.min'
 import VuejsDialog from "vuejs-dialog"
 import "vuejs-dialog/dist/vuejs-dialog.min.css"
 import consoleHelper from './consoleHelper'
-import objectHelper from './object'
+import objectHelper from './objectHelper'
 
 Vue.use(VuejsDialog);
 
