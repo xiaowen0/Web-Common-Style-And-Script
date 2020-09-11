@@ -31,20 +31,50 @@ function errrHandler(e)
 gulp.task('build', function() {
   // 将你的默认的任务代码放在这
   // gulp.start('minifyhtml','minifycss','minifyjs');
-  gulp.start('copy_style_image', 'minifycss', 'minifyjs');
+  gulp.start('copy_image_folder', 'copy_style_image', 'minifycss', 'minifyjs', 'copy_fragments');
+});
+
+// copy image folder
+gulp.task('copy_fragments', function (){
+
+    gulp.src('public/config/*.*')
+        .pipe(gulp.dest(targetFolder + 'config/'))            //输出文件目录
+        .pipe(notify({message:'copy config folder ok', onLast : true})); //提示成功
+
+    gulp.src('public/data/*.*')
+        .pipe(gulp.dest(targetFolder + 'data/'))            //输出文件目录
+        .pipe(notify({message:'copy data folder ok', onLast : true})); //提示成功
+
+    gulp.src('public/data/*.*')
+        .pipe(gulp.dest(targetFolder + 'data/'))            //输出文件目录
+        .pipe(notify({message:'copy data folder ok', onLast : true})); //提示成功
+
+    gulp.src('public/lang/*.*')
+        .pipe(gulp.dest(targetFolder + 'lang/'))            //输出文件目录
+        .pipe(notify({message:'copy lang folder ok', onLast : true})); //提示成功
+
+    return true;
+});
+
+// copy image folder
+gulp.task('copy_image_folder', function (){
+
+    return gulp.src('public/image/*.*')
+        .pipe(gulp.dest(targetFolder + 'image/'))            //输出文件目录
+        .pipe(notify({message:'copy image folder task ok', onLast : true})); //提示成功
 });
 
 // copy image in style folder
 gulp.task('copy_style_image', function (){
 
-    return gulp.src('style/**/image/*.*')
+    return gulp.src('public/style/**/image/*.*')
         .pipe(gulp.dest(targetFolder + 'style/'))            //输出文件目录
         .pipe(notify({message:'copy style image task ok', onLast : true})); //提示成功
 });
 
 // minify css file
 gulp.task('minifycss',function(){
-    return gulp.src('style/**/*.css')            //设置css
+    return gulp.src('public/style/**/*.css')            //设置css
 	   .pipe(replace("$VERSION", version))     //输出版本号
        .pipe(rename({suffix:'.min'}))          //修改文件名
        .pipe(minifycss())                      //压缩文件
@@ -62,7 +92,7 @@ gulp.task('minifyjs',function(){
        .pipe(gulp.dest('script/common_script/'))        //输出
        .pipe(notify({message:"minify js task ok"}));    //提示*/
 
-	gulp.src('script/**/*.js')       // script folder's js file
+	gulp.src('public/script/**/*.js')       // script folder's js file
        //.pipe(concat('order_query.js'))  //合并js
        //.pipe(gulp.dest('dist/js'))      //输出
        .pipe(rename({suffix:'.min'}))       //重命名
@@ -73,7 +103,7 @@ gulp.task('minifyjs',function(){
        .pipe(gulp.dest(targetFolder + 'script/'))        //输出
        .pipe(notify({message:"copy and minify js file finished.", onLast : true}));    //提示
 
-	gulp.src('script/**/*.md')		// script folder's markdown file
+	gulp.src('public/script/**/*.md')		// script folder's markdown file
 		.pipe(gulp.dest(targetFolder + 'script/'))        //输出
        .pipe(notify({message:"copy markdown file finished.", onLast : true}));    //提示
 
