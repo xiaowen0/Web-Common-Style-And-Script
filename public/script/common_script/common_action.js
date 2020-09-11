@@ -1,6 +1,6 @@
 /**
  * common action
- * dependent on jQuery
+ * @requires jQuery common_function
  */
 
 $(document).ready(function ()
@@ -24,7 +24,6 @@ $(document).ready(function ()
         $('.debugButtonLayer').removeClass('hide').show();
     }
 
-    // VConsole
     if (getUrlParam('vconsole'))
     {
         // VConsole

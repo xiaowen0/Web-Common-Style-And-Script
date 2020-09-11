@@ -1,6 +1,8 @@
 /**
  * common function
- * author: Kevin Kwan
+ * recommend use single page app framework and quote all required libraries.
+ * It's use in non-single page
+ * @author: Kevin Kwan
  * E-mail: zhiwen2720@163.com
  * url: https://github.com/xiaowen0/Web-Common-Style-And-Script
  */
@@ -25,7 +27,6 @@ var cdnList = {
 };
 
 /* --- Number function group --------------------------------------- */
-
 
 function fixFloatingPointNumber(number, bit) {
 
@@ -4434,6 +4435,8 @@ function playLetter(sentence_index, delay)
 
 /**
  * auto load missing dependencies library
+ * recommend use single page app framework and quote all required libraries.
+ * only use loadDependencies in non-single page
  */
 function loadDependencies()
 {
