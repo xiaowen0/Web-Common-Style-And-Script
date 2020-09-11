@@ -6,6 +6,10 @@
 
 var appConfig = {
 
+    mode : 'demo',
+
+    name : 'App Name',
+
     /**
      * ajax error handle
      */

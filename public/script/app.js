@@ -7,6 +7,8 @@ var appConfig = {
 
     title : 'Kevin App Framework',
 
+    name : 'Kevin App Framework',
+
     resourceList : [],
 
     apiList : {},
@@ -138,6 +140,8 @@ if (typeof(apiList) !== 'undefined')
 
 /**
  * web client application object
+ * use in non-single page app framework, or copy to single page app framework.
+ * methods recommend platform independent (not use BOM, DOM, Browser API)
  * @type    Object
  * @require jQuery, errorMessageList.js, common_function.js
  */
@@ -148,6 +152,18 @@ var application = {
      * @type  String
      */
     title : '',
+
+    /**
+     * app config
+     * @type  Object
+     */
+    config : {},
+
+    /**
+     * app mode
+     * @type  String    dev|demo|testing
+     */
+    mode : '',
 
     /**
      * environment sign
@@ -177,12 +193,6 @@ var application = {
      * @type    Array
      */
     resourceList : [],
-
-    /**
-     * app config
-     * @type  Object
-     */
-    config : {},
 
     /**
      * sub page source url, if use div or iframe to load external page (html)
@@ -218,9 +228,11 @@ var application = {
     soundPlayer : document.createElement('audio'),
 
     /**
-     * @var object
+     * @var object|null
      */
     user : null,
+
+    sessionManager : null,
 
     init : function (config)
     {
@@ -230,6 +242,7 @@ var application = {
         }
 
         this.title = appConfig.title || '';
+        this.name = appConfig.name || '';
         this.config = appConfig || {};
         this.apiList = this.config.apiList || {};
 
@@ -268,6 +281,50 @@ var application = {
             }
         }
     },
+
+    checkLogin : function () {},
+
+    enableDebug : function () {
+        if (typeof (localStorage) === 'undefined')
+        {
+            return false;
+        }
+        localStorage.debug='on';
+        sessionStorage.debug='on';
+        return true;
+    },
+    disableDebug : function () {
+        if (typeof (localStorage) === 'undefined')
+        {
+            return false;
+        }
+        localStorage.debug='off';
+        sessionStorage.debug='off';
+        return true;
+    },
+    getDebugStatus : function () {
+        if (typeof (localStorage) === 'undefined')
+        {
+            return false;
+        }
+        return localStorage.debug == 'on';
+    },
+
+
+    getUser : function () {
+        return this.user;
+    },
+
+    getAppIcon : function () {
+        var iconLinkTag = document.getElementsByName('icon');
+        if (!iconLinkTag.length)
+        {
+            return '';
+        }
+        return iconLinkTag[0].href;
+    },
+
+    goToLoginPage : function () {},
 
     /**
      * init resource list
@@ -369,6 +426,12 @@ var application = {
             alert(content);
         }
     },
+
+    showMessage : function (content, title, options) {
+        this.showMessageBox();
+    },
+
+    confirm : function () {},
 
     /**
      * load city data (include province, city, district)
@@ -648,6 +711,22 @@ var application = {
                 location.href = 'login.html';
             }
         });
+    },
+
+    /**
+     * @param   Object          options
+     * @param   Function        callback
+     * - Object|null    error
+     * - Object|null    response data
+     */
+    requestApi : function (options, callback) {
+
+        axios(options).then(res => {
+            callback ? callback(null, res.data) : null;
+        }).catch(error => {
+            callback ? callback(error, null) : null;
+        });
+
     },
 
     /**
