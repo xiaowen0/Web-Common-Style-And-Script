@@ -8,9 +8,9 @@
 
 (function() {
     var flakes = [],
-        canvas = document.getElementById("Snow"), //»­²¼ID£¬ÓëÉÏÒ»²½´´½¨µÄ»­²¼¶ÔÓ¦
+        canvas = document.getElementById("Snow"), //ç”»å¸ƒIDï¼Œä¸ä¸Šä¸€æ­¥åˆ›å»ºçš„ç”»å¸ƒå¯¹åº”
         ctx = canvas.getContext("2d"),
-        flakeCount = 200,  //Ñ©»¨ÊıÁ¿£¬ÊıÖµÔ½´óÑ©»¨ÊıÁ¿Ô½¶à
+        flakeCount = 200,  //é›ªèŠ±æ•°é‡ï¼Œæ•°å€¼è¶Šå¤§é›ªèŠ±æ•°é‡è¶Šå¤š
         mX = -100,
         mY = -100;
 
@@ -24,7 +24,7 @@
             var flake = flakes[i],
                 x = mX,
                 y = mY,
-                minDist = 150,  //Ñ©»¨¾àÀëÊó±êÖ¸ÕëµÄ×îĞ¡Öµ£¬Ğ¡ÓÚÕâ¸ö¾àÀëµÄÑ©»¨½«ÊÜµ½Êó±êµÄÅÅ³â
+                minDist = 150,  //é›ªèŠ±è·ç¦»é¼ æ ‡æŒ‡é’ˆçš„æœ€å°å€¼ï¼Œå°äºè¿™ä¸ªè·ç¦»çš„é›ªèŠ±å°†å—åˆ°é¼ æ ‡çš„æ’æ–¥
                 x2 = flake.x,
                 y2 = flake.y;
 
@@ -49,7 +49,7 @@
                 flake.velX += Math.cos(flake.step += .05) * flake.stepSize;
             }
 
-            ctx.fillStyle = "rgba(255,255,255," + flake.opacity + ")";  //Ñ©»¨ÑÕÉ«
+            ctx.fillStyle = "rgba(255,255,255," + flake.opacity + ")";  //é›ªèŠ±é¢œè‰²
             flake.y += flake.velY;
             flake.x += flake.velX;
 
@@ -71,20 +71,20 @@
     function reset(flake) {
         flake.x = Math.floor(Math.random() * canvas.width);
         flake.y = 0;
-        flake.size = (Math.random() * 3) + 2;  //¼ÓºÅºóÃæµÄÖµ£¬Ñ©»¨´óĞ¡£¬Îª»ù×¼Öµ£¬ÊıÖµÔ½´óÑ©»¨Ô½´ó
-        flake.speed = (Math.random() * 1) + 0.5;  //¼ÓºÅºóÃæµÄÖµ£¬Ñ©»¨ËÙ¶È£¬Îª»ù×¼Öµ£¬ÊıÖµÔ½´óÑ©»¨ËÙ¶ÈÔ½¿ì
+        flake.size = (Math.random() * 3) + 2;  //åŠ å·åé¢çš„å€¼ï¼Œé›ªèŠ±å¤§å°ï¼Œä¸ºåŸºå‡†å€¼ï¼Œæ•°å€¼è¶Šå¤§é›ªèŠ±è¶Šå¤§
+        flake.speed = (Math.random() * 1) + 0.5;  //åŠ å·åé¢çš„å€¼ï¼Œé›ªèŠ±é€Ÿåº¦ï¼Œä¸ºåŸºå‡†å€¼ï¼Œæ•°å€¼è¶Šå¤§é›ªèŠ±é€Ÿåº¦è¶Šå¿«
         flake.velY = flake.speed;
         flake.velX = 0;
-        flake.opacity = (Math.random() * 0.5) + 0.3;  //¼ÓºÅºóÃæµÄÖµ£¬Îª»ù×¼Öµ£¬·¶Î§0~1
+        flake.opacity = (Math.random() * 0.5) + 0.3;  //åŠ å·åé¢çš„å€¼ï¼Œä¸ºåŸºå‡†å€¼ï¼ŒèŒƒå›´0~1
     }
 
     function init() {
         for (var i = 0; i < flakeCount; i++) {
             var x = Math.floor(Math.random() * canvas.width),
                 y = Math.floor(Math.random() * canvas.height),
-                size = (Math.random() * 3) + 2,  //¼ÓºÅºóÃæµÄÖµ£¬Ñ©»¨´óĞ¡£¬Îª»ù×¼Öµ£¬ÊıÖµÔ½´óÑ©»¨Ô½´ó
-                speed = (Math.random() * 1) + 0.5,  //¼ÓºÅºóÃæµÄÖµ£¬Ñ©»¨ËÙ¶È£¬Îª»ù×¼Öµ£¬ÊıÖµÔ½´óÑ©»¨ËÙ¶ÈÔ½¿ì
-                opacity = (Math.random() * 0.5) + 0.3;  //¼ÓºÅºóÃæµÄÖµ£¬Îª»ù×¼Öµ£¬·¶Î§0~1
+                size = (Math.random() * 3) + 2,  //åŠ å·åé¢çš„å€¼ï¼Œé›ªèŠ±å¤§å°ï¼Œä¸ºåŸºå‡†å€¼ï¼Œæ•°å€¼è¶Šå¤§é›ªèŠ±è¶Šå¤§
+                speed = (Math.random() * 1) + 0.5,  //åŠ å·åé¢çš„å€¼ï¼Œé›ªèŠ±é€Ÿåº¦ï¼Œä¸ºåŸºå‡†å€¼ï¼Œæ•°å€¼è¶Šå¤§é›ªèŠ±é€Ÿåº¦è¶Šå¿«
+                opacity = (Math.random() * 0.5) + 0.3;  //åŠ å·åé¢çš„å€¼ï¼Œä¸ºåŸºå‡†å€¼ï¼ŒèŒƒå›´0~1
 
             flakes.push({
                 speed: speed,
@@ -93,7 +93,7 @@
                 x: x,
                 y: y,
                 size: size,
-                stepSize: (Math.random()) / 30 * 1,  //³ËºÅºóÃæµÄÖµ£¬Ñ©»¨ºáÒÆ·ù¶È£¬Îª»ù×¼Öµ£¬ÊıÖµÔ½´óÑ©»¨ºáÒÆ·ù¶ÈÔ½´ó£¬0ÎªÊúÖ±ÏÂÂä
+                stepSize: (Math.random()) / 30 * 1,  //ä¹˜å·åé¢çš„å€¼ï¼Œé›ªèŠ±æ¨ªç§»å¹…åº¦ï¼Œä¸ºåŸºå‡†å€¼ï¼Œæ•°å€¼è¶Šå¤§é›ªèŠ±æ¨ªç§»å¹…åº¦è¶Šå¤§ï¼Œ0ä¸ºç«–ç›´ä¸‹è½
                 step: 0,
                 angle: 180,
                 opacity: opacity
