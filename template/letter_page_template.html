@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        <title>一封信</title>
+
+        <link rel="stylesheet" href="../public/style/common_style_classes/common_style_classes.css" />
+        <link rel="stylesheet" href="../public/style/common_style_classes/common_component.css" />
+        <link rel="stylesheet" href="https://cdn.bootcss.com/normalize/4.2.0/normalize.min.css" />
+
+        <style>
+
+            .wrapper {
+                position: relative;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .full_height {
+                min-height: 100%;
+            }
+
+            #letter_content_box {
+                position: relative;
+                z-index: 3;
+                padding: 70px 30px 10px;
+                color: #333;
+            }
+
+            #letter_content_box section {
+                /*margin-bottom: 10px;*/
+                clear: both;
+                overflow: hidden;
+            }
+
+            #letter_content_box img {
+                width: 100%;
+                height: auto;
+                float: left;
+            }
+
+            .button.musicNote {
+                position: absolute;
+                right: 30px;
+                top: 30px;
+                z-index: 3;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div class="wrapper max_w640 full_height">
+
+            <article id="letter_content_box">
+                <section class="hide"><img src="letter_page/letter_01.png" alt="" /></section>
+                <section class="hide"><img src="letter_page/letter_02.png" alt="" /></section>
+                <section class="hide"><img src="letter_page/letter_03.png" alt="" /></section>
+                <section class="hide"><img src="letter_page/letter_04.png" alt="" /></section>
+            </article>
+
+            <a class="button musicNote small stopped" id="mainMusicControlButton"></a>
+
+            <div class="layer contentLayer backgroundLayer grey_bg">
+                <img src="letter_page/bg_320_643.jpg" alt="" />
+            </div>
+
+        </div>
+
+        <audio preload="" loop="" class="audio hide" id="mainAudioController">
+            <source src="../public/demo/music/Secret%20Garden%20-%20Heartstrings.mp3" />
+            <source src="../public/demo/music/Secret%20Garden%20-%20Heartstrings.ogg" />
+        </audio>
+
+        <script src="https://cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+        <script src="../public/script/common_script/common_function.js"></script>
+        <script src="../public/script/common_script/common_action.js"></script>
+        <script>
+
+            $(document).ready(function ()
+            {
+                setBodyMinHeight();
+
+                // check audio
+                var mainAudioController = getMainAudioController();
+                if (typeof(mainAudioController.canplay !== 'undefined'))
+                {
+                    mainAudioController.error = function ()
+                    {
+                        var log_text = '加载音乐出错。';
+                        addConsoleLog(log_text);
+                        alert(log_text);
+                    }
+
+                    if (playMusic())
+                    {
+                        ;
+                    }
+                    else
+                    {
+                        // Safari 不允许自动播放，这出于避免影响用户体验。
+                        alert('你使用的浏览器需要手动点击音符按钮播放音乐。');
+                    }
+                }
+                else
+                {
+                    var log_text = '很抱歉！你使用的浏览器没有音频播放功能，建议使用最新版本的谷歌浏览器或火狐浏览器浏览该网页。';
+                    addConsoleLog(log_text);
+                    alert(log_text);
+                }
+
+                playLetter(0, 3000);
+            });
+        </script>
+
+    </body>
+</html>
+

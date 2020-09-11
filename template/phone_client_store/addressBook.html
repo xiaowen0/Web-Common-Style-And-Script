@@ -1,0 +1,140 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta charset="UTF-8"/>
+
+    <title>地址簿</title>
+
+    <!-- reset element default style -->
+    <link rel="stylesheet" href="../../public/asset/normalize.css"/>
+
+    <link rel="stylesheet" href="../../public/style/common_style_classes/common_style_classes.css"/>
+    <link rel="stylesheet" href="../../public/style/common_style_classes/common_component.css"/>
+    <link rel="stylesheet" href="../../public/asset/font-awesome-4.7.0/css/font-awesome.min.css"/>
+
+    <!-- phone client store common style -->
+    <link rel="stylesheet" href="style/phone_client_store.css"/>
+
+    <!-- special style for current page -->
+    <!--    <link rel="stylesheet" href="../../css/store/cart.css"/>-->
+
+</head>
+
+<!-- dangdang site: font size : window width ratio = 24 : 375 =  -->
+<body data-base-width="375">
+
+    <div class="page max640" id="infoItem">
+
+        <div class="inner">
+
+            <header class="header subPageHeader">
+                <a href="javascript:history.back();" class="back" title="返回">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                <div class="title"></div>
+                <!--            <a href="javascript:;" class="menu">-->
+                <!--                <i class="fa fa-navicon"></i>-->
+                <!--            </a>-->
+            </header>
+
+            <div class="content" id="addressBookContent">
+
+                <div class="inner">
+                    <div class="addressList mb20">
+
+    <!--                    <div class="addressItem flexLayout">-->
+    <!--                        <div class="leftColumn">-->
+    <!--                            <div style="font-size: 1.8rem;margin-bottom: 1rem">-->
+    <!--                                <span class="recipientName">收货人：李小明</span>-->
+    <!--                                <span class="phone fr">13012345678</span>-->
+    <!--                            </div>-->
+    <!--                            <div class="address">收货地址：广东省佛山市禅城区季华六路岭南明珠体育馆18楼1803</div>-->
+    <!--                        </div>-->
+    <!--                        <div class="rightColumn">-->
+    <!--                            <i class="icon fa fa-check" style="font-size: 2.2rem;"></i>-->
+    <!--                        </div>-->
+    <!--                    </div>&lt;!&ndash; end .addressItem &ndash;&gt;-->
+
+                        <div class="addressItem flexLayout" v-for="item in list" v-bind:data-id="item.id"
+                             v-bind:class="{ active: item.id == selectedId }" v-on:click="onSelectAddressItem">
+                            <div class="leftColumn">
+                                <div style="font-size: 1.8rem;margin-bottom: 1rem">
+                                    <span class="recipientName">收货人：{{item.userName}}</span>
+                                    <span class="phone fr">{{item.phone}}</span>
+                                </div>
+                                <div class="address">收货地址：{{item.province + item.city + item.district + item.address}}</div>
+                            </div>
+                            <div class="rightColumn">
+                                <i class="icon fa fa-check" style="font-size: 2.2rem;"></i>
+                            </div>
+                        </div><!-- end .addressItem -->
+
+                    </div><!-- end .addressList -->
+
+                    <div class="newAddressContent white_bg">
+
+                        <div class="padding10">
+
+                            <h3 class="f16">自定义收货地址</h3>
+
+                            <form class="form verticalLayout row_mb10" action="javascript:;">
+                                <div class="form_row">
+                                    <label class="form_label">姓名</label>
+                                    <input type="text" class="inputbox" v-model="addAddressData.userName"/>
+                                </div>
+                                <div class="form_row">
+                                    <label class="form_label">联系电话</label>
+                                    <input type="text" class="inputbox" pattern="^1[0-9]{10}$" v-model="addAddressData.phone"/>
+                                </div>
+                                <div class="form_row">
+                                    <label class="form_label">地址</label>
+                                    <div class="horizontalLayout mb10">
+                                        <select class="selectbox" v-model="addAddressData.province" v-on:change="onChangeProvince">
+                                            <option v-for="(value, key, index) in provinceList">{{key}}</option>
+                                        </select>
+                                        <select class="selectbox" v-model="addAddressData.city" v-on:change="onChangeCity">
+                                            <option v-for="(value, key, index) in cityList">{{key}}</option>
+                                        </select>
+                                        <select class="selectbox" v-model="addAddressData.district">
+                                            <option v-for="value in districtList">{{value}}</option>
+                                        </select>
+                                    </div>
+                                    <textarea class="textbox" v-model="addAddressData.address"></textarea>
+                                </div>
+                                <div class="form_row">
+                                    <label class="form_label">邮政编码</label>
+                                    <input type="text" class="inputbox" v-model="addAddressData.zipCode"/>
+                                </div>
+                                <div class="form_row">
+                                    <button type="submit" class="button success">添加</button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div><!-- end .newAddressContent -->
+
+                </div>
+
+            </div><!-- end content -->
+
+        </div><!-- end inner -->
+
+    </div><!-- end page -->
+
+    <script src="../../public/asset/jquery/jquery-3.4.1.min.js"></script>
+    <script src="../../public/asset/moment-with-locales.min.js"></script>
+    <script src="../../public/asset/vue.2.6.10.min.js"></script>
+    <script src="../../public/script/common_script/common_function.js"></script>
+
+    <!-- app object  (require errorMessageList.js, common_function.js) -->
+    <script src="../../public/config/errorMessageList.js"></script>
+    <script src="../../public/script/app.js"></script>
+
+    <script src="../../public/script/common_script/common_action.js"></script>
+
+    <script src="js/addressBook.js"></script>
+
+</body>
+</html>

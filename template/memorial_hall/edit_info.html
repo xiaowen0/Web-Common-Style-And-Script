@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>纪念主页</title>
+    <link rel="stylesheet" href="../../public/asset/bootstrap-3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../public/asset/bootstrap-3.3.7/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="../../public/style/common_style_classes/common_style_classes.css"/>
+    <link rel="stylesheet/less" href="style/memorial_hall.less"/>
+    <script src="../../public/asset/less.min.js"></script>
+</head>
+<body>
+
+    <div class="header" id="pageHeader">
+        <div class="inner">
+            <div class="titleContainer">
+                <div class="title">{{name}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content pageContent edit_info">
+
+        <div class="inner">
+            <form id="editInfoForm">
+
+                <div class="form-group">
+                    <label for="nameInputbox">
+                        先人姓名：<span class="red">*</span>
+                    </label>
+                    <input id="nameInputbox" class="form-control" type="text" required="required"
+                        v-model="name"/>
+                </div>
+
+                <div class="form-group">
+                    <label>出生日期：</label>
+                    <div>
+                        <input class="form-control" type="date" v-model="birthday"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>逝世日期：</label>
+                    <div>
+                        <input class="form-control" type="date" v-model="passAwayDate"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>名言/一句简介：</label>
+                    <div>
+                        <textarea class="form-control" v-model="desc"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-success" type="button" v-on:click="saveData">更改</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <nav class="menuPanel">
+        <div class="inner">
+            <ul class="menu">
+                <li>
+                    <a href="home.html">纪念主页</a>
+                </li>
+                <li>
+                    <a href="live_story.html">生平故事</a>
+                </li>
+                <li>
+                    <a href="picture_album.html">回忆相册</a>
+                </li>
+                <li>
+                    <a href="video_list.html">精彩视频</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <script src="../../public/asset/require.js"></script>
+    <script src="js/appConfig.js"></script>
+    <script src="js/edit_info.js"></script>
+
+</body>
+</html>
+

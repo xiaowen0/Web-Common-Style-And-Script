@@ -1,0 +1,170 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+    <head>
+        <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+        <meta charset="UTF-8"/>
+
+        <title>购物车</title>
+
+        <!-- reset element default style -->
+        <link rel="stylesheet" href="../../public/asset/normalize.css"/>
+
+        <link rel="stylesheet" href="../../public/style/common_style_classes/common_style_classes.css"/>
+        <link rel="stylesheet" href="../../public/style/common_style_classes/common_component.css"/>
+        <link rel="stylesheet" href="../../public/asset/font-awesome-4.7.0/css/font-awesome.min.css"/>
+
+        <!-- phone client store common style -->
+        <link rel="stylesheet" href="style/phone_client_store.css"/>
+
+        <!-- special style for current page -->
+        <link rel="stylesheet" href="style/cart.css"/>
+
+    </head>
+
+    <!-- dangdang site: font size : window width ratio = 24 : 375 =  -->
+    <body data-base-width="375">
+
+        <div class="page max640" id="infoItem">
+            <div class="inner">
+
+                <header class="header subPageHeader">
+                    <a href="javascript:history.back();" class="back" title="返回">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <div class="title">购物车</div>
+                    <!--            <a href="javascript:;" class="menu">-->
+                    <!--                <i class="fa fa-navicon"></i>-->
+                    <!--            </a>-->
+                </header>
+
+                <!-- banner-1 for home page -->
+                <div class="bannerBlock" id="homeBanner">
+                    <a href="javascript:;">
+                        <img src="image/banner/home1.jpg" alt=""/>
+                    </a>
+                </div>
+
+                <div id="cartContent" class="cartContent">
+
+                    <!-- shop item -->
+                    <div class="shopBlock">
+                        <div class="cart_list" v-for="items in itemInfo">
+                            <!--店铺级模块-->
+                            <!--店铺头-->
+                            <div class="shop_title clearfix" data-shop-id="10748">
+                                <input type="checkbox" class="fl c_checkbox" v-bind:data-storeid="items.id" v-on:change="checkAll" checked="">
+                                <div class="shopIcon fl common"></div>
+                                <a class="fl shop_link" href="">
+                                    <p class="title">{{items.name}}</p>
+                                    <p class="shop_in"></p>
+                                </a>
+                            </div>
+                            <!--店铺头end-->
+
+                            <div class="shopLine"></div>
+
+                            <!--店铺商品-->
+
+                            <!-- cart item -->
+                            <!--店铺商品-->
+                            <div v-for="item in items.trolleysList">
+                                <!-- cart item -->
+                                <div class="cart_item" v-bind:item_id="item.productId" ordnum="1">
+                                    <input type="checkbox" class="fl c_checkbox" v-model="item.checked">
+                                    <!--商品图片-->
+                                    <a v-bind:href="'goods_detail.html?id='+item.productId" class="fl pro_pic">
+                                        <!-- discount image -->
+                                        <img style="width:2.8rem;height:2.8rem;position: absolute;z-index: 1;right: 0rem;bottom: 0rem;"
+                                             src="../../public/image/three_discount.png" alt=""/>
+                                        <img class="pic" v-bind:src="item.productImg">
+                                    </a>
+                                    <!--商品图片end-->
+
+                                    <div class="item_show">
+                                        <div class="detail clearfix">
+                                            <!--商品名称-->
+                                            <p class="fl prd_tit">
+                                                <a v-bind:href="'goods_detail.html?id='+item.productId">{{item.productTitle}}</a>
+                                            </p>
+                                            <!--商品名称end-->
+                                            <!--商品价格-->
+                                            <p class="fl prd_price ">
+                                                <span class="dangdang_price">￥{{item.productPrice}}</span>
+                                            </p>
+                                            <!--商品价格end-->
+                                            <!--商品标签-->
+                                            <p class="clear tags clearfix"></p>
+                                            <!--商品标签end-->
+                                        </div>
+
+                                        <!--商品数量颜色尺码-->
+                                        <div class="clearfix alignRight" style="margin-right: 1rem;">
+                                            <!--<span class="num fl eclipse">x1</span>-->
+                                            <!--<span class="color_size fl eclipse">桃红-睡美人/14/参考脚长134mm</span>-->
+                                            <div class="goodsNumberControl">
+                                                <button class="add" v-bind:data-productid="item.productId" data-type="1" v-on:click="doAddOrDe">+</button>
+                                                <span class="count">{{item.productCount}}</span>
+                                                <button class="reduce"v-bind:data-productid="item.productId" data-type="0" v-on:click="doAddOrDe">-</button>
+                                            </div>
+                                        </div>
+                                        <!--商品数量颜色尺码end-->
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--集合促销商品end-->
+
+                            <!--集合促销小计-->
+                            <div class="shopPromoFit">
+                                <div class="fitMoney fr">
+                                    店铺合计：<span >￥{{getStorePrice(items,1)}}</span>
+                                </div>
+                            </div>
+                            <!--集合促销小计end-->
+
+                            <!--店铺商品end-->
+
+                            <!--店铺合计-->
+
+                            <!-- <div class="shopPromoFit">
+                            <div class="fitMoney fr">
+                            店铺合计：<span>￥348.00</span></div>
+                            </div> -->
+                            <!--店铺合计end-->
+                            <!--店铺级模块end-->
+                        </div><!-- end cart_list -->
+                    </div><!-- end shopBlock -->
+
+                </div>
+
+            </div>
+
+            <nav class="mobileBottomMenuContainer">
+                <div class="orderOptArea clearfix">
+                    <div class="fitMoney fl">
+                        合计：<span class="full_Price">￥{{getStorePrice(itemInfo,0)}}</span>
+                    </div>
+                    <div class="fr">
+                        <button class="button payBtn" v-on:click="doOrder">下单</button>
+                    </div>
+                </div>
+            </nav>
+
+        </div>
+
+        <script src="../../public/asset/jquery/jquery-3.4.1.min.js"></script>
+        <script src="../../public/asset/moment-with-locales.min.js"></script>
+        <script src="../../public/asset/vue.2.6.10.min.js"></script>
+        <script src="../../public/script/common_script/common_function.js"></script>
+
+        <!-- app object  (require errorMessageList.js, common_function.js) -->
+        <script src="../../public/config/errorMessageList.js"></script>
+        <script src="../../public/script/app.js"></script>
+
+        <script src="../../public/script/common_script/common_action.js"></script>
+
+        <script src="js/cart.js"></script>
+
+    </body>
+
+</html>

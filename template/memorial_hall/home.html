@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>纪念主页</title>
+    <link rel="stylesheet" href="../../public/asset/bootstrap-3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../public/asset/bootstrap-3.3.7/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="../../public/style/common_style_classes/common_style_classes.css"/>
+    <link rel="stylesheet/less" href="style/memorial_hall.less"/>
+    <script src="../../public/asset/less.min.js"></script>
+</head>
+<body>
+
+    <div class="header" id="pageHeader">
+        <div class="inner">
+            <div class="titleContainer">
+                <div class="title" v-if="!nameEditingState" v-on:click="editName">{{name}}纪念馆</div>
+                <div class="nameEditingContainer" v-if="nameEditingState">
+                    <input type="text" name="title" v-model="nameDraft" />
+                    <button type="button" v-on:click="saveNewName">保存</button>
+                    <button type="button" v-on:click="cancelEditName">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="menuPanel">
+        <div class="inner">
+            <ul class="menu">
+                <li>
+                    <a href="home.html">纪念主页</a>
+                </li>
+                <li>
+                    <a href="live_story.html">生平故事</a>
+                </li>
+                <li>
+                    <a href="picture_album.html">回忆相册</a>
+                </li>
+                <li>
+                    <a href="video_list.html">精彩视频</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <script src="../../public/asset/require.js"></script>
+    <script src="js/appConfig.js"></script>
+    <script src="js/home.js"></script>
+
+</body>
+</html>
+

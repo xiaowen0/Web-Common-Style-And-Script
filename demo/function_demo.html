@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <title>Common Style And Script 公共样式与脚本</title>
+
+    <!-- common function -->
+    <script src="../public/script/common_script/common_function.js"></script>
+
+    <!-- check IE old version, add HTML5 support, use CDN. -->
+    <!--[if lt IE 9]>
+    <script>
+        if (getBrowserLanguage() === 'zh-cn')   // 中国大陆
+        {
+            printTag('script', {src: 'https://cdn.bootcss.com/html5shiv/r29/html5.min.js'});
+        }
+        else    // 国际网络
+        {
+            printTag('script', {src: 'https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js'});
+        }
+    </script>
+    <![endif]-->
+
+    <!-- Bootstrap framework , use CDN. -->
+    <script>
+        if (getBrowserLanguage() === 'zh-cn')   // 中国大陆
+        {
+            printStylesheetLink('https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css');
+            printStylesheetLink('https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap-theme.min.css');
+        }
+        else    // 国际网络
+        {
+            printStylesheetLink('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css');
+            printStylesheetLink('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap-theme.min.css');
+        }
+    </script>
+
+    <!-- common style classes -->
+    <link rel="stylesheet" href="../public/style/common_style_classes/common_component.css"/>
+    <link rel="stylesheet" href="../public/style/common_style_classes/common_style_classes.css"/>
+
+</head>
+<body>
+
+<div class="page container-fluid">
+
+    <div class="inner">
+
+        <h1 class="mb20">函数示例</h1>
+
+        <div class="content row">
+
+            <div class="col-xs-12">
+                <h2>字符串类</h2>
+            </div>
+
+            <div class="col-xs-12 col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3>字符串替换 str_replace(string, find, replace)</h3>
+                        <p>把在字符串 string 中的字符串 find 全部替换成 replace</p>
+                        <p>String.replace 接口只能替换一个，这个函数可以替换全部。</p>
+                        <p>string String 要进行操作的字符串</p>
+                        <p>find String 要搜索的字符串</p>
+                        <p>replace String 替换的字符串</p>
+                        <p>返回 String 类型</p>
+                        <p>str_replace('abacd', 'a', 'd'); // "dbdcd"</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3>数据替换 replaceData(string, data)</h3>
+                        <p>按键值对映射，把字符串 string 里的 key 替换成 value</p>
+                        <p>string 要进行操作的字符串</p>
+                        <p>data 替换的数据</p>
+                        <p>返回 String 类型</p>
+                        <p>var data = {'$name': '张三', '$profession': '软件开发工程师'}</p>
+                        <p>var str1 = replaceData('$name的职业是$profession。', data);</p>
+                        <p>"张三的职业是软件开发工程师。"</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3>移除所有 HTML 标记 removeHtmlTag(html)</h3>
+                        <p>在 HTML 代码中移除所有 HTML 标记，返回一个纯文本。</p>
+                        <p>html String 操作的字符串</p>
+                        <p>返回 String 类型</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3>过滤 IMG 标记 filterImgTag(html)</h3>
+                        <p>在 HTML 代码中过滤出所有 IMG 标记元素，返回一个数组。</p>
+                        <p>html String 操作的字符串</p>
+                        <p>返回 Array 类型</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3>转义 HTML 代码 escapeHtml(html)</h3>
+                        <p>html String 操作的字符串</p>
+                        <p>返回 String 类型</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12">
+                <h2>时间类</h2>
+            </div>
+
+            <div class="col-xs-12 col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3>获取新鲜的时间描述 getFreshText(time_str)</h3>
+                        <p>通过一个时间表达式，获取新鲜时间描述，返回以下类似的描述：</p>
+                        <p>n秒前，n分钟前，n小时前，n天前，n月前</p>
+                        <p>需要 moment-with-locales 库，并加载相应的语言文件。</p>
+                        <p>time_str String 时间格式的字符串，类似：“2016-01-31 12:00:00”</p>
+                        <p>返回 String 类型</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3>打印时间到一个容器里面 printTime(element, format)</h3>
+                        <p>这个时间每秒钟更新</p>
+                        <p>需要 moment-with-locales 库，并加载相应的语言文件。</p>
+                        <p>element HTMLElement 要输出时间内容的容器</p>
+                        <p>format String 时间格式，默认为：'YYYY-MM-DD H:mm:ss'</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12">
+                <h2>元素类</h2>
+            </div>
+
+            <div class="col-xs-12 col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3>按 ID 获取元素 getElement(id)</h3>
+                        <p>id String  元素的id属性</p>
+                        <p>返回 Element 或 null</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-6">
+
+                <div class="panel panel-default">
+
+                    <div class="panel-body">
+
+                        <h3>显示一个对话框：showMessageBox 类</h3>
+
+                        <div>
+                            <button type="button" class="button" onclick="showMessageBox('操作成功！', '成功');">显示</button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-xs-12">
+                <h2>检查类</h2>
+            </div>
+
+            <div class="col-xs-12 col-sm-6">
+
+                <div class="panel panel-default">
+
+                    <div class="panel-body">
+
+                        <h3>检查是否支持跨源：isSupportCrossOrigin()</h3>
+
+                        <div>
+                            <button type="button" class="button" onclick="alert(isSupportCrossOrigin() ? '该浏览器支持跨源' : '该浏览器不支持跨源');">检查</button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-6">
+                <div class="panel panel-default">
+
+                    <div class="panel-body">
+
+                        <h3>初始化导入按钮</h3>
+
+                        <p>var fileImportHelper1 = initImportButton('#importFileButton', {name : 'file'});</p>
+
+                        <p>第一个参数：导入按钮的引用，或 CSS Selector。</p>
+                        <p>第二个参数：导入选项。</p>
+
+                        <p>action: String 接收文件上传的 URL</p>
+                        <p>valid_extensions:  Array  可接受上传的文件扩展名</p>
+                        <p>params: Object  其他请求参数</p>
+                        <p>onComplete: function(response)  完成后回调</p>
+                        <p>onStart: function()  开始上传后回调</p>
+                        <p>onCancel: function()  取消上传后的回调</p>
+
+                        <button type="button" id="importFileButton" class="button">导入</button>
+                    </div>
+
+                </div>
+            </div>
+
+			<div class="col-xs-12 col-sm-6">
+                <div class="panel panel-default">
+
+                    <div class="panel-body">
+
+                        <h3>数据字段转换</h3>
+
+						<p>保持内容模板的独立性，网页上的数据的字段名称可以与接口获取的不一致。</p>
+
+						<p class="bold">dataColumnConvert(data, mapping)</p>
+
+						<p>第一个参数：源数据，对象类型。</p>
+                        <p>第二个参数：名称映射键值对，对象类型。</p>
+
+						<p>例子：有一模板如下</p>
+						<p>标题：{{title}}，作者：{{author}}，阅读：{{readedCount}}</p>
+						<p>接口数据：{"title":"标题","createdUser":"比尔盖茨","clicks":2465}</p>
+
+						<p>
+							<code>var newData = dataColumnConvert(data, {<br/>
+								author : 'createdUser',<br/>
+								readedCount : 'clicks'<br/>
+							});
+							</code>
+						</p>
+
+						<p>
+							<script>
+							var data = {"title":"标题","createdUser":"比尔盖茨","clicks":2465};
+							var newData = dataColumnConvert(data, {
+								author : 'createdUser',
+								readedCount : 'clicks'
+							});
+							document.writeln(JSON.stringify(newData));
+							</script>
+						</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-header">
+                        <h2>时间倒流显示</h2>
+                    </div>
+                    <div class="panel-body">
+                        <div>
+                            <button type="button" onclick="timeDrop('#timeDropContent', '23:59:59');">开始</button>
+                        </div>
+                        <p>
+                            <span id="timeDropContent"></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-6"></div>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="dialog messageBox" id="mainMessageBox">
+    <div class="dialog_header">
+        <div class="dialog_title">标题</div>
+        <div class="button_group">
+            <button type="button" class="button close_button">X</button>
+        </div>
+    </div>
+    <div class="dialog_body">
+        <p>对话框内容对话框内容对话框内容</p>
+    </div>
+</div>
+
+<!-- jQuery library -->
+<script>
+    /*if (getBrowserLanguage() === 'zh-cn')   // 中国大陆
+     {
+     printTag('script', {src: 'https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js'});
+     }
+     else  // 国际网络
+     {
+     printTag('script', {src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'});
+     }*/
+</script>
+
+<script>
+    includeDependencies();
+</script>
+
+<script src="../public/asset/jquery/jQuery.AjaxFileUpload/jquery.ajaxfileupload.js"></script>
+
+<!-- common action (must after jQuery) -->
+<script src="../public/script/common_script/common_action.js"></script>
+
+<script src="../public/config/errorMessageList.js"></script>
+
+<script>
+
+    $(document).ready(function(){
+        var fileImportHelper1 = initImportButton('#importFileButton', {
+            name : 'pdf',
+            action: '/pdf2img',
+            valid_extensions : ['pdf'],
+            params: {},
+            onComplete: function(response) {
+                console.log('custom handler for file:');
+                alert(JSON.stringify(response));
+            },
+            onStart: function() {
+                if(0) return false; // cancels upload
+            },
+            onCancel: function() {
+                console.log('no file selected');
+            }
+        });
+    });
+
+</script>
+
+</body>
+</html>

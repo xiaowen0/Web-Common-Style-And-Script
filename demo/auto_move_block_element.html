@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>自动移动的块元素</title>
+		<style>
+			#demo1 {
+				width: 120px; /*height: 80px;*/
+				top: 50%; left: 50%;
+				position: fixed;
+				background-color: rgb(230,78,34); color: #FFF;
+				line-height: 30px;
+			}
+			.inner {
+				padding: 10px;
+			}
+		</style>
+	</head>
+	<body>
+
+		<div id="demo1" data-speed="80">
+			<div class="inner">
+				<p>erherherh</p>
+				<p>
+					<strong>wegweg</strong>
+				</p>
+			</div>
+		</div>
+
+		<!-- jQuery library -->
+		<script src="../public/asset/jquery/jquery-3.1.0.min.js"></script>
+
+		<!-- common function -->
+		<script src="../public/script/common_script/common_function.js"></script>
+
+		<script>
+			initAutoMoveInWindow($('#demo1')[0]);
+		</script>
+
+	</body>
+</html>

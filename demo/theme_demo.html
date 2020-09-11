@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>主题示例</title>
+
+    <link rel="stylesheet" href="../public/asset/normalize.css"/>
+    <link rel="stylesheet" href="../public/asset/font-awesome-4.7.0/css/font-awesome.min.css"/>
+
+    <!-- common style classes library -->
+    <link rel="stylesheet" href="../public/style/common_style_classes/common_component.css"/>
+    <link rel="stylesheet" href="../public/style/common_style_classes/common_style_classes.css"/>
+
+    <link rel="stylesheet" href="../public/style/theme/weui.css" id="styleTheme"/>
+
+</head>
+<body class="weui">
+
+<div class="page container-fluid">
+    <div class="inner padding10">
+
+        <h1 class="mainTitle">主题演示</h1>
+
+        <p class="mt10">同样的内容，不同的主题，显示不同的风格。
+            <label for="themeSelector">选择主题：</label>
+            <select id="themeSelector" class="selectbox">
+                <option value="weui" selected="selected">WeUI</option>
+                <option value="mui">Mui</option>
+                <option value="shixun">ShiXun</option>
+                <option value="shixun_v2">ShiXun V2</option>
+            </select>
+        </p>
+
+        <div class="mt10">
+            <h2 class="h2">文字演示</h2>
+
+            <div class="h1">.h1  一级标题</div>
+            <div class="h2">.h2  二级标题</div>
+            <div class="h3">.h3  三级标题</div>
+
+            <p class="mt10 primaryTextColor">.primaryTextColor  主要颜色(大部分文字的颜色)</p>
+            <p class="mt10 secondaryTextColor">.secondaryTextColor  次要颜色(简介、时间、浏览量等文字)</p>
+            <p class="mt10">.primaryLinkColor  <a href="javascript:;" class="primaryLinkColor">主要链接颜色</a> </p>
+            <p class="mt10">.secondaryLinkColor  <a href="javascript:;" class="secondaryLinkColor">次要链接颜色</a> </p>
+
+            <p class="mt10">.priceColor  <span class="priceColor">价格颜色  ￥987.65</span></p>
+
+        </div>
+
+        <div class="mt10">
+            <h2 class="h2">按钮演示</h2>
+
+            <h3 class="h3 mt10">普通按钮</h3>
+
+            <div class="mt10">
+                <p>
+                    .button.button_default  <button class="button button_default">默认按钮</button>
+                    .button_loading  <button class="button button_default button_loading">默认按钮(加载中)</button>
+                </p>
+                <p class="mt10">
+                    .button.button_primary  <button class="button button_primary">主要按钮</button>
+                    .button_loading  <button class="button button_primary button_loading">主要按钮(加载中)</button>
+                </p>
+                <p class="mt10">
+                    .button.button_success  <button class="button button_success">成功按钮</button>
+                    .button.button_warning  <button class="button button_warning">警告按钮</button>
+                    .button.button_danger  <button class="button button_danger">危险按钮</button>
+                </p>
+
+                <p class="mt10">
+                    <button class="button button_default">
+                        <i class="fa fa-bars"></i> 菜单
+                    </button>
+                    <button class="button button_primary">
+                        <i class="fa fa-save"></i> 保存
+                    </button>
+                    <button class="button button_success">
+                        <i class="fa fa-save"></i> 保存
+                    </button>
+                    <button class="button button_primary">
+                        <i class="fa fa-line-chart"></i> 查看统计
+                    </button>
+                    <button class="button button_success">
+                        <i class="fa fa-plus"></i>  添加
+                    </button>
+                    <button class="button button_primary">
+                        <i class="fa fa-search"></i> 搜索
+                    </button>
+                    <button class="button button_success">
+                        <i class="fa fa-pencil"></i>  撰写
+                    </button>
+                    <button class="button button_warning">
+                        <i class="fa fa-edit"></i>  编辑
+                    </button>
+                    <button class="button button_warning">
+                        <i class="fa fa-ban"></i>  禁用
+                    </button>
+                    <button class="button button_danger">
+                        <i class="fa fa-remove"></i>  删除
+                    </button>
+                    <button class="button button_danger">
+                        <i class="fa fa-trash-o"></i>  删除
+                    </button>
+                </p>
+
+            </div>
+
+            <h3 class="h3 mt10">被禁用按钮</h3>
+
+            <div class="mt10">
+                <button class="button button_default" disabled="disabled">默认按钮</button>
+                <button class="button button_primary" disabled="disabled">主要按钮</button>
+                <button class="button button_success" disabled="disabled">成功按钮</button>
+                <button class="button button_warning" disabled="disabled">警告按钮</button>
+                <button class="button button_danger" disabled="disabled">危险按钮</button>
+            </div>
+
+            <h3 class="h3 mt10">迷你按钮</h3>
+
+            <div class="mt10">
+                <button class="button button_default button_mini">默认</button>
+                <button class="button button_primary button_mini">主要</button>
+                <button class="button button_success button_mini">成功</button>
+                <button class="button button_warning button_mini">警告</button>
+                <button class="button button_danger button_mini">危险</button>
+            </div>
+
+            <h3 class="h3 mt10">被禁用按钮</h3>
+
+            <div class="mt10">
+                <button class="button button_default button_mini" disabled="disabled">默认</button>
+                <button class="button button_primary button_mini" disabled="disabled">普通</button>
+                <button class="button button_success button_mini" disabled="disabled">成功</button>
+                <button class="button button_warning button_mini" disabled="disabled">警告</button>
+                <button class="button button_danger button_mini" disabled="disabled">危险</button>
+            </div>
+
+        </div>
+
+        <div class="mt10 grey_bg">
+            <div class="padding10">
+                <h2 class="h2 form_cells_title">表单控件</h2>
+                <div class="form_cells">
+                    <div class="form_cell">
+                        <input class="inputbox" placeholder="电子邮箱/手机号码"/>
+                    </div>
+                    <div class="form_cell form_cell_selectbox">
+                        <select class="selectbox">
+                            <option>A1</option>
+                            <option>B2</option>
+                            <option>C3</option>
+                            <option>D4</option>
+                        </select>
+                    </div>
+                </div>
+                <h2 class="h2 form_cells_title">文本域</h2>
+                <div class="form_cells">
+                    <div class="form_cell">
+                        <textarea class="textarea"></textarea>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<script src="../public/asset/jquery/jquery-3.4.1.min.js"></script>
+
+<script src="../public/script/common_script/common_function.js"></script>
+<script src="../public/script/common_script/common_action.js"></script>
+
+<script>
+function changeTheme(event)
+{
+    var theme = this.value;
+
+    // remove old class
+    var themeList = [];
+    $(this).find('option').each(function(){
+        themeList.push(this.value);
+    })
+    $(document.body).removeClass(themeList);
+
+    // set new class
+    switch (theme) {
+        case 'weui' :
+        case 'mui' :
+        default :
+            $('#styleTheme').attr('href', '../style/theme/' + theme + '.css');
+            $(document.body).addClass(theme);
+    }
+}
+$(function(){
+    $('#themeSelector').on('change', changeTheme).trigger('change');
+})
+</script>
+
+</body>
+</html>
