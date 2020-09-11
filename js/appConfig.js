@@ -1,6 +1,7 @@
 /**
  * web application client config
  * recommend use app.js
+ * @requires errorMessageList common_function
  */
 
 var appConfig = {
