@@ -1,3 +1,8 @@
+/**
+ * transplant from alanbo/animate.js
+ * https://github.com/alanbo/animate.js
+ */
+
 'use strict';
 
 const animationFunctionEnum = {

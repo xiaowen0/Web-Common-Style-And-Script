@@ -66,6 +66,7 @@ export default {
 
     /**
      * @param   Number  top
+     * @author  zhiwen
      */
     scrollTo : function(top = 0)
     {
