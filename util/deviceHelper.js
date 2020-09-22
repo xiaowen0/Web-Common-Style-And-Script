@@ -7,10 +7,12 @@ var helper = {
     isIphone : false,
     isIpad : false,
 
+    isAndroidApp : false,
+    isIphoneApp : false,
+
     os : '',
 
     deviceType : '',
-    deviceName : '',
 
     init : function () {
 
@@ -19,6 +21,9 @@ var helper = {
         this.isAndroid  = userAgent.indexOf("Android") > -1;
         this.isIphone   = userAgent.indexOf("iPhone") > -1;
         this.isIpad     = userAgent.indexOf("iPad") > -1;
+
+        this.isAndroidApp    = /android.*mobile\s\S*$/i.test(userAgent);
+        this.isIphoneApp     = /iphone.*mobile\/\S*$/i.test(userAgent);
 
         if (this.isAndroid || this.isIphone || this.isIpad)
         {
@@ -29,8 +34,8 @@ var helper = {
             this.deviceType = 'pc';
         }
 
-        var isWindows = userAgent.indexOf("Windows") > -1;
-        var isLinux = userAgent.indexOf("Linux") > -1;
+        var isWindows   = userAgent.indexOf("Windows") > -1;
+        var isLinux     = userAgent.indexOf("Linux") > -1;
         var isMacintosh = userAgent.indexOf("Macintosh") > -1;
         if (isWindows)
         {
@@ -52,11 +57,6 @@ var helper = {
         {
             this.os = 'iOS';
         }
-
-        var userAgent  = navigator.userAgent;
-        this.isAndroid     = userAgent.indexOf("Android") > -1;
-        this.isIphone  = userAgent.indexOf("iPhone") > -1;
-        this.isIpad  = userAgent.indexOf("iPad") > -1;
     }
 };
 helper.init();
