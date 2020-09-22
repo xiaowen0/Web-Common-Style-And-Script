@@ -858,17 +858,6 @@
     border-radius: 50% 50%;
 }
 
-.payButton,
-.payBtn{
-    background-color: #FB4741;
-    color: #fff;
-    border-radius: 0;
-    width: 6rem;
-    height: 4.5rem;
-    line-height: 100%;
-    font-size: 180%;
-}
-
 .menuButton .icon-bar {
     background-color: #000;
 }
