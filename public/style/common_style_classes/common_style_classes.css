@@ -37,11 +37,11 @@
     margin-right: auto
 }
 
-.fl {
+.fl, .floatL {
     float: left
 }
 
-.fr {
+.fr, .floatR {
     float: right
 }
 
@@ -543,45 +543,53 @@ img.fullSpace {
 .bgF5F5F5 {
     background-color: #F5F5F5;
 }
+.mask70 {
+    background-color: rgba(0,0,0,.7);
+}
+.mask50 {
+    background-color: rgba(0,0,0,.5);
+}
 
 /* align */
-.alignLeft {
+.alignLeft, .alignL {
     text-align: left;
 }
 
-.alignCenter {
+.alignCenter, .alignC {
     text-align: center;
 }
 
-.alignRight {
+.alignRight, .alignR {
     text-align: right;
 }
 
-.alignJustify {
+.alignJustify, .alignJ {
     text-align: justify;
 }
 
-.alignTop {
+.alignTop, .alignT {
     vertical-align: top;
 }
-.alignMiddle {
+.alignMiddle, .alignM {
     vertical-align: middle;
 }
-.alignBottom {
+.alignBottom, .alignB {
     vertical-align: bottom;
 }
 
-.breakWord {
+.breakWord, .breakW {
     word-break: break-all;
 }
 
-.textOverflowShowEllipsis {
+.textOverflowShowEllipsis,
+.ellipsisOverflowText,
+.ellipsisOF {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
 /* font */
-.msyh {
+.msyh, .boldFace {
     font-family: "微软雅黑", "黑体";
 }
 
@@ -593,6 +601,8 @@ img.fullSpace {
     font-family: serif;
     font-weight: bold;
 }
+
+/* absolute font size */
 
 .f10 {
     font-size: 10px;
@@ -876,6 +886,55 @@ img.fullSpace {
     animation: blink_keyframes .75s linear infinite;
 }
 
+/* mixed font style */
+
+.f_14r_bold_333 {           /* size + bold + color */
+    font-size: 87.5%;
+    font-weight: bold;
+    color: #333;
+}
+.f_16r_bold_333 {
+    font-size: 100%;
+    font-weight: bold;
+    color: #333;
+}
+.f_18r_bold_333 {
+    font-size: 112.5%;
+    font-weight: bold;
+    color: #333;
+}
+.f_20r_bold_333 {
+    font-size: 125%;
+    font-weight: bold;
+    color: #333;
+}
+.f_24r_bold_333 {
+    font-size: 150%;
+    font-weight: bold;
+    color: #333;
+}
+
+.f_14r_999 {                /* size + color */
+    font-size: 87.5%;
+    color: #999;
+}
+.f_16r_999 {
+    font-size: 100%;
+    color: #333;
+}
+.f_18r_999 {
+    font-size: 112.5%;
+    color: #999;
+}
+.f_20r_999 {
+    font-size: 125%;
+    color: #999;
+}
+.f_24r_999 {.
+    font-size: 150%;
+    color: #999;
+}
+
 /* column layout */
 
 .columnLayout,
@@ -976,19 +1035,22 @@ img.fullSpace {
 }
 
 .roundBorder,
-.roundBorder8 {
+.roundBorder8,
+.round8{
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     border-radius: 8px;
 }
 
-.roundBorder4 {
+.roundBorder4,
+.round4 {
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
 }
 
-.roundBorder10 {
+.roundBorder10,
+.round10 {
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
