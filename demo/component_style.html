@@ -791,29 +791,29 @@
             <div class="panel panel-default">
                 <div class="panel-body">
 
-                    <h2>文章内容</h2>
+                    <h2>简单文章界面 .article.simpleUI</h2>
 
                     <div>
                         <p>结构：</p>
-                        <p>*.articleContent</p>
-                        <p>-*.article.conciseDesign itemscope="" itemtype="http://schema.org/Blog"</p>
-                        <p>----*.article_title itemprop="name"</p>
-                        <p>----*.article_info</p>
+                        <p>*.articleContainer</p>
+                        <p>-*.article.simpleUI itemscope="" itemtype="http://schema.org/Blog"</p>
+                        <p>----*.titleArea itemprop="name"</p>
+                        <p>----*.infoArea</p>
                         <p>------span.publishedTime itemprop="dateCreated"</p><span>|</span>
                         <p>------span.clickNumber</p>
-                        <p>----*.article_text itemprop="text"</p>
+                        <p>----*.textArea itemprop="text"</p>
                     </div>
 
                     <div>示例：</div>
 
-                    <div class="articleContent">
-                        <article class="article defaultLayout conciseDesign" itemscope="" itemtype="http://schema.org/Blog">
+                    <div class="articleContainer">
+                        <article class="article simpleUI conciseDesign" itemscope="" itemtype="http://schema.org/Blog">
 
-                            <h1 class="article_title" itemprop="name">
+                            <h1 class="titleArea" itemprop="name">
                                 孩子初学写字，写歪写丑不要纠正，原因你最好知道
                             </h1>
 
-                            <div class="article_info">
+                            <div class="infoArea">
                                 <span class="publishedTime" itemprop="dateCreated">
                                     发布：2016-09-09 14:12:33
                                 </span>
@@ -823,7 +823,7 @@
                                 </span>
                             </div>
 
-                            <div class="article_text" itemprop="text">
+                            <div class="textArea" itemprop="text">
 
                                 <div>
                                     <p class="indent_2_em">
@@ -881,10 +881,10 @@
 
                                 </div>
 
-                            </div><!-- end .article_text -->
+                            </div><!-- end .textArea -->
 
                         </article><!-- end .article -->
-                    </div><!-- end .articleContent -->
+                    </div><!-- end .articleContainer -->
 
                 </div>
             </div>

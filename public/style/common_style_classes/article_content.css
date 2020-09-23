@@ -1,14 +1,13 @@
-/* article */
 /* Article (article content default style) ----------------------*/
 
-.article.defaultLayout {
+.article.simpleUI {
     background-color: #fff;
     padding: 30px 10px;
     margin-bottom: 20px;
 }
 
 @media screen and (min-width: 768px) {
-    .article.defaultLayout {
+    .article.simpleUI {
         margin-bottom: 20px;
         padding-left: 15px;
         padding-right: 15px;
@@ -16,34 +15,36 @@
 }
 
 @media (min-width: 1600px)    /* Big Screen */ {
-    .article.defaultLayout {
+    .article.simpleUI {
         padding-left: 20px;
         padding-right: 20px;
     }
 }
 
 /* tag in article element */
-.article.defaultLayout h1 {
+.article.simpleUI h1 {
     margin-bottom: 30px;
 }
-.article.defaultLayout h2,
-.article.defaultLayout h3,
-.article.defaultLayout h4,
-.article.defaultLayout table {
+.article.simpleUI h2,
+.article.simpleUI h3,
+.article.simpleUI h4,
+.article.simpleUI table {
     margin-bottom: 20px;
 }
 
-.article.defaultLayout h5,
-.article.defaultLayout h6,
-.article.defaultLayout p,
-.article.defaultLayout ul,
-.article.defaultLayout ol {
+.article.simpleUI h5,
+.article.simpleUI h6,
+.article.simpleUI p,
+.article.simpleUI ul,
+.article.simpleUI ol {
     margin-bottom: 10px;
 }
 
-.article.defaultLayout ul,
-.article.defaultLayout ol {
+.article.simpleUI ul,
+.article.simpleUI ol {
     padding-left: 20px;
+    line-height: 26px;
+    font-size: 15px;
 }
 
 .article audio,
@@ -55,25 +56,34 @@
     background-color: #333;
 }
 
+.article img {
+    max-width: 100%;
+    height: auto;
+}
+
 .article .articleNav {
     overflow: visible;
 }
 
-.article_title,
-.articleTitle,
-.article .title{
+.article.simpleUI .title{
     font-size: 28px;
     padding-bottom: 10px;
     line-height: normal;
 }
 
-.article_info {
+.article.simpleUI h2 {
+    color: #000;
+    font-size: 22px;
+    line-height: 50px;
+    margin-bottom: 20px;
+}
+
+.article.simpleUI .infoArea {
     margin-bottom: 20px;
     color: #9a9a9a;
 }
 
-.article_text,
-.articleContent{
+.article.simpleUI .contentArea{
     color: #666;
     word-wrap: break-word;
     word-break: break-all;
@@ -83,34 +93,29 @@
     overflow: hidden;
 }
 
-.article img {
-    max-width: 100%;
-    height: auto;
-}
-
-.article_image {
+.article.simpleUI .imageArea {
     overflow: hidden;
     padding-bottom: 20px;
 }
 
-.article_image img {
+.article.simpleUI .imageArea img {
     max-width: 100%;
 }
 
-.article_visitor {
+.article.simpleUI .visitor {
     color: #9a9a9a;
 }
 
-.article_visitor dt {
+.article.simpleUI .visitor dt {
     color: #666;
     margin-bottom: 7px;
 }
 
-.article_visitor dd {
+.article.simpleUI .visitor dd {
     margin-bottom: 5px;
 }
 
-.article .articleNav ul {
+.article.simpleUI .articleNav ul {
     border-radius: 6px;
     background: #F4F8FB;
     list-style: none none;
@@ -118,56 +123,36 @@
     padding: 12px 0;
 }
 
-.article .articleNav li a {
+.article.simpleUI .articleNav li a {
     display: block;
     padding: 6px 25px;
     font-weight: normal;
 }
 
-.article .articleNav li a:hover {
+.article.simpleUI .articleNav li a:hover {
     background: #EAF1F7;
     text-decoration: none;
 }
 
-.article .titleBox {
+.article.simpleUI .titleArea {
     font-size: 32px;
 }
 
-.article .subTitleBox {
+.article.simpleUI .subTitleArea {
     margin-bottom: 20px;
 }
 
-.article .title {
-    line-height: 50px;
-    font-size: 35px;
-    color: #2A5E8E;
-}
-
-.article h2 {
-    color: #000;
-    font-size: 22px;
-    line-height: 50px;
-    margin-bottom: 20px;
-}
-
-.article p,
-.article ol,
-.article ul {
-    line-height: 26px;
-    font-size: 15px;
-}
-
-.article .timeBox {
+.article.simpleUI .timeArea {
     text-align: center;
     color: #999;
 }
 
-.article .hitsBox {
+.article.simpleUI .hitsArea {
     text-align: center;
     color: #999;
 }
 
-.article .textBox {
+.article.simpleUI .textArea {
     padding: 2ex 0;
     line-height: 170%;
 }
