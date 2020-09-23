@@ -1,6 +1,11 @@
 /**
  * common action
+ * recommend use single page app framework
+ * It's use in non-single page
+ * @author: Kevin Kwan
  * @requires jQuery common_function
+ * E-mail: zhiwen2720@163.com
+ * url: https://github.com/xiaowen0/Web-Common-Style-And-Script
  */
 
 $(document).ready(function ()
