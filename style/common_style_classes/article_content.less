@@ -1,0 +1,266 @@
+/* Article (article content default style) ----------------------*/
+
+.article.simpleUI {
+    background-color: #fff;
+    padding: 30px 10px;
+    margin-bottom: 20px;
+}
+
+@media screen and (min-width: 768px) {
+    .article.simpleUI {
+        margin-bottom: 20px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+
+@media (min-width: 1600px)    /* Big Screen */ {
+    .article.simpleUI {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+/* tag in article element */
+.article.simpleUI h1 {
+    margin-bottom: 30px;
+}
+.article.simpleUI h2,
+.article.simpleUI h3,
+.article.simpleUI h4,
+.article.simpleUI table {
+    margin-bottom: 20px;
+}
+
+.article.simpleUI h5,
+.article.simpleUI h6,
+.article.simpleUI p,
+.article.simpleUI ul,
+.article.simpleUI ol {
+    margin-bottom: 10px;
+}
+
+.article.simpleUI ul,
+.article.simpleUI ol {
+    padding-left: 20px;
+    line-height: 26px;
+    font-size: 15px;
+}
+
+.article audio,
+.article video {
+    max-width: 100%;
+}
+
+.article video {
+    background-color: #333;
+}
+
+.article img {
+    max-width: 100%;
+    height: auto;
+}
+
+.article .articleNav {
+    overflow: visible;
+}
+
+.article.simpleUI .title{
+    font-size: 28px;
+    padding-bottom: 10px;
+    line-height: normal;
+}
+
+.article.simpleUI h2 {
+    color: #000;
+    font-size: 22px;
+    line-height: 50px;
+    margin-bottom: 20px;
+}
+
+.article.simpleUI .infoArea {
+    margin-bottom: 20px;
+    color: #9a9a9a;
+}
+
+.article.simpleUI .contentArea{
+    color: #666;
+    word-wrap: break-word;
+    word-break: break-all;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    line-height: 30px;
+    overflow: hidden;
+}
+
+.article.simpleUI .imageArea {
+    overflow: hidden;
+    padding-bottom: 20px;
+}
+
+.article.simpleUI .imageArea img {
+    max-width: 100%;
+}
+
+.article.simpleUI .visitor {
+    color: #9a9a9a;
+}
+
+.article.simpleUI .visitor dt {
+    color: #666;
+    margin-bottom: 7px;
+}
+
+.article.simpleUI .visitor dd {
+    margin-bottom: 5px;
+}
+
+.article.simpleUI .articleNav ul {
+    border-radius: 6px;
+    background: #F4F8FB;
+    list-style: none none;
+    margin: 0;
+    padding: 12px 0;
+}
+
+.article.simpleUI .articleNav li a {
+    display: block;
+    padding: 6px 25px;
+    font-weight: normal;
+}
+
+.article.simpleUI .articleNav li a:hover {
+    background: #EAF1F7;
+    text-decoration: none;
+}
+
+.article.simpleUI .titleArea {
+    font-size: 32px;
+}
+
+.article.simpleUI .subTitleArea {
+    margin-bottom: 20px;
+}
+
+.article.simpleUI .timeArea {
+    text-align: center;
+    color: #999;
+}
+
+.article.simpleUI .hitsArea {
+    text-align: center;
+    color: #999;
+}
+
+.article.simpleUI .textArea {
+    padding: 2ex 0;
+    line-height: 170%;
+}
+
+/* 显示文章列表 */
+.list_blog {
+    list-style: none none;
+    padding-left: 0;
+    margin-bottom: 14px;
+}
+
+.list_blog .item_blog {
+    background-color: #FFF;
+    padding: 25px 5%;
+    margin-bottom: 30px;
+}
+
+.list_blog .item_blog:last-child {
+    margin-bottom: 0;
+}
+
+.list_blog .item_blog .title_box {
+    font-size: 24px;
+    margin: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.list_blog .item_blog .title_box a {
+    color: #2fa0ec;
+}
+
+.item_blog .item_title {
+    font-size: 28px;
+    line-height: normal;
+    margin: 0;
+    padding: 0 0 10px;
+    text-decoration: none;
+    text-transform: capitalize;
+}
+
+.item_blog .item_title a {
+    color: #333;
+}
+
+.item_blog .item_title a:hover {
+    color: #2980b9;
+}
+
+.item_blog .item_header {
+    border-bottom: 1px solid #f5f5f5;
+    color: #999999;
+    font-size: 12px;
+    line-height: normal;
+    margin: 0 0 10px;
+    padding: 0 0 10px;
+    text-transform: capitalize;
+}
+
+.item_blog .item_time {
+    /*background: url(../images/sprites.png) no-repeat 0 -20px;*/
+    padding: 2px 15px 2px 20px;
+}
+
+.item_blog .item_intro {
+    color: #666;
+    word-wrap: break-word;
+}
+
+.item_blog .intro_image {
+    margin-bottom: 10px;
+}
+
+.item_blog .intro_image img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* news layout for article list */
+.listContent.newsLayout {
+    list-style: none none;
+    padding-left: 0;
+    margin-bottom: 14px;
+}
+
+.newsLayout .item {
+    position: relative;
+    clear: both;
+    padding-left: 160px;
+    min-height: 110px;
+}
+
+.newsLayout .imageArea {
+    position: absolute;
+    z-index: 1;
+    width: 140px;
+    height: 90px;
+    left: 0;
+    top: 0;
+    background: #EEE;
+}
+
+/*.newsLayout .imageArea a {*/
+/**/
+/*}*/
+
+.newsLayout .imageArea img {
+    width: 100%;
+    height: auto;
+    min-height: 100%;
+}
