@@ -5230,6 +5230,7 @@ function initVueList(options)
         keywords : '',
         filters : filterColumns,
         list : [],
+        dataList : [],
         ajaxLock : false,
         status : '',
         checkingColumns : checkingColumns
@@ -5258,7 +5259,7 @@ function initVueList(options)
             return null;
         },
         cleanList : function (){
-            this.list = [];
+            this.list = this.dataList = [];
         },
         checkColumns : function(list, columns){
             for (var i=0; i<list.length; i++)
@@ -5315,6 +5316,7 @@ function initVueList(options)
                 type : apiConfig.list.method || 'get',
                 data : params,
                 success : function(result){
+
                     if (afterLoadData)
                     {
                         afterLoadData(result);
@@ -5335,7 +5337,7 @@ function initVueList(options)
                             }
                         }
 
-                        me.list         = me.list.concat(result.data.rows);
+                        me.list         = me.dataList = me.list.concat(result.data.rows);
                         me.pageCount    = result.data.totalPage || 1;
                         me.count        = result.data.totalCount || me.list.length;
 
@@ -5365,7 +5367,7 @@ function initVueList(options)
         loadFirstPage : function(){
 
             // clean old data
-            me.list = [];
+            me.list = me.dataList = [];
 
             this.loadPage(1);
         },
@@ -5427,7 +5429,7 @@ function initVueList(options)
                 },
                 success : function (result){
                     var item = me.getItemById(id);
-                    me.list = removeArrayElement(me.list, item);
+                    me.list = me.dataList = removeArrayElement(me.list, item);
 
                     if (afterRemove)
                     {
