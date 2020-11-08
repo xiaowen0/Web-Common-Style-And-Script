@@ -2001,6 +2001,73 @@ function setHeightEqualToWidth(element)
 }
 
 /**
+ * load external data for image
+ * @param   HTMLElement|String  element     image element quote or css query string, it can be set 'data-baseurl' attr for link base url.
+ * @param   Object  apiConfig
+ * - url            String  required
+ * - method         String  default 'GET'
+ * - dataPath       String
+ * - dataMapping    Object  example: {'src' : 'imageUrl'}
+ * @requires    jQuery
+ */
+function imageLoadData(element, apiConfig, callback)
+{
+    $.ajax({
+        url : apiConfig.url,
+        type : apiConfig.method || 'get',
+        data : apiConfig.params || {},
+        success : function (result) {
+
+            var dataPath = apiConfig.dataPath || '';
+            var dataMapping = apiConfig.dataMapping || {};
+
+            // get data and convert columns
+            var data = dataPath ? getObjectPropertyByKeyPath(result, dataPath) : result;
+            data = dataColumnConvert(data, dataMapping);
+
+            var imageQuote = $(element);
+
+            var baseUrl = imageQuote.attr('data-baseurl') || '';
+
+            // set src attr
+            imageQuote.attr('src', baseUrl + data.src);
+
+            // set prototype attribute and data attribute
+            var imageAttrs = ['width', 'height', 'alt', 'title'];
+            for(var key in data)
+            {
+                if (inArray(key, imageAttrs))
+                {
+                    imageQuote.attr(key, data[key]);
+                }
+                else
+                {
+                    imageQuote.attr('data-' + key, data[key]);
+                }
+            }
+
+            // check link and set click action
+            if (typeof(data.link) !== 'undefined')
+            {
+                imageQuote.on('click', function() {
+                    var baseUrl = this.dataset['data-baseurl'] || '';
+                    var link = this.dataset['data-link'] || '';
+                    if (link)
+                    {
+                        location.href = baseUrl + link;
+                    }
+                });
+            }
+
+            callback ? callback(null, data) : null;
+        },
+        error : function (error) {
+            callback ? callback(error, null) : null;
+        }
+    })
+}
+
+/**
  * reload image
  * @param HTMLElement image
  */
@@ -5922,9 +5989,13 @@ function initVueItemDetail(options)
             var me = this;
             this.status = 'loading';
 
+            var data = JSON.parse(JSON.stringify(apiConfig.get.params || {}));
+
             var idParam         = apiConfig.get.idParam || 'id';
-            var data = {};
-            data[idParam] = id;
+            if (id)
+            {
+                data[idParam] = id;
+            }
 
             $.ajax({
                 url : apiConfig.get.url,
@@ -6030,7 +6101,7 @@ function initVueItemDetail(options)
             var id = getUrlParam('id');
             if (!id)
             {
-                location.href = parentPage ? parentPage : 'index.html';
+                // location.href = parentPage ? parentPage : 'index.html';
             }
 
             this.loadData(id);
@@ -6142,13 +6213,17 @@ function initVueForm(options)
         },
         loadData : function (id, callback)
         {
+            var data = JSON.parse(JSON.stringify(apiConfig.get.params || {}));
+            if (id)
+            {
+                data.id = id;
+            }
+
             var me = this;
             $.ajax({
                 url : apiConfig.get.url,
                 type : apiConfig.get.method || 'get',
-                data : {
-                    id : id
-                },
+                data : data,
                 success : function(result){
 
                     var data = result;
