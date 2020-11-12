@@ -538,9 +538,19 @@ function str_replace(string, find, replace)
         return string;
     }
 
+    var limit = 10000;
+    var count = 0;
+
+    if (replace.indexOf(find) >= 0)
+    {
+        console.error('[error] replace string include finding string.');
+        return string;
+    }
+
     var oStr = new String(string);
-    while (oStr.indexOf(find) >= 0) {
+    while (oStr.indexOf(find) >= 0 && count < limit) {
         oStr = oStr.replace(find, replace);
+        count++;
     }
     return oStr;
 }
